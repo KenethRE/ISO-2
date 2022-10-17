@@ -9,4 +9,5 @@ public enum TipoCurso {
 	FORMACION_CONTINUA, 
 	MICROCREDENCIALES, 
 	CORTA_DURACION;
+	
 }
