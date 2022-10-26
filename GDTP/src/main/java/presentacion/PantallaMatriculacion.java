@@ -1,6 +1,6 @@
 package presentacion;
 
-public class PantallaMatriculación {
+public class PantallaMatriculacion{
 
 	public void realizarMatriculacion() {
 		throw new UnsupportedOperationException();
