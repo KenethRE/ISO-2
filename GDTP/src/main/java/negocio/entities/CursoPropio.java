@@ -16,12 +16,12 @@ public class CursoPropio {
 	private int _edicion;
 	
 	//Un curso propio puede tener varias matriculas
-	public Vector<Matricula> _matriculas = new Vector<Matricula>();
+	public Vector<Matricula> _matriculas = new Vector<Matricula>();//revisar vectores
 	public Centro _centro;
 	public ProfesorUCLM _director;
 	public ProfesorUCLM _secretario;
 	//un curso propio puede tener varias materias
-	public Vector<Materia> _materias = new Vector<Materia>();
+	public Vector<Materia> _materias = new Vector<Materia>();//revisar vectores
 	public EstadoCurso _estado;
 	public TipoCurso _tipo;
 	public CursoPropioDAO _cursoPropioDao;

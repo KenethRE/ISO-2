@@ -7,7 +7,7 @@ public class Materia {
 	private double _horas;
 	private Date _fechaInicio;
 	private Date _fechaFin;
-	public CursoPropio _unnamed_CursoPropio_;
+	public CursoPropio _unnamed_CursoPropio_;//revisar unnamed
 	public Profesor _responsable;
 	
 	
