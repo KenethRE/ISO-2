@@ -126,7 +126,7 @@ public class RegistrarUsuario extends JFrame {
 							JOptionPane.INFORMATION_MESSAGE);
 					
 				}else {
-					JOptionPane.showMessageDialog(null, "Usuario no registrado", "ERROR",
+					JOptionPane.showMessageDialog(null, "Usuario no registrado, datos incorrectos", "ERROR",
 							JOptionPane.ERROR_MESSAGE);
 					textNombre.setText("");
 					textContraseña.setText("");
