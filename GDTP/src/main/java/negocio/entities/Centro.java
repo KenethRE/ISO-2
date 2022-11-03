@@ -9,8 +9,8 @@ public class Centro {
 	private String _nombre;
 	private String _localizacion;
 	private Object _attribute;
-	public Vector<CursoPropio> _cursoPropios = new Vector<CursoPropio>();
-	public Vector<ProfesorUCLM> _plantilla = new Vector<ProfesorUCLM>();
+	public Vector<CursoPropio> _cursoPropios = new Vector<CursoPropio>();//revisar los de vectores
+	public Vector<ProfesorUCLM> _plantilla = new Vector<ProfesorUCLM>();//revisar lo de vectores o mejor seria listas de objetos no se..
 	
 	
 	public String get_nombre() {

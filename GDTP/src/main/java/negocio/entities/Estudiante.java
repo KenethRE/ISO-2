@@ -10,8 +10,8 @@ public class Estudiante {
 	private String _titulacion;
 	private String _cualificacion;
 	
-	//Un estudiante tiene muchas matrículas
-	public Vector<Matricula> _matriculas = new Vector<Matricula>();
+	//Un estudiante tiene muchas matrï¿½culas
+	public Vector<Matricula> _matriculas = new Vector<Matricula>();//revisar los de vectores
 	
 
 	public String get_dni() {
