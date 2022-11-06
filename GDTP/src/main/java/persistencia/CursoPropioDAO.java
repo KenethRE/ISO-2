@@ -1,10 +1,12 @@
 package persistencia;
 
+import java.sql.Date;
+
 import negocio.entities.CursoPropio;
 import negocio.entities.EstadoCurso;
 import negocio.entities.TipoCurso;
 
-public class CursoPropioDAO extends AbstractEntityDAO<E> {
+public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 
 	public int crearNuevoCurso(CursoPropio aCurso) {
 		throw new UnsupportedOperationException();
