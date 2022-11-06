@@ -47,7 +47,7 @@ public class Bienvenida extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel_2 = new JLabel("ยก Bienvenido al sistema !");
+		JLabel lblNewLabel_2 = new JLabel("ก Bienvenido al sistema !");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setFont(new Font("Rockwell Condensed", Font.BOLD, 26));
 		lblNewLabel_2.setBounds(36, 127, 366, 65);

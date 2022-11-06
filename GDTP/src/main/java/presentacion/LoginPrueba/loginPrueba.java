@@ -25,7 +25,7 @@ public class loginPrueba extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textUsuario;
-	private JPasswordField textContraseña;
+	private JPasswordField textContrasena;
 
 	/**
 	 * Launch the application.
@@ -91,17 +91,17 @@ public class loginPrueba extends JFrame {
 		panel.add(textUsuario);
 		textUsuario.setColumns(10);
 		
-		JLabel lblNewLabel_3 = new JLabel("Contraseña");
+		JLabel lblNewLabel_3 = new JLabel("Contrasena");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblNewLabel_3.setBounds(0, 256, 124, 33);
 		panel.add(lblNewLabel_3);
 		
-		textContraseña = new JPasswordField();
-		textContraseña.setForeground(new Color(255, 255, 255));
-		textContraseña.setBackground(new Color(77, 77, 77));
-		textContraseña.setBounds(20, 285, 380, 33);
-		panel.add(textContraseña);
+		textContrasena = new JPasswordField();
+		textContrasena.setForeground(new Color(255, 255, 255));
+		textContrasena.setBackground(new Color(77, 77, 77));
+		textContrasena.setBounds(20, 285, 380, 33);
+		panel.add(textContrasena);
 		
 		JCheckBox chckbxNewCheckBox = new JCheckBox("Recuerdame");
 		chckbxNewCheckBox.setBounds(18, 320, 106, 23);
@@ -111,7 +111,7 @@ public class loginPrueba extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				char[] clave = textContraseña.getPassword();
+				char[] clave = textContrasena.getPassword();
 				String claveFinal = new String(clave);
 				
 				if(textUsuario.getText().equals("vaporware") && claveFinal.equals("1234")) {
@@ -124,10 +124,10 @@ public class loginPrueba extends JFrame {
 				
 					
 				}else {
-					JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrectos", "ERROR",
+					JOptionPane.showMessageDialog(null, "Usuario o Contrasena incorrectos", "ERROR",
 							JOptionPane.ERROR_MESSAGE);
 					textUsuario.setText("");
-					textContraseña.setText("");
+					textContrasena.setText("");
 					textUsuario.requestFocus();
 				}
 			}
@@ -142,10 +142,10 @@ public class loginPrueba extends JFrame {
 		lblNewLabel_6.setBounds(101, 395, 27, 30);
 		panel.add(lblNewLabel_6);
 		
-		JButton btnNewButton_1 = new JButton("¿Has olvidado la contraseña?");
+		JButton btnNewButton_1 = new JButton("¿Has olvidado la contrasena?");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RecuperarContraseña recuperar = new RecuperarContraseña();
+				RecuperarContrasena recuperar = new RecuperarContrasena();
 				recuperar.setVisible(true);
 				
 			}

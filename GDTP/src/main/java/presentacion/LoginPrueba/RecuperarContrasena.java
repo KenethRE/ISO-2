@@ -15,7 +15,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class RecuperarContraseña extends JFrame {
+public class RecuperarContrasena extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textEmail;
@@ -27,7 +27,7 @@ public class RecuperarContraseña extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RecuperarContraseña frame = new RecuperarContraseña();
+					RecuperarContrasena frame = new RecuperarContrasena();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +39,7 @@ public class RecuperarContraseña extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RecuperarContraseña() {
+	public RecuperarContrasena() {
 		
 	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,7 +54,7 @@ public class RecuperarContraseña extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("  Para recuperar su contraseña es necesario que introduzca su email");
+		JLabel lblNewLabel_1 = new JLabel("  Para recuperar su contrasena es necesario que introduzca su email");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_1.setBounds(20, 72, 517, 54);
 		panel.add(lblNewLabel_1);
@@ -74,7 +74,7 @@ public class RecuperarContraseña extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(textEmail.getText().length() != 0) {
 					dispose();
-					JOptionPane.showMessageDialog(null, "Verifique su correo electrónico", "INGRESO CORRECTO", 
+					JOptionPane.showMessageDialog(null, "Verifique su correo electronico", "INGRESO CORRECTO", 
 							JOptionPane.INFORMATION_MESSAGE);
 				
 				}
@@ -94,7 +94,7 @@ public class RecuperarContraseña extends JFrame {
 		panel.add(btnEnviar);
 		
 		JLabel lblNewLabel_3 = new JLabel("New label");
-		lblNewLabel_3.setIcon(new ImageIcon(RecuperarContraseña.class.getResource("/presentacion/LoginPrueba/Avatar_Container.png")));
+		lblNewLabel_3.setIcon(new ImageIcon(RecuperarContrasena.class.getResource("/presentacion/LoginPrueba/Avatar_Container.png")));
 		lblNewLabel_3.setBounds(191, 11, 152, 72);
 		panel.add(lblNewLabel_3);
 		
@@ -103,7 +103,7 @@ public class RecuperarContraseña extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon(RecuperarContraseña.class.getResource("/presentacion/LoginPrueba/cont.png")));
+		lblNewLabel.setIcon(new ImageIcon(RecuperarContrasena.class.getResource("/presentacion/LoginPrueba/cont.png")));
 		lblNewLabel.setBounds(0, 0, 920, 529);
 		contentPane.add(lblNewLabel);
 		

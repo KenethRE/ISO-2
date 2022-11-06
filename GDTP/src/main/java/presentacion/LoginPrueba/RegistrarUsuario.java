@@ -22,7 +22,7 @@ public class RegistrarUsuario extends JFrame {
 	private JTextField textApellidos;
 	private JTextField textEmail;
 	private JTextField textTelefono;
-	private JTextField textContraseña;
+	private JTextField textContrasena;
 
 	/**
 	 * Launch the application.
@@ -86,7 +86,7 @@ public class RegistrarUsuario extends JFrame {
 		lblNewLabel_3_3.setBounds(30, 281, 77, 23);
 		panel.add(lblNewLabel_3_3);
 		
-		JLabel lblNewLabel_3_4 = new JLabel("Contraseña");
+		JLabel lblNewLabel_3_4 = new JLabel("Contrasena");
 		lblNewLabel_3_4.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblNewLabel_3_4.setBounds(30, 346, 109, 23);
 		panel.add(lblNewLabel_3_4);
@@ -111,16 +111,16 @@ public class RegistrarUsuario extends JFrame {
 		textTelefono.setBounds(30, 304, 336, 31);
 		panel.add(textTelefono);
 		
-		textContraseña = new JTextField();
-		textContraseña.setColumns(10);
-		textContraseña.setBounds(30, 369, 336, 31);
-		panel.add(textContraseña);
+		textContrasena = new JTextField();
+		textContrasena.setColumns(10);
+		textContrasena.setBounds(30, 369, 336, 31);
+		panel.add(textContrasena);
 		
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if((textNombre.getText().length() != 0) && (textApellidos.getText().length() != 0) && (textEmail.getText().length() != 0)
-						&& (textContraseña.getText().length() != 0) && (textTelefono.getText().length() != 0)) {
+						&& (textContrasena.getText().length() != 0) && (textTelefono.getText().length() != 0)) {
 					dispose();
 					JOptionPane.showMessageDialog(null, "Usuario registrado correctamente", "INGRESO CORRECTO", 
 							JOptionPane.INFORMATION_MESSAGE);
@@ -129,7 +129,7 @@ public class RegistrarUsuario extends JFrame {
 					JOptionPane.showMessageDialog(null, "Usuario no registrado, datos incorrectos", "ERROR",
 							JOptionPane.ERROR_MESSAGE);
 					textNombre.setText("");
-					textContraseña.setText("");
+					textContrasena.setText("");
 					textEmail.setText("");
 					textApellidos.setText("");
 					textTelefono.setText("");
