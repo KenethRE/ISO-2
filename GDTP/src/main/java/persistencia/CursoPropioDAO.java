@@ -1,6 +1,7 @@
 package persistencia;
 
 import java.sql.Date;
+import java.util.List;
 
 import negocio.entities.CursoPropio;
 import negocio.entities.EstadoCurso;
