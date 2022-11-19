@@ -1,20 +1,41 @@
 package persistencia;
 
-import java.sql.Date;
+import java.sql.*;
+import negocio.entities.*;
 
 public class AbstractEntityDAO<E>{
-	private String ID;
-	private Date fechaCreacion;
-	private Date fechaActualizacion;
+
+	private GestorBD agente = GestorBD.getAgente();
 	
-	public E get(String iD) {
-		E result = null;
+	//esto regresa un unico elemento
+	public ResultSet get(String iD, String Table, String keyName) {
 		
+		ResultSet result = agente.select("SELECT * FROM " + Table + "WHERE " + keyName + " = " + iD);
+		return result;
+	}
+	
+	//esto regresa todos los elementos de alguna tabla en particular
+	public ResultSet get(String iD, String Table) {
+		
+		ResultSet result = agente.select("SELECT * FROM " + Table);
 		return result;
 	}
 	public int insert (Object E) {
-		int i=0;
-		return i;
+		String className = E.getClass().getSimpleName();
+		int result = 0;
+		switch (className) {
+		
+		case "CursoPropio":
+			result = agente.insert("INSERT INTO " + className + " VALUES('" + ((CursoPropio) E).get_id() + "','"  + ((CursoPropio) E).get_nombre() + "'," 
+					+ ((CursoPropio) E).get_eCTS() + ",'"  + ((CursoPropio) E).get_fechaInicio() + "','"  + ((CursoPropio) E).get_fechaFin() + "'," 
+					+ ((CursoPropio) E).get_tasaMatricula() + ","  + ((CursoPropio) E).get_edicion() + ","  + ((CursoPropio) E).getId_centro() + ",'"
+					+ ((CursoPropio) E).getId_secretario() + "','"  + ((CursoPropio) E).getId_director() + "')");
+			break;
+			
+		case "Profesor":
+		}
+		
+		return result;
 	}
 	public E update (Object E) {
 		E result = null;

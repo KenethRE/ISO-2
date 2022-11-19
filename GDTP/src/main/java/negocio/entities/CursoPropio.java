@@ -17,15 +17,18 @@ public class CursoPropio {
 	
 	//Un curso propio puede tener varias matriculas
 	public Vector<Matricula> _matriculas = new Vector<Matricula>();//revisar vectores
-	public Centro _centro;
-	public ProfesorUCLM _director;
-	public ProfesorUCLM _secretario;
+	public int id_centro;
+	public String id_director;
+	public String id_secretario;
 	//un curso propio puede tener varias materias
 	public Vector<Materia> _materias = new Vector<Materia>();//revisar vectores
 	public EstadoCurso _estado;
 	public TipoCurso _tipo;
-	public CursoPropioDAO _cursoPropioDao;
+	public CursoPropioDAO<CursoPropio> _cursoPropioDao;
 	
+	public CursoPropio(String id) {
+		this._id = id;
+	}
 	
 	public String get_id() {
 		return _id;
@@ -69,7 +72,70 @@ public class CursoPropio {
 	public void set_edicion(int _edicion) {
 		this._edicion = _edicion;
 	}
-	
+
+	public Vector<Matricula> get_matriculas() {
+		return _matriculas;
+	}
+
+	public void set_matriculas(Vector<Matricula> _matriculas) {
+		this._matriculas = _matriculas;
+	}
+
+	public int getId_centro() {
+		return id_centro;
+	}
+
+	public void setId_centro(int id_centro) {
+		this.id_centro = id_centro;
+	}
+
+	public String getId_director() {
+		return id_director;
+	}
+
+	public void setId_director(String id_director) {
+		this.id_director = id_director;
+	}
+
+	public String getId_secretario() {
+		return id_secretario;
+	}
+
+	public void setId_secretario(String id_secretario) {
+		this.id_secretario = id_secretario;
+	}
+
+	public Vector<Materia> get_materias() {
+		return _materias;
+	}
+
+	public void set_materias(Vector<Materia> _materias) {
+		this._materias = _materias;
+	}
+
+	public EstadoCurso get_estado() {
+		return _estado;
+	}
+
+	public void set_estado(EstadoCurso _estado) {
+		this._estado = _estado;
+	}
+
+	public TipoCurso get_tipo() {
+		return _tipo;
+	}
+
+	public void set_tipo(TipoCurso _tipo) {
+		this._tipo = _tipo;
+	}
+
+	public CursoPropioDAO<CursoPropio> get_cursoPropioDao() {
+		return _cursoPropioDao;
+	}
+
+	public void set_cursoPropioDao(CursoPropioDAO<CursoPropio> _cursoPropioDao) {
+		this._cursoPropioDao = _cursoPropioDao;
+	}
 	
 	
 }
