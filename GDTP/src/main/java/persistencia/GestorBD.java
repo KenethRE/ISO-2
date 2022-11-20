@@ -97,17 +97,17 @@ public class GestorBD{
 			mBD = DriverManager.getConnection(""+BaseDatos.DRIVER+":"+BaseDatos.DBNAME+";create=true", BaseDatos.DBUSER, BaseDatos.DBPASS);
 			try (Statement stmt = mBD.createStatement()) {
 				stmt.execute("CREATE TABLE Centro (id INT NOT NULL, Nombre VARCHAR (20) NOT NULL, Localizacion VARCHAR(40) NOT NULL, PRIMARY KEY (id))");
-				stmt.execute("CREATE TABLE Profesor (dni VARCHAR(10) NOT NULL, Nombre VARCHAR(40) NOT NULL,Apellidos VARCHAR(40) NOT NULL,doctor BOOLEAN NOT NULL,Centro INT NOT NULL,PRIMARY KEY (DNI),FOREIGN KEY (Centro) REFERENCES Centro(id))");
+				stmt.execute("CREATE TABLE Profesor (dni VARCHAR(10) NOT NULL, Nombre VARCHAR(40) NOT NULL,Apellidos VARCHAR(40) NOT NULL,doctor BOOLEAN NOT NULL,Centro INT,PRIMARY KEY (DNI),FOREIGN KEY (Centro) REFERENCES Centro(id))");
 				stmt.execute("CREATE TABLE ProfesorExterno (dni VARCHAR(10) NOT NULL, titulacion VARCHAR(40) NOT NULL,FOREIGN KEY (dni) REFERENCES Profesor(dni))");
+				stmt.execute("CREATE TABLE ProfesorUCLM (dni VARCHAR(10) NOT NULL, Nombre VARCHAR(40) NOT NULL,Apellidos VARCHAR(40) NOT NULL,CategoriaProfesor VARCHAR(40) NOT NULL,FOREIGN KEY (dni) REFERENCES Profesor(dni))");
 				stmt.execute("CREATE TABLE CursoPropio (id VARCHAR(10) NOT NULL, Nombre VARCHAR(40) NOT NULL, ECTS INT NOT NULL, FechaInicio DATE NOT NULL, FechaFin DATE NOT NULL, TasaMatricula FLOAT (2) NOT NULL, Edicion INT NOT NULL, idCentro INT NOT NULL, Secretario VARCHAR(10) NOT NULL,\r\n"
-						+ "Director VARCHAR(10) NOT NULL, PRIMARY KEY (ID), FOREIGN KEY (idCentro) REFERENCES Centro(id), FOREIGN KEY (Secretario) REFERENCES Profesor(dni), FOREIGN KEY (Director) REFERENCES Profesor(dni))");
+						+ "Director VARCHAR(10) NOT NULL, TipoCurso VARCHAR (40) NOT NULL,EstadoCurso VARCHAR(40) NOT NULL, PRIMARY KEY (ID), FOREIGN KEY (idCentro) REFERENCES Centro(id), FOREIGN KEY (Secretario) REFERENCES Profesor(dni), FOREIGN KEY (Director) REFERENCES Profesor(dni))");
 				stmt.execute("CREATE TABLE Estudiante (dni VARCHAR(10) NOT NULL, Nombre VARCHAR(40) NOT NULL, Apellidos VARCHAR(40) NOT NULL, Titulacion VARCHAR(40) NOT NULL,Cualificacion VARCHAR(40) NOT NULL, PRIMARY KEY (dni))");
-				stmt.execute("CREATE TABLE Materia (Nombre VARCHAR(40) NOT NULL,horas FLOAT (2) NOT NULL,FechaInicio DATE NOT NULL,FechaFin DATE NOT NULL,idCurso VARCHAR (10) NOT NULL,FOREIGN KEY (idCurso) REFERENCES CursoPropio(id))");
-				stmt.execute("CREATE TABLE Matricula (Fecha DATE NOT NULL,Pagado BOOLEAN NOT NULL,dniEstudiante VARCHAR(10) NOT NULL,idCurso VARCHAR (10) NOT NULL,FOREIGN KEY (dniEstudiante) REFERENCES Estudiante(dni),FOREIGN KEY (idCurso) REFERENCES CursoPropio(id))");
+				stmt.execute("CREATE TABLE Materia (Nombre VARCHAR(40) NOT NULL,horas FLOAT (2) NOT NULL,FechaInicio DATE NOT NULL,FechaFin DATE NOT NULL,idCurso VARCHAR (10),dniprofesor VARCHAR(10), FOREIGN KEY (idCurso) REFERENCES CursoPropio(id),FOREIGN KEY (dniprofesor) REFERENCES Profesor(dni))");
+				stmt.execute("CREATE TABLE Matricula (Fecha DATE NOT NULL,Pagado BOOLEAN NOT NULL,dniEstudiante VARCHAR(10) NOT NULL,idCurso VARCHAR (10) NOT NULL,ModoPago VARCHAR(40) NOT NULL,FOREIGN KEY (dniEstudiante) REFERENCES Estudiante(dni),FOREIGN KEY (idCurso) REFERENCES CursoPropio(id))");
 			}
 		} catch (SQLException ex) {
 			conectarBD();
-			System.out.println(ex.getErrorCode());
 		}
 		
 

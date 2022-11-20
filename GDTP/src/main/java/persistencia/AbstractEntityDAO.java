@@ -9,15 +9,21 @@ public class AbstractEntityDAO<E>{
 	
 	//esto regresa un unico elemento
 	public ResultSet get(String iD, String Table, String keyName) {
-		
-		ResultSet result = agente.select("SELECT * FROM " + Table + "WHERE " + keyName + " = " + iD);
+		ResultSet result = null;
+		if (Table.equals("ProfesorExterno") || Table.equals("ProfesorUCLM")) result = agente.select("SELECT * FROM " + Table + " NATURAL JOIN PROFESOR");
+		else result = agente.select("SELECT * FROM " + Table + "WHERE " + keyName + " = '" + iD +"'");
+		 
 		return result;
 	}
 	
 	//esto regresa todos los elementos de alguna tabla en particular
 	public ResultSet get(String iD, String Table) {
+		ResultSet result = null;
 		
-		ResultSet result = agente.select("SELECT * FROM " + Table);
+		if (Table.equals("ProfesorExterno") || Table.equals("ProfesorUCLM")) result = agente.select("SELECT * FROM " + Table + " NATURAL JOIN PROFESOR");
+		else result = agente.select("SELECT * FROM " + Table);
+
+
 		return result;
 	}
 	public int insert (Object E) {
@@ -55,7 +61,6 @@ public class AbstractEntityDAO<E>{
 					+ "','" + ((Estudiante) E).get_titulacion() + "','" + ((Estudiante) E).get_cualificacion() + "')" );
 			break;
 		}
-		
 		return result;
 	}
 	public E update (Object E) {
