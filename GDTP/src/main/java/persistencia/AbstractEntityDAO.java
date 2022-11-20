@@ -31,8 +31,29 @@ public class AbstractEntityDAO<E>{
 					+ ((CursoPropio) E).get_tasaMatricula() + ","  + ((CursoPropio) E).get_edicion() + ","  + ((CursoPropio) E).getId_centro() + ",'"
 					+ ((CursoPropio) E).getId_secretario() + "','"  + ((CursoPropio) E).getId_director() + "')");
 			break;
-			
 		case "Profesor":
+			result = agente.insert("INSERT INTO " + className + " VALUES('" + ((Profesor) E).get_dni() + "','" + ((Profesor) E).get_nombre() + "','"
+					 + ((Profesor) E).get_apellidos() + "'," + ((Profesor) E).is_doctor()+ "," + ((Profesor) E).get_centro() + ")");
+		case "ProfesorExterno":
+			result = agente.insert("INSERT INTO " + className + "VALUES('" + ((ProfesorExterno) E).get_dni() + "','" + ((ProfesorExterno) E).get_titulacion() + "')");
+			break;
+		
+		case "Matricula":
+			result = agente.insert("INSERT INTO " + className + "VALUES('" + ((Matricula) E).get_fecha() + "'," + ((Matricula) E).is_pagado() + ",'"
+					+ ((Matricula) E).getId_estudiante() + "','" + ((Matricula) E).getId_Curso() + "')");
+			break;
+		case "Materia":
+			result = agente.insert("INSERT INTO " + className + "VALUES('" + ((Materia) E).get_nombre()+ "'," + ((Materia) E).get_horas() + ",'"
+					+ ((Materia) E).get_fechaInicio() + "','" + ((Materia) E).get_fechaFin() + "','" + ((Materia) E).getId_Curso() + "')");
+			break;
+		case "Centro":
+			result = agente.insert("INSERT INTO " + className + "VALUES(" + ((Centro) E).get_Id() + ",'" + ((Centro) E).get_nombre() + "','" + ((Centro) E).get_localizacion() 
+					+ "')");
+			break;
+		case "Estudiante":
+			result = agente.insert("INSERT INTO " + className + "VALUES('" + ((Estudiante) E).get_dni() + "','" + ((Estudiante) E).get_nombre() + "','" + ((Estudiante) E).get_apellidos() 
+					+ "','" + ((Estudiante) E).get_titulacion() + "','" + ((Estudiante) E).get_cualificacion() + "')" );
+			break;
 		}
 		
 		return result;

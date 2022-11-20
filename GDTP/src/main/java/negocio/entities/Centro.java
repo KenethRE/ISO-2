@@ -6,6 +6,7 @@ import negocio.entities.ProfesorUCLM;
 
 public class Centro {
 	
+	private int _Id;
 	private String _nombre;
 	private String _localizacion;
 	private Object _attribute;
@@ -13,6 +14,12 @@ public class Centro {
 	public Vector<ProfesorUCLM> _plantilla = new Vector<ProfesorUCLM>();//revisar lo de vectores o mejor seria listas de objetos no se..
 	
 	
+	public int get_Id() {
+		return _Id;
+	}
+	public void set_Id(int _Id) {
+		this._Id = _Id;
+	}	
 	public String get_nombre() {
 		return _nombre;
 	}
@@ -31,7 +38,18 @@ public class Centro {
 	public void set_attribute(Object _attribute) {
 		this._attribute = _attribute;
 	}
-
-
+	public Vector<CursoPropio> get_cursoPropios() {
+		return _cursoPropios;
+	}
+	public void set_cursoPropios(Vector<CursoPropio> _cursoPropios) {
+		this._cursoPropios = _cursoPropios;
+	}
+	public Vector<ProfesorUCLM> get_plantilla() {
+		return _plantilla;
+	}
+	public void set_plantilla(Vector<ProfesorUCLM> _plantilla) {
+		this._plantilla = _plantilla;
+	}
+	
 	
 }

@@ -7,8 +7,8 @@ public class Materia {
 	private double _horas;
 	private Date _fechaInicio;
 	private Date _fechaFin;
-	public CursoPropio _unnamed_CursoPropio_;//revisar unnamed
-	public Profesor _responsable;
+	public String id_Curso;
+	public int id_prof_responsable;
 	
 	
 	public String get_nombre() {
@@ -34,6 +34,18 @@ public class Materia {
 	}
 	public void set_fechaFin(Date _fechaFin) {
 		this._fechaFin = _fechaFin;
+	}
+	public String getId_Curso() {
+		return id_Curso;
+	}
+	public void setId_Curso(String id_Curso) {
+		this.id_Curso = id_Curso;
+	}
+	public int getId_prof_responsable() {
+		return id_prof_responsable;
+	}
+	public void setId_prof_responsable(int id_prof_responsable) {
+		this.id_prof_responsable = id_prof_responsable;
 	}
 
 	

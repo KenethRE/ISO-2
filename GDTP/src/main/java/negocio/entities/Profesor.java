@@ -6,12 +6,16 @@ public class Profesor {
 	private String _nombre;
 	private String _apellidos;
 	private boolean _doctor;
+	private int _centro;
 	
 	public Profesor(String dni, String nombre, String apellidos, boolean doctor) {
 		this._dni=dni;
 		this._nombre=nombre;
 		this._apellidos=apellidos;
 		this._doctor=doctor;
+	}
+	public Profesor(String dni) {
+		this._dni=dni;
 	}
 
 	public String get_dni() {
@@ -44,6 +48,12 @@ public class Profesor {
 
 	public void set_doctor(boolean _doctor) {
 		this._doctor = _doctor;
+	}
+	public int get_centro() {
+		return _centro;
+	}
+	public void set_centro(int _centro) {
+		this._centro = _centro;
 	}
 	
 	
