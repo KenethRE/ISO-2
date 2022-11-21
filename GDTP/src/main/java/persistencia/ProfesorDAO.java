@@ -3,49 +3,42 @@ package persistencia;
 import java.sql.*;
 import java.util.List;
 
-import negocio.entities.CursoPropio;
-import negocio.entities.EstadoCurso;
+import negocio.entities.Profesor;
 import negocio.entities.TipoCurso;
 
 public class ProfesorDAO<E> extends AbstractEntityDAO<E> {
 
-	public int crearNuevoCurso(CursoPropio aCurso) {
+	public int crearNuevoProfesor(Profesor aProfesor) {
 		throw new UnsupportedOperationException();
 	}
 
-	public CursoPropio seleccionarCurso(CursoPropio aCurso) {
-		CursoPropio curso = new CursoPropio (aCurso.get_id());
+	public Profesor seleccionarProfesor(Profesor aProfesor) {
+		Profesor profesor = new Profesor (aProfesor.get_dni());
 		// El iD curso es el curso que queremos seleccionar, el nombre de la clase "CursoPropio" es la tabla que queremos
 		// buscar y la cadena del final representa la clave que usamos para hacer la seleccion.
-		ResultSet aux = get(curso.get_id(), curso.getClass().getSimpleName(), "ID");
+		ResultSet aux = get(profesor.get_dni(), profesor.getClass().getSimpleName(), "DNI");
 		try {
 			while (aux.next()) {
-				curso.set_nombre(aux.getString("NOMBRE"));
-				curso.set_eCTS(aux.getInt("ECTS"));
-				curso.set_fechaInicio(aux.getDate("FECHAINICIO"));
-				curso.set_fechaFin(aux.getDate("FECHAFIN"));
-				curso.set_tasaMatricula(aux.getInt("TASAMATRICULA"));
-				curso.set_edicion(aux.getInt("EDICION"));
-				curso.setId_centro(aux.getInt("IDCENTRO"));
-				curso.setId_director(aux.getString("DIRECTOR"));
-				curso.setId_secretario(aux.getString("SECRETARIO"));
+				profesor.set_nombre(aux.getString("NOMBRE"));
+				profesor.set_apellidos(aux.getString("APELLIDOS"));
+				profesor.set_doctor(aux.getBoolean("DOCTOR"));
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Curso no encontrado");
+			System.out.println("Profesor no encontrado");
 		}
 		
 			
-		return curso;
+		return profesor;
 		
 	}
 
-	public CursoPropio editarCurso(CursoPropio aCurso) {
+	public Profesor editarProfesor(Profesor aProfesor) {
 		throw new UnsupportedOperationException();
 	}
 
-	public List<CursoPropio> listarCursosPorEstado(EstadoCurso aEstado, Date aFechaInicio, Date aFechaFin) {
+	public List<Profesor> listarProfesoresdoctores(Boolean adoctor) {
 		throw new UnsupportedOperationException();
 	}
 
