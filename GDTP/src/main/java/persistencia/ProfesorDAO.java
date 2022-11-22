@@ -8,13 +8,15 @@ import negocio.entities.TipoCurso;
 
 public class ProfesorDAO<E> extends AbstractEntityDAO<E> {
 
-	public int crearNuevoProfesor(Profesor aProfesor) {
-		throw new UnsupportedOperationException();
+	public int crearNuevoProfesor(Profesor aProfesor) throws SQLException {
+		int aux= 0;
+		aux = insert (aProfesor);
+		return aux;
 	}
 
 	public Profesor seleccionarProfesor(Profesor aProfesor) {
 		Profesor profesor = new Profesor (aProfesor.get_dni());
-		// El iD curso es el curso que queremos seleccionar, el nombre de la clase "CursoPropio" es la tabla que queremos
+		// El iD curso es el curso que queremos seleccionar, el nombre de la clase "Profesor" es la tabla que queremos
 		// buscar y la cadena del final representa la clave que usamos para hacer la seleccion.
 		ResultSet aux = get(profesor.get_dni(), profesor.getClass().getSimpleName(), "DNI");
 		try {
@@ -38,8 +40,9 @@ public class ProfesorDAO<E> extends AbstractEntityDAO<E> {
 		throw new UnsupportedOperationException();
 	}
 
-	public List<Profesor> listarProfesoresdoctores(Boolean adoctor) {
-		throw new UnsupportedOperationException();
+	public List<Profesor> listarProfesores(String aprofesor) {
+		ResultSet aux = get(aprofesor);
+		return (List<Profesor>) aux; //verificar molde no se si funciona
 	}
 
 	public double listarIngresos(TipoCurso aTipo, Date aFechaInicio, Date aFechaFin) {

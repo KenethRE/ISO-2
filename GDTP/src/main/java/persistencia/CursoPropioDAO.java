@@ -9,15 +9,17 @@ import negocio.entities.TipoCurso;
 
 public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 
-	public int crearNuevoCurso(CursoPropio aCurso) {
-		throw new UnsupportedOperationException();
+	public int crearNuevoCurso(CursoPropio aCurso) throws SQLException {
+		int aux= 0;
+		aux = insert (aCurso);
+		return aux;
 	}
 
 	public CursoPropio seleccionarCurso(CursoPropio aCurso) {
 		CursoPropio curso = new CursoPropio (aCurso.get_id());
 		// El iD curso es el curso que queremos seleccionar, el nombre de la clase "CursoPropio" es la tabla que queremos
 		// buscar y la cadena del final representa la clave que usamos para hacer la seleccion.
-		ResultSet aux = get(curso.get_id(), curso.getClass().getSimpleName(), "ID");
+		ResultSet aux = get(curso.get_id(), curso.getClass().getSimpleName(),"ID");
 		try {
 			while (aux.next()) {
 				curso.set_nombre(aux.getString("NOMBRE"));
