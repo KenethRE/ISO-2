@@ -33,9 +33,10 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 				curso.setId_centro(aux.getInt("IDCENTRO"));
 				curso.setId_director(aux.getString("DIRECTOR"));
 				curso.setId_secretario(aux.getString("SECRETARIO"));
-				//TO DO : COMO SE HACE CON LOS ENUM
-				//curso.set_tipo(aux.getString("TIPOCURSO"));
-				//curso.set_estado(aux.getString("ESTADOCURSO"));
+				TipoCurso Tcurso =  TipoCurso.valueOf(aux.getString("TIPOCURSO"));
+				curso.set_tipo(Tcurso);
+				EstadoCurso Ecurso = EstadoCurso.valueOf(aux.getString("ESTADOCURSO"));
+				curso.set_estado(Ecurso);
 			}
 			
 		} catch (SQLException e) {
@@ -86,8 +87,10 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 				curso.setId_director(aux.getString("DIRECTOR"));
 				curso.setId_secretario(aux.getString("SECRETARIO"));
 				//TO DO : COMO SE HACE CON LOS ENUM
-				//curso.set_tipo(aux.getString("TIPOCURSO"));
-				//curso.set_estado(aux.getString("ESTADOCURSO"));
+				TipoCurso Tcurso =  TipoCurso.valueOf(aux.getString("TIPOCURSO"));
+				curso.set_tipo(Tcurso);
+				EstadoCurso Ecurso = EstadoCurso.valueOf(aux.getString("ESTADOCURSO"));
+				curso.set_estado(Ecurso);
 				Cursos.add(curso);
 			}
 			
@@ -137,9 +140,10 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 				curso.setId_centro(aux.getInt("IDCENTRO"));
 				curso.setId_director(aux.getString("DIRECTOR"));
 				curso.setId_secretario(aux.getString("SECRETARIO"));
-				//TO DO : COMO SE HACE CON LOS ENUM
-				//curso.set_tipo(aux.getString("TIPOCURSO"));
-				//curso.set_estado(aux.getString("ESTADOCURSO"));
+				TipoCurso Tcurso =  TipoCurso.valueOf(aux.getString("TIPOCURSO"));
+				curso.set_tipo(Tcurso);
+				EstadoCurso Ecurso = EstadoCurso.valueOf(aux.getString("ESTADOCURSO"));
+				curso.set_estado(Ecurso);
 			}
 			
 
