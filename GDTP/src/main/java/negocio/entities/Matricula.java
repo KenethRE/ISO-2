@@ -2,7 +2,15 @@ package negocio.entities;
 
 import java.util.Date;
 
-public class Matricula {
+public class Matricula implements IdInterface{
+	private int iD;
+	
+	public int getiD() {
+		return iD;
+	}
+	public void setiD(int iD) {
+		this.iD = iD;
+	}
 	private Date _fecha;
 	private boolean _pagado;
 	private Object _attribute;
@@ -48,6 +56,10 @@ public class Matricula {
 	}
 	public void set_tipoPago(ModoPago _tipoPago) {
 		this._tipoPago = _tipoPago;
+	}
+	@Override
+	public String getId() {
+		return String.valueOf(iD);
 	}
 	
 	

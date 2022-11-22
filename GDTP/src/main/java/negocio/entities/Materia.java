@@ -2,7 +2,7 @@ package negocio.entities;
 
 import java.util.Date;
 
-public class Materia {
+public class Materia implements IdInterface{
 	private String _nombre;
 	private double _horas;
 	private Date _fechaInicio;
@@ -46,6 +46,10 @@ public class Materia {
 	}
 	public void setId_prof_responsable(int id_prof_responsable) {
 		this.id_prof_responsable = id_prof_responsable;
+	}
+	@Override
+	public String getId() {
+		return id_Curso;
 	}
 
 	

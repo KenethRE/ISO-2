@@ -18,6 +18,9 @@ public class Profesor {
 		this._dni=dni;
 	}
 
+	public Profesor() {
+	}
+	
 	public String get_dni() {
 		return _dni;
 	}

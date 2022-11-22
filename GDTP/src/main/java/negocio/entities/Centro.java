@@ -4,7 +4,7 @@ import java.util.Vector;
 import negocio.entities.CursoPropio;
 import negocio.entities.ProfesorUCLM;
 
-public class Centro {
+public class Centro implements IdInterface{
 	
 	private int _Id;
 	private String _nombre;
@@ -49,6 +49,10 @@ public class Centro {
 	}
 	public void set_plantilla(Vector<ProfesorUCLM> _plantilla) {
 		this._plantilla = _plantilla;
+	}
+	@Override
+	public String getId() {
+		return String.valueOf(_Id);
 	}
 	
 	

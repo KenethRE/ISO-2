@@ -2,11 +2,9 @@ package negocio.entities;
 
 import java.util.Date;
 import java.util.Vector;
-import negocio.entities.Matricula;
-import negocio.entities.Materia;
 import persistencia.CursoPropioDAO;
 
-public class CursoPropio {
+public class CursoPropio implements IdInterface{
 	private String _id;
 	private String _nombre;
 	private int _eCTS;
@@ -139,6 +137,11 @@ public class CursoPropio {
 
 	public void set_cursoPropioDao(CursoPropioDAO<CursoPropio> _cursoPropioDao) {
 		this._cursoPropioDao = _cursoPropioDao;
+	}
+
+	@Override
+	public String getId() {
+		return _id;
 	}
 	
 	

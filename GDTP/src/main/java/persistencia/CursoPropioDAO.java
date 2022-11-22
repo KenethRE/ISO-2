@@ -17,26 +17,23 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 		return aux;
 	}
 
-	public CursoPropio seleccionarCurso(CursoPropio aCurso) {
-		CursoPropio curso = new CursoPropio (aCurso.get_id());
+	public int seleccionarCurso(CursoPropio aCurso) {
 		// El iD curso es el curso que queremos seleccionar, el nombre de la clase "CursoPropio" es la tabla que queremos
 		// buscar y la cadena del final representa la clave que usamos para hacer la seleccion.
-		ResultSet aux = get(curso.get_id(), curso.getClass().getSimpleName(),"ID");
+		ResultSet aux = get(aCurso);
 		try {
 			while (aux.next()) {
-				curso.set_nombre(aux.getString("NOMBRE"));
-				curso.set_eCTS(aux.getInt("ECTS"));
-				curso.set_fechaInicio(aux.getDate("FECHAINICIO"));
-				curso.set_fechaFin(aux.getDate("FECHAFIN"));
-				curso.set_tasaMatricula(aux.getInt("TASAMATRICULA"));
-				curso.set_edicion(aux.getInt("EDICION"));
-				curso.setId_centro(aux.getInt("IDCENTRO"));
-				curso.setId_director(aux.getString("DIRECTOR"));
-				curso.setId_secretario(aux.getString("SECRETARIO"));
-				TipoCurso Tcurso =  TipoCurso.valueOf(aux.getString("TIPOCURSO"));
-				curso.set_tipo(Tcurso);
-				EstadoCurso Ecurso = EstadoCurso.valueOf(aux.getString("ESTADOCURSO"));
-				curso.set_estado(Ecurso);
+				aCurso.set_nombre(aux.getString("NOMBRE"));
+				aCurso.set_eCTS(aux.getInt("ECTS"));
+				aCurso.set_fechaInicio(aux.getDate("FECHAINICIO"));
+				aCurso.set_fechaFin(aux.getDate("FECHAFIN"));
+				aCurso.set_tasaMatricula(aux.getInt("TASAMATRICULA"));
+				aCurso.set_edicion(aux.getInt("EDICION"));
+				aCurso.setId_centro(aux.getInt("IDCENTRO"));
+				aCurso.setId_director(aux.getString("DIRECTOR"));
+				aCurso.setId_secretario(aux.getString("SECRETARIO"));
+				aCurso.set_tipo(TipoCurso.valueOf(aux.getString("TIPOCURSO")));
+				aCurso.set_estado(EstadoCurso.valueOf(aux.getString("ESTADOCURSO")));
 			}
 			
 		} catch (SQLException e) {
@@ -44,38 +41,34 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 			System.out.println("Curso no encontrado");
 		}
 		
-		return curso;
+		return 0;
 		
 	}
 
-	public CursoPropio editarCurso(CursoPropio aCurso) {
-		CursoPropio curso = new CursoPropio(aCurso.get_id());
+	public int editarCurso(CursoPropio aCurso) {
 		// El iD curso es el curso que queremos editar, el nombre de la clase "CursoPropio" es la tabla que queremos
 		try{
-			curso = seleccionarCurso(aCurso);
+			seleccionarCurso(aCurso);
 			//primero busca que el curso exista si no salta la excepcion lo modifica
-		
-			int aux= 0;
-			aux = update (aCurso);
-				
-			return curso;
-				
+			update (aCurso);
+			return 0;
 			
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 		}
 		
-		return curso;
+		return 0;
 		
 	}
 
 	public List<CursoPropio> listarCursosPorEstado(EstadoCurso aEstado, Date aFechaInicio, Date aFechaFin) {
 		List<CursoPropio> Cursos = new ArrayList<CursoPropio>();
-		CursoPropio curso = new CursoPropio();
 		
-		ResultSet aux = get_estado(curso.getClass().getSimpleName(), aEstado, aFechaInicio, aFechaFin);
+		
+		ResultSet aux = get("Curso", aEstado, aFechaInicio, aFechaFin);
 		try {
 			while (aux.next()) {
+				CursoPropio curso = new CursoPropio();
 				curso.set_id(aux.getString("ID"));
 				curso.set_nombre(aux.getString("NOMBRE"));
 				curso.set_eCTS(aux.getInt("ECTS"));
@@ -86,11 +79,8 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 				curso.setId_centro(aux.getInt("IDCENTRO"));
 				curso.setId_director(aux.getString("DIRECTOR"));
 				curso.setId_secretario(aux.getString("SECRETARIO"));
-				//TO DO : COMO SE HACE CON LOS ENUM
-				TipoCurso Tcurso =  TipoCurso.valueOf(aux.getString("TIPOCURSO"));
-				curso.set_tipo(Tcurso);
-				EstadoCurso Ecurso = EstadoCurso.valueOf(aux.getString("ESTADOCURSO"));
-				curso.set_estado(Ecurso);
+				curso.set_tipo(TipoCurso.valueOf(aux.getString("TIPOCURSO")));
+				curso.set_estado(EstadoCurso.valueOf(aux.getString("ESTADOCURSO")));
 				Cursos.add(curso);
 			}
 			
@@ -106,9 +96,8 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 
 	public double listarIngresos(TipoCurso aTipo, Date aFechaInicio, Date aFechaFin) {
 		double total=0;
-		CursoPropio curso = new CursoPropio();
 		
-		ResultSet aux = get_tipo(curso.getClass().getSimpleName(), aTipo, aFechaInicio, aFechaFin);
+		ResultSet aux = get("Curso", aTipo, aFechaInicio, aFechaFin);
 		try {
 			if (aux.next()) {
 				total = aux.getDouble(0);
@@ -145,9 +134,7 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 				EstadoCurso Ecurso = EstadoCurso.valueOf(aux.getString("ESTADOCURSO"));
 				curso.set_estado(Ecurso);
 			}
-			
-
-		
+					
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Curso no encontrado");

@@ -104,7 +104,7 @@ public class GestorBD{
 						+ "Director VARCHAR(10) NOT NULL, TipoCurso VARCHAR (40) NOT NULL,EstadoCurso VARCHAR(40) NOT NULL, PRIMARY KEY (ID), FOREIGN KEY (idCentro) REFERENCES Centro(id), FOREIGN KEY (Secretario) REFERENCES Profesor(dni), FOREIGN KEY (Director) REFERENCES Profesor(dni))");
 				stmt.execute("CREATE TABLE Estudiante (dni VARCHAR(10) NOT NULL, Nombre VARCHAR(40) NOT NULL, Apellidos VARCHAR(40) NOT NULL, Titulacion VARCHAR(40) NOT NULL,Cualificacion VARCHAR(40) NOT NULL, PRIMARY KEY (dni))");
 				stmt.execute("CREATE TABLE Materia (Nombre VARCHAR(40) NOT NULL,horas FLOAT (2) NOT NULL,FechaInicio DATE NOT NULL,FechaFin DATE NOT NULL,idCurso VARCHAR (10),dniprofesor VARCHAR(10), FOREIGN KEY (idCurso) REFERENCES CursoPropio(id),FOREIGN KEY (dniprofesor) REFERENCES Profesor(dni))");
-				stmt.execute("CREATE TABLE Matricula (Fecha DATE NOT NULL,Pagado BOOLEAN NOT NULL,dniEstudiante VARCHAR(10) NOT NULL,idCurso VARCHAR (10) NOT NULL,ModoPago VARCHAR(40) NOT NULL,FOREIGN KEY (dniEstudiante) REFERENCES Estudiante(dni),FOREIGN KEY (idCurso) REFERENCES CursoPropio(id))");
+				stmt.execute("CREATE TABLE Matricula (id INT, PRIMARY KEY(ID), Fecha DATE NOT NULL,Pagado BOOLEAN NOT NULL,dniEstudiante VARCHAR(10) NOT NULL,idCurso VARCHAR (10) NOT NULL,ModoPago VARCHAR(40) NOT NULL,FOREIGN KEY (dniEstudiante) REFERENCES Estudiante(dni),FOREIGN KEY (idCurso) REFERENCES CursoPropio(id))");
 			}
 		} catch (SQLException ex) {
 			conectarBD();
