@@ -26,6 +26,40 @@ public class AbstractEntityDAO<E>{
 
 		return result;
 	}
+	
+	//get para estadoCurso
+	public ResultSet get_estado(String Table, EstadoCurso estadoCurso, Date aFechaInicio, Date aFechaFin) {
+		ResultSet result = null;
+		
+		if (Table.equals("CursoPropio")) {
+			result = agente.select("SELECT * FROM " + Table + "WHERE estadocurso = "+estadoCurso+" AND fechainicio > "+aFechaInicio+" AND fechafin < "+aFechaFin);
+		}
+
+		return result;
+	}
+	
+	//get para coste total por tipos de curso
+	public ResultSet get_tipo(String Table, TipoCurso tipoCurso,  Date aFechaInicio, Date aFechaFin) {
+		ResultSet result = null;
+		
+		if (Table.equals("CursoPropio")) {
+			result = agente.select("SELECT SUM(tasamatricula) FROM " + Table + "WHERE tipocurso = "+tipoCurso+" AND fechainicio > "+aFechaInicio+" AND fechafin < "+aFechaFin);
+		}
+
+		return result;
+	}
+	
+	public ResultSet get_edicion(String Table, Date aFechaInicio, Date aFechaFin) {
+		ResultSet result = null;
+		
+		if (Table.equals("CursoPropio")) {
+			result = agente.select("SELECT edicion FROM " + Table + "WHERE fechainicio > "+aFechaInicio+" AND fechafin < "+aFechaFin);
+		}
+
+		return result;
+	}
+	
+	
 	public int insert (Object E) {
 		String className = E.getClass().getSimpleName();
 		int result = 0;

@@ -113,7 +113,7 @@ public class loginPrueba extends JFrame {
 				
 				char[] clave = textContrasena.getPassword();
 				String claveFinal = new String(clave);
-				
+				//COMPROBAR EN LA BBDD EN VEZ DE HARDCODEADO
 				if(textUsuario.getText().equals("vaporware") && claveFinal.equals("1234")) {
 					dispose();
 					JOptionPane.showMessageDialog(null, "Inicio de sesión correcto", "INGRESO CORRECTO", 

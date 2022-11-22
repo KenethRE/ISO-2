@@ -26,6 +26,10 @@ public class CursoPropio {
 	public TipoCurso _tipo;
 	public CursoPropioDAO<CursoPropio> _cursoPropioDao;
 	
+	public CursoPropio() {
+		
+	}
+	
 	public CursoPropio(String id) {
 		this._id = id;
 	}

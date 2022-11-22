@@ -6,6 +6,7 @@ import negocio.entities.EstadoCurso;
 public class GestorPropuestasCursos {
 
 	public CursoPropio realizarPropuestaCurso() {
+		
 		throw new UnsupportedOperationException();
 	}
 
