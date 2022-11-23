@@ -20,7 +20,7 @@ public class AbstractEntityDAO<E>{
 	}
 	
 	//esto regresa todos los elementos de alguna tabla en particular
-	public ResultSet get(String Table) { //borro "String iD ya que no se usa
+	public ResultSet get(String Table) {
 		ResultSet result = null;
 
 		if (Table.equals("ProfesorExterno") || Table.equals("ProfesorUCLM")) result = agente.select("SELECT * FROM " + Table + " NATURAL JOIN PROFESOR");
@@ -119,8 +119,7 @@ public class AbstractEntityDAO<E>{
 		
 		case "Matricula":
 			result = agente.update("UPDATE INTO " + className + "VALUES('" + ((Matricula) E).get_fecha() + "'," + ((Matricula) E).is_pagado() + ",'"
-					+ ((Matricula) E).getId_estudiante() + "','" + ((Matricula) E).getId_Curso() + "')" + " WHERE ID = '" + ((Matricula) E).getiD() + "'");//no hay id matricula revisar
-			break;
+					+ ((Matricula) E).getId_estudiante() + "','" + ((Matricula) E).getId_Curso() + "')" + " WHERE ID = '" + ((Matricula) E).getiD() + "'");
 		case "Materia":
 			result = agente.update("UPDATE INTO " + className + "VALUES('" + ((Materia) E).get_nombre()+ "'," + ((Materia) E).get_horas() + ",'"
 					+ ((Materia) E).get_fechaInicio() + "','" + ((Materia) E).get_fechaFin() + "','" + ((Materia) E).getId_Curso() + "')"+ " WHERE Nombre = '" + ((Materia) E).get_nombre() +"'"); 

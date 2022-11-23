@@ -35,8 +35,19 @@ public class ProfesorDAO<E> extends AbstractEntityDAO<E> {
 		
 	}
 
-	public Profesor editarProfesor(Profesor aProfesor) {
-		throw new UnsupportedOperationException();
+	public int editarProfesor(Profesor aProfesor) {
+		// El dni Profesor es el profesor que queremos editar, el nombre de la clase "Profesor" es la tabla que queremos
+		try{
+			seleccionarProfesor(aProfesor);
+			//primero busca que el profesor exista si no salta la excepcion lo modifica
+			update (aProfesor);
+			return 0;
+			
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
 	}
 
 	public List<Profesor> listarProfesores() {

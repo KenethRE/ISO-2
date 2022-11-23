@@ -17,7 +17,7 @@ public class Matricula implements IdInterface{
 	
 	//una matricula tiene un estudiante
 	public String id_estudiante;
-	public int id_Curso;
+	public String id_Curso;
 	public ModoPago _tipoPago;
 	
 	
@@ -45,10 +45,10 @@ public class Matricula implements IdInterface{
 	public void setId_estudiante(String id_estudiante) {
 		this.id_estudiante = id_estudiante;
 	}
-	public int getId_Curso() {
+	public String getId_Curso() {
 		return id_Curso;
 	}
-	public void setId_Curso(int id_Curso) {
+	public void setId_Curso(String id_Curso) {
 		this.id_Curso = id_Curso;
 	}
 	public ModoPago get_tipoPago() {
