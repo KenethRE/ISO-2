@@ -10,6 +10,10 @@ public class ProfesorExterno extends Profesor {
 		super(dni);
 	}
 
+	public ProfesorExterno() {
+		// TODO Auto-generated constructor stub
+	}
+
 	private String _titulacion;
 
 	public String get_titulacion() {

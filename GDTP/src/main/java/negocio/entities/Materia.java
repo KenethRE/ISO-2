@@ -8,7 +8,7 @@ public class Materia implements IdInterface{
 	private Date _fechaInicio;
 	private Date _fechaFin;
 	public String id_Curso;
-	public int id_prof_responsable;
+	public String id_prof_responsable;
 	
 	
 	public String get_nombre() {
@@ -41,10 +41,10 @@ public class Materia implements IdInterface{
 	public void setId_Curso(String id_Curso) {
 		this.id_Curso = id_Curso;
 	}
-	public int getId_prof_responsable() {
+	public String getId_prof_responsable() {
 		return id_prof_responsable;
 	}
-	public void setId_prof_responsable(int id_prof_responsable) {
+	public void setId_prof_responsable(String id_prof_responsable) {
 		this.id_prof_responsable = id_prof_responsable;
 	}
 	@Override

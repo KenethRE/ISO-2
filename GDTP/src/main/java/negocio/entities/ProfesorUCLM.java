@@ -17,6 +17,11 @@ public class ProfesorUCLM extends Profesor {
 	}
 
 
+	public ProfesorUCLM() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public String get_nombre() {
 		return _nombre;
 	}

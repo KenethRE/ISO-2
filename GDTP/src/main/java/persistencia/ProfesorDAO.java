@@ -20,6 +20,7 @@ public class ProfesorDAO<E> extends AbstractEntityDAO<E> {
 		ResultSet aux = get(aProfesor);
 		try {
 			while (aux.next()) {
+				aProfesor.set_dni(aux.getNString("dni"));
 				aProfesor.set_nombre(aux.getString("NOMBRE"));
 				aProfesor.set_apellidos(aux.getString("APELLIDOS"));
 				aProfesor.set_doctor(aux.getBoolean("DOCTOR"));
