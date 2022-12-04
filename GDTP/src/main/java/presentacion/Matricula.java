@@ -1,4 +1,4 @@
-package presentacion.curso_matricula;
+package presentacion;
 
 import java.awt.EventQueue;
 

@@ -1,13 +1,10 @@
-package presentacion.curso_matricula;
+package presentacion;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import presentacion.LoginPrueba.ServiciosAdmin;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 

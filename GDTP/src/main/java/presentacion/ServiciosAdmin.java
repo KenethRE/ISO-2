@@ -1,16 +1,10 @@
-package presentacion.LoginPrueba;
+package presentacion;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import presentacion.curso_matricula.VistaPrevia_RealizarPropuestaCursos;
-import presentacion.curso_matricula.RealizarPropuestaCursos;
-import presentacion.curso_matricula.VerPropuestaCursos;
-import presentacion.curso_matricula.gestionarIngresos;
-
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Color;
@@ -110,12 +104,12 @@ public class ServiciosAdmin extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(ServiciosAdmin.class.getResource("/presentacion/LoginPrueba/Unio2.png")));
+		lblNewLabel.setIcon(new ImageIcon(ServiciosAdmin.class.getResource("/presentacion/Unio2.png")));
 		lblNewLabel.setBounds(-10, 0, 940, 520);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(ServiciosAdmin.class.getResource("/presentacion/LoginPrueba/Ellipse 209.png")));
+		lblNewLabel_1.setIcon(new ImageIcon(ServiciosAdmin.class.getResource("/presentacion/Ellipse 209.png")));
 		lblNewLabel_1.setBounds(670, 220, 260, 300);
 		contentPane.add(lblNewLabel_1);
 		

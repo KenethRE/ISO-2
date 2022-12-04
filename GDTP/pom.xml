@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ISO-2</groupId>
   <artifactId>GDTP</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0</version>
   <description>Sistema informático para la gestión de enseñanzas propias de la Universidad
 de Castilla-La Mancha.</description>
   <properties>
@@ -18,7 +18,7 @@ de Castilla-La Mancha.</description>
   <configuration>
     <archive>
       <manifest>
-        <mainClass>presentacion.Principal</mainClass> <!--  recordar cambiar el nombre de esta clase a la nueva clase principal cuando la tengamos -->
+        <mainClass>presentacion.PantallaLogin</mainClass> <!--  recordar cambiar el nombre de esta clase a la nueva clase principal cuando la tengamos -->
       </manifest>
     </archive>
     <descriptorRefs>
