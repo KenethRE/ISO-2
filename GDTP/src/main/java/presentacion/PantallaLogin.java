@@ -8,9 +8,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Color;
-import javax.swing.BoxLayout;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
@@ -128,15 +125,16 @@ public class PantallaLogin extends JFrame {
 				//COMPROBAR EN LA BBDD EN VEZ DE HARDCODEADO
 				
 				
-				if(textUsuario.getText().equals("administrador") && claveFinal.equals("1234")) {
-					dispose();
+				if(textUsuario.getText().equals("admin") && claveFinal.equals("1234")) {
 					JOptionPane.showMessageDialog(null, "Inicio de sesión correcto", "INGRESO CORRECTO", 
 							JOptionPane.INFORMATION_MESSAGE);
 					
 					switch(loginSwitch.getSelectedItem().toString()) {
 						case "Vicerrector":
 						//llamar a la clase PantallaJefeGabineteVicerrectorado //TODO
-						
+							PantallaJefeGabineteVicerrectorado screen1 = new PantallaJefeGabineteVicerrectorado(PantallaLogin.this);
+							PantallaLogin.this.setVisible(false);
+							screen1.setVisible(true);
 						break;
 						case "Gabinete":
 						//llamar a la clase PantallaEmpleadosVicerrectorado //TODO
@@ -151,11 +149,6 @@ public class PantallaLogin extends JFrame {
 							
 						break;
 					}
-						
-					
-					ServiciosAdmin bienvenida = new ServiciosAdmin();
-					bienvenida.setVisible(true);
-					contentPane.setVisible(false);
 				
 					
 				}else {

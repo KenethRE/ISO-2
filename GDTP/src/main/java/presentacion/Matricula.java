@@ -17,6 +17,10 @@ import java.awt.event.KeyEvent;
 
 public class Matricula extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7592567473508560622L;
 	private JPanel contentPane;
 	private JTextField txtDni;
 	private JTextField textField_1;
