@@ -30,7 +30,9 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import java.awt.CardLayout;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SpringLayout;
 
 public class PantallaDireccionCursos extends JFrame{
 	JFrame previousWindow;
@@ -136,6 +138,17 @@ public class PantallaDireccionCursos extends JFrame{
 		JPanel panel = new JPanel();
 		pestañas.addTab("Editar Curso", null, panel, null);
 		panel.setLayout(null);
+			JDatePickerImpl fechafineditar = new JDatePickerImpl(panelfechafin,new DateLabelFormatter());
+			fechafineditar.setSize(134, 101);
+			fechafineditar.setLocation(232, 173);
+			fechafineditar.setBounds(21, 173, 134, 101);
+			panel.add(fechafineditar);
+			fechafineditar.setVisible(false);
+			JDatePickerImpl fechainicioeditar = new JDatePickerImpl(panelfechainicio,new DateLabelFormatter());
+			fechainicioeditar.setSize(134, 101);
+			fechainicioeditar.setBounds(232, 173, 134, 101);
+			panel.add(fechainicioeditar);
+			fechainicioeditar.setVisible(false);
 		
 		JLabel lblNewLabel_8 = new JLabel("Nombre");
 		lblNewLabel_8.setBounds(21, 44, 49, 14);
@@ -206,6 +219,27 @@ public class PantallaDireccionCursos extends JFrame{
 		list_1.setVisible(false);
 		
 		JButton btnNewButton_1_1 = new JButton("Guardar Curso");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Curso editado correctamente", "EDICION CORRECTA", 
+						JOptionPane.INFORMATION_MESSAGE);
+				lblNewLabel_8.setVisible(false);
+				textField_5.setVisible(false);
+				lblNewLabel_1_1.setVisible(false);
+				lblNewLabel_2_1.setVisible(false);
+				lblNewLabel_3_1.setVisible(false);
+				lblNewLabel_4_1.setVisible(false);
+				lblNewLabel_5_1.setVisible(false);
+				textField_6.setVisible(false);
+				textField_7.setVisible(false);
+				textField_8.setVisible(false);
+				btnNewButton_2.setVisible(false);
+				list_1.setVisible(false);
+				btnNewButton_1_1.setVisible(false);
+				fechafineditar.setVisible(false);
+				fechainicioeditar.setVisible(false);
+			}
+		});
 		btnNewButton_1_1.setBounds(417, 382, 121, 23);
 		panel.add(btnNewButton_1_1);
 		btnNewButton_1_1.setVisible(false);
@@ -214,6 +248,10 @@ public class PantallaDireccionCursos extends JFrame{
 		textField_9.setBounds(75, 10, 48, 20);
 		panel.add(textField_9);
 		textField_9.setColumns(10);
+		JDatePanelImpl panelfechainicioeditar = new JDatePanelImpl(new UtilDateModel(),propiedadesfecha);
+		JDatePanelImpl panelfechafineditar = new JDatePanelImpl(new UtilDateModel(),propiedadesfecha);		
+		fechainicio.setBounds(21, 173, 134, 101);
+		fechafin.setBounds(232, 173, 134, 101);
 		
 		JButton btnNewButton_3 = new JButton("Buscar curso");
 		btnNewButton_3.addActionListener(new ActionListener() {
@@ -236,6 +274,8 @@ public class PantallaDireccionCursos extends JFrame{
 					btnNewButton_2.setVisible(true);
 					list_1.setVisible(true);
 					btnNewButton_1_1.setVisible(true);
+					fechafineditar.setVisible(true);
+					fechainicioeditar.setVisible(true);
 					
 				}
 			}
@@ -259,6 +299,7 @@ public class PantallaDireccionCursos extends JFrame{
 	private JTextField textField_7;
 	private JTextField textField_8;
 	private JTextField textField_9;
+	private SpringLayout springLayout;
 	
 
 	public void altaCurso() {
