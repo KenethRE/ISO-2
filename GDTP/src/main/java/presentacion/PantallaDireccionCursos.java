@@ -83,39 +83,6 @@ public class PantallaDireccionCursos extends JFrame{
 		panel1.add(lblNewLabel_2);
 		JPanel panel = new JPanel();
 		pestañas.addTab("Editar Curso", null, panel, null);
-		/*
-		
-		
-		JLabel lblFechaInicio = new JLabel("Fecha Inicio");
-		lblFechaInicio.setBounds(25, 320, 59, 14);
-		Properties propiedadesfecha = new Properties();
-		propiedadesfecha.put("text.today","Hoy");
-		propiedadesfecha.put("text.month","Mes");
-		propiedadesfecha.put("text.year","Año");
-	
-		JDatePanelImpl panelfechainicio = new JDatePanelImpl(new UtilDateModel(),propiedadesfecha);
-		JDatePickerImpl fechainicio = new JDatePickerImpl(panelfechainicio,new DateLabelFormatter());
-		fechainicio.setBounds(25, 345, 134, 101);
-		getContentPane().add(fechainicio);
-		
-		JLabel lblTasaMatricula = new JLabel("Tasa Matricula");
-		lblTasaMatricula.setBounds(158, 292, 73, 14);
-		
-		JButton btnAadirMaterias = new JButton("Añadir materias");
-		btnAadirMaterias.setBounds(210, 469, 111, 23);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(67, 289, 74, 20);
-		textField_1.setColumns(10);
-		getContentPane().setLayout(null);
-		getContentPane().add(altaButton);
-		getContentPane().add(edicionButton);
-		getContentPane().add(lblNombreCurso);
-		getContentPane().add(lblFechaInicio);
-		getContentPane().add(textField_1);
-		getContentPane().add(lblTasaMatricula);
-		getContentPane().add(btnAadirMaterias);
-		*/
 		
 		
 		
