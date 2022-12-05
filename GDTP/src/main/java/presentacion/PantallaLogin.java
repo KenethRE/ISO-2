@@ -142,6 +142,9 @@ public class PantallaLogin extends JFrame {
 						break;
 						case "Director":
 						//llamar a la clase PantallaDireccionCursos //TODO
+							PantallaDireccionCursos screen2 = new PantallaDireccionCursos (PantallaLogin.this);
+							PantallaLogin.this.setVisible(false);
+							screen2.setVisible(true);
 						
 						break;
 						case "Estudiante":
