@@ -1,9 +1,15 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+import org.jdatepicker.*;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Properties;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -11,11 +17,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.GroupLayout.Alignment;
 
+import java.awt.EventQueue;
 import java.awt.GridLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 import java.awt.Label;
 import javax.swing.JTextField;
+import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
+import java.awt.CardLayout;
 
 public class PantallaDireccionCursos extends JFrame{
 	JFrame previousWindow;
@@ -33,101 +43,88 @@ public class PantallaDireccionCursos extends JFrame{
 		setTitle("Pantalla Director Cursos");
 		setBounds(100, 100, 943, 610);
 		setResizable(false);
+		getContentPane().setLayout(new CardLayout(0, 0));
+		JTabbedPane pestañas=new JTabbedPane();
+		JPanel panel1 = new JPanel();
+		panel1.setLayout(null);
+		pestañas.addTab("Alta Curso",panel1);
 		
-		JButton altaButton  = new JButton("Alta Curso");
-		altaButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
-		JButton edicionButton = new JButton("Editar curso");
-		
-		JLabel lblNombreCurso = new JLabel("Nombre Curso");
-		
-		JLabel lblEcts = new JLabel("ECTS");
-		
-		JLabel lblFechaInicio = new JLabel("Fecha Inicio");
-		
-		JLabel lblFechaFin = new JLabel("Fecha Fin");
-		
-		JLabel lblTasaMatricula = new JLabel("Tasa Matricula");
-		
-		JButton btnAadirMaterias = new JButton("Añadir materias");
+		JLabel lblNewLabel = new JLabel("Nombre");
+		lblNewLabel.setBounds(10, 38, 49, 14);
+		panel1.add(lblNewLabel);
 		
 		textField = new JTextField();
+		textField.setBounds(69, 35, 185, 20);
+		panel1.add(textField);
 		textField.setColumns(10);
+		getContentPane().add(pestañas, "name_26133981429000");
+		JLabel lblFechaInicio = new JLabel("Fecha Inicio");
+		lblFechaInicio.setBounds(25, 320, 59, 14);
+		Properties propiedadesfecha = new Properties();
+		propiedadesfecha.put("text.today","Hoy");
+		propiedadesfecha.put("text.month","Mes");
+		propiedadesfecha.put("text.year","Año");
+	
+		JDatePanelImpl panelfechainicio = new JDatePanelImpl(new UtilDateModel(),propiedadesfecha);
+		JDatePickerImpl fechainicio = new JDatePickerImpl(panelfechainicio,new DateLabelFormatter());
+		fechainicio.setBounds(52, 262, 134, 101);
+		JDatePanelImpl panelfechafin = new JDatePanelImpl(new UtilDateModel(),propiedadesfecha);
+		JDatePickerImpl fechafin = new JDatePickerImpl(panelfechafin,new DateLabelFormatter());
+		fechafin.setBounds(263, 262, 134, 101);
+		panel1.add(fechainicio);
+		panel1.add(fechafin);
+		
+		JLabel lblNewLabel_1 = new JLabel("Fecha Inicio");
+		lblNewLabel_1.setBounds(61, 237, 93, 14);
+		panel1.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("Fecha Fin");
+		lblNewLabel_2.setBounds(262, 237, 49, 14);
+		panel1.add(lblNewLabel_2);
+		JPanel panel = new JPanel();
+		pestañas.addTab("Editar Curso", null, panel, null);
+		/*
+		
+		
+		JLabel lblFechaInicio = new JLabel("Fecha Inicio");
+		lblFechaInicio.setBounds(25, 320, 59, 14);
+		Properties propiedadesfecha = new Properties();
+		propiedadesfecha.put("text.today","Hoy");
+		propiedadesfecha.put("text.month","Mes");
+		propiedadesfecha.put("text.year","Año");
+	
+		JDatePanelImpl panelfechainicio = new JDatePanelImpl(new UtilDateModel(),propiedadesfecha);
+		JDatePickerImpl fechainicio = new JDatePickerImpl(panelfechainicio,new DateLabelFormatter());
+		fechainicio.setBounds(25, 345, 134, 101);
+		getContentPane().add(fechainicio);
+		
+		JLabel lblTasaMatricula = new JLabel("Tasa Matricula");
+		lblTasaMatricula.setBounds(158, 292, 73, 14);
+		
+		JButton btnAadirMaterias = new JButton("Añadir materias");
+		btnAadirMaterias.setBounds(210, 469, 111, 23);
 		
 		textField_1 = new JTextField();
+		textField_1.setBounds(67, 289, 74, 20);
 		textField_1.setColumns(10);
-		GroupLayout groupLayout = new GroupLayout(getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(altaButton, GroupLayout.PREFERRED_SIZE, 464, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(edicionButton, GroupLayout.PREFERRED_SIZE, 459, GroupLayout.PREFERRED_SIZE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-							.addGroup(groupLayout.createSequentialGroup()
-								.addGap(25)
-								.addComponent(lblEcts, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
-							.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-								.addGap(55)
-								.addComponent(lblNombreCurso, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addPreferredGap(ComponentPlacement.RELATED)))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(29)
-							.addComponent(lblFechaInicio)
-							.addPreferredGap(ComponentPlacement.RELATED)))
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-							.addGroup(groupLayout.createSequentialGroup()
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-								.addGap(18)
-								.addComponent(lblTasaMatricula))
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblFechaFin, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnAadirMaterias)))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(18)
-							.addComponent(textField, GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
-							.addGap(97)))
-					.addGap(444))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(96)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(altaButton, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-						.addComponent(edicionButton, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
-					.addGap(59)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNombreCurso))
-					.addGap(24)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblTasaMatricula)
-						.addComponent(lblEcts))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblFechaInicio)
-						.addComponent(lblFechaFin))
-					.addPreferredGap(ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
-					.addComponent(btnAadirMaterias)
-					.addGap(81))
-		);
-
-		getContentPane().setLayout(groupLayout);
+		getContentPane().setLayout(null);
+		getContentPane().add(altaButton);
+		getContentPane().add(edicionButton);
+		getContentPane().add(lblNombreCurso);
+		getContentPane().add(lblFechaInicio);
+		getContentPane().add(textField_1);
+		getContentPane().add(lblTasaMatricula);
+		getContentPane().add(btnAadirMaterias);
+		*/
+		
+		
+		
 	}
 
 	
 	private static final long serialVersionUID = 1L;
-	private JTextField textField;
 	private JTextField textField_1;
+	private JTextField textField;
 
 	public void altaCurso() {
 		throw new UnsupportedOperationException();
@@ -135,5 +132,17 @@ public class PantallaDireccionCursos extends JFrame{
 
 	public void edicionCurso() {
 		throw new UnsupportedOperationException();
+	}
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					PantallaDireccionCursos frame = new PantallaDireccionCursos(null);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }
