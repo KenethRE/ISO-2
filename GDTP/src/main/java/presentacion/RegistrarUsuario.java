@@ -128,7 +128,7 @@ public class RegistrarUsuario extends JFrame {
 					dispose();
 					JOptionPane.showMessageDialog(null, "Usuario registrado correctamente", "INGRESO CORRECTO", 
 							JOptionPane.INFORMATION_MESSAGE);
-					//AÑADIR USUARIO A LA BBDD
+					//AÑADIR USUARIO A LA BBDD -> Nuestro programa no soporta la creacion de usuarios ya que no existe persistencia para ello.
 					
 				}else {
 					JOptionPane.showMessageDialog(null, "Usuario no registrado, datos incorrectos", "ERROR",
