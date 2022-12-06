@@ -22,7 +22,7 @@ public class CursoPropio implements IdInterface{
 	public Vector<Materia> _materias = new Vector<Materia>();//revisar vectores
 	public EstadoCurso _estado;
 	public TipoCurso _tipo;
-	public CursoPropioDAO<CursoPropio> _cursoPropioDao;
+	public CursoPropioDAO<CursoPropio> _cursoPropioDao = new CursoPropioDAO<CursoPropio>() ;
 	
 	public CursoPropio() {
 		

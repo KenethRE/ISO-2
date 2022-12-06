@@ -11,6 +11,7 @@ import org.jdatepicker.impl.UtilDateModel;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.Date;
 import java.util.Properties;
 
 import javax.swing.GroupLayout;
@@ -34,6 +35,9 @@ import javax.swing.JTable;
 
 public class PantallaDireccionCursos extends JFrame{
 	JFrame previousWindow;
+	Date fechaComienzo;
+	Date fechaFin;
+	
 	public PantallaDireccionCursos(JFrame previousWindow) {
 		this.previousWindow = previousWindow;
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -76,15 +80,21 @@ public class PantallaDireccionCursos extends JFrame{
 		fechainicio.setBounds(21, 173, 134, 101);
 		JDatePickerImpl fechafin = new JDatePickerImpl(panelfechafin,new DateLabelFormatter());
 		fechafin.setBounds(232, 173, 134, 101);
-		panel1.add(fechainicio);
-		panel1.add(fechafin);
+		JPanel PanelFechaComienzo = new JPanel();
+		PanelFechaComienzo.setBounds(10, 173, 212, 130);
+		JPanel PanelFechaFin = new JPanel();
+		PanelFechaFin.setBounds(255, 173, 212, 130);
+		panel1.add(PanelFechaComienzo);
+		panel1.add(PanelFechaFin);
+		PanelFechaComienzo.add(fechainicio);
+		PanelFechaFin.add(fechafin);
 		
 		JLabel lblNewLabel_1 = new JLabel("Fecha Inicio");
-		lblNewLabel_1.setBounds(30, 148, 93, 14);
+		lblNewLabel_1.setBounds(10, 159, 93, 14);
 		panel1.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Fecha Fin");
-		lblNewLabel_2.setBounds(231, 148, 49, 14);
+		lblNewLabel_2.setBounds(255, 159, 49, 14);
 		panel1.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("ECTS");
@@ -122,8 +132,8 @@ public class PantallaDireccionCursos extends JFrame{
 		lblNewLabel_6.setBounds(21, 11, 49, 14);
 		panel1.add(lblNewLabel_6);
 		
-		JLabel lblNewLabel_7 = new JLabel("ID");
-		lblNewLabel_7.setBounds(75, 11, 49, 14);
+		JLabel lblNewLabel_7 = new JLabel(String.valueOf((int)(Math.random() * 100)));
+		lblNewLabel_7.setBounds(75, 11, 93, 14);
 		panel1.add(lblNewLabel_7);
 		
 		JList list = new JList();
