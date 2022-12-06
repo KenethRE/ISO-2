@@ -1,5 +1,6 @@
 package negocio.entities;
 
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.Vector;
 import persistencia.CursoPropioDAO;
@@ -130,13 +131,14 @@ public class CursoPropio implements IdInterface{
 	public void set_tipo(TipoCurso _tipo) {
 		this._tipo = _tipo;
 	}
-
-	public CursoPropioDAO<CursoPropio> get_cursoPropioDao() {
-		return _cursoPropioDao;
-	}
-
-	public void set_cursoPropioDao(CursoPropioDAO<CursoPropio> _cursoPropioDao) {
-		this._cursoPropioDao = _cursoPropioDao;
+	
+	public void persist () {
+		try {
+			this._cursoPropioDao.crearNuevoCurso(this);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

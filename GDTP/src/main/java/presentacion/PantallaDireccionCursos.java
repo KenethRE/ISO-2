@@ -8,6 +8,10 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
+import negocio.entities.CursoPropio;
+import negocio.entities.EstadoCurso;
+import negocio.entities.TipoCurso;
+
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -31,12 +35,16 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import java.awt.CardLayout;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class PantallaDireccionCursos extends JFrame{
 	JFrame previousWindow;
 	Date fechaComienzo;
 	Date fechaFin;
+	int contador = 0;
 	
 	public PantallaDireccionCursos(JFrame previousWindow) {
 		this.previousWindow = previousWindow;
@@ -69,13 +77,13 @@ public class PantallaDireccionCursos extends JFrame{
 		pestañas.addTab("Alta Curso",panel1);
 		
 		JLabel lblNewLabel = new JLabel("Nombre");
-		lblNewLabel.setBounds(21, 44, 49, 14);
+		lblNewLabel.setBounds(31, 44, 49, 14);
 		panel1.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(75, 41, 185, 20);
-		panel1.add(textField);
-		textField.setColumns(10);
+		txtNombreCurso = new JTextField();
+		txtNombreCurso.setBounds(75, 41, 276, 20);
+		panel1.add(txtNombreCurso);
+		txtNombreCurso.setColumns(10);
 		JDatePickerImpl fechainicio = new JDatePickerImpl(panelfechainicio,new DateLabelFormatter());
 		fechainicio.setBounds(21, 173, 134, 101);
 		JDatePickerImpl fechafin = new JDatePickerImpl(panelfechafin,new DateLabelFormatter());
@@ -98,51 +106,66 @@ public class PantallaDireccionCursos extends JFrame{
 		panel1.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("ECTS");
-		lblNewLabel_3.setBounds(21, 76, 49, 14);
+		lblNewLabel_3.setBounds(31, 76, 49, 14);
 		panel1.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Tasa");
-		lblNewLabel_4.setBounds(161, 76, 49, 14);
+		lblNewLabel_4.setBounds(215, 76, 49, 14);
 		panel1.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Edicion");
-		lblNewLabel_5.setBounds(21, 103, 49, 14);
+		lblNewLabel_5.setBounds(31, 103, 49, 14);
 		panel1.add(lblNewLabel_5);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(55, 73, 49, 20);
-		panel1.add(textField_2);
-		textField_2.setColumns(10);
+		txtECTS = new JTextField();
+		txtECTS.setBounds(85, 73, 49, 20);
+		panel1.add(txtECTS);
+		txtECTS.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(191, 72, 49, 20);
-		panel1.add(textField_3);
+		txtTasaMatricula = new JTextField();
+		txtTasaMatricula.setColumns(10);
+		txtTasaMatricula.setBounds(269, 72, 82, 20);
+		panel1.add(txtTasaMatricula);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(55, 100, 49, 20);
-		panel1.add(textField_4);
+		txtEdicion = new JTextField();
+		txtEdicion.setColumns(10);
+		txtEdicion.setBounds(85, 100, 49, 20);
+		panel1.add(txtEdicion);
 		
 		JButton btnNewButton = new JButton("Añadir Materias");
 		btnNewButton.setBounds(30, 314, 111, 23);
 		panel1.add(btnNewButton);
 		
-		JLabel lblNewLabel_6 = new JLabel("Id Curso");
-		lblNewLabel_6.setBounds(21, 11, 49, 14);
-		panel1.add(lblNewLabel_6);
-		
-		JLabel lblNewLabel_7 = new JLabel(String.valueOf((int)(Math.random() * 100)));
-		lblNewLabel_7.setBounds(75, 11, 93, 14);
-		panel1.add(lblNewLabel_7);
-		
 		JList list = new JList();
 		list.setBounds(178, 317, 188, 140);
 		panel1.add(list);
 		
+		JComboBox <TipoCurso> cbTipoCurso = new JComboBox<TipoCurso>();
+		cbTipoCurso.setModel(new DefaultComboBoxModel<TipoCurso>(TipoCurso.values()));
+		cbTipoCurso.setBounds(230, 99, 121, 22);
+		panel1.add(cbTipoCurso);
+		
 		JButton btnNewButton_1 = new JButton("Guardar Curso");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String IDCurso = txtNombreCurso.getText().substring(0, 8) + contador++;
+				
+				fechaComienzo = new java.sql.Date(((java.util.Date) fechainicio.getModel().getValue()).getTime());
+				fechaFin = new java.sql.Date(((java.util.Date) fechafin.getModel().getValue()).getTime());
+				altaCurso(IDCurso, txtNombreCurso.getText(), Integer.valueOf(txtECTS.getText()), 
+						fechaFin, fechaFin, Double.valueOf(txtTasaMatricula.getText()), Integer.valueOf(txtEdicion.getText()), (TipoCurso) cbTipoCurso.getSelectedItem());
+				JOptionPane.showMessageDialog(null, "Se ha creado un curso con identificador: " + IDCurso, "EXITO",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
 		btnNewButton_1.setBounds(417, 382, 121, 23);
 		panel1.add(btnNewButton_1);
+		
+		
+		
+		JLabel lblNewLabel_6 = new JLabel("Tipo de Curso:");
+		lblNewLabel_6.setBounds(157, 103, 80, 14);
+		panel1.add(lblNewLabel_6);
 		JPanel panel = new JPanel();
 		pestañas.addTab("Editar Curso", null, panel, null);
 		panel.setLayout(null);
@@ -268,10 +291,10 @@ public class PantallaDireccionCursos extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 	private JTextField textField_1;
-	private JTextField textField;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField txtNombreCurso;
+	private JTextField txtECTS;
+	private JTextField txtTasaMatricula;
+	private JTextField txtEdicion;
 	private JTextField textField_5;
 	private JTextField textField_6;
 	private JTextField textField_7;
@@ -279,8 +302,21 @@ public class PantallaDireccionCursos extends JFrame{
 	private JTextField textField_9;
 	
 
-	public void altaCurso() {
-		throw new UnsupportedOperationException();
+	public void altaCurso(String idCurso, String nombreCurso, int ECTS, Date fechaInicio, Date fechaFin, double TasaMatricula, int Edicion, TipoCurso tipoCurso) {
+		CursoPropio curso = new CursoPropio();
+		curso.set_id(idCurso);
+		curso.set_nombre(nombreCurso);
+		curso.set_eCTS(ECTS);
+		curso.set_fechaInicio(fechaInicio);
+		curso.set_fechaFin(fechaFin);
+		curso.set_tasaMatricula(TasaMatricula);
+		curso.set_edicion(Edicion);
+		curso.setId_secretario("01");
+		curso.setId_director("02");
+		curso.set_estado(EstadoCurso.PROPUESTO);
+		curso.set_tipo(tipoCurso);
+		curso.setId_centro(1);
+		curso.persist();
 	}
 
 	public void edicionCurso() {
