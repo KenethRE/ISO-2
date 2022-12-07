@@ -34,19 +34,19 @@ public class AbstractEntityDAO<E>{
 		ResultSet result = null;
 		
 		if (Table.equals("CursoPropio")) {
-			result = agente.select("SELECT * FROM " + Table + "WHERE estadocurso = "+estadoCurso+" AND fechainicio > "+aFechaInicio+" AND fechafin < "+aFechaFin);
+			result = agente.select("SELECT * FROM " + Table + "WHERE estadocurso = '"+estadoCurso+"' AND fechainicio > '"+aFechaInicio+"' AND fechafin < '"+aFechaFin+"'");
 		}
 
 		return result;
 	}
 	
 	//get para coste total por tipos de curso
-	public ResultSet get(String Table, TipoCurso tipoCurso,  Date aFechaInicio, Date aFechaFin) {
+	public ResultSet get(TipoCurso tipoCurso,  Date aFechaInicio, Date aFechaFin) {
 		ResultSet result = null;
 		
-		if (Table.equals("CursoPropio")) {
-			result = agente.select("SELECT SUM(tasamatricula) FROM " + Table + "WHERE tipocurso = "+tipoCurso+" AND fechainicio > "+aFechaInicio+" AND fechafin < "+aFechaFin);
-		}
+		result = agente.select("SELECT DISTINCT COUNT(),COUNT()*C.tasamatricula AS total,c.id FROM Matricula m"
+							 + " INNER JOIN CursoPropio c ON m.idcurso = c.id WHERE m.pagado=1"
+							 + " AND c.tipocurso='"+tipoCurso+"' AND c.fechainicio > '"+aFechaInicio+"' AND c.fechafin < '"+aFechaFin+"' GROUP BY m.idcurso");
 
 		return result;
 	}

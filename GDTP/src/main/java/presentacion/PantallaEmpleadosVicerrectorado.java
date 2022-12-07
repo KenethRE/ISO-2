@@ -87,9 +87,8 @@ public class PantallaEmpleadosVicerrectorado extends JFrame{
 
 	public void evaluarCurso() {
 		CursoPropio curso = new CursoPropio();
-		
-		
 	}
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

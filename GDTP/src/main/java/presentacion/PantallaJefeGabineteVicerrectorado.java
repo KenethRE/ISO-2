@@ -20,6 +20,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.GroupLayout.Alignment;
 
 import java.awt.EventQueue;
@@ -37,6 +38,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import java.awt.Font;
 import javax.swing.JComboBox;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -271,6 +273,25 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 			pickerFechaFin3.setBounds(128, 304, 202, 23);
 			PanelFechaFin3.add(pickerFechaFin3);
 			
+			ButtonGroup grupo1= new ButtonGroup();
+			JRadioButton rbtn1=new JRadioButton("txt1",true);
+			JRadioButton rbtn2=new JRadioButton("txt2",false);
+			JRadioButton rbtn3=new JRadioButton("txt3",false);
+			
+			grupo1.add(rbtn1);
+			grupo1.add(rbtn2);
+			grupo1.add(rbtn3);
+			
+			
+			rbtn1.setBounds(6,72,50,50);
+			rbtn2.setBounds(83,72,50,50);
+			rbtn3.setBounds(172,72,50,50);
+			
+
+			panel3.add(rbtn1);
+			panel3.add(rbtn2);
+			panel3.add(rbtn3);
+			
 			//Botón ListarEdiciones Panel3
 			
 			JButton btnListarEdiciones = new JButton("Listar Ediciones");
@@ -323,5 +344,17 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 				}
 			}
 		});
+	}
+	
+	public void consultarIngresos() {
+		CursoPropio curso = new CursoPropio();
+	}
+	
+	public void consultarEstadoCursos() {
+		CursoPropio curso = new CursoPropio();
+	}
+	
+	public void listarEdicionesCursos() {
+		CursoPropio curso = new CursoPropio();
 	}
 }

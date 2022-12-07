@@ -96,19 +96,21 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 	}
 
 	public double listarIngresos(TipoCurso aTipo, Date aFechaInicio, Date aFechaFin) {
-		double total=0;
+		int num=0;
+		double total =0;
+		String id;
 		
-		ResultSet aux = get("Curso", aTipo, aFechaInicio, aFechaFin);
+		ResultSet aux = get(aTipo, aFechaInicio, aFechaFin);
 		try {
 			if (aux.next()) {
-				total = aux.getDouble(0);
-				return total;
+				num = aux.getInt(0);
+				total += aux.getDouble(1);
+				id = aux.getString(2);
 			}
-			
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Curso no encontrado");
+			System.out.println("Ingresos no encontrados");
 		}
 		
 		
