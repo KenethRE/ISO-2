@@ -1,5 +1,6 @@
 package presentacion;
 
+
 import org.apache.derby.iapi.sql.dictionary.TupleDescriptor;
 import org.jdatepicker.*;
 import org.jdatepicker.impl.JDatePanelImpl;
@@ -8,6 +9,7 @@ import org.jdatepicker.impl.UtilDateModel;
 
 import negocio.controllers.*;
 import negocio.entities.*;
+import persistencia.CursoPropioDAO;
 
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -75,14 +77,6 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 			getContentPane().add(pestañas, "name_002");
 			
 			
-			UtilDateModel model1 = new UtilDateModel();
-			Properties propiedadesfecha = new Properties();
-			propiedadesfecha.put("text.today","Hoy");
-			propiedadesfecha.put("text.month","Mes");
-			propiedadesfecha.put("text.year","Año");
-			
-			
-			
 			JPanel panel1 = new JPanel(); 
 			panel1.setLayout(null);
 			pestañas.addTab("Consultar ingresos", panel1);
@@ -103,24 +97,36 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 			
 			//Date FechaInicio Panel1
 			
-			JLabel lblFechaInicio = new JLabel("Fecha Inicio:");
-			lblFechaInicio.setFont(new Font("Tahoma", Font.BOLD, 11));
-			lblFechaInicio.setBounds(10, 50, 200, 14);
-			panel1.add(lblFechaInicio);
+			UtilDateModel fInicio1 = new UtilDateModel();
+			Properties pInicio1 = new Properties();
+			pInicio1.put("text.today","Hoy");
+			pInicio1.put("text.month","Mes");
+			pInicio1.put("text.year","Año");
+			
+			JLabel lblInicio = new JLabel("Fecha Inicio:");
+			lblInicio.setFont(new Font("Tahoma", Font.BOLD, 11));
+			lblInicio.setBounds(10, 50, 200, 14);
+			panel1.add(lblInicio);
 		
 			JPanel PanelFechaInicio = new JPanel();
 			PanelFechaInicio.setBounds(10, 64, 212, 33);
 			panel1.add(PanelFechaInicio);
-			JDatePanelImpl panelfechainicio = new JDatePanelImpl(model1, propiedadesfecha);
+			JDatePanelImpl panelfechainicio = new JDatePanelImpl(fInicio1, pInicio1);
 			JDatePickerImpl pickerFechaInicio = new JDatePickerImpl(panelfechainicio, new DateLabelFormatter());
 			PanelFechaInicio.add(pickerFechaInicio);
 			
 			//Date FechaFin Panel1
 			
+			UtilDateModel fFin1 = new UtilDateModel();
+			Properties pFin1 = new Properties();
+			pFin1.put("text.today","Hoy");
+			pFin1.put("text.month","Mes");
+			pFin1.put("text.year","Año");
+			
 			JPanel PanelFechaFin = new JPanel();
 			PanelFechaFin.setBounds(256, 66, 212, 33);
 			panel1.add(PanelFechaFin);
-			JDatePanelImpl panelfechafin = new JDatePanelImpl(model1,propiedadesfecha);
+			JDatePanelImpl panelfechafin = new JDatePanelImpl(fFin1,pFin1);
 			JLabel lblFechaFin = new JLabel("Fecha Finalizacion:");
 			lblFechaFin.setFont(new Font("Tahoma", Font.BOLD, 11));
 			lblFechaFin.setBounds(256, 50, 200, 14);
@@ -144,20 +150,19 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 			btnConsultarIngresos.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-						PantallaJefeGabineteVicerrectorado.this.fechaComienzo = new java.sql.Date(model1.getValue().getTime());
+						PantallaJefeGabineteVicerrectorado.this.fechaComienzo = new java.sql.Date(fInicio1.getValue().getTime());
 					}
 					catch(Exception ex) {
 						 JOptionPane.showMessageDialog(null, "Campo fecha inicio vacío ", "Fecha incio", JOptionPane.INFORMATION_MESSAGE);
 					}
 					try {
-						PantallaJefeGabineteVicerrectorado.this.fechaFin = new java.sql.Date(model1.getValue().getTime());
+						PantallaJefeGabineteVicerrectorado.this.fechaFin = new java.sql.Date(fFin1.getValue().getTime());
 					}
 					catch(Exception ex) {
 						JOptionPane.showMessageDialog(null, "Campo fecha fin vacío ", "Fecha fin", JOptionPane.INFORMATION_MESSAGE);
 					}
 			
 					PantallaJefeGabineteVicerrectorado.this.tipoCurso = (TipoCurso) comboBoxTipoCurso.getSelectedItem();
-					
 					
 				}
 			});
@@ -176,14 +181,19 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 			tipoCurso2.setBounds(10, 11, 200, 14);
 			panel2.add(tipoCurso2);
 			
-			JComboBox<EstadoCurso> comboBoxTipoCurso2 = new JComboBox<EstadoCurso>();
-			comboBoxTipoCurso2.setModel(new DefaultComboBoxModel<EstadoCurso>(EstadoCurso.values()));
-			comboBoxTipoCurso2.setBounds(15, 25, 200, 22);
-			panel2.add(comboBoxTipoCurso2);
+			JComboBox<EstadoCurso> comboBoxEstadoCurso = new JComboBox<EstadoCurso>();
+			comboBoxEstadoCurso.setModel(new DefaultComboBoxModel<EstadoCurso>(EstadoCurso.values()));
+			comboBoxEstadoCurso.setBounds(15, 25, 200, 22);
+			panel2.add(comboBoxEstadoCurso);
 			
 			//Date FechaInicio Panel2
 			
-			UtilDateModel model2 = new UtilDateModel();
+			UtilDateModel fInicio2 = new UtilDateModel();
+			Properties pInicio2 = new Properties();
+			pInicio2.put("text.today","Hoy");
+			pInicio2.put("text.month","Mes");
+			pInicio2.put("text.year","Año");
+			
 			JLabel lblFechaInicio2 = new JLabel("Fecha Inicio:");
 			lblFechaInicio2.setFont(new Font("Tahoma", Font.BOLD, 11));
 			lblFechaInicio2.setBounds(10, 50, 200, 14);
@@ -192,17 +202,23 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 			JPanel PanelFechaInicio2 = new JPanel();
 			PanelFechaInicio2.setBounds(10, 64, 212, 33);
 			panel2.add(PanelFechaInicio2);
-			JDatePanelImpl panelfechainicio2 = new JDatePanelImpl(model2, propiedadesfecha);
+			JDatePanelImpl panelfechainicio2 = new JDatePanelImpl(fInicio2, pInicio2);
 			JDatePickerImpl pickerFechaInicio2 = new JDatePickerImpl(panelfechainicio2, new DateLabelFormatter());
 			PanelFechaInicio2.add(pickerFechaInicio2);
 			
 			//Date FechaFin Panel2
 			
+			UtilDateModel fFin2 = new UtilDateModel();
+			Properties pFin2 = new Properties();
+			pFin2.put("text.today","Hoy");
+			pFin2.put("text.month","Mes");
+			pFin2.put("text.year","Año");
+			
 			JPanel PanelFechaFin2 = new JPanel();
 			PanelFechaFin2.setBounds(256, 66, 212, 33);
 			panel2.add(PanelFechaFin2);
 			
-			JDatePanelImpl panelfechafin2 = new JDatePanelImpl(model2,propiedadesfecha);
+			JDatePanelImpl panelfechafin2 = new JDatePanelImpl(fFin2,pFin2);
 			JLabel lblFechaFin2 = new JLabel("Fecha Finalizacion:");
 			lblFechaFin2.setFont(new Font("Tahoma", Font.BOLD, 11));
 			lblFechaFin2.setBounds(256, 50, 200, 14);
@@ -217,20 +233,19 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 			btnConsultarEstados.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-						PantallaJefeGabineteVicerrectorado.this.fechaComienzo = new java.sql.Date(model2.getValue().getTime());
+						PantallaJefeGabineteVicerrectorado.this.fechaComienzo = new java.sql.Date(fInicio2.getValue().getTime());
 					}
 					catch(Exception ex) {
 						 JOptionPane.showMessageDialog(null, "Campo fecha inicio vacío ", "Fecha incio", JOptionPane.INFORMATION_MESSAGE);
 					}
 					try {
-						PantallaJefeGabineteVicerrectorado.this.fechaFin = new java.sql.Date(model2.getValue().getTime());
+						PantallaJefeGabineteVicerrectorado.this.fechaFin = new java.sql.Date(fFin2.getValue().getTime());
 					}
 					catch(Exception ex) {
 						JOptionPane.showMessageDialog(null, "Campo fecha fin vacío ", "Fecha fin", JOptionPane.INFORMATION_MESSAGE);
 					}
-			
-					PantallaJefeGabineteVicerrectorado.this.estadoCurso = (EstadoCurso) comboBoxTipoCurso.getSelectedItem();
 					
+					PantallaJefeGabineteVicerrectorado.this.estadoCurso = (EstadoCurso) comboBoxEstadoCurso.getSelectedItem();
 					
 				}
 			});
@@ -245,7 +260,12 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 			
 			//Date FechaInicio Panel3
 			
-			UtilDateModel model3 = new UtilDateModel();
+			UtilDateModel fInicio3 = new UtilDateModel();
+			Properties pInicio3 = new Properties();
+			pFin2.put("text.today","Hoy");
+			pFin2.put("text.month","Mes");
+			pFin2.put("text.year","Año");
+			
 			JLabel lblFechaInicio3 = new JLabel("Fecha Inicio:");
 			lblFechaInicio3.setFont(new Font("Tahoma", Font.BOLD, 11));
 			lblFechaInicio3.setBounds(10, 11, 200, 14);
@@ -254,17 +274,23 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 			JPanel PanelFechaInicio3 = new JPanel();
 			PanelFechaInicio3.setBounds(10, 25, 212, 33);
 			panel3.add(PanelFechaInicio3);
-			JDatePanelImpl panelfechainicio3 = new JDatePanelImpl(model3, propiedadesfecha);
+			JDatePanelImpl panelfechainicio3 = new JDatePanelImpl(fInicio3, pInicio3);
 			JDatePickerImpl pickerFechaInicio3 = new JDatePickerImpl(panelfechainicio3, new DateLabelFormatter());
 			PanelFechaInicio3.add(pickerFechaInicio3);
 			
 			//Date FechaFin Panel3
 			
+			UtilDateModel fFin3 = new UtilDateModel();
+			Properties pFin3 = new Properties();
+			pFin3.put("text.today","Hoy");
+			pFin3.put("text.month","Mes");
+			pFin3.put("text.year","Año");
+			
 			JPanel PanelFechaFin3= new JPanel();
 			PanelFechaFin3.setBounds(256, 25, 212, 33);
 			panel3.add(PanelFechaFin3);
 			
-			JDatePanelImpl panelfechafin3 = new JDatePanelImpl(model3,propiedadesfecha);
+			JDatePanelImpl panelfechafin3 = new JDatePanelImpl(fFin3,pFin3);
 			JLabel lblFechaFin3 = new JLabel("Fecha Finalizacion:");
 			lblFechaFin3.setFont(new Font("Tahoma", Font.BOLD, 11));
 			lblFechaFin3.setBounds(256, 11, 200, 14);
@@ -273,44 +299,23 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 			pickerFechaFin3.setBounds(128, 304, 202, 23);
 			PanelFechaFin3.add(pickerFechaFin3);
 			
-			ButtonGroup grupo1= new ButtonGroup();
-			JRadioButton rbtn1=new JRadioButton("txt1",true);
-			JRadioButton rbtn2=new JRadioButton("txt2",false);
-			JRadioButton rbtn3=new JRadioButton("txt3",false);
-			
-			grupo1.add(rbtn1);
-			grupo1.add(rbtn2);
-			grupo1.add(rbtn3);
-			
-			
-			rbtn1.setBounds(6,72,50,50);
-			rbtn2.setBounds(83,72,50,50);
-			rbtn3.setBounds(172,72,50,50);
-			
-
-			panel3.add(rbtn1);
-			panel3.add(rbtn2);
-			panel3.add(rbtn3);
-			
 			//Botón ListarEdiciones Panel3
 			
 			JButton btnListarEdiciones = new JButton("Listar Ediciones");
 			btnListarEdiciones.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-						PantallaJefeGabineteVicerrectorado.this.fechaComienzo = new java.sql.Date(model3.getValue().getTime());
+						PantallaJefeGabineteVicerrectorado.this.fechaComienzo = new java.sql.Date(fInicio3.getValue().getTime());
 					}
 					catch(Exception ex) {
 						 JOptionPane.showMessageDialog(null, "Campo fecha inicio vacío ", "Fecha incio", JOptionPane.INFORMATION_MESSAGE);
 					}
 					try {
-						PantallaJefeGabineteVicerrectorado.this.fechaFin = new java.sql.Date(model3.getValue().getTime());
+						PantallaJefeGabineteVicerrectorado.this.fechaFin = new java.sql.Date(fFin3.getValue().getTime());
 					}
 					catch(Exception ex) {
 						JOptionPane.showMessageDialog(null, "Campo fecha fin vacío ", "Fecha fin", JOptionPane.INFORMATION_MESSAGE);
 					}
-					
-					
 				}
 			});
 			
@@ -344,17 +349,5 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 				}
 			}
 		});
-	}
-	
-	public void consultarIngresos() {
-		CursoPropio curso = new CursoPropio();
-	}
-	
-	public void consultarEstadoCursos() {
-		CursoPropio curso = new CursoPropio();
-	}
-	
-	public void listarEdicionesCursos() {
-		CursoPropio curso = new CursoPropio();
 	}
 }
