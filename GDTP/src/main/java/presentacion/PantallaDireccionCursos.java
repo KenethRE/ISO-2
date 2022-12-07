@@ -81,7 +81,7 @@ public class PantallaDireccionCursos extends JFrame{
 		panel1.add(lblNewLabel);
 		
 		txtNombreCurso = new JTextField();
-		txtNombreCurso.setBounds(75, 41, 276, 20);
+		txtNombreCurso.setBounds(85, 41, 382, 20);
 		panel1.add(txtNombreCurso);
 		txtNombreCurso.setColumns(10);
 		JDatePickerImpl fechainicio = new JDatePickerImpl(panelfechainicio,new DateLabelFormatter());
@@ -110,7 +110,7 @@ public class PantallaDireccionCursos extends JFrame{
 		panel1.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Tasa");
-		lblNewLabel_4.setBounds(215, 76, 49, 14);
+		lblNewLabel_4.setBounds(255, 76, 49, 14);
 		panel1.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Edicion");
@@ -124,7 +124,7 @@ public class PantallaDireccionCursos extends JFrame{
 		
 		txtTasaMatricula = new JTextField();
 		txtTasaMatricula.setColumns(10);
-		txtTasaMatricula.setBounds(269, 72, 82, 20);
+		txtTasaMatricula.setBounds(346, 73, 121, 20);
 		panel1.add(txtTasaMatricula);
 		
 		txtEdicion = new JTextField();
@@ -142,7 +142,7 @@ public class PantallaDireccionCursos extends JFrame{
 		
 		JComboBox <TipoCurso> cbTipoCurso = new JComboBox<TipoCurso>();
 		cbTipoCurso.setModel(new DefaultComboBoxModel<TipoCurso>(TipoCurso.values()));
-		cbTipoCurso.setBounds(230, 99, 121, 22);
+		cbTipoCurso.setBounds(346, 99, 121, 22);
 		panel1.add(cbTipoCurso);
 		
 		JButton btnNewButton_1 = new JButton("Guardar Curso");
@@ -164,7 +164,7 @@ public class PantallaDireccionCursos extends JFrame{
 		
 		
 		JLabel lblNewLabel_6 = new JLabel("Tipo de Curso:");
-		lblNewLabel_6.setBounds(157, 103, 80, 14);
+		lblNewLabel_6.setBounds(255, 103, 80, 14);
 		panel1.add(lblNewLabel_6);
 		JPanel panel = new JPanel();
 		pestañas.addTab("Editar Curso", null, panel, null);
@@ -275,14 +275,6 @@ public class PantallaDireccionCursos extends JFrame{
 		});
 		btnNewButton_3.setBounds(205, 7, 111, 23);
 		panel.add(btnNewButton_3);
-		
-		JPanel panel2 = new JPanel();
-		panel2.setLayout(null);
-		pestañas.addTab("Ver Cursos",panel2);
-		
-		JPanel panel3 = new JPanel();
-		panel3.setLayout(null);
-		pestañas.addTab("Realizar propuesta",panel3);
 		
 		
 		
