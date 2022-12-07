@@ -1,7 +1,7 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
-
+import persistencia.*;
 import org.apache.derby.iapi.sql.dictionary.TupleDescriptor;
 import org.jdatepicker.*;
 import org.jdatepicker.impl.JDatePanelImpl;
@@ -10,6 +10,7 @@ import org.jdatepicker.impl.UtilDateModel;
 
 import negocio.entities.CursoPropio;
 import negocio.entities.EstadoCurso;
+import negocio.entities.Materia;
 import negocio.entities.TipoCurso;
 
 import java.awt.event.ActionListener;
@@ -69,6 +70,14 @@ public class PantallaDireccionCursos extends JFrame{
 		propiedadesfecha.put("text.today","Hoy");
 		propiedadesfecha.put("text.month","Mes");
 		propiedadesfecha.put("text.year","Año");
+		
+		
+		this.addWindowListener(new WindowAdapter() {
+			public void windowOpened(WindowEvent e) {
+				cargarMaterias();
+			}
+		});
+		
 	
 		JDatePanelImpl panelfechainicio = new JDatePanelImpl(new UtilDateModel(),propiedadesfecha);
 		JDatePanelImpl panelfechafin = new JDatePanelImpl(new UtilDateModel(),propiedadesfecha);
@@ -313,6 +322,13 @@ public class PantallaDireccionCursos extends JFrame{
 
 	public void edicionCurso() {
 		throw new UnsupportedOperationException();
+	}
+	
+	public void cargarMaterias() {
+		
+		MateriaDAO <Materia> MateriaDAO = new MateriaDAO <Materia>();
+		MateriaDAO.get("Materia");
+		
 	}
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
