@@ -169,14 +169,18 @@ public class PantallaDireccionCursos extends JFrame{
 		JButton btnNewButton_1 = new JButton("Guardar Curso");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String IDCurso = txtNombreCurso.getText().substring(0, 8) + contador++;
 				
+				if (txtNombreCurso.getText().length() < 3) JOptionPane.showMessageDialog(null, "El nombre del curso es muy corto. Por favor "
+						+ "intentelo nuevamente", "ERROR",
+						JOptionPane.ERROR); else {
+				String IDCurso = txtNombreCurso.getText().substring(0, 3) + contador++;
 				fechaComienzo = new java.sql.Date(((java.util.Date) fechainicio.getModel().getValue()).getTime());
 				fechaFin = new java.sql.Date(((java.util.Date) fechafin.getModel().getValue()).getTime());
 				altaCurso(IDCurso, txtNombreCurso.getText(), Integer.valueOf(txtECTS.getText()), 
 						fechaFin, fechaFin, Double.valueOf(txtTasaMatricula.getText()), Integer.valueOf(txtEdicion.getText()), (TipoCurso) cbTipoCurso.getSelectedItem());
 				JOptionPane.showMessageDialog(null, "Se ha creado un curso con identificador: " + IDCurso, "EXITO",
 						JOptionPane.INFORMATION_MESSAGE);
+						}
 			}
 		});
 		btnNewButton_1.setBounds(196, 448, 121, 23);
