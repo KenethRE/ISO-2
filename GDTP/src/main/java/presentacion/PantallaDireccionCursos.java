@@ -168,7 +168,7 @@ public class PantallaDireccionCursos extends JFrame{
 				
 			}
 		});
-		btnNewButton.setBounds(178, 286, 111, 23);
+		btnNewButton.setBounds(10, 306, 111, 23);
 		panel1.add(btnNewButton);
 		
 		JComboBox <TipoCurso> cbTipoCurso = new JComboBox<TipoCurso>();
@@ -197,6 +197,10 @@ public class PantallaDireccionCursos extends JFrame{
 		JLabel lblNewLabel_6 = new JLabel("Tipo de Curso:");
 		lblNewLabel_6.setBounds(255, 103, 80, 14);
 		panel1.add(lblNewLabel_6);
+		
+		table = new JTable();
+		table.setBounds(131, 296, 384, 130);
+		panel1.add(table);
 		JPanel panel = new JPanel();
 		pestañas.addTab("Editar Curso", null, panel, null);
 		panel.setLayout(null);
@@ -323,6 +327,7 @@ public class PantallaDireccionCursos extends JFrame{
 	private JTextField textField_7;
 	private JTextField textField_8;
 	private JTextField textField_9;
+	private JTable table;
 	
 
 	public void altaCurso(String idCurso, String nombreCurso, int ECTS, Date fechaInicio, Date fechaFin, double TasaMatricula, int Edicion, TipoCurso tipoCurso) {
