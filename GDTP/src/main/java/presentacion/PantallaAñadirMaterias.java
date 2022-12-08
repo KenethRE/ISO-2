@@ -12,11 +12,18 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
+import negocio.entities.Materia;
+
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.awt.event.ActionEvent;
 
 public class PantallaAñadirMaterias extends JFrame{
 	private JTextField textField;
 	private JTextField textField_1;
+	Date fechaComienzo;
+	Date fechaFin;
 	public PantallaAñadirMaterias() {
 		getContentPane().setLayout(null);
 		Properties propiedadesfecha = new Properties();
@@ -67,8 +74,18 @@ public class PantallaAñadirMaterias extends JFrame{
 		textField_1.setBounds(115, 59, 96, 20);
 		panel.add(textField_1);
 		textField_1.setColumns(10);
-		
+		fechaComienzo = new java.sql.Date(((java.util.Date) fechainicio.getModel().getValue()).getTime());
+		fechaFin = new java.sql.Date(((java.util.Date) fechafin.getModel().getValue()).getTime());
+		Materia aMateria = new Materia();
+		aMateria.set_nombre(lblNewLabel.getText());
+		aMateria.set_horas(Integer.parseInt((lblNewLabel.getText())));
+		aMateria.set_fechaInicio(fechaComienzo);
+		aMateria.set_fechaFin(fechaFin);
 		JButton btnNewButton = new JButton("Añadir materia");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton.setBounds(181, 264, 105, 23);
 		panel.add(btnNewButton);
 	}

@@ -154,18 +154,8 @@ public class PantallaDireccionCursos extends JFrame{
 		JButton btnNewButton = new JButton("Añadir Materias");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				List<Materia> Materias = new ArrayList<Materia>();
-				Materias=cargarMaterias();
-				
-				for(int i = 0;i<Materias.size();i++)
-				{
-					Materia materia1 = new Materia();
-					materia1 = Materias.get(i);
-					String nombremateria=materia1.get_nombre();
-				    modelo.addElement(nombremateria);
-				}
-				
-				
+				PantallaAñadirMaterias añadirMaterias = new PantallaAñadirMaterias();
+				añadirMaterias.setVisible(true);
 			}
 		});
 		btnNewButton.setBounds(10, 306, 111, 23);
