@@ -56,7 +56,6 @@ public class PantallaDireccionCursos extends JFrame{
 	Date fechaFin;
 	int contador = 0;
 	private DefaultListModel modelo;
-	private JScrollPane scrollLista;
 	
 	public PantallaDireccionCursos(JFrame previousWindow) {
 		this.previousWindow = previousWindow;
@@ -70,7 +69,7 @@ public class PantallaDireccionCursos extends JFrame{
 			});
 		}
 		setTitle("Pantalla Director Cursos");
-		setBounds(100, 100, 610, 547);
+		setBounds(100, 100, 544, 547);
 		setResizable(false);
 		getContentPane().setLayout(new CardLayout(0, 0));
 		JTabbedPane pestañas=new JTabbedPane();
@@ -108,20 +107,20 @@ public class PantallaDireccionCursos extends JFrame{
 		JDatePickerImpl fechafin = new JDatePickerImpl(panelfechafin,new DateLabelFormatter());
 		fechafin.setBounds(232, 173, 134, 101);
 		JPanel PanelFechaComienzo = new JPanel();
-		PanelFechaComienzo.setBounds(10, 173, 212, 130);
+		PanelFechaComienzo.setBounds(10, 145, 212, 130);
 		JPanel PanelFechaFin = new JPanel();
-		PanelFechaFin.setBounds(255, 173, 212, 130);
+		PanelFechaFin.setBounds(255, 145, 212, 130);
 		panel1.add(PanelFechaComienzo);
 		panel1.add(PanelFechaFin);
 		PanelFechaComienzo.add(fechainicio);
 		PanelFechaFin.add(fechafin);
 		
 		JLabel lblNewLabel_1 = new JLabel("Fecha Inicio");
-		lblNewLabel_1.setBounds(10, 159, 93, 14);
+		lblNewLabel_1.setBounds(10, 131, 93, 14);
 		panel1.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Fecha Fin");
-		lblNewLabel_2.setBounds(255, 159, 49, 14);
+		lblNewLabel_2.setBounds(255, 131, 49, 14);
 		panel1.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("ECTS");
@@ -150,18 +149,7 @@ public class PantallaDireccionCursos extends JFrame{
 		txtEdicion.setColumns(10);
 		txtEdicion.setBounds(85, 100, 49, 20);
 		panel1.add(txtEdicion);
-		scrollLista = new JScrollPane();
-		scrollLista.setBounds(30, 348,174, 119);
 		modelo=new DefaultListModel<>();
-		panel1.add(scrollLista);
-		
-		
-		
-		JList <Materia> listamaterias = new JList();
-		scrollLista.setViewportView(listamaterias);
-		//listamaterias.setBounds(41, 348, 145, 119);
-		listamaterias.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listamaterias.setModel(modelo);
 		
 		JButton btnNewButton = new JButton("Añadir Materias");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -180,7 +168,7 @@ public class PantallaDireccionCursos extends JFrame{
 				
 			}
 		});
-		btnNewButton.setBounds(181, 314, 111, 23);
+		btnNewButton.setBounds(178, 286, 111, 23);
 		panel1.add(btnNewButton);
 		
 		JComboBox <TipoCurso> cbTipoCurso = new JComboBox<TipoCurso>();
@@ -201,7 +189,7 @@ public class PantallaDireccionCursos extends JFrame{
 						JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-		btnNewButton_1.setBounds(389, 382, 121, 23);
+		btnNewButton_1.setBounds(196, 448, 121, 23);
 		panel1.add(btnNewButton_1);
 		
 		
@@ -209,10 +197,6 @@ public class PantallaDireccionCursos extends JFrame{
 		JLabel lblNewLabel_6 = new JLabel("Tipo de Curso:");
 		lblNewLabel_6.setBounds(255, 103, 80, 14);
 		panel1.add(lblNewLabel_6);
-		
-		JList list_2 = new JList();
-		list_2.setBounds(247, 348, 132, 119);
-		panel1.add(list_2);
 		JPanel panel = new JPanel();
 		pestañas.addTab("Editar Curso", null, panel, null);
 		panel.setLayout(null);
