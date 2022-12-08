@@ -3,6 +3,7 @@ package presentacion;
 import java.awt.event.ActionEvent;
 import persistencia.*;
 import org.apache.derby.iapi.sql.dictionary.TupleDescriptor;
+import org.apache.derby.impl.store.access.sort.MergeScanRowSource;
 import org.jdatepicker.*;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -17,17 +18,21 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.GroupLayout.Alignment;
 
 import java.awt.EventQueue;
 import java.awt.GridLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ListSelectionModel;
 import javax.swing.plaf.basic.BasicTreeUI.TreeCancelEditingAction;
 import javax.swing.JLabel;
 import java.awt.Label;
@@ -35,17 +40,23 @@ import javax.swing.JTextField;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import java.awt.CardLayout;
+import java.awt.Component;
+
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JComboBox;
+import javax.management.modelmbean.ModelMBeanOperationInfo;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 
 public class PantallaDireccionCursos extends JFrame{
 	JFrame previousWindow;
 	Date fechaComienzo;
 	Date fechaFin;
 	int contador = 0;
+	private DefaultListModel modelo;
+	private JScrollPane scrollLista;
 	
 	public PantallaDireccionCursos(JFrame previousWindow) {
 		this.previousWindow = previousWindow;
@@ -74,7 +85,6 @@ public class PantallaDireccionCursos extends JFrame{
 		
 		this.addWindowListener(new WindowAdapter() {
 			public void windowOpened(WindowEvent e) {
-				cargarMaterias();
 			}
 		});
 		
@@ -140,14 +150,38 @@ public class PantallaDireccionCursos extends JFrame{
 		txtEdicion.setColumns(10);
 		txtEdicion.setBounds(85, 100, 49, 20);
 		panel1.add(txtEdicion);
+		scrollLista = new JScrollPane();
+		scrollLista.setBounds(30, 348,174, 119);
+		modelo=new DefaultListModel<>();
+		panel1.add(scrollLista);
+		
+		
+		
+		JList <Materia> listamaterias = new JList();
+		scrollLista.setViewportView(listamaterias);
+		//listamaterias.setBounds(41, 348, 145, 119);
+		listamaterias.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listamaterias.setModel(modelo);
 		
 		JButton btnNewButton = new JButton("Añadir Materias");
-		btnNewButton.setBounds(30, 314, 111, 23);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				List<Materia> Materias = new ArrayList<Materia>();
+				Materias=cargarMaterias();
+				
+				for(int i = 0;i<Materias.size();i++)
+				{
+					Materia materia1 = new Materia();
+					materia1 = Materias.get(i);
+					String nombremateria=materia1.get_nombre();
+				    modelo.addElement(nombremateria);
+				}
+				
+				
+			}
+		});
+		btnNewButton.setBounds(181, 314, 111, 23);
 		panel1.add(btnNewButton);
-		
-		JList list = new JList();
-		list.setBounds(178, 317, 188, 140);
-		panel1.add(list);
 		
 		JComboBox <TipoCurso> cbTipoCurso = new JComboBox<TipoCurso>();
 		cbTipoCurso.setModel(new DefaultComboBoxModel<TipoCurso>(TipoCurso.values()));
@@ -167,7 +201,7 @@ public class PantallaDireccionCursos extends JFrame{
 						JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-		btnNewButton_1.setBounds(417, 382, 121, 23);
+		btnNewButton_1.setBounds(389, 382, 121, 23);
 		panel1.add(btnNewButton_1);
 		
 		
@@ -175,6 +209,10 @@ public class PantallaDireccionCursos extends JFrame{
 		JLabel lblNewLabel_6 = new JLabel("Tipo de Curso:");
 		lblNewLabel_6.setBounds(255, 103, 80, 14);
 		panel1.add(lblNewLabel_6);
+		
+		JList list_2 = new JList();
+		list_2.setBounds(247, 348, 132, 119);
+		panel1.add(list_2);
 		JPanel panel = new JPanel();
 		pestañas.addTab("Editar Curso", null, panel, null);
 		panel.setLayout(null);
@@ -324,10 +362,12 @@ public class PantallaDireccionCursos extends JFrame{
 		throw new UnsupportedOperationException();
 	}
 	
-	public void cargarMaterias() {
+	public List<Materia> cargarMaterias() {
 		
 		MateriaDAO <Materia> MateriaDAO = new MateriaDAO <Materia>();
-		MateriaDAO.get("Materia");
+		List<Materia> Materias = new ArrayList<Materia>();
+		Materias=MateriaDAO.listarMaterias();
+		return Materias;
 		
 	}
 	public static void main(String[] args) {

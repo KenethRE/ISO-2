@@ -63,6 +63,7 @@ public class MateriaDAO<E> extends AbstractEntityDAO<E> {
 				aMateria.set_fechaFin(aux.getDate("FechaFin"));
 				aMateria.setId_Curso(aux.getString("idCurso"));
 				aMateria.setId_prof_responsable(aux.getString("dniProfesor"));
+				Materias.add(aMateria);
 			}
 		} catch (SQLException e) {
 				e.printStackTrace();
