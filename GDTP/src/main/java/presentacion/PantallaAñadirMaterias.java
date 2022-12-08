@@ -22,9 +22,11 @@ import java.awt.event.ActionEvent;
 public class PantallaAñadirMaterias extends JFrame{
 	private JTextField textField;
 	private JTextField textField_1;
-	Date fechaComienzo;
-	Date fechaFin;
+	Date fechaComienzo2;
+	Date fechaFin2;
 	public PantallaAñadirMaterias() {
+		setTitle("Pantalla Añadir Materias");
+		setBounds(100, 100, 544, 547);
 		getContentPane().setLayout(null);
 		Properties propiedadesfecha = new Properties();
 		propiedadesfecha.put("text.today","Hoy");
@@ -74,19 +76,21 @@ public class PantallaAñadirMaterias extends JFrame{
 		textField_1.setBounds(115, 59, 96, 20);
 		panel.add(textField_1);
 		textField_1.setColumns(10);
-		fechaComienzo = new java.sql.Date(((java.util.Date) fechainicio.getModel().getValue()).getTime());
-		fechaFin = new java.sql.Date(((java.util.Date) fechafin.getModel().getValue()).getTime());
-		Materia aMateria = new Materia();
-		aMateria.set_nombre(lblNewLabel.getText());
-		aMateria.set_horas(Integer.parseInt((lblNewLabel.getText())));
-		aMateria.set_fechaInicio(fechaComienzo);
-		aMateria.set_fechaFin(fechaFin);
+		
 		JButton btnNewButton = new JButton("Añadir materia");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				fechaComienzo2 = new java.sql.Date(((java.util.Date) fechainicio.getModel().getValue()).getTime());
+				fechaFin2 = new java.sql.Date(((java.util.Date) fechafin.getModel().getValue()).getTime());
+				Materia aMateria = new Materia();
+				aMateria.set_nombre(lblNewLabel.getText());
+				aMateria.set_horas(Integer.parseInt((lblNewLabel.getText())));
+				aMateria.set_fechaInicio(fechaComienzo2);
+				aMateria.set_fechaFin(fechaFin2);
 			}
 		});
 		btnNewButton.setBounds(181, 264, 105, 23);
 		panel.add(btnNewButton);
 	}
+	
 }
