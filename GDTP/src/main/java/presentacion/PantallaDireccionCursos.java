@@ -21,6 +21,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -47,6 +48,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JComboBox;
 import javax.management.modelmbean.ModelMBeanOperationInfo;
+import javax.management.openmbean.OpenMBeanAttributeInfoSupport;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
@@ -56,6 +58,7 @@ public class PantallaDireccionCursos extends JFrame{
 	Date fechaFin;
 	int contador = 0;
 	private DefaultListModel modelo;
+	DefaultListModel modelomaterias = new DefaultListModel();
 	
 	public PantallaDireccionCursos(JFrame previousWindow) {
 		this.previousWindow = previousWindow;
@@ -154,7 +157,7 @@ public class PantallaDireccionCursos extends JFrame{
 		JButton btnNewButton = new JButton("Añadir Materias");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PantallaAñadirMaterias añadirMaterias = new PantallaAñadirMaterias();
+				PantallaAñadirMaterias añadirMaterias = new PantallaAñadirMaterias(modelomaterias, previousWindow);
 				añadirMaterias.setVisible(true);
 			}
 		});
@@ -192,9 +195,12 @@ public class PantallaDireccionCursos extends JFrame{
 		lblNewLabel_6.setBounds(255, 103, 80, 14);
 		panel1.add(lblNewLabel_6);
 		
-		table = new JTable();
-		table.setBounds(131, 296, 384, 130);
-		panel1.add(table);
+		JList list = new JList();
+		list.setModel(modelomaterias);
+		list.setBounds(161, 309, 156, 128);
+		panel1.add(list);
+		
+		
 		JPanel panel = new JPanel();
 		pestañas.addTab("Editar Curso", null, panel, null);
 		panel.setLayout(null);
@@ -321,7 +327,6 @@ public class PantallaDireccionCursos extends JFrame{
 	private JTextField textField_7;
 	private JTextField textField_8;
 	private JTextField textField_9;
-	private JTable table;
 	
 
 	public void altaCurso(String idCurso, String nombreCurso, int ECTS, Date fechaInicio, Date fechaFin, double TasaMatricula, int Edicion, TipoCurso tipoCurso) {

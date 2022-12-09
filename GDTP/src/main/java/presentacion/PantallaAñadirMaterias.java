@@ -3,9 +3,11 @@ package presentacion;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JTextField;
 
 import org.jdatepicker.impl.JDatePanelImpl;
@@ -14,17 +16,32 @@ import org.jdatepicker.impl.UtilDateModel;
 
 import negocio.entities.Materia;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Date;
 import java.awt.event.ActionEvent;
 
 public class PantallaAñadirMaterias extends JFrame{
+	JFrame previousWindow;
 	private JTextField textField;
 	private JTextField textField_1;
 	Date fechaComienzo2;
 	Date fechaFin2;
-	public PantallaAñadirMaterias() {
+	private JTextField textField_2;
+	public PantallaAñadirMaterias(DefaultListModel modelomaterias, JFrame previousWindow) {
+		this.previousWindow = previousWindow;
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		if (previousWindow != null) {
+			
+			this.addWindowListener(new WindowAdapter() {
+				public void windowClosing(WindowEvent e) {
+					previousWindow.setVisible(true);
+				}
+			});
+		}
 		setTitle("Pantalla Añadir Materias");
 		setBounds(100, 100, 544, 547);
 		getContentPane().setLayout(null);
@@ -80,17 +97,28 @@ public class PantallaAñadirMaterias extends JFrame{
 		JButton btnNewButton = new JButton("Añadir materia");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Materia materia = new Materia();
 				fechaComienzo2 = new java.sql.Date(((java.util.Date) fechainicio.getModel().getValue()).getTime());
 				fechaFin2 = new java.sql.Date(((java.util.Date) fechafin.getModel().getValue()).getTime());
-				Materia aMateria = new Materia();
-				aMateria.set_nombre(lblNewLabel.getText());
-				aMateria.set_horas(Integer.parseInt((lblNewLabel.getText())));
-				aMateria.set_fechaInicio(fechaComienzo2);
-				aMateria.set_fechaFin(fechaFin2);
+				materia.set_nombre(textField.getText());
+				materia.set_horas(Integer.parseInt((textField_1.getText())));
+				materia.set_fechaInicio(fechaComienzo2);
+				materia.set_fechaFin(fechaFin2);
+				materia.setId_prof_responsable(textField_2.getText());
+				modelomaterias.addElement(materia);
+				dispose();
 			}
 		});
 		btnNewButton.setBounds(181, 264, 105, 23);
 		panel.add(btnNewButton);
+		
+		JLabel lblDniProfesor = new JLabel("Dni Profesor");
+		lblDniProfesor.setBounds(237, 28, 67, 14);
+		panel.add(lblDniProfesor);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(316, 25, 96, 20);
+		panel.add(textField_2);
+		textField_2.setColumns(10);
 	}
-	
 }

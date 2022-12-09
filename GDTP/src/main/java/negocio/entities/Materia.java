@@ -51,6 +51,11 @@ public class Materia implements IdInterface{
 	public String getId() {
 		return id_Curso;
 	}
+	public String toString() {
+		return _nombre;
+		
+		
+	}
 
 	
 	
