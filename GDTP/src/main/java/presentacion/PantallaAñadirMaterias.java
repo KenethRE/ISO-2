@@ -9,6 +9,7 @@ import java.util.Properties;
 
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import org.jdatepicker.impl.JDatePanelImpl;
@@ -85,7 +86,7 @@ public class PantallaAñadirMaterias extends JFrame{
 		panel.add(lblNewLabel_2);
 		
 		JLabel lblFechaFin = new JLabel("Fecha Fin");
-		lblFechaFin.setBounds(237, 98, 49, 14);
+		lblFechaFin.setBounds(237, 98, 67, 14);
 		panel.add(lblFechaFin);
 		
 		textField = new JTextField();
@@ -108,18 +109,39 @@ public class PantallaAñadirMaterias extends JFrame{
 		panel.add(comboBox);
 		
 		JButton btnNewButton = new JButton("Añadir materia");
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Materia materia = new Materia();
 				fechaComienzo2 = new java.sql.Date(((java.util.Date) fechainicio.getModel().getValue()).getTime());
 				fechaFin2 = new java.sql.Date(((java.util.Date) fechafin.getModel().getValue()).getTime());
-				materia.set_nombre(textField.getText());
-				materia.set_horas(Double.parseDouble((textField_1.getText())));
-				materia.set_fechaInicio(fechaComienzo2);
-				materia.set_fechaFin(fechaFin2);
-				materia.setId_prof_responsable(comboBox.getSelectedItem().toString());
-				modelomaterias.addElement(materia);
-				dispose();
+				if (controldeerroresguardarmateria()==true) {
+					Materia materia = new Materia();
+					materia.set_nombre(textField.getText());
+					materia.set_horas(Double.parseDouble((textField_1.getText())));
+					materia.set_fechaInicio(fechaComienzo2);
+					materia.set_fechaFin(fechaFin2);
+					materia.setId_prof_responsable(comboBox.getSelectedItem().toString());
+					modelomaterias.addElement(materia);
+					dispose();
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Algun campo no posee la longitud correcta o el tipo correcto de dato o revise fechas "
+							+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE); 
+				}
+			}
+			public boolean controldeerroresguardarmateria() {
+				boolean control = true;
+				if (fechaFin2.after(fechaComienzo2)==false)
+					control=false;
+				if (textField.getText().length() < 3) {
+					control = false;
+				}
+				if  (textField_1.getText().length()<1 || textField_1.getText().chars().allMatch(Character::isDigit)==false){
+					control = false;
+				}
+				return control;
+				
+				
 			}
 		});
 		btnNewButton.setBounds(181, 264, 105, 23);

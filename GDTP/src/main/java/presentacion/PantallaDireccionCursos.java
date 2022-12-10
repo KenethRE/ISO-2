@@ -191,13 +191,18 @@ public class PantallaDireccionCursos extends JFrame{
 						String IDCurso = txtNombreCurso.getText().substring(0, 3) + contador++;
 						fechaComienzo = new java.sql.Date(((java.util.Date) fechainicio.getModel().getValue()).getTime());
 						fechaFin = new java.sql.Date(((java.util.Date) fechafin.getModel().getValue()).getTime());
-						
-						altaCurso(IDCurso, txtNombreCurso.getText(), Integer.valueOf(txtECTS.getText()), 
-								fechaFin, fechaFin, Double.valueOf(txtTasaMatricula.getText()), 
-								Integer.valueOf(txtEdicion.getText()), (TipoCurso) cbTipoCurso.getSelectedItem());
-						altamaterias(modelomaterias,IDCurso);
-						JOptionPane.showMessageDialog(null, "Se ha creado un curso con identificador: " + IDCurso, "EXITO",
-								JOptionPane.INFORMATION_MESSAGE);}
+						if(fechaFin.before(fechaComienzo)) {
+							JOptionPane.showMessageDialog(null, "Rango de fechas incorrecto "
+									+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE);
+						}
+						else {
+							altaCurso(IDCurso, txtNombreCurso.getText(), Integer.valueOf(txtECTS.getText()), 
+									fechaFin, fechaFin, Double.valueOf(txtTasaMatricula.getText()), 
+									Integer.valueOf(txtEdicion.getText()), (TipoCurso) cbTipoCurso.getSelectedItem());
+							altamaterias(modelomaterias,IDCurso);
+							JOptionPane.showMessageDialog(null, "Se ha creado un curso con identificador: " + IDCurso, "EXITO",
+							JOptionPane.INFORMATION_MESSAGE);}
+						}
 				
 						}
 			}
