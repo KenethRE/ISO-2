@@ -78,16 +78,16 @@ public class AbstractEntityDAO<E>{
 			result = agente.insert("INSERT INTO " + className + " VALUES('" + ((Profesor) E).get_dni() + "','" + ((Profesor) E).get_nombre() + "','"
 					 + ((Profesor) E).get_apellidos() + "'," + ((Profesor) E).is_doctor()+ "," + ((Profesor) E).get_centro() + ")");
 		case "ProfesorExterno":
-			result = agente.insert("INSERT INTO " + className + "VALUES('" + ((ProfesorExterno) E).get_dni() + "','" + ((ProfesorExterno) E).get_titulacion() + "')");
+			result = agente.insert("INSERT INTO " + className + " VALUES('" + ((ProfesorExterno) E).get_dni() + "','" + ((ProfesorExterno) E).get_titulacion() + "')");
 			break;
 		
 		case "Matricula":
-			result = agente.insert("INSERT INTO " + className + "VALUES("+ ((Matricula) E).getiD() + ",'" + ((Matricula) E).get_fecha() + "'," + ((Matricula) E).is_pagado() + ",'"
+			result = agente.insert("INSERT INTO " + className + " VALUES("+ ((Matricula) E).getiD() + ",'" + ((Matricula) E).get_fecha() + "'," + ((Matricula) E).is_pagado() + ",'"
 					+ ((Matricula) E).getId_estudiante() + "','" + ((Matricula) E).getId_Curso() + "')");
 			break;
 		case "Materia":
-			result = agente.insert("INSERT INTO " + className + "VALUES('" + ((Materia) E).get_nombre()+ "'," + ((Materia) E).get_horas() + ",'"
-					+ ((Materia) E).get_fechaInicio() + "','" + ((Materia) E).get_fechaFin() + "','" + ((Materia) E).getId_Curso() + "')");
+			String sentencia= "INSERT INTO " + className + " VALUES('" + ((Materia) E).get_nombre()+ "',"+((Materia) E).get_horas() + ",'"+ ((Materia) E).get_fechaInicio() + "','" + ((Materia) E).get_fechaFin() + "','"+((Materia) E).getId_prof_responsable()+ "','" + ((Materia) E).getId_Curso() + "')";
+			result = agente.insert(sentencia);
 			break;
 		case "Centro":
 			result = agente.insert("INSERT INTO " + className + "VALUES(" + ((Centro) E).get_Id() + ",'" + ((Centro) E).get_nombre() + "','" + ((Centro) E).get_localizacion() 

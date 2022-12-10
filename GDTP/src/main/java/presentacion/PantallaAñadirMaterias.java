@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.swing.JLabel;
@@ -15,6 +16,8 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import negocio.entities.Materia;
+import negocio.entities.Profesor;
+import persistencia.ProfesorDAO;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -23,6 +26,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Date;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 public class PantallaAñadirMaterias extends JFrame{
 	JFrame previousWindow;
@@ -30,7 +34,7 @@ public class PantallaAñadirMaterias extends JFrame{
 	private JTextField textField_1;
 	Date fechaComienzo2;
 	Date fechaFin2;
-	private JTextField textField_2;
+	private ProfesorDAO<Profesor> agenteProfesorDAO = new ProfesorDAO<>();
 	public PantallaAñadirMaterias(DefaultListModel modelomaterias, JFrame previousWindow) {
 		this.previousWindow = previousWindow;
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -43,7 +47,7 @@ public class PantallaAñadirMaterias extends JFrame{
 			});
 		}
 		setTitle("Pantalla Añadir Materias");
-		setBounds(100, 100, 544, 547);
+		setBounds(100, 100, 500, 384);
 		getContentPane().setLayout(null);
 		Properties propiedadesfecha = new Properties();
 		propiedadesfecha.put("text.today","Hoy");
@@ -94,6 +98,15 @@ public class PantallaAñadirMaterias extends JFrame{
 		panel.add(textField_1);
 		textField_1.setColumns(10);
 		
+		JComboBox comboBox = new JComboBox();
+		List<Profesor> Profesores = new ArrayList<Profesor>();
+		Profesores = agenteProfesorDAO.listarProfesores();
+		for (int i=0; i<Profesores.size();i++) {
+			comboBox.addItem(Profesores.get(i));
+		}
+		comboBox.setBounds(314, 24, 105, 22);
+		panel.add(comboBox);
+		
 		JButton btnNewButton = new JButton("Añadir materia");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -101,10 +114,10 @@ public class PantallaAñadirMaterias extends JFrame{
 				fechaComienzo2 = new java.sql.Date(((java.util.Date) fechainicio.getModel().getValue()).getTime());
 				fechaFin2 = new java.sql.Date(((java.util.Date) fechafin.getModel().getValue()).getTime());
 				materia.set_nombre(textField.getText());
-				materia.set_horas(Integer.parseInt((textField_1.getText())));
+				materia.set_horas(Double.parseDouble((textField_1.getText())));
 				materia.set_fechaInicio(fechaComienzo2);
 				materia.set_fechaFin(fechaFin2);
-				materia.setId_prof_responsable(textField_2.getText());
+				materia.setId_prof_responsable(comboBox.getSelectedItem().toString());
 				modelomaterias.addElement(materia);
 				dispose();
 			}
@@ -116,9 +129,6 @@ public class PantallaAñadirMaterias extends JFrame{
 		lblDniProfesor.setBounds(237, 28, 67, 14);
 		panel.add(lblDniProfesor);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(316, 25, 96, 20);
-		panel.add(textField_2);
-		textField_2.setColumns(10);
+		
 	}
 }

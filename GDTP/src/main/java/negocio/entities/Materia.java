@@ -1,6 +1,9 @@
 package negocio.entities;
 
+import java.sql.SQLException;
 import java.util.Date;
+
+import persistencia.MateriaDAO;
 
 public class Materia implements IdInterface{
 	private String _nombre;
@@ -9,6 +12,7 @@ public class Materia implements IdInterface{
 	private Date _fechaFin;
 	public String id_Curso;
 	public String id_prof_responsable;
+	public MateriaDAO<Materia> _MateriaDAO = new MateriaDAO<Materia>();
 	
 	
 	public String get_nombre() {
@@ -56,7 +60,14 @@ public class Materia implements IdInterface{
 		
 		
 	}
-
+	public void persist () {
+		try {
+			this._MateriaDAO.crearNuevaMateria(this);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	
 }

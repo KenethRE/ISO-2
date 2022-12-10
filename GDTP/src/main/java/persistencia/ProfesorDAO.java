@@ -61,6 +61,7 @@ public class ProfesorDAO<E> extends AbstractEntityDAO<E> {
 				aProfesor.set_nombre(aux.getString("NOMBRE"));
 				aProfesor.set_apellidos(aux.getString("APELLIDOS"));
 				aProfesor.set_doctor(aux.getBoolean("DOCTOR"));
+				Profesores.add(aProfesor);
 			}
 		} catch (SQLException e) {
 				e.printStackTrace();

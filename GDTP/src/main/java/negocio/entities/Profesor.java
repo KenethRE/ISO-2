@@ -58,6 +58,11 @@ public class Profesor {
 	public void set_centro(int _centro) {
 		this._centro = _centro;
 	}
+	public String toString() {
+		return _dni;
+		
+		
+	}
 	
 	
 	

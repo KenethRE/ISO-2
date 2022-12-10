@@ -1,6 +1,7 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+
 import persistencia.*;
 import org.apache.derby.iapi.sql.dictionary.TupleDescriptor;
 import org.apache.derby.impl.store.access.sort.MergeScanRowSource;
@@ -169,20 +170,35 @@ public class PantallaDireccionCursos extends JFrame{
 		cbTipoCurso.setBounds(346, 99, 121, 22);
 		panel1.add(cbTipoCurso);
 		
+		JList listamaterias = new JList();
+		listamaterias.setModel(modelomaterias);
+		listamaterias.setBounds(161, 309, 156, 128);
+		panel1.add(listamaterias);
+		
 		JButton btnNewButton_1 = new JButton("Guardar Curso");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if (txtNombreCurso.getText().length() < 3) JOptionPane.showMessageDialog(null, "El nombre del curso es muy corto. Por favor "
-						+ "intentelo nuevamente", "ERROR",
-						JOptionPane.ERROR); else {
-				String IDCurso = txtNombreCurso.getText().substring(0, 3) + contador++;
-				fechaComienzo = new java.sql.Date(((java.util.Date) fechainicio.getModel().getValue()).getTime());
-				fechaFin = new java.sql.Date(((java.util.Date) fechafin.getModel().getValue()).getTime());
-				altaCurso(IDCurso, txtNombreCurso.getText(), Integer.valueOf(txtECTS.getText()), 
-						fechaFin, fechaFin, Double.valueOf(txtTasaMatricula.getText()), Integer.valueOf(txtEdicion.getText()), (TipoCurso) cbTipoCurso.getSelectedItem());
-				JOptionPane.showMessageDialog(null, "Se ha creado un curso con identificador: " + IDCurso, "EXITO",
-						JOptionPane.INFORMATION_MESSAGE);
+				if (txtNombreCurso.getText().length() < 3)
+					JOptionPane.showMessageDialog(null, "El nombre del curso es muy corto. Por favor "
+						+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE); 
+				else {
+					if (controldeerroresguardarcurso()== false) {
+						JOptionPane.showMessageDialog(null, "Algun campo no posee la longitud correcta o el tipo correcto de dato "
+								+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE); 
+					}
+					else {
+						String IDCurso = txtNombreCurso.getText().substring(0, 3) + contador++;
+						fechaComienzo = new java.sql.Date(((java.util.Date) fechainicio.getModel().getValue()).getTime());
+						fechaFin = new java.sql.Date(((java.util.Date) fechafin.getModel().getValue()).getTime());
+						
+						altaCurso(IDCurso, txtNombreCurso.getText(), Integer.valueOf(txtECTS.getText()), 
+								fechaFin, fechaFin, Double.valueOf(txtTasaMatricula.getText()), 
+								Integer.valueOf(txtEdicion.getText()), (TipoCurso) cbTipoCurso.getSelectedItem());
+						altamaterias(modelomaterias,IDCurso);
+						JOptionPane.showMessageDialog(null, "Se ha creado un curso con identificador: " + IDCurso, "EXITO",
+								JOptionPane.INFORMATION_MESSAGE);}
+				
 						}
 			}
 		});
@@ -195,10 +211,7 @@ public class PantallaDireccionCursos extends JFrame{
 		lblNewLabel_6.setBounds(255, 103, 80, 14);
 		panel1.add(lblNewLabel_6);
 		
-		JList list = new JList();
-		list.setModel(modelomaterias);
-		list.setBounds(161, 309, 156, 128);
-		panel1.add(list);
+		
 		
 		
 		JPanel panel = new JPanel();
@@ -345,6 +358,15 @@ public class PantallaDireccionCursos extends JFrame{
 		curso.setId_centro(1);
 		curso.persist();
 	}
+	public void altamaterias(DefaultListModel modelo,String idcurso) {
+		for (int i=0; i < modelo.getSize(); i++) {
+			Materia aMateria = new Materia();
+			aMateria=(Materia) modelo.getElementAt(i);
+			aMateria.setId_Curso(idcurso);
+			aMateria.persist();
+		}
+		
+	}
 
 	public void edicionCurso() {
 		throw new UnsupportedOperationException();
@@ -356,6 +378,25 @@ public class PantallaDireccionCursos extends JFrame{
 		List<Materia> Materias = new ArrayList<Materia>();
 		Materias=MateriaDAO.listarMaterias();
 		return Materias;
+		
+	}
+	
+	public boolean controldeerroresguardarcurso() {
+		boolean control = true;
+		if (txtNombreCurso.getText().length() < 3) {
+			control = false;
+		}
+		if  (txtECTS.getText().length()<1 || txtECTS.getText().chars().allMatch(Character::isDigit)==false){
+			control = false;
+		}
+		if  (txtTasaMatricula.getText().length()<1 || txtTasaMatricula.getText().chars().allMatch(Character::isDigit)==false){
+			control = false;
+		}
+		if (txtEdicion.getText().isEmpty()|| txtEdicion.getText().length() < 1) {
+			control = false;
+		}
+		return control;
+		
 		
 	}
 	public static void main(String[] args) {
