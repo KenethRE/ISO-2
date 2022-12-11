@@ -89,7 +89,8 @@ public class AbstractEntityDAO<E>{
 					+ ((Matricula) E).getId_estudiante() + "','" + ((Matricula) E).getId_Curso() + "')");
 			break;
 		case "Materia":
-			String sentencia= "INSERT INTO " + className + " VALUES('" + ((Materia) E).get_nombre()+ "',"+((Materia) E).get_horas() + ",'"+ ((Materia) E).get_fechaInicio() + "','" + ((Materia) E).get_fechaFin() + "','"+((Materia) E).getId_prof_responsable()+ "','" + ((Materia) E).getId_Curso() + "')";
+			String sentencia= "INSERT INTO " + className + " VALUES('" + ((Materia) E).get_nombre()+ "',"+((Materia) E).get_horas() + ",'"+ ((Materia) E).get_fechaInicio() + "','" + ((Materia) E).get_fechaFin() +
+			"','"+ ((Materia) E).getId_Curso()+ "','" +((Materia) E).getId_prof_responsable() + "')";
 			result = agente.insert(sentencia);
 			break;
 		case "Centro":

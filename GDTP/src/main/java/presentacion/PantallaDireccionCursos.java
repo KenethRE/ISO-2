@@ -34,6 +34,8 @@ import javax.swing.GroupLayout.Alignment;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.ListSelectionModel;
 import javax.swing.plaf.basic.BasicTreeUI.TreeCancelEditingAction;
 import javax.swing.JLabel;
@@ -162,15 +164,37 @@ public class PantallaDireccionCursos extends JFrame{
 				añadirMaterias.setVisible(true);
 			}
 		});
-		btnNewButton.setBounds(10, 306, 111, 23);
+		btnNewButton.setBounds(10, 306, 124, 23);
 		panel1.add(btnNewButton);
 		
 		JComboBox <TipoCurso> cbTipoCurso = new JComboBox<TipoCurso>();
 		cbTipoCurso.setModel(new DefaultComboBoxModel<TipoCurso>(TipoCurso.values()));
 		cbTipoCurso.setBounds(346, 99, 121, 22);
 		panel1.add(cbTipoCurso);
-		
 		JList listamaterias = new JList();
+		listamaterias.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		JButton Elimnarmaterias = new JButton("Eliminar Materia");
+		Elimnarmaterias.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				modelomaterias.removeElementAt(listamaterias.getSelectedIndex());
+			}
+			
+		});
+		Elimnarmaterias.setBounds(10, 340, 124, 23);
+		panel1.add(Elimnarmaterias);
+		Elimnarmaterias.setVisible(false);
+		
+		
+		listamaterias.addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				Elimnarmaterias.setVisible(true);
+				
+			}
+		});
 		listamaterias.setModel(modelomaterias);
 		listamaterias.setBounds(161, 309, 156, 128);
 		panel1.add(listamaterias);
@@ -202,6 +226,13 @@ public class PantallaDireccionCursos extends JFrame{
 							altamaterias(modelomaterias,IDCurso);
 							JOptionPane.showMessageDialog(null, "Se ha creado un curso con identificador: " + IDCurso, "EXITO",
 							JOptionPane.INFORMATION_MESSAGE);}
+							modelomaterias.removeAllElements();
+							txtNombreCurso.setText("");
+							txtECTS.setText("");
+							txtTasaMatricula.setText("");
+							txtEdicion.setText("");
+							fechafin.getModel().setValue(null);
+							fechainicio.getModel().setValue(null);
 						}
 				
 						}
@@ -215,6 +246,8 @@ public class PantallaDireccionCursos extends JFrame{
 		JLabel lblNewLabel_6 = new JLabel("Tipo de Curso:");
 		lblNewLabel_6.setBounds(255, 103, 80, 14);
 		panel1.add(lblNewLabel_6);
+		
+		
 		
 		
 		
