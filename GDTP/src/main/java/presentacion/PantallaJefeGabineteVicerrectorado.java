@@ -1,7 +1,6 @@
 package presentacion;
 
 
-import org.apache.derby.iapi.sql.dictionary.TupleDescriptor;
 import org.jdatepicker.*;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -16,6 +15,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.swing.GroupLayout;
@@ -80,8 +81,6 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 			JPanel panel1 = new JPanel(); 
 			panel1.setLayout(null);
 			pestañas.addTab("Consultar ingresos", panel1);
-			
-				
 				
 			//JComboBox TipoCurso Panel1
 			
@@ -144,7 +143,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 			list.setBounds(0, 69, 569, 51);
 			panelMostrarResultadosConsulta.add(list);
 			
-			//Botón ConsultarIngresos Panel1
+			//Button ConsultarIngresos Panel1
 			
 			JButton btnConsultarIngresos = new JButton("Consultar Ingresos");
 			btnConsultarIngresos.addActionListener(new ActionListener() {
@@ -164,6 +163,11 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 			
 					PantallaJefeGabineteVicerrectorado.this.tipoCurso = (TipoCurso) comboBoxTipoCurso.getSelectedItem();
 					
+					GestorConsultas gestor = new GestorConsultas();
+					List<CursoPropio> data = new ArrayList<CursoPropio>();
+					data = gestor.consultarIngresos(PantallaJefeGabineteVicerrectorado.this.tipoCurso, PantallaJefeGabineteVicerrectorado.this.fechaComienzo, PantallaJefeGabineteVicerrectorado.this.fechaFin);
+					
+					//Consulta a BBDD
 				}
 			});
 			
@@ -247,6 +251,13 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 					
 					PantallaJefeGabineteVicerrectorado.this.estadoCurso = (EstadoCurso) comboBoxEstadoCurso.getSelectedItem();
 					
+					//consultarEstadoCurso aqui
+					GestorConsultas gestor = new GestorConsultas();
+					List<CursoPropio> data = new ArrayList<CursoPropio>();
+					data = gestor.consultarEstadoCursos(estadoCurso, fechaComienzo, fechaFin);
+					
+					
+					//Consulta a BBDD
 				}
 			});
 			
@@ -316,6 +327,9 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 					catch(Exception ex) {
 						JOptionPane.showMessageDialog(null, "Campo fecha fin vacío ", "Fecha fin", JOptionPane.INFORMATION_MESSAGE);
 					}
+					
+					//Consulta a BBDD
+					
 				}
 			});
 			

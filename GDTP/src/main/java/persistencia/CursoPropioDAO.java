@@ -116,6 +116,31 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 		
 		return total;
 	}
+	
+	public List<CursoPropio> listaIngresos(TipoCurso aTipo, Date aFechaInicio, Date aFechaFin) {
+		List<CursoPropio> Cursos = new ArrayList<CursoPropio>();
+		int pepe=0;
+		ResultSet aux = get(aTipo, aFechaInicio, aFechaFin);
+		try {
+			if (aux.next()) {
+				pepe = aux.getInt("n");
+				System.out.println("SUUUUUUUUUUUUUUUU");
+				//aux.getInt("total"));
+				//aux.getString("id"));
+				
+			
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("No hay cursos con esta descripción");
+		}
+		
+		
+		return Cursos;
+	}
+	
+	
 
 	public void listarEdicionesCursos(Date aFechaInicio, Date aFechaFin) {
 		CursoPropio curso = new CursoPropio();
