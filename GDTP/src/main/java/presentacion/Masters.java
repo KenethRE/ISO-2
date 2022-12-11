@@ -133,8 +133,8 @@ public class Masters extends JFrame {
 		JButton btnNewButton = new JButton("Realizar matricula");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Matricula matricula = new Matricula();
-				matricula.setVisible(true);
+				//Matricula matricula = new Matricula();
+				//matricula.setVisible(true);
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));

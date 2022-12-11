@@ -16,10 +16,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class Matricula extends JFrame {
-
-	/**
-	 * 
-	 */
+	JFrame previousWindow;
 	private static final long serialVersionUID = -7592567473508560622L;
 	private JPanel contentPane;
 	private JTextField txtDni;
@@ -28,28 +25,9 @@ public class Matricula extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Matricula frame = new Matricula();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public Matricula() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public Matricula(JFrame previousWindow) {
+		this.previousWindow = previousWindow;
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 940, 559);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -106,7 +84,7 @@ public class Matricula extends JFrame {
 		JButton btnNewButton = new JButton("Realizar pago");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RealizarPago pago = new RealizarPago();
+				RealizarPago pago = new RealizarPago(previousWindow);
 				pago.setVisible(true);
 			}
 		});
@@ -161,5 +139,17 @@ public class Matricula extends JFrame {
 		});
 		btnNewButton_1.setBounds(827, 11, 89, 23);
 		contentPane.add(btnNewButton_1);
+	}
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Matricula frame = new  Matricula(null);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }

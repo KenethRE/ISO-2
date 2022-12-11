@@ -219,8 +219,8 @@ public class Especialistas extends JFrame {
 		JButton btnNewButton = new JButton("Realizar matricula");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Matricula matricula = new Matricula();
-				matricula.setVisible(true);
+				//Matricula matricula = new Matricula();
+				//matricula.setVisible(true);
 			}
 		});
 		btnNewButton.setBounds(320, 460, 155, 39);
