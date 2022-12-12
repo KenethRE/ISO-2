@@ -29,6 +29,9 @@ public class GestorConsultas {
 	}
 
 	public List<CursoPropio> listarEdicionesCursos(Date aFechaInicio, Date aFechaFin) {
-		throw new UnsupportedOperationException();
+		CursoPropioDAO<CursoPropio> CursoDAO = new CursoPropioDAO<CursoPropio>();
+		List<CursoPropio> listaEdiciones= new ArrayList<CursoPropio>();	
+		listaEdiciones=CursoDAO.listarEdicionesCursos(aFechaInicio,aFechaFin);
+		return listaEdiciones;
 	}
 }

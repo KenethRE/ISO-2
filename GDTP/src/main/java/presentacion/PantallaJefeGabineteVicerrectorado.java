@@ -470,6 +470,51 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 			pickerFechaFin3.setBounds(128, 304, 202, 23);
 			PanelFechaFin3.add(pickerFechaFin3);
 			
+			//Tabla 3
+			
+			JScrollPane scrollPane_1 = new JScrollPane();
+			scrollPane_1.setBounds(10, 153, 573, 320);
+			panel3.add(scrollPane_1);
+			
+			table_3 = new JTable();
+			
+			
+			table_3.setModel(new DefaultTableModel(
+				new Object[][] {
+					{null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null},
+				},
+				new String[] {
+					"Id", "Nombre", "ECTS", "FechaInicio", "FechaFin", "TasaMatriculacion", "Edicion"
+				}
+			));
+
+			scrollPane_1.setViewportView(table_3);
+			
+			DefaultTableModel model3 = new DefaultTableModel();
+			table_3.setModel(model3);
+			model3.addColumn("ID");
+			model3.addColumn("Nombre");
+			model3.addColumn("ECTs");
+			model3.addColumn("FechaInicio");
+			model3.addColumn("FechaFin");
+			model3.addColumn("TasaMatriculacion");
+			model3.addColumn("Edicion");
+
+			
 			//Botón ListarEdiciones Panel3
 			
 			JButton btnListarEdiciones = new JButton("Listar Ediciones");
@@ -477,24 +522,80 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					try {
 						PantallaJefeGabineteVicerrectorado.this.fechaComienzo = new java.sql.Date(fInicio3.getValue().getTime());
+						try {
+							PantallaJefeGabineteVicerrectorado.this.fechaFin = new java.sql.Date(fFin3.getValue().getTime());
+							
+							//Consulta a BBDD
+							GestorConsultas gestor = new GestorConsultas();
+							List<CursoPropio> data = new ArrayList<CursoPropio>();
+							data = gestor.listarEdicionesCursos(fechaComienzo, fechaFin);
+							int contador=0;
+							
+							//Jpanlel
+							for(CursoPropio aux : data) {
+								Object[] col = new Object[7];
+								aux=data.get(contador);
+								col[0]=aux.get_id();
+								col[1]=aux.get_nombre();
+								col[2]=aux.get_eCTS();
+								col[3]=aux.get_fechaInicio();
+								col[4]=aux.get_fechaFin();
+								col[5]=aux.get_tasaMatricula();
+								col[6]=aux.get_edicion();
+							
+								model3.addRow(col);
+								contador++;
+							}
+							if(contador==0) {
+								Object[] col = new Object[7];
+								col[0]="No";
+								col[1]="hay";
+								col[2]="datos";
+								model3.addRow(col);
+							}
+							
+						}
+						catch(Exception ex) {
+							JOptionPane.showMessageDialog(null, "Campo fecha fin vacío ", "Fecha fin", JOptionPane.INFORMATION_MESSAGE);
+						}
 					}
 					catch(Exception ex) {
 						 JOptionPane.showMessageDialog(null, "Campo fecha inicio vacío ", "Fecha incio", JOptionPane.INFORMATION_MESSAGE);
 					}
-					try {
-						PantallaJefeGabineteVicerrectorado.this.fechaFin = new java.sql.Date(fFin3.getValue().getTime());
-					}
-					catch(Exception ex) {
-						JOptionPane.showMessageDialog(null, "Campo fecha fin vacío ", "Fecha fin", JOptionPane.INFORMATION_MESSAGE);
-					}
 					
-					//Consulta a BBDD
+					
+					
 					
 				}
 			});
 			
-			btnListarEdiciones.setBounds(26, 179, 174, 23);
+			btnListarEdiciones.setBounds(20, 99, 174, 23);
 			panel3.add(btnListarEdiciones);
+			
+			//Boton Reset panel3
+			
+			JButton btnVaciar3 = new JButton("Reset");
+			btnVaciar3.setSize(143, 23);
+			btnVaciar3.setLocation(263, 99);
+			btnVaciar2.setBounds(210, 198, 99, 23);
+			panel3.add(btnVaciar3);
+			
+			btnVaciar3.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					 try {
+				            DefaultTableModel modelo=(DefaultTableModel) table_3.getModel();
+				            int filas=table_3.getRowCount();
+				            for (int i = 0;filas>i; i++) {
+				                modelo.removeRow(0);
+				            }
+				        } catch (Exception ex) {
+				            JOptionPane.showMessageDialog(null, "Error al limpiar la tabla.");
+				        }
+					
+				}
+			});
+			
+			
 		
 	}
 
@@ -502,6 +603,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 	
 	private JTable table;
 	private JTable table_1;
+	private JTable table_3;
 	
 	
 	public static void main(String[] args) {

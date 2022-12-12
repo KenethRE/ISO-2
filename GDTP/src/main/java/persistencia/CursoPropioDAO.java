@@ -140,11 +140,13 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 	
 	
 
-	public void listarEdicionesCursos(Date aFechaInicio, Date aFechaFin) {
-		CursoPropio curso = new CursoPropio();
-		ResultSet aux = get_edicion(curso.getClass().getSimpleName(), aFechaInicio, aFechaFin);
+	public List<CursoPropio> listarEdicionesCursos(Date aFechaInicio, Date aFechaFin) {
+		List<CursoPropio> Cursos = new ArrayList<CursoPropio>();
+		
+		ResultSet aux = get_edicion("CursoPropio", aFechaInicio, aFechaFin);
 		try {
 			while (aux.next()) {
+				CursoPropio curso = new CursoPropio();
 				curso.set_id(aux.getString("ID"));
 				curso.set_nombre(aux.getString("NOMBRE"));
 				curso.set_eCTS(aux.getInt("ECTS"));
@@ -159,12 +161,15 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 				curso.set_tipo(Tcurso);
 				EstadoCurso Ecurso = EstadoCurso.valueOf(aux.getString("ESTADOCURSO"));
 				curso.set_estado(Ecurso);
+				Cursos.add(curso);
 			}
 					
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Curso no encontrado");
 		}
+		
+		return Cursos;
 		
 	}
 }
