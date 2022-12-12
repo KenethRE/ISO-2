@@ -66,7 +66,7 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 		List<CursoPropio> Cursos = new ArrayList<CursoPropio>();
 		
 		
-		ResultSet aux = get("Curso", aEstado, aFechaInicio, aFechaFin);
+		ResultSet aux = get("CursoPropio", aEstado, aFechaInicio, aFechaFin);
 		try {
 			while (aux.next()) {
 				CursoPropio curso = new CursoPropio();

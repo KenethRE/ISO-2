@@ -34,7 +34,7 @@ public class AbstractEntityDAO<E>{
 		ResultSet result = null;
 		
 		if (Table.equals("CursoPropio")) {
-			result = agente.select("SELECT * FROM " + Table + "WHERE estadocurso = '"+estadoCurso+"' AND fechainicio > '"+aFechaInicio+"' AND fechafin < '"+aFechaFin+"'");
+			result = agente.select("SELECT * FROM " + Table + " WHERE estadocurso = '"+estadoCurso+"' AND fechainicio > '"+aFechaInicio+"' AND fechafin < '"+aFechaFin+"'");
 		}
 
 		return result;
