@@ -150,6 +150,10 @@ public class RealizarPago extends JFrame {
 		txtNumTargeta.setText("");
 		txtCvv.setText("");
 		PanelFecha.setVisible(false);
+		lblNewLabel_1_1.setVisible(false);
+		lblNewLabel_1_2.setVisible(false);
+		lblNewLabel_1_3.setVisible(false);
+		lblNewLabel_1_4.setVisible(false);
 		
 		rdbtnTransferenciaBancaria.addMouseListener(new MouseAdapter() {
 			@Override
@@ -163,6 +167,10 @@ public class RealizarPago extends JFrame {
 				PanelFecha.setVisible(false);
 				txtIban.setVisible(true);
 				lblNewLabel_1.setVisible(true);
+				lblNewLabel_1_1.setVisible(false);
+				lblNewLabel_1_2.setVisible(false);
+				lblNewLabel_1_3.setVisible(false);
+				lblNewLabel_1_4.setVisible(false);
 				
 			}
 		});
@@ -189,6 +197,9 @@ public class RealizarPago extends JFrame {
 				txtIban.setText("");
 				lblNewLabel_1_1.setVisible(true);
 				lblNewLabel_1_2.setVisible(true);
+				lblNewLabel_1_3.setVisible(true);
+				lblNewLabel_1_4.setVisible(true);
+				lblNewLabel_1.setVisible(false);
 			}
 		});
 		rdbtnTargetaDeCredito.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -197,12 +208,23 @@ public class RealizarPago extends JFrame {
 		
 		
 		JButton btnNewButton = new JButton("Pagar ahora ");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		if ( rdbtnTargetaDeCredito.isSelected()) {
+			if (fecha.getModel().getValue()!=null) {
 				fechacaducidad = new java.sql.Date(((java.util.Date) fecha.getModel().getValue()).getTime());
-				if((txtIban.getText().length() != 0) || (txtNombre.getText().length() != 0) && (txtNumTargeta.getText().length() != 0)
-						 && (fechacaducidad.toString().length() !=0) && (txtCvv.getText().length() != 0)) {
-					dispose();
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "debe elegir una fecha",
+						"ERROR", JOptionPane.ERROR_MESSAGE);
+			}
+		
+		}
+		btnNewButton.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				if((txtIban.getText().length() != 0) || ((txtNombre.getText().length() != 0) && (txtNumTargeta.getText().length() != 0)
+						 && (fechacaducidad.toString().length() !=0) && (txtCvv.getText().length() != 0))) {
+					dispose(); 
 					
 					JOptionPane.showMessageDialog(null, "Pago realizado con exito", 
 						"PAGO CORRECTO", JOptionPane.INFORMATION_MESSAGE);
