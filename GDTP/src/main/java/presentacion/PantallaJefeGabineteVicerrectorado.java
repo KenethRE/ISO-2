@@ -135,7 +135,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 			pickerFechaFin.setBounds(128, 304, 202, 23);
 			PanelFechaFin.add(pickerFechaFin);
 			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(15, 232, 443, 241);
+			scrollPane.setBounds(10, 232, 573, 241);
 			panel1.add(scrollPane);
 			
 			table = new JTable();
@@ -166,7 +166,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 			
 			DefaultTableModel model = new DefaultTableModel();
 			table.setModel(model);
-			model.addColumn("Numero");
+			model.addColumn("Nº Matriculados");
 			model.addColumn("Ingresos");
 			model.addColumn("idCurso");
 			
@@ -184,39 +184,63 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 					}
 					try {
 						PantallaJefeGabineteVicerrectorado.this.fechaFin = new java.sql.Date(fFin1.getValue().getTime());
+						PantallaJefeGabineteVicerrectorado.this.tipoCurso = (TipoCurso) comboBoxTipoCurso.getSelectedItem();
+						
+						//Consulta a BBDD
+						
+						GestorConsultas gestor = new GestorConsultas();
+						List<List<String>> data = new ArrayList<>();
+						data = gestor.consultarIngresos(PantallaJefeGabineteVicerrectorado.this.tipoCurso, PantallaJefeGabineteVicerrectorado.this.fechaComienzo, PantallaJefeGabineteVicerrectorado.this.fechaFin);
+						int contador=0;
+						
+						//Colocando el Jpanlel
+						for(List<String> aux : data) {
+							Object[] col = new Object[3];
+							aux=data.get(contador);
+							col[0]=aux.get(0);
+							col[1]=aux.get(1);
+							col[2]=aux.get(2);
+							
+							model.addRow(col);
+							contador++;
+						}
+						if(contador==0) {
+							Object[] col = new Object[3];
+							col[0]="No";
+							col[1]="hay";
+							col[2]="datos";
+							model.addRow(col);
+						}
+						
 					}
 					catch(Exception ex) {
 						JOptionPane.showMessageDialog(null, "Campo fecha fin vacío ", "Fecha fin", JOptionPane.INFORMATION_MESSAGE);
 					}
-			
-					PantallaJefeGabineteVicerrectorado.this.tipoCurso = (TipoCurso) comboBoxTipoCurso.getSelectedItem();
-					
-					//Consulta a BBDD
-					
-					GestorConsultas gestor = new GestorConsultas();
-					List<List<String>> data = new ArrayList<>();
-					data = gestor.consultarIngresos(PantallaJefeGabineteVicerrectorado.this.tipoCurso, PantallaJefeGabineteVicerrectorado.this.fechaComienzo, PantallaJefeGabineteVicerrectorado.this.fechaFin);
-					int contador=0;
-					
-					//Colocando el Jpanlel
-					for(List<String> aux : data) {
-						Object[] col = new Object[3];
-						aux=data.get(contador);
-						col[0]=aux.get(0);
-						col[1]=aux.get(1);
-						col[2]=aux.get(2);
-						
-						model.addRow(col);
-						contador++;
-					}
-					
-					
 					
 				}
 			});
 			
 			panel1.add(btnConsultarIngresos);
-			btnConsultarIngresos.setBounds(15, 131, 174, 23);
+			btnConsultarIngresos.setBounds(10, 198, 174, 23);
+			
+			JButton btnVaciar = new JButton("Reset");
+			btnVaciar.setBounds(210, 198, 99, 23);
+			panel1.add(btnVaciar);
+			
+			btnVaciar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					 try {
+				            DefaultTableModel modelo=(DefaultTableModel) table.getModel();
+				            int filas=table.getRowCount();
+				            for (int i = 0;filas>i; i++) {
+				                modelo.removeRow(0);
+				            }
+				        } catch (Exception ex) {
+				            JOptionPane.showMessageDialog(null, "Error al limpiar la tabla.");
+				        }
+					
+				}
+			});
 			
 			JPanel panel2 = new JPanel();
 			panel2.setLayout(null);
