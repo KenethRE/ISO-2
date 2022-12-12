@@ -14,11 +14,11 @@ import negocio.entities.Materia;
 
 public class GestorConsultas {
 
-	public List<CursoPropio> consultarIngresos(TipoCurso aTipo, Date aFechaInicio, Date aFechaFin) {
+	public List<List<String>> consultarIngresos(TipoCurso aTipo, Date aFechaInicio, Date aFechaFin) {
 		CursoPropioDAO<CursoPropio> CursoDAO = new CursoPropioDAO<CursoPropio>();
-		List<CursoPropio> listaCursos = new ArrayList<CursoPropio>();	
-		listaCursos=CursoDAO.listaIngresos(aTipo,aFechaInicio,aFechaFin);
-		return listaCursos;
+		List<List<String>> ingresos = new ArrayList<>();	
+		ingresos=CursoDAO.listarIngresos(aTipo,aFechaInicio,aFechaFin);
+		return ingresos;
 	}
 
 	public List<CursoPropio> consultarEstadoCursos(EstadoCurso aEstadoCurso, Date aFechaInicio, Date aFechaFin) {

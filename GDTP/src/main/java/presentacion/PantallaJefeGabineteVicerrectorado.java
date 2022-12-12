@@ -47,6 +47,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
 
 public class PantallaJefeGabineteVicerrectorado extends JFrame {
 	
@@ -133,15 +134,42 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 			JDatePickerImpl pickerFechaFin = new JDatePickerImpl(panelfechafin, new DateLabelFormatter());
 			pickerFechaFin.setBounds(128, 304, 202, 23);
 			PanelFechaFin.add(pickerFechaFin);
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setBounds(15, 232, 443, 241);
+			panel1.add(scrollPane);
 			
-			JPanel panelMostrarResultadosConsulta = new JPanel();
-			panelMostrarResultadosConsulta.setBounds(10, 268, 569, 201);
-			panel1.add(panelMostrarResultadosConsulta);
-			panelMostrarResultadosConsulta.setLayout(null);
+			table = new JTable();
+			table.setModel(new DefaultTableModel(
+				new Object[][] {
+					{null, null, null},
+					{null, null, null},
+					{null, null, null},
+					{null, null, null},
+					{null, null, null},
+					{null, null, null},
+					{null, null, null},
+					{null, null, null},
+					{null, null, null},
+					{null, null, null},
+					{null, null, null},
+					{null, null, null},
+					{null, null, null},
+					{null, null, null},
+					{null, null, null},
+				},
+				new String[] {
+					"Matriculados", "Ingresos", "idCurso"
+				}
+			));
+			scrollPane.setViewportView(table);
 			
-			JList list = new JList();
-			list.setBounds(0, 69, 569, 51);
-			panelMostrarResultadosConsulta.add(list);
+			
+			DefaultTableModel model = new DefaultTableModel();
+			table.setModel(model);
+			model.addColumn("Numero");
+			model.addColumn("Ingresos");
+			model.addColumn("idCurso");
+			
 			
 			//Button ConsultarIngresos Panel1
 			
@@ -163,16 +191,32 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 			
 					PantallaJefeGabineteVicerrectorado.this.tipoCurso = (TipoCurso) comboBoxTipoCurso.getSelectedItem();
 					
-					GestorConsultas gestor = new GestorConsultas();
-					List<CursoPropio> data = new ArrayList<CursoPropio>();
-					data = gestor.consultarIngresos(PantallaJefeGabineteVicerrectorado.this.tipoCurso, PantallaJefeGabineteVicerrectorado.this.fechaComienzo, PantallaJefeGabineteVicerrectorado.this.fechaFin);
-					
 					//Consulta a BBDD
+					
+					GestorConsultas gestor = new GestorConsultas();
+					List<List<String>> data = new ArrayList<>();
+					data = gestor.consultarIngresos(PantallaJefeGabineteVicerrectorado.this.tipoCurso, PantallaJefeGabineteVicerrectorado.this.fechaComienzo, PantallaJefeGabineteVicerrectorado.this.fechaFin);
+					int contador=0;
+					
+					//Colocando el Jpanlel
+					for(List<String> aux : data) {
+						Object[] col = new Object[3];
+						aux=data.get(contador);
+						col[0]=aux.get(0);
+						col[1]=aux.get(1);
+						col[2]=aux.get(2);
+						
+						model.addRow(col);
+						contador++;
+					}
+					
+					
+					
 				}
 			});
 			
-			btnConsultarIngresos.setBounds(36, 219, 174, 23);
 			panel1.add(btnConsultarIngresos);
+			btnConsultarIngresos.setBounds(15, 131, 174, 23);
 			
 			JPanel panel2 = new JPanel();
 			panel2.setLayout(null);
@@ -350,6 +394,8 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 	private JTextField textField_7;
 	private JTextField textField_8;
 	private JTextField textField_9;
+	private JTable table_1;
+	private JTable table;
 	
 	
 	public static void main(String[] args) {

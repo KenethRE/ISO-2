@@ -44,12 +44,12 @@ public class AbstractEntityDAO<E>{
 	public ResultSet get(TipoCurso tipoCurso,  Date aFechaInicio, Date aFechaFin) {
 		ResultSet result = null;
 		
-		result = agente.select("SELECT DISTINCT COUNT() AS n,COUNT()*C.tasamatricula AS total,c.id FROM Matricula m\n"
-				+ "INNER JOIN CursoPropio c ON m.idcurso = c.id WHERE m.pagado=1"
-				+ "AND c.tipocurso='"+tipoCurso+"'"
-				+ "AND c.fechainicio > '"+aFechaInicio+"'"
-				+ "AND c.fechafin < '"+aFechaFin+"'"
-				+ "GROUP BY m.idcurso");
+		result = agente.select("SELECT COUNT(IDCURSO) AS n,COUNT(IDCURSO)*C.TASAMATRICULA AS total,IDCURSO FROM Matricula m "
+				+ "INNER JOIN CursoPropio c ON m.idcurso = c.id WHERE m.pagado='TRUE' "
+				+ "AND c.tipocurso='"+tipoCurso+"' "
+				+ "AND c.fechainicio > '"+aFechaInicio+"' "
+				+ "AND c.fechafin < '"+aFechaFin+"' "
+				+ "GROUP BY IDCURSO, TASAMATRICULA");
 
 		return result;
 	}

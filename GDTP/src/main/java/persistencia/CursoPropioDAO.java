@@ -94,7 +94,7 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 		
 		return Cursos;
 	}
-
+	/*
 	public double listarIngresos(TipoCurso aTipo, Date aFechaInicio, Date aFechaFin) {
 		int num=0;
 		double total =0;
@@ -116,28 +116,26 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 		
 		return total;
 	}
+	*/
 	
-	public List<CursoPropio> listaIngresos(TipoCurso aTipo, Date aFechaInicio, Date aFechaFin) {
-		List<CursoPropio> Cursos = new ArrayList<CursoPropio>();
-		int pepe=0;
+	public List<List<String>> listarIngresos(TipoCurso aTipo, Date aFechaInicio, Date aFechaFin) {
+		List<List<String>> Datos = new ArrayList<>();
 		ResultSet aux = get(aTipo, aFechaInicio, aFechaFin);
 		try {
-			if (aux.next()) {
-				pepe = aux.getInt("n");
-				System.out.println("SUUUUUUUUUUUUUUUU");
-				//aux.getInt("total"));
-				//aux.getString("id"));
-				
-			
+			while(aux.next()) {
+				List<String> data = new ArrayList<String>();
+				data.add(aux.getString("n"));
+				data.add(aux.getString("total"));
+				data.add(aux.getString("idcurso"));
+				Datos.add(data);
 			}
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("No hay cursos con esta descripción");
 		}
 		
 		
-		return Cursos;
+		return Datos;
 	}
 	
 	
