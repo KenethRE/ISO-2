@@ -152,7 +152,7 @@ public class Matricula extends JFrame {
 		
 		JCheckBox chckbxNewCheckBox = new JCheckBox("Pagado");
 		chckbxNewCheckBox.setEnabled(false);
-		chckbxNewCheckBox.setBounds(310, 445, 99, 23);
+		chckbxNewCheckBox.setBounds(310, 445, 72, 23);
 		contentPane.add(chckbxNewCheckBox);
 		
 		JButton btnNewButton_2 = new JButton("Finalizar Matricula");
