@@ -44,7 +44,7 @@ public class AbstractEntityDAO<E>{
 		ResultSet result = null;
 		
 		if (Table.equals("CursoPropio")) {
-			result = agente.select("SELECT * FROM " + Table + " WHERE estadocurso = '"+estadoCurso+"' AND fechainicio > '"+aFechaInicio+"' AND fechafin < '"+aFechaFin+"'");
+			result = agente.select("SELECT * FROM " + Table + " WHERE estadocurso = '"+estadoCurso+"' AND fechainicio >= '"+aFechaInicio+"' AND fechafin <= '"+aFechaFin+"'");
 		}
 
 		return result;
@@ -57,8 +57,8 @@ public class AbstractEntityDAO<E>{
 		result = agente.select("SELECT COUNT(IDCURSO) AS n,COUNT(IDCURSO)*C.TASAMATRICULA AS total,IDCURSO FROM Matricula m "
 				+ "INNER JOIN CursoPropio c ON m.idcurso = c.id WHERE m.pagado='TRUE' "
 				+ "AND c.tipocurso='"+tipoCurso+"' "
-				+ "AND c.fechainicio > '"+aFechaInicio+"' "
-				+ "AND c.fechafin < '"+aFechaFin+"' "
+				+ "AND c.fechainicio >= '"+aFechaInicio+"' "
+				+ "AND c.fechafin <= '"+aFechaFin+"' "
 				+ "GROUP BY IDCURSO, TASAMATRICULA");
 
 		return result;
@@ -68,7 +68,7 @@ public class AbstractEntityDAO<E>{
 		ResultSet result = null;
 		
 		if (Table.equals("CursoPropio")) {
-			result = agente.select("SELECT * FROM " + Table + " WHERE fechainicio > '"+aFechaInicio+"' AND fechafin < '"+aFechaFin+"'");
+			result = agente.select("SELECT * FROM " + Table + " WHERE fechainicio >= '"+aFechaInicio+"' AND fechafin <= '"+aFechaFin+"'");
 		}
 
 		return result;
