@@ -40,7 +40,9 @@ public class RealizarPago extends JFrame {
 	private JTextField txtNumTargeta;
 	Date fechacaducidad;
 	private JTextField txtCvv;
+	private Matriculacion ventanMatricula;
 	private ButtonGroup bg = new ButtonGroup();
+	boolean tarjeta;
 
 	public RealizarPago(JFrame previousWindow) {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -51,6 +53,7 @@ public class RealizarPago extends JFrame {
 					previousWindow.setVisible(true);
 				}
 			});
+			this.ventanMatricula=(Matriculacion) previousWindow;
 		}
 		setBounds(100, 100, 930, 572);
 		contentPane = new JPanel();
@@ -154,6 +157,8 @@ public class RealizarPago extends JFrame {
 		lblNewLabel_1_2.setVisible(false);
 		lblNewLabel_1_3.setVisible(false);
 		lblNewLabel_1_4.setVisible(false);
+		tarjeta=false;
+				
 		
 		rdbtnTransferenciaBancaria.addMouseListener(new MouseAdapter() {
 			@Override
@@ -171,7 +176,7 @@ public class RealizarPago extends JFrame {
 				lblNewLabel_1_2.setVisible(false);
 				lblNewLabel_1_3.setVisible(false);
 				lblNewLabel_1_4.setVisible(false);
-				
+				tarjeta=false;
 			}
 		});
 		rdbtnTransferenciaBancaria.setSelected(true);
@@ -200,6 +205,7 @@ public class RealizarPago extends JFrame {
 				lblNewLabel_1_3.setVisible(true);
 				lblNewLabel_1_4.setVisible(true);
 				lblNewLabel_1.setVisible(false);
+				tarjeta=true;
 			}
 		});
 		rdbtnTargetaDeCredito.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -225,9 +231,17 @@ public class RealizarPago extends JFrame {
 				if((txtIban.getText().length() != 0) || ((txtNombre.getText().length() != 0) && (txtNumTargeta.getText().length() != 0)
 						 && (fechacaducidad.toString().length() !=0) && (txtCvv.getText().length() != 0))) {
 					dispose(); 
-					
+					if(tarjeta==false) {
+						JOptionPane.showMessageDialog(null, "Pago realizado con exito", 
+								"PAGO CORRECTO", JOptionPane.INFORMATION_MESSAGE);
+							ventanMatricula.activarcasillapago();
+					}
+					else {
 					JOptionPane.showMessageDialog(null, "Pago realizado con exito", 
 						"PAGO CORRECTO", JOptionPane.INFORMATION_MESSAGE);
+					ventanMatricula.activarcasillapago();
+					ventanMatricula.setpagotarjeta();
+					}
 				}else {
 					JOptionPane.showMessageDialog(null, "Pago incorrecto, vuelva a intentarlo",
 							"ERROR", JOptionPane.ERROR_MESSAGE);

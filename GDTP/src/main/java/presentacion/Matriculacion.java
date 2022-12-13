@@ -5,16 +5,24 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import negocio.entities.CursoPropio;
+import negocio.entities.Estudiante;
+import negocio.entities.ModoPago;
+import persistencia.EstudianteDAO;
+import persistencia.MatriculaDAO;
+import negocio.entities.Matricula;
 
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.management.loading.PrivateClassLoader;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
@@ -29,8 +37,9 @@ import java.util.Properties;
 
 import javax.swing.JCheckBox;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
-public class Matricula extends JFrame {
+public class Matriculacion extends JFrame {
 	JFrame previousWindow;
 	JFrame estaventana;
 	private static final long serialVersionUID = -7592567473508560622L;
@@ -41,8 +50,15 @@ public class Matricula extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField;
+	private boolean camposrellenos;
 	private CursoPropio cursoPropio = new CursoPropio();
-	public Matricula(JFrame previousWindow){
+	private JCheckBox chckbxNewCheckBox = new JCheckBox("Pagado");
+	private JButton btnNewButton_2 = new JButton("Finalizar Matricula");
+	private ModoPago tipoPago;
+	private boolean tarjeta=false;
+	Date fechamatriculacionDate;
+	
+	public Matriculacion(JFrame previousWindow){
 		estaventana= this;
 		cursoPropio.set_id("");
 		cursoPropio.set_nombre("");
@@ -100,43 +116,6 @@ public class Matricula extends JFrame {
 		lblNewLabel_2_4_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_2_4_1.setBounds(351, 112, 147, 14);
 		contentPane.add(lblNewLabel_2_4_1);
-		
-		JButton btnNewButton = new JButton("Realizar pago");
-		btnNewButton.setEnabled(false);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				RealizarPago pago = new RealizarPago(previousWindow);
-				pago.setVisible(true);
-			}
-		});
-		btnNewButton.setBounds(64, 432, 216, 48);
-		contentPane.add(btnNewButton);
-		
-		txtDni = new JTextField();
-		txtDni.setBounds(109, 126, 196, 20);
-		contentPane.add(txtDni);
-		txtDni.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(109, 168, 196, 20);
-		contentPane.add(textField_1);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(109, 215, 196, 20);
-		contentPane.add(textField_2);
-		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(109, 265, 196, 20);
-		contentPane.add(textField_3);
-		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(109, 308, 196, 20);
-		contentPane.add(textField_4);
 		Properties propiedadesfecha = new Properties();
 		propiedadesfecha.put("text.today","Hoy");
 		propiedadesfecha.put("text.month","Mes");
@@ -149,6 +128,172 @@ public class Matricula extends JFrame {
 		contentPane.add(PanelFecha);
 		PanelFecha.add(fecha);
 		fecha.getModel().setDate(LocalDate.now().getYear(),LocalDate.now().getMonthValue(),LocalDate.now().getDayOfMonth());
+		
+		JButton btnNewButton = new JButton("Realizar pago");
+		btnNewButton.setEnabled(false);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (textField.getText().isEmpty()==false && fecha.getModel().getValue()!=null) {
+				RealizarPago pago = new RealizarPago(estaventana);
+				pago.setVisible(true);
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "debe elegir un curso para matricularse y fecha de matriculacion"
+							+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		btnNewButton.setBounds(64, 432, 216, 48);
+		contentPane.add(btnNewButton);
+		
+		txtDni = new JTextField();
+		txtDni.setBounds(109, 126, 196, 20);
+		contentPane.add(txtDni);
+		txtDni.setColumns(10);
+		txtDni.getDocument().addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				updated();
+				
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				updated();
+				
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				updated();
+				
+			}
+			public void updated() {
+				if (chequearcampos()==true) {
+					btnNewButton.setEnabled(true);
+				}
+			}
+		});
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(109, 168, 196, 20);
+		contentPane.add(textField_1);
+		textField_1.getDocument().addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				updated();
+				
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				updated();
+				
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				updated();
+				
+			}
+			public void updated() {
+				if (chequearcampos()==true) {
+					btnNewButton.setEnabled(true);
+				}
+			}
+		});
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(109, 215, 196, 20);
+		contentPane.add(textField_2);
+		textField_2.getDocument().addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				updated();
+				
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				updated();
+				
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				updated();
+				
+			}
+			public void updated() {
+				if (chequearcampos()==true) {
+					btnNewButton.setEnabled(true);
+				}
+			}
+		});
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(109, 265, 196, 20);
+		contentPane.add(textField_3);
+		textField_3.getDocument().addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				updated();
+				
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				updated();
+				
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				updated();
+				
+			}
+			public void updated() {
+				if (chequearcampos()==true) {
+					btnNewButton.setEnabled(true);
+				}
+			}
+		});
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(109, 308, 196, 20);
+		contentPane.add(textField_4);
+		textField_4.getDocument().addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				updated();
+				
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				updated();
+				
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				updated();
+				
+			}
+			public void updated() {
+				if (chequearcampos()==true) {
+					btnNewButton.setEnabled(true);
+				}
+			}
+		});
+		
 		JButton btnNewButton_1 = new JButton("Logout");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -158,12 +303,39 @@ public class Matricula extends JFrame {
 		btnNewButton_1.setBounds(546, 21, 89, 23);
 		contentPane.add(btnNewButton_1);
 		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("Pagado");
+		
 		chckbxNewCheckBox.setEnabled(false);
 		chckbxNewCheckBox.setBounds(310, 445, 72, 23);
 		contentPane.add(chckbxNewCheckBox);
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				fechamatriculacionDate = new java.sql.Date(((java.util.Date) fecha.getModel().getValue()).getTime());
+				Estudiante estudiante = new Estudiante();
+				estudiante.set_dni(txtDni.getText());
+				estudiante.set_nombre(textField_1.getText());
+				estudiante.set_apellidos(textField_2.getText());
+				estudiante.set_titulacion(textField_3.getText());
+				estudiante.set_cualificacion(textField_4.getText());
+				Matricula matricula = new Matricula();
+				matricula.set_pagado(true);
+				int idmatricula = (int)(Math.random()*9000+1);
+				matricula.setiD(idmatricula);
+				matricula.set_fecha(fechamatriculacionDate);
+				matricula.setId_estudiante(estudiante.get_dni());
+				if (tarjeta==false) {
+					matricula.set_tipoPago(tipoPago.TRANSFERENCIA);
+					
+				}
+				else {
+					matricula.set_tipoPago(tipoPago.TARJETA_CREDITO);
+				}
+				estudiante.persist();
+				matricula.persist();
+				
+			}
+		});
 		
-		JButton btnNewButton_2 = new JButton("Finalizar Matricula");
+		
 		btnNewButton_2.setEnabled(false);
 		btnNewButton_2.setBounds(402, 432, 233, 48);
 		contentPane.add(btnNewButton_2);
@@ -194,11 +366,28 @@ public class Matricula extends JFrame {
 		cursoPropio=curso;
 		textField.setText(cursoPropio.get_nombre());
 	}
+	public boolean chequearcampos() {
+		if (txtDni.getText().length()>1 && textField_1.getText().length()>1 && textField_2.getText().length()>1 && textField_3.getText().length()>1
+				&& textField_4.getText().length()>1) {
+		camposrellenos=true;
+		}
+		return camposrellenos;
+		
+	}
+	public void activarcasillapago() {
+		chckbxNewCheckBox.setSelected(true);
+		btnNewButton_2.setEnabled(true);
+		
+	}
+	public void setpagotarjeta() {
+		tarjeta=true;
+		
+	}
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Matricula frame = new  Matricula(null);
+					Matriculacion frame = new  Matriculacion(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

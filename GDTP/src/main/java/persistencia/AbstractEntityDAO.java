@@ -98,7 +98,7 @@ public class AbstractEntityDAO<E>{
 					+ "')");
 			break;
 		case "Estudiante":
-			result = agente.insert("INSERT INTO " + className + "VALUES('" + ((Estudiante) E).get_dni() + "','" + ((Estudiante) E).get_nombre() + "','" + ((Estudiante) E).get_apellidos() 
+			result = agente.insert("INSERT INTO " + className + " VALUES('" + ((Estudiante) E).get_dni() + "','" + ((Estudiante) E).get_nombre() + "','" + ((Estudiante) E).get_apellidos() 
 					+ "','" + ((Estudiante) E).get_titulacion() + "','" + ((Estudiante) E).get_cualificacion() + "')" );
 			break;
 		}

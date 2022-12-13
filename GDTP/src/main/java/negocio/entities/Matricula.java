@@ -1,6 +1,9 @@
 package negocio.entities;
 
+import java.sql.SQLException;
 import java.util.Date;
+
+import persistencia.MatriculaDAO;
 
 public class Matricula implements IdInterface{
 	private int iD;
@@ -19,7 +22,7 @@ public class Matricula implements IdInterface{
 	public String id_estudiante;
 	public String id_Curso;
 	public ModoPago _tipoPago;
-	
+	private MatriculaDAO agenteMatriculaDAO = new MatriculaDAO<>();
 	
 	public Date get_fecha() {
 		return _fecha;
@@ -60,6 +63,14 @@ public class Matricula implements IdInterface{
 	@Override
 	public String getId() {
 		return String.valueOf(iD);
+	}
+	public void persist () {
+		try {
+			this.agenteMatriculaDAO.crearNuevaMatricula(this);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	

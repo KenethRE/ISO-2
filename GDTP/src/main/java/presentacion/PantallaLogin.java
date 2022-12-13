@@ -148,7 +148,7 @@ public class PantallaLogin extends JFrame {
 						
 						break;
 						case "Estudiante":
-							Matricula matricula = new Matricula(PantallaLogin.this);
+							Matriculacion matricula = new Matriculacion(PantallaLogin.this);
 							matricula.setVisible(true);
 							
 						break;

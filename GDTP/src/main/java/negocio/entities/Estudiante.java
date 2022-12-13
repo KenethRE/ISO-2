@@ -1,7 +1,9 @@
 package negocio.entities;
 
+import java.sql.SQLException;
 import java.util.Vector;
 import negocio.entities.Matricula;
+import persistencia.EstudianteDAO;
 
 public class Estudiante {
 	private String _dni;
@@ -12,7 +14,7 @@ public class Estudiante {
 	
 	//Un estudiante tiene muchas matr�culas
 	public Vector<Matricula> _matriculas = new Vector<Matricula>();//revisar los de vectores
-	
+	private EstudianteDAO<Estudiante> agenteEstudianteDAO = new EstudianteDAO<>();
 
 	public String get_dni() {
 		return _dni;
@@ -54,6 +56,12 @@ public class Estudiante {
 		this._cualificacion = _cualificacion;
 	}
 	
-	
-	
+	public void persist () {
+		try {
+			this.agenteEstudianteDAO.crearNuevoEstudiante(this);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

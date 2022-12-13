@@ -40,7 +40,7 @@ public class Busquedacurso extends JFrame{
 	Date fechaComienzo;
 	Date fechaFin;
 	private DefaultListModel modelo;
-	private Matricula ventanMatricula;
+	private Matriculacion ventanMatricula;
 	DefaultListModel modelocursos = new DefaultListModel();
 
 	private JFrame frame;
@@ -56,7 +56,7 @@ public class Busquedacurso extends JFrame{
 					previousWindow.setVisible(true);
 				}
 			});
-			this.ventanMatricula= (Matricula) previousWindow;
+			this.ventanMatricula= (Matriculacion) previousWindow;
 		}
 		setBounds(100, 100, 647, 414);
 		contentPane = new JPanel();
