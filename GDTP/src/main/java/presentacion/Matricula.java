@@ -10,6 +10,8 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
+import negocio.entities.CursoPropio;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -30,6 +32,7 @@ import javax.swing.JList;
 
 public class Matricula extends JFrame {
 	JFrame previousWindow;
+	JFrame estaventana;
 	private static final long serialVersionUID = -7592567473508560622L;
 	private JPanel contentPane;
 	private JTextField txtDni;
@@ -38,7 +41,13 @@ public class Matricula extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField;
+	private String idcursoPropioelegido;
+	private String nombrecursopropioelegido;
+	private CursoPropio cursoPropio = new CursoPropio();
 	public Matricula(JFrame previousWindow){
+		estaventana= this;
+		cursoPropio.set_id("");
+		cursoPropio.set_nombre("");
 		this.previousWindow = previousWindow;
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 670, 548);
@@ -98,6 +107,7 @@ public class Matricula extends JFrame {
 		btnNewButton.setEnabled(false);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				RealizarPago pago = new RealizarPago(previousWindow);
 				pago.setVisible(true);
 			}
@@ -163,7 +173,7 @@ public class Matricula extends JFrame {
 		JButton btnNewButton_3 = new JButton("Buscar Curso");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Busquedacurso busqueda = new Busquedacurso(previousWindow);
+				Busquedacurso busqueda = new Busquedacurso(estaventana);
 				busqueda.setVisible(true);
 			}
 		});
@@ -180,6 +190,11 @@ public class Matricula extends JFrame {
 		JLabel lblNewLabel_3 = new JLabel("Curso seleccionado");
 		lblNewLabel_3.setBounds(412, 335, 114, 14);
 		contentPane.add(lblNewLabel_3);
+		textField.setText(cursoPropio.get_nombre());
+	}
+	public void setcursopropio(CursoPropio curso) {
+		cursoPropio=curso;
+		textField.setText(cursoPropio.get_nombre());
 	}
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

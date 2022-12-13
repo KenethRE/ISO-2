@@ -145,6 +145,10 @@ public class CursoPropio implements IdInterface{
 	public String getId() {
 		return _id;
 	}
-	
+	public String toString() {
+		return _nombre;
+		
+		
+	}
 	
 }
