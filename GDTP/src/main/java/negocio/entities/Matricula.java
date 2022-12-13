@@ -3,6 +3,7 @@ package negocio.entities;
 import java.sql.SQLException;
 import java.util.Date;
 
+import negocio.controllers.GestorMatriculacion;
 import persistencia.MatriculaDAO;
 
 public class Matricula implements IdInterface{
@@ -22,7 +23,7 @@ public class Matricula implements IdInterface{
 	public String id_estudiante;
 	public String id_Curso;
 	public ModoPago _tipoPago;
-	private MatriculaDAO agenteMatriculaDAO = new MatriculaDAO<>();
+	private GestorMatriculacion agentematricula = new GestorMatriculacion();
 	
 	public Date get_fecha() {
 		return _fecha;
@@ -66,7 +67,7 @@ public class Matricula implements IdInterface{
 	}
 	public void persist () {
 		try {
-			this.agenteMatriculaDAO.crearNuevaMatricula(this);
+			this.agentematricula.realizarMatriculacion(this);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
