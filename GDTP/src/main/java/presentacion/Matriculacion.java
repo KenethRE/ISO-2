@@ -322,6 +322,7 @@ public class Matriculacion extends JFrame {
 				matricula.setiD(idmatricula);
 				matricula.set_fecha(fechamatriculacionDate);
 				matricula.setId_estudiante(estudiante.get_dni());
+				matricula.setId_Curso(cursoPropio.get_id());
 				if (tarjeta==false) {
 					matricula.set_tipoPago(tipoPago.TRANSFERENCIA);
 					
@@ -331,6 +332,9 @@ public class Matriculacion extends JFrame {
 				}
 				estudiante.persist();
 				matricula.persist();
+				JOptionPane.showMessageDialog(null, "Se ha creado la matricula con identificador: " + matricula.getiD(), "EXITO",
+				JOptionPane.INFORMATION_MESSAGE);
+				dispose();
 				
 			}
 		});

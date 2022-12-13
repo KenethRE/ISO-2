@@ -83,10 +83,11 @@ public class AbstractEntityDAO<E>{
 		case "ProfesorExterno":
 			result = agente.insert("INSERT INTO " + className + " VALUES('" + ((ProfesorExterno) E).get_dni() + "','" + ((ProfesorExterno) E).get_titulacion() + "')");
 			break;
-		
+			//INSERT INTO Matricula VALUES('2022-12-13',true,'jdsljhflkj','mic0','TRANSFERENCIA')
 		case "Matricula":
-			result = agente.insert("INSERT INTO " + className + " VALUES("+ ((Matricula) E).getiD() + ",'" + ((Matricula) E).get_fecha() + "'," + ((Matricula) E).is_pagado() + ",'"
-					+ ((Matricula) E).getId_estudiante() + "','" + ((Matricula) E).getId_Curso() + "')");
+			String senteciamatricula= "INSERT INTO " + className + " VALUES('" + ((Matricula) E).get_fecha() +  "'," + ((Matricula) E).is_pagado() + ",'"
+					+ ((Matricula) E).getId_estudiante() + "','"  + ((Matricula) E).getId_Curso() + "','"+((Matricula) E).get_tipoPago().toString()+"')";
+			result = agente.insert(senteciamatricula);
 			break;
 		case "Materia":
 			String sentencia= "INSERT INTO " + className + " VALUES('" + ((Materia) E).get_nombre()+ "',"+((Materia) E).get_horas() + ",'"+ ((Materia) E).get_fechaInicio() + "','" + ((Materia) E).get_fechaFin() +
