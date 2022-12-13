@@ -41,8 +41,6 @@ public class Matricula extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField;
-	private String idcursoPropioelegido;
-	private String nombrecursopropioelegido;
 	private CursoPropio cursoPropio = new CursoPropio();
 	public Matricula(JFrame previousWindow){
 		estaventana= this;
