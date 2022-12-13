@@ -49,8 +49,6 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 	public int editarCurso(CursoPropio aCurso) {
 		// El iD curso es el curso que queremos editar, el nombre de la clase "CursoPropio" es la tabla que queremos
 		try{
-			seleccionarCurso(aCurso);
-			//primero busca que el curso exista si no salta la excepcion lo modifica
 			update (aCurso);
 			return 0;
 			
@@ -61,10 +59,41 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 		return 0;
 		
 	}
+	
+	public List<CursoPropio> listarCursosPorEstado(EstadoCurso aEstado) {
+		List<CursoPropio> Cursos = new ArrayList<CursoPropio>();
+
+		ResultSet aux = get("CursoPropio", aEstado);
+		try {
+			while (aux.next()) {
+				CursoPropio curso = new CursoPropio();
+				curso.set_id(aux.getString("ID"));
+				curso.set_nombre(aux.getString("NOMBRE"));
+				curso.set_eCTS(aux.getInt("ECTS"));
+				curso.set_fechaInicio(aux.getDate("FECHAINICIO"));
+				curso.set_fechaFin(aux.getDate("FECHAFIN"));
+				curso.set_tasaMatricula(aux.getInt("TASAMATRICULA"));
+				curso.set_edicion(aux.getInt("EDICION"));
+				curso.setId_centro(aux.getInt("IDCENTRO"));
+				curso.setId_director(aux.getString("DIRECTOR"));
+				curso.setId_secretario(aux.getString("SECRETARIO"));
+				curso.set_tipo(TipoCurso.valueOf(aux.getString("TIPOCURSO")));
+				curso.set_estado(EstadoCurso.valueOf(aux.getString("ESTADOCURSO")));
+				Cursos.add(curso);
+			}
+			
+			return Cursos;
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Curso no encontrado");
+		}
+		
+		return Cursos;
+	}
 
 	public List<CursoPropio> listarCursosPorEstado(EstadoCurso aEstado, Date aFechaInicio, Date aFechaFin) {
 		List<CursoPropio> Cursos = new ArrayList<CursoPropio>();
-		
 		
 		ResultSet aux = get("CursoPropio", aEstado, aFechaInicio, aFechaFin);
 		try {
@@ -94,29 +123,6 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 		
 		return Cursos;
 	}
-	/*
-	public double listarIngresos(TipoCurso aTipo, Date aFechaInicio, Date aFechaFin) {
-		int num=0;
-		double total =0;
-		String id;
-		
-		ResultSet aux = get(aTipo, aFechaInicio, aFechaFin);
-		try {
-			if (aux.next()) {
-				num = aux.getInt(0);
-				total += aux.getDouble(1);
-				id = aux.getString(2);
-			}
-		
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("Ingresos no encontrados");
-		}
-		
-		
-		return total;
-	}
-	*/
 	
 	public List<List<String>> listarIngresos(TipoCurso aTipo, Date aFechaInicio, Date aFechaFin) {
 		List<List<String>> Datos = new ArrayList<>();

@@ -30,6 +30,16 @@ public class AbstractEntityDAO<E>{
 	}
 	
 	//get para estadoCurso
+	public ResultSet get(String Table, EstadoCurso estadoCurso) {
+		ResultSet result = null;
+		
+		if (Table.equals("CursoPropio")) {
+			result = agente.select("SELECT * FROM " + Table + " WHERE estadocurso = '"+estadoCurso+"'");
+		}
+
+		return result;
+	}
+	
 	public ResultSet get(String Table, EstadoCurso estadoCurso, Date aFechaInicio, Date aFechaFin) {
 		ResultSet result = null;
 		
@@ -116,6 +126,7 @@ public class AbstractEntityDAO<E>{
 					+ ((CursoPropio) E).get_tasaMatricula() + ", EDICION="  + ((CursoPropio) E).get_edicion() + ", IDCENTRO="  + ((CursoPropio) E).getId_centro() + ", SECRETARIO='"
 					+ ((CursoPropio) E).getId_secretario() + "', DIRECTOR='"  + ((CursoPropio) E).getId_director() + "', TIPOCURSO='" + ((CursoPropio) E).get_tipo() 
 					+ "', ESTADOCURSO='" + ((CursoPropio) E).get_estado() + "' WHERE ID = '" + ((CursoPropio) E).get_id() +"'");
+					
 			break;
 		case "Profesor":
 			result = agente.update("UPDATE " + className + " SET DNI='" + ((Profesor) E).get_dni() + "', NOMBRE='" + ((Profesor) E).get_nombre() + "', APELLIDOS='"

@@ -193,12 +193,12 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 							int contador=0;
 							
 							//Colocando el Jpanlel
-							for(List<String> aux : data) {
+							for(List<String> ingreso : data) {
 								Object[] col = new Object[3];
-								aux=data.get(contador);
-								col[0]=aux.get(0);
-								col[1]=aux.get(1);
-								col[2]=aux.get(2);
+								ingreso=data.get(contador);
+								col[0]=ingreso.get(0);
+								col[1]=ingreso.get(1);
+								col[2]=ingreso.get(2);
 								
 								model.addRow(col);
 								contador++;
@@ -385,16 +385,16 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 							int contador=0;
 							
 							//Jpanlel
-							for(CursoPropio aux : data) {
+							for(CursoPropio curso : data) {
 								Object[] col = new Object[7];
-								aux=data.get(contador);
-								col[0]=aux.get_id();
-								col[1]=aux.get_nombre();
-								col[2]=aux.get_eCTS();
-								col[3]=aux.get_fechaInicio();
-								col[4]=aux.get_fechaFin();
-								col[5]=aux.get_tasaMatricula();
-								col[6]=aux.get_edicion();
+								curso=data.get(contador);
+								col[0]=curso.get_id();
+								col[1]=curso.get_nombre();
+								col[2]=curso.get_eCTS();
+								col[3]=curso.get_fechaInicio();
+								col[4]=curso.get_fechaFin();
+								col[5]=curso.get_tasaMatricula();
+								col[6]=curso.get_edicion();
 							
 								model2.addRow(col);
 								contador++;
@@ -532,16 +532,16 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 							int contador=0;
 							
 							//Jpanlel
-							for(CursoPropio aux : data) {
+							for(CursoPropio curso : data) {
 								Object[] col = new Object[7];
-								aux=data.get(contador);
-								col[0]=aux.get_id();
-								col[1]=aux.get_nombre();
-								col[2]=aux.get_eCTS();
-								col[3]=aux.get_fechaInicio();
-								col[4]=aux.get_fechaFin();
-								col[5]=aux.get_tasaMatricula();
-								col[6]=aux.get_edicion();
+								curso=data.get(contador);
+								col[0]=curso.get_id();
+								col[1]=curso.get_nombre();
+								col[2]=curso.get_eCTS();
+								col[3]=curso.get_fechaInicio();
+								col[4]=curso.get_fechaFin();
+								col[5]=curso.get_tasaMatricula();
+								col[6]=curso.get_edicion();
 							
 								model3.addRow(col);
 								contador++;
@@ -572,7 +572,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 			btnListarEdiciones.setBounds(20, 99, 174, 23);
 			panel3.add(btnListarEdiciones);
 			
-			//Boton Reset panel3
+			//Boton Reset
 			
 			JButton btnVaciar3 = new JButton("Reset");
 			btnVaciar3.setSize(143, 23);
