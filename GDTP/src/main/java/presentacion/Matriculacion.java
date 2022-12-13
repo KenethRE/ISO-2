@@ -131,6 +131,7 @@ public class Matriculacion extends JFrame {
 		
 		JButton btnNewButton = new JButton("Realizar pago");
 		btnNewButton.setEnabled(false);
+		// activacion de la ventana realizar pago siempre y cuando haya elegido un curso  y una fecha de matriculacion.
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (textField.getText().isEmpty()==false && fecha.getModel().getValue()!=null) {
@@ -307,6 +308,8 @@ public class Matriculacion extends JFrame {
 		chckbxNewCheckBox.setEnabled(false);
 		chckbxNewCheckBox.setBounds(310, 445, 72, 23);
 		contentPane.add(chckbxNewCheckBox);
+		
+		//creacion de la matricula a partir del click al boton pagar matricula
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				fechamatriculacionDate = new java.sql.Date(((java.util.Date) fecha.getModel().getValue()).getTime());
@@ -366,10 +369,12 @@ public class Matriculacion extends JFrame {
 		contentPane.add(lblNewLabel_3);
 		textField.setText(cursoPropio.get_nombre());
 	}
+	// recoge el curso elegido de la pantalla elegir curso.
 	public void setcursopropio(CursoPropio curso) {
 		cursoPropio=curso;
 		textField.setText(cursoPropio.get_nombre());
 	}
+	//chequea los campos para saber si estan completados
 	public boolean chequearcampos() {
 		if (txtDni.getText().length()>1 && textField_1.getText().length()>1 && textField_2.getText().length()>1 && textField_3.getText().length()>1
 				&& textField_4.getText().length()>1) {
@@ -378,11 +383,13 @@ public class Matriculacion extends JFrame {
 		return camposrellenos;
 		
 	}
+	//recoge la activacion del pago desde la ventamna pago
 	public void activarcasillapago() {
 		chckbxNewCheckBox.setSelected(true);
 		btnNewButton_2.setEnabled(true);
 		
 	}
+	// si el pago ha sido con tarjeta en la venta pago se cambia aqui.
 	public void setpagotarjeta() {
 		tarjeta=true;
 		

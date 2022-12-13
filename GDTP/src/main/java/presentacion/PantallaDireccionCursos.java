@@ -62,6 +62,17 @@ public class PantallaDireccionCursos extends JFrame{
 	int contador = 0;
 	private DefaultListModel modelo;
 	DefaultListModel modelomaterias = new DefaultListModel();
+	private static final long serialVersionUID = 1L;
+	private JTextField textField_1;
+	private JTextField txtNombreCurso;
+	private JTextField txtECTS;
+	private JTextField txtTasaMatricula;
+	private JTextField txtEdicion;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JTextField textField_7;
+	private JTextField textField_8;
+	private JTextField textField_9;
 	
 	public PantallaDireccionCursos(JFrame previousWindow) {
 		this.previousWindow = previousWindow;
@@ -367,19 +378,9 @@ public class PantallaDireccionCursos extends JFrame{
 	}
 
 	
-	private static final long serialVersionUID = 1L;
-	private JTextField textField_1;
-	private JTextField txtNombreCurso;
-	private JTextField txtECTS;
-	private JTextField txtTasaMatricula;
-	private JTextField txtEdicion;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
 	
-
+	
+	// metodo para dar de alta el curso en la base de datos.
 	public void altaCurso(String idCurso, String nombreCurso, int ECTS, Date fechaInicio, Date fechaFin, double TasaMatricula, int Edicion, TipoCurso tipoCurso) {
 		CursoPropio curso = new CursoPropio();
 		curso.set_id(idCurso);
@@ -396,6 +397,7 @@ public class PantallaDireccionCursos extends JFrame{
 		curso.setId_centro(1);
 		curso.persist();
 	}
+	// metodo para guardar la materia creada en la base de datos
 	public void altamaterias(DefaultListModel modelo,String idcurso) {
 		for (int i=0; i < modelo.getSize(); i++) {
 			Materia aMateria = new Materia();
@@ -409,7 +411,7 @@ public class PantallaDireccionCursos extends JFrame{
 	public void edicionCurso() {
 		throw new UnsupportedOperationException();
 	}
-	
+	// carga de materias de la tabla materias.
 	public List<Materia> cargarMaterias() {
 		
 		MateriaDAO <Materia> MateriaDAO = new MateriaDAO <Materia>();
@@ -418,7 +420,7 @@ public class PantallaDireccionCursos extends JFrame{
 		return Materias;
 		
 	}
-	
+	//contro de que en cada campo este el tipo correcto.
 	public boolean controldeerroresguardarcurso() {
 		boolean control = true;
 		if (txtNombreCurso.getText().length() < 3) {
