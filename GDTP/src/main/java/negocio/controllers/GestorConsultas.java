@@ -12,23 +12,23 @@ import negocio.entities.EstadoCurso;
 public class GestorConsultas {
 
 	public List<List<String>> consultarIngresos(TipoCurso aTipo, Date aFechaInicio, Date aFechaFin) {
-		CursoPropioDAO<CursoPropio> CursoDao = new CursoPropioDAO<>();
+		CursoPropioDAO<CursoPropio> cursoDao = new CursoPropioDAO<>();
 		List<List<String>> ingresos = new ArrayList<>();	
-		ingresos=CursoDao.listarIngresos(aTipo,aFechaInicio,aFechaFin);
+		ingresos=cursoDao.listarIngresos(aTipo,aFechaInicio,aFechaFin);
 		return ingresos;
 	}
 
 	public List<CursoPropio> consultarEstadoCursos(EstadoCurso aEstadoCurso, Date aFechaInicio, Date aFechaFin) {
-		CursoPropioDAO<CursoPropio> CursoDao = new CursoPropioDAO<>();
+		CursoPropioDAO<CursoPropio> cursoDao = new CursoPropioDAO<>();
 		List<CursoPropio> listaCursos = new ArrayList<>();	
-		listaCursos=CursoDao.listarCursosPorEstado(aEstadoCurso,aFechaInicio,aFechaFin);
+		listaCursos=cursoDao.listarCursosPorEstado(aEstadoCurso,aFechaInicio,aFechaFin);
 		return listaCursos;
 	}
 
 	public List<CursoPropio> listarEdicionesCursos(Date aFechaInicio, Date aFechaFin) {
-		CursoPropioDAO<CursoPropio> CursoDao = new CursoPropioDAO<>();
+		CursoPropioDAO<CursoPropio> cursoDao = new CursoPropioDAO<>();
 		List<CursoPropio> listaEdiciones= new ArrayList<>();	
-		listaEdiciones=CursoDao.listarEdicionesCursos(aFechaInicio,aFechaFin);
+		listaEdiciones=cursoDao.listarEdicionesCursos(aFechaInicio,aFechaFin);
 		return listaEdiciones;
 	}
 }

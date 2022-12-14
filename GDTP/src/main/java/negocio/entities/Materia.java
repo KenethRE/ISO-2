@@ -5,38 +5,38 @@ import java.util.Date;
 import persistencia.MateriaDAO;
 
 public class Materia implements IdInterface{
-	private String _nombre;
-	private double _horas;
-	private Date _fechaInicio;
-	private Date _fechaFin;
+	private String nombre;
+	private double horas;
+	private Date fechaInicio;
+	private Date fechaFin;
 	public String id_Curso;
 	public String id_prof_responsable;
-	public MateriaDAO<Materia> _MateriaDAO = new MateriaDAO<Materia>();
+	public MateriaDAO<Materia> MateriaDAO = new MateriaDAO<Materia>();
 	
 	
 	public String get_nombre() {
-		return _nombre;
+		return nombre;
 	}
 	public void set_nombre(String _nombre) {
-		this._nombre = _nombre;
+		this.nombre = _nombre;
 	}
 	public double get_horas() {
-		return _horas;
+		return horas;
 	}
 	public void set_horas(double _horas) {
-		this._horas = _horas;
+		this.horas = horas;
 	}
 	public Date get_fechaInicio() {
-		return _fechaInicio;
+		return fechaInicio;
 	}
 	public void set_fechaInicio(Date _fechaInicio) {
-		this._fechaInicio = _fechaInicio;
+		this.fechaInicio = fechaInicio;
 	}
 	public Date get_fechaFin() {
-		return _fechaFin;
+		return fechaFin;
 	}
 	public void set_fechaFin(Date _fechaFin) {
-		this._fechaFin = _fechaFin;
+		this.fechaFin = fechaFin;
 	}
 	public String getId_Curso() {
 		return id_Curso;
@@ -55,12 +55,12 @@ public class Materia implements IdInterface{
 		return id_Curso;
 	}
 	public String toString() {
-		return _nombre;
+		return nombre;
 		
 		
 	}
 	public void persist () {
-		this._MateriaDAO.crearNuevaMateria(this);
+		this.MateriaDAO.crearNuevaMateria(this);
 
 	}
 	

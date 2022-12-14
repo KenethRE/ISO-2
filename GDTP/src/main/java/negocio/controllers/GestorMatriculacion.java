@@ -2,14 +2,12 @@ package negocio.controllers;
 
 import java.sql.SQLException;
 
-import negocio.entities.CursoPropio;
-import negocio.entities.Estudiante;
 import negocio.entities.Matricula;
 import persistencia.MatriculaDAO;
 
 public class GestorMatriculacion {
 
-	public void realizarMatriculacion(Matricula matricula) throws SQLException {
+	public void realizarMatriculacion(Matricula matricula) {
 		MatriculaDAO<Matricula> agenteMatriculaDAO = new MatriculaDAO<>();
 		agenteMatriculaDAO.crearNuevaMatricula(matricula);
 	}

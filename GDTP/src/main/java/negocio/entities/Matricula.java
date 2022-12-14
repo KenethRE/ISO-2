@@ -1,6 +1,5 @@
 package negocio.entities;
 
-import java.sql.SQLException;
 import java.util.Date;
 
 import negocio.controllers.GestorMatriculacion;
@@ -65,12 +64,8 @@ public class Matricula implements IdInterface{
 		return String.valueOf(iD);
 	}
 	public void persist () {
-		try {
-			this.agentematricula.realizarMatriculacion(this);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.agentematricula.realizarMatriculacion(this);
+
 	}
 	
 	
