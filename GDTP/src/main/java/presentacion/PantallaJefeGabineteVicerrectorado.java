@@ -181,7 +181,6 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 						// Colocando el Jpanlel
 						for (List<String> ingreso : data) {
 							Object[] col = new Object[3];
-							ingreso = data.get(contador);
 							col[0] = ingreso.get(0);
 							col[1] = ingreso.get(1);
 							col[2] = ingreso.get(2);
@@ -360,7 +359,6 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 						// Jpanlel
 						for (CursoPropio curso : data) {
 							Object[] col = new Object[7];
-							curso = data.get(contador);
 							col[0] = curso.get_id();
 							col[1] = curso.get_nombre();
 							col[2] = curso.get_eCTS();
@@ -492,7 +490,6 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 						// Jpanlel
 						for (CursoPropio curso : data) {
 							Object[] col = new Object[7];
-							curso = data.get(contador);
 							col[0] = curso.get_id();
 							col[1] = curso.get_nombre();
 							col[2] = curso.get_eCTS();

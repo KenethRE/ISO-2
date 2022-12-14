@@ -167,7 +167,6 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 				int contador = 0;
 				for (CursoPropio curso : data) {
 					Object[] col = new Object[7];
-					curso = data.get(contador);
 					col[0] = curso.get_id();
 					col[1] = curso.get_nombre();
 					col[2] = curso.get_eCTS();
