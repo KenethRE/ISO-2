@@ -55,7 +55,7 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 		int resultado = 0;
 		try{
 			resultado = update (aCurso);
-			return 0;
+			return resultado;
 			
 		} catch (NullPointerException e) {
 			e.printStackTrace();

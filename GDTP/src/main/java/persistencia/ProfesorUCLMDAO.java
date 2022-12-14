@@ -46,7 +46,7 @@ public class ProfesorUCLMDAO<E> extends AbstractEntityDAO<E> {
 			seleccionarProfesor(aProfesor);
 			//primero busca que el profesor exista si no salta la excepcion lo modifica
 			resultado = update (aProfesor);
-			return 0;
+			return resultado;
 			
 		} catch (NullPointerException e) {
 			e.printStackTrace();

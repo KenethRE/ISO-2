@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import negocio.entities.Estudiante;
 
 public class EstudianteDAO <E> extends AbstractEntityDAO<E> {
+	private final String loggerName = "GDTP_Logger";
 	public int crearNuevoEstudiante(Estudiante aEstudiante) {
 		 
 		return insert (aEstudiante);
@@ -31,7 +32,7 @@ public class EstudianteDAO <E> extends AbstractEntityDAO<E> {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Estudiante no encontrado");
+			Logger.getLogger(loggerName).log(Level.SEVERE,"Estudiante no encontrado");
 			resultado = 1;
 		}
 		
@@ -50,7 +51,7 @@ public class EstudianteDAO <E> extends AbstractEntityDAO<E> {
 					
 				} catch (NullPointerException e) {
 					e.printStackTrace();
-					Logger.getLogger("GDTP_Logger").log(Level.SEVERE, "Estudiante no encontrado");
+					Logger.getLogger(loggerName).log(Level.SEVERE, "Estudiante no encontrado");
 				}
 				
 				return 0;
@@ -70,7 +71,7 @@ public class EstudianteDAO <E> extends AbstractEntityDAO<E> {
 			}
 		} catch (SQLException e) {
 				e.printStackTrace();
-				Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Error al acceder a la tabla Estudiante");
+				Logger.getLogger(loggerName).log(Level.SEVERE,"Error al acceder a la tabla Estudiante");
 			}
 
 		return Estudiantes; 
