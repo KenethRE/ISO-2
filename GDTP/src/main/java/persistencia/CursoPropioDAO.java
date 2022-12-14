@@ -52,15 +52,17 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 
 	public int editarCurso(CursoPropio aCurso) {
 		// El iD curso es el curso que queremos editar, el nombre de la clase "CursoPropio" es la tabla que queremos
+		int resultado = 0;
 		try{
-			update (aCurso);
+			resultado = update (aCurso);
 			return 0;
 			
 		} catch (NullPointerException e) {
 			e.printStackTrace();
+			Logger.getLogger("GDTP_Logger").log(Level.SEVERE, "Curso no encontrado");
 		}
 		
-		return 0;
+		return resultado;
 		
 	}
 	
@@ -90,7 +92,7 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Curso no encontrado");
+			Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Curso no encontrado");
 		}
 		
 		return Cursos;

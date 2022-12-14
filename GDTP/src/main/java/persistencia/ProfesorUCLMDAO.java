@@ -18,6 +18,7 @@ public class ProfesorUCLMDAO<E> extends AbstractEntityDAO<E> {
 	public int seleccionarProfesor(ProfesorUCLM aProfesor) {
 		// El iD curso es el curso que queremos seleccionar, el nombre de la clase "Profesor" es la tabla que queremos
 		// buscar y la cadena del final representa la clave que usamos para hacer la seleccion.
+		int resultado = 0;
 		ResultSet aux = get(aProfesor);
 		try {
 			while (aux.next()) {
@@ -29,20 +30,22 @@ public class ProfesorUCLMDAO<E> extends AbstractEntityDAO<E> {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			resultado = 1;
 			Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"ProfesorUCLM no encontrado");
 		}
 		
 			
-		return 0;
+		return resultado;
 		
 	}
 
 	public int editarProfesor(ProfesorUCLM aProfesor) {
 		// El dni Profesor es el profesor que queremos editar, el nombre de la clase "Profesor" es la tabla que queremos
+		int resultado = 0;
 		try{
 			seleccionarProfesor(aProfesor);
 			//primero busca que el profesor exista si no salta la excepcion lo modifica
-			update (aProfesor);
+			resultado = update (aProfesor);
 			return 0;
 			
 		} catch (NullPointerException e) {
@@ -50,7 +53,7 @@ public class ProfesorUCLMDAO<E> extends AbstractEntityDAO<E> {
 			Logger.getLogger("GDTP_Logger").log(Level.SEVERE, "Profesor UCLM no encontrado");
 		}
 		
-		return 0;
+		return resultado;
 	}
 
 	public List<ProfesorUCLM> listarProfesores() {

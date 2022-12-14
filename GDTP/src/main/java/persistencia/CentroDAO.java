@@ -38,17 +38,18 @@ public class CentroDAO<E> extends AbstractEntityDAO<E> {
 
 	public int editarCentro(Centro aCentro) {
 		// El id Centro es el Centro que queremos editar, el nombre de la clase "Centro" es la tabla que queremos
+		int resultado = 0;
 		try{
 			seleccionarCentro(aCentro);
 			//primero busca que el centro exista si no salta la excepcion lo modifica
-			update (aCentro);
-			return 0;
+			resultado = update (aCentro);
+			return resultado;
 			
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 		}
 		
-		return 0;
+		return resultado;
 	}
 
 	public List<Centro> listarCentro() {

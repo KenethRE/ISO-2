@@ -18,6 +18,7 @@ public class MateriaDAO<E> extends AbstractEntityDAO<E> {
 	public int seleccionarMateria(Materia aMateria) {
 		// El nombre es la materia que queremos seleccionar, el nombre de la clase "Materia" es la tabla que queremos
 		// buscar y la cadena del final representa la clave que usamos para hacer la seleccion.
+		int resultado = 0;
 		ResultSet aux = get(aMateria);
 		try {
 			while (aux.next()) {
@@ -30,28 +31,30 @@ public class MateriaDAO<E> extends AbstractEntityDAO<E> {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			resultado = 1;
 			Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Materia no encontrada");
 		}
 		
 			
-		return 0;
+		return resultado;
 		
 	}
 
-	public int  editarMateria(Materia aMateria) {
+	public int editarMateria(Materia aMateria) {
 		// El nombre de la materia es la materia que queremos editar, el nombre de la clase "Materia" es la tabla que queremos
-				try{
+				int resultado = 0;
+				try {
 					seleccionarMateria(aMateria);
 					//primero busca que la materia exista si no salta la excepcion lo modifica
-					update (aMateria);
-					return 0;
+					resultado = update (aMateria);
+					return resultado;
 					
 				} catch (NullPointerException e) {
 					e.printStackTrace();
 					Logger.getLogger("GDTP_Logger").log(Level.SEVERE, "Materia no encontrada");
 				}
 				
-				return 0;
+				return resultado;
 	}
 
 	public List<Materia> listarMaterias() {

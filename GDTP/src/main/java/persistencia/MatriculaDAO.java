@@ -44,18 +44,19 @@ public class MatriculaDAO <E> extends AbstractEntityDAO<E> {
 	public int editarMatricula(Matricula aMatricula) {
 		
 		// El iD matricula es la matricula que queremos editar, el nombre de la clase "Matricula" es la tabla que queremos
+		int resultado = 0;
 		try{
 			seleccionarMatricula(aMatricula);
 			//primero busca que la matricula exista si no salta la excepcion lo modifica
-			update (aMatricula);
-			return 0;
+			resultado = update (aMatricula);
+			return resultado;
 			
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 			Logger.getLogger("GDTP_Logger").log(Level.SEVERE, "Matricula no encontrada.");
 		}
 		
-		return 0;
+		return resultado;
 	}
 
 	public List<Matricula> listarMatricula() {

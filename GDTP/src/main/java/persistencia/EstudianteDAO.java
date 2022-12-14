@@ -18,6 +18,7 @@ public class EstudianteDAO <E> extends AbstractEntityDAO<E> {
 	public int seleccionarEstudiante(Estudiante aEstudiante) {
 		// El dni es el Estudiante que queremos seleccionar, el nombre de la clase "Estudiante" es la tabla que queremos
 		// buscar y la cadena del final representa la clave que usamos para hacer la seleccion.
+		int resultado = 0;
 		ResultSet aux = get(aEstudiante);
 		try {
 			while (aux.next()) {
@@ -27,13 +28,15 @@ public class EstudianteDAO <E> extends AbstractEntityDAO<E> {
 				aEstudiante.set_titulacion(aux.getString("Titulacion"));
 				aEstudiante.set_cualificacion(aux.getNString("Cualificacion"));
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Estudiante no encontrado");
+			resultado = 1;
 		}
 		
 			
-		return 0;
+		return resultado;
 		
 	}
 
@@ -47,6 +50,7 @@ public class EstudianteDAO <E> extends AbstractEntityDAO<E> {
 					
 				} catch (NullPointerException e) {
 					e.printStackTrace();
+					Logger.getLogger("GDTP_Logger").log(Level.SEVERE, "Estudiante no encontrado");
 				}
 				
 				return 0;

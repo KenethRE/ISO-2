@@ -90,10 +90,10 @@ public class AbstractEntityDAO<E>{
 		case "Profesor":
 			result = agente.insert("INSERT INTO " + className + " VALUES('" + ((Profesor) E).get_dni() + "','" + ((Profesor) E).get_nombre() + "','"
 					 + ((Profesor) E).get_apellidos() + "'," + ((Profesor) E).is_doctor()+ "," + ((Profesor) E).get_centro() + ")");
+			break;
 		case "ProfesorExterno":
 			result = agente.insert("INSERT INTO " + className + " VALUES('" + ((ProfesorExterno) E).get_dni() + "','" + ((ProfesorExterno) E).get_titulacion() + "')");
 			break;
-			//INSERT INTO Matricula VALUES('2022-12-13',true,'jdsljhflkj','mic0','TRANSFERENCIA')
 		case "Matricula":
 			String senteciamatricula= "INSERT INTO " + className + " VALUES('" + ((Matricula) E).get_fecha() +  "'," + ((Matricula) E).is_pagado() + ",'"
 					+ ((Matricula) E).getId_estudiante() + "','"  + ((Matricula) E).getId_Curso() + "','"+((Matricula) E).get_tipoPago().toString()+"')";
@@ -131,6 +131,7 @@ public class AbstractEntityDAO<E>{
 		case "Profesor":
 			result = agente.update("UPDATE " + className + " SET DNI='" + ((Profesor) E).get_dni() + "', NOMBRE='" + ((Profesor) E).get_nombre() + "', APELLIDOS='"
 					 + ((Profesor) E).get_apellidos() + "', DOCTOR=" + ((Profesor) E).is_doctor()+ ", CENTRO=" + ((Profesor) E).get_centro() + ")" + " WHERE DNI = '" + ((Profesor) E).get_dni() +"'");
+			break;
 		case "ProfesorExterno":
 			result = agente.update("UPDATE " + className + "SET DNI='" + ((ProfesorExterno) E).get_dni() + "', TITULACION='" + ((ProfesorExterno) E).get_titulacion() + "'"+ " WHERE DNI = '" + ((ProfesorExterno) E).get_dni() +"'");
 			break;
@@ -138,6 +139,7 @@ public class AbstractEntityDAO<E>{
 		case "Matricula":
 			result = agente.update("UPDATE " + className + "SET FECHA='" + ((Matricula) E).get_fecha() + "', PAGADO=" + ((Matricula) E).is_pagado() + ", DNIESTUDIANTE='"
 					+ ((Matricula) E).getId_estudiante() + "', IDCURSO='" + ((Matricula) E).getId_Curso() + "', MODOPAGO='" + ((Matricula) E).get_tipoPago()+ "' WHERE ID = '" + ((Matricula) E).getiD() + "'");
+			break;
 		case "Materia":
 			result = agente.update("UPDATE " + className + "SET NOMBRE='" + ((Materia) E).get_nombre()+ "', HORAS=" + ((Materia) E).get_horas() + ", FECHAINICIO='"
 					+ ((Materia) E).get_fechaInicio() + "', FECHAFIN='" + ((Materia) E).get_fechaFin() + "', IDCURSO='" + ((Materia) E).getId_Curso() + "', DNIPROFESOR='" + ((Materia) E).getId_prof_responsable()+ "' WHERE NOMBRE = '" 
