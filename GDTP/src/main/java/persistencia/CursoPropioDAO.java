@@ -3,6 +3,8 @@ package persistencia;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import negocio.entities.CursoPropio;
 import negocio.entities.EstadoCurso;
@@ -11,7 +13,9 @@ import negocio.entities.TipoCurso;
 
 public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 
-	public int crearNuevoCurso(CursoPropio aCurso) throws SQLException {
+	private static final String name = "CursoPropio";
+	
+	public int crearNuevoCurso(CursoPropio aCurso) {
 		int aux= 0;
 		aux = insert (aCurso);
 		
@@ -39,7 +43,7 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Curso no encontrado");
+			Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Curso no encontrado");
 		}
 		
 		return 0;
@@ -61,9 +65,9 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 	}
 	
 	public List<CursoPropio> listarCursosPorEstado(EstadoCurso aEstado) {
-		List<CursoPropio> Cursos = new ArrayList<CursoPropio>();
+		List<CursoPropio> Cursos = new ArrayList<>();
 
-		ResultSet aux = get("CursoPropio", aEstado);
+		ResultSet aux = get(name, aEstado);
 		try {
 			while (aux.next()) {
 				CursoPropio curso = new CursoPropio();
@@ -93,9 +97,9 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 	}
 
 	public List<CursoPropio> listarCursosPorEstado(EstadoCurso aEstado, Date aFechaInicio, Date aFechaFin) {
-		List<CursoPropio> Cursos = new ArrayList<CursoPropio>();
+		List<CursoPropio> Cursos = new ArrayList<>();
 		
-		ResultSet aux = get("CursoPropio", aEstado, aFechaInicio, aFechaFin);
+		ResultSet aux = get(name, aEstado, aFechaInicio, aFechaFin);
 		try {
 			while (aux.next()) {
 				CursoPropio curso = new CursoPropio();
@@ -118,7 +122,7 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Curso no encontrado");
+			Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Curso no encontrado");
 		}
 		
 		return Cursos;
@@ -138,6 +142,7 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
+			Logger.getLogger("GDTP_Logger").log(Level.SEVERE, "Informacion de ingresos no encontrada.");
 		}
 		
 		
@@ -147,9 +152,9 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 	
 
 	public List<CursoPropio> listarEdicionesCursos(Date aFechaInicio, Date aFechaFin) {
-		List<CursoPropio> Cursos = new ArrayList<CursoPropio>();
+		List<CursoPropio> Cursos = new ArrayList<>();
 		
-		ResultSet aux = get_edicion("CursoPropio", aFechaInicio, aFechaFin);
+		ResultSet aux = get_edicion(name, aFechaInicio, aFechaFin);
 		try {
 			while (aux.next()) {
 				CursoPropio curso = new CursoPropio();
@@ -172,7 +177,7 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 					
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Curso no encontrado");
+			Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Curso no encontrado");
 		}
 		
 		return Cursos;

@@ -4,11 +4,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import negocio.entities.Estudiante;
 
 public class EstudianteDAO <E> extends AbstractEntityDAO<E> {
-	public int crearNuevoEstudiante(Estudiante aEstudiante) throws SQLException {
+	public int crearNuevoEstudiante(Estudiante aEstudiante) {
 		 
 		return insert (aEstudiante);
 	}
@@ -27,7 +29,7 @@ public class EstudianteDAO <E> extends AbstractEntityDAO<E> {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Estudiante no encontrado");
+			Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Estudiante no encontrado");
 		}
 		
 			
@@ -51,7 +53,7 @@ public class EstudianteDAO <E> extends AbstractEntityDAO<E> {
 	}
 
 	public List<Estudiante> listarEstudiantes() {
-		List<Estudiante> Estudiantes = new ArrayList<Estudiante>();
+		List<Estudiante> Estudiantes = new ArrayList<>();
 		ResultSet aux = get("Profesor");
 		try {
 			while (aux.next()) {
@@ -64,7 +66,7 @@ public class EstudianteDAO <E> extends AbstractEntityDAO<E> {
 			}
 		} catch (SQLException e) {
 				e.printStackTrace();
-				System.out.println("Error al acceder a la tabla Estudiante");
+				Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Error al acceder a la tabla Estudiante");
 			}
 
 		return Estudiantes; 

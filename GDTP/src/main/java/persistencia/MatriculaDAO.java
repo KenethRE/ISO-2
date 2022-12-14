@@ -4,12 +4,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import negocio.entities.Matricula;
 import negocio.entities.ModoPago;
 
 public class MatriculaDAO <E> extends AbstractEntityDAO<E> {
-	public int crearNuevaMatricula(Matricula aMatricula) throws SQLException {
+	public int crearNuevaMatricula(Matricula aMatricula) {
 		return insert (aMatricula);
 	}
 
@@ -31,7 +33,7 @@ public class MatriculaDAO <E> extends AbstractEntityDAO<E> {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Matricula no encontrado");
+			Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Matricula no encontrado");
 		}
 		
 			
@@ -50,13 +52,14 @@ public class MatriculaDAO <E> extends AbstractEntityDAO<E> {
 			
 		} catch (NullPointerException e) {
 			e.printStackTrace();
+			Logger.getLogger("GDTP_Logger").log(Level.SEVERE, "Matricula no encontrada.");
 		}
 		
 		return 0;
 	}
 
 	public List<Matricula> listarMatricula() {
-		List<Matricula> Matriculas = new ArrayList<Matricula>();
+		List<Matricula> Matriculas = new ArrayList<>();
 		ResultSet aux = get("Profesor");
 		try {
 			while (aux.next()) {
@@ -70,7 +73,7 @@ public class MatriculaDAO <E> extends AbstractEntityDAO<E> {
 			} 
 		} catch (SQLException e) {
 				e.printStackTrace();
-				System.out.println("Error al acceder a la tabla Matriculas");
+				Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Error al acceder a la tabla Matriculas");
 			}
 
 		return Matriculas; 

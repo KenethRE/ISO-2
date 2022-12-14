@@ -4,11 +4,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import negocio.entities.ProfesorUCLM;
 
 public class ProfesorUCLMDAO<E> extends AbstractEntityDAO<E> {
-	public int crearNuevoProfesor(ProfesorUCLM aProfesor) throws SQLException {
+	public int crearNuevoProfesor(ProfesorUCLM aProfesor) {
 		 
 		return insert (aProfesor);
 	}
@@ -27,7 +29,7 @@ public class ProfesorUCLMDAO<E> extends AbstractEntityDAO<E> {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("ProfesorUCLM no encontrado");
+			Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"ProfesorUCLM no encontrado");
 		}
 		
 			
@@ -45,6 +47,7 @@ public class ProfesorUCLMDAO<E> extends AbstractEntityDAO<E> {
 			
 		} catch (NullPointerException e) {
 			e.printStackTrace();
+			Logger.getLogger("GDTP_Logger").log(Level.SEVERE, "Profesor UCLM no encontrado");
 		}
 		
 		return 0;
@@ -63,7 +66,7 @@ public class ProfesorUCLMDAO<E> extends AbstractEntityDAO<E> {
 			}
 		} catch (SQLException e) {
 				e.printStackTrace();
-				System.out.println("Error al acceder a la tabla ProfesoresUCLM");
+				Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Error al acceder a la tabla ProfesoresUCLM");
 			}
 
 		return Profesores; 

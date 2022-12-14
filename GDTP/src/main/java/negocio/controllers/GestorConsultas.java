@@ -6,32 +6,29 @@ import java.util.List;
 
 import negocio.entities.CursoPropio;
 import negocio.entities.TipoCurso;
-import persistencia.AbstractEntityDAO;
 import persistencia.CursoPropioDAO;
-import persistencia.MateriaDAO;
 import negocio.entities.EstadoCurso;
-import negocio.entities.Materia;
 
 public class GestorConsultas {
 
 	public List<List<String>> consultarIngresos(TipoCurso aTipo, Date aFechaInicio, Date aFechaFin) {
-		CursoPropioDAO<CursoPropio> CursoDAO = new CursoPropioDAO<CursoPropio>();
+		CursoPropioDAO<CursoPropio> CursoDao = new CursoPropioDAO<>();
 		List<List<String>> ingresos = new ArrayList<>();	
-		ingresos=CursoDAO.listarIngresos(aTipo,aFechaInicio,aFechaFin);
+		ingresos=CursoDao.listarIngresos(aTipo,aFechaInicio,aFechaFin);
 		return ingresos;
 	}
 
 	public List<CursoPropio> consultarEstadoCursos(EstadoCurso aEstadoCurso, Date aFechaInicio, Date aFechaFin) {
-		CursoPropioDAO<CursoPropio> CursoDAO = new CursoPropioDAO<CursoPropio>();
-		List<CursoPropio> listaCursos = new ArrayList<CursoPropio>();	
-		listaCursos=CursoDAO.listarCursosPorEstado(aEstadoCurso,aFechaInicio,aFechaFin);
+		CursoPropioDAO<CursoPropio> CursoDao = new CursoPropioDAO<>();
+		List<CursoPropio> listaCursos = new ArrayList<>();	
+		listaCursos=CursoDao.listarCursosPorEstado(aEstadoCurso,aFechaInicio,aFechaFin);
 		return listaCursos;
 	}
 
 	public List<CursoPropio> listarEdicionesCursos(Date aFechaInicio, Date aFechaFin) {
-		CursoPropioDAO<CursoPropio> CursoDAO = new CursoPropioDAO<CursoPropio>();
-		List<CursoPropio> listaEdiciones= new ArrayList<CursoPropio>();	
-		listaEdiciones=CursoDAO.listarEdicionesCursos(aFechaInicio,aFechaFin);
+		CursoPropioDAO<CursoPropio> CursoDao = new CursoPropioDAO<>();
+		List<CursoPropio> listaEdiciones= new ArrayList<>();	
+		listaEdiciones=CursoDao.listarEdicionesCursos(aFechaInicio,aFechaFin);
 		return listaEdiciones;
 	}
 }

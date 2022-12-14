@@ -3,13 +3,14 @@ package persistencia;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import negocio.entities.Profesor;
-import negocio.entities.TipoCurso;
 
 public class ProfesorDAO<E> extends AbstractEntityDAO<E> {
 
-	public int crearNuevoProfesor(Profesor aProfesor) throws SQLException {
+	public int crearNuevoProfesor(Profesor aProfesor) {
 		 
 		return insert (aProfesor);
 	}
@@ -28,7 +29,7 @@ public class ProfesorDAO<E> extends AbstractEntityDAO<E> {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Profesor no encontrado");
+			Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Profesor no encontrado");
 		}
 		
 			
@@ -45,6 +46,7 @@ public class ProfesorDAO<E> extends AbstractEntityDAO<E> {
 			return 0;
 			
 		} catch (NullPointerException e) {
+			Logger.getLogger("GDTP_Logger").log(Level.SEVERE, "Profesor no encontrado.");
 			e.printStackTrace();
 		}
 		
@@ -52,7 +54,7 @@ public class ProfesorDAO<E> extends AbstractEntityDAO<E> {
 	}
 
 	public List<Profesor> listarProfesores() {
-		List<Profesor> Profesores = new ArrayList<Profesor>();
+		List<Profesor> Profesores = new ArrayList<>();
 		ResultSet aux = get("Profesor");
 		try {
 			while (aux.next()) {
@@ -65,7 +67,7 @@ public class ProfesorDAO<E> extends AbstractEntityDAO<E> {
 			}
 		} catch (SQLException e) {
 				e.printStackTrace();
-				System.out.println("Error al acceder a la tabla Profesores");
+				Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Error al acceder a la tabla Profesores");
 			}
 
 		return Profesores; 

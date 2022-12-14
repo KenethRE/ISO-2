@@ -4,11 +4,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import negocio.entities.Centro;
 
 public class CentroDAO<E> extends AbstractEntityDAO<E> {
-	public int crearNuevoCentro(Centro aCentro) throws SQLException {
+	public int crearNuevoCentro(Centro aCentro) {
 		 
 		return insert (aCentro);
 	}
@@ -26,7 +28,7 @@ public class CentroDAO<E> extends AbstractEntityDAO<E> {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Centro no encontrado");
+			Logger.getLogger("GDTP_Logger").log(Level.SEVERE, "Centro no encontrado");
 		}
 		
 			
@@ -50,7 +52,7 @@ public class CentroDAO<E> extends AbstractEntityDAO<E> {
 	}
 
 	public List<Centro> listarCentro() {
-		List<Centro> Centros = new ArrayList<Centro>();
+		List<Centro> Centros = new ArrayList<>();
 		ResultSet aux = get("Centro");
 		try {
 			while (aux.next()) {
@@ -62,7 +64,8 @@ public class CentroDAO<E> extends AbstractEntityDAO<E> {
 			}
 		} catch (SQLException e) {
 				e.printStackTrace();
-				System.out.println("Error al acceder a la tabla Centro");
+				Logger.getLogger("GDTP_Logger").log(Level.SEVERE, "Error al acceder a la tabla Centro");
+				
 			}
 
 		return Centros; 

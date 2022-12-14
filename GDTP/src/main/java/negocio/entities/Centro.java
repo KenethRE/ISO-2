@@ -1,58 +1,57 @@
 package negocio.entities;
 
-import java.util.Vector;
-import negocio.entities.CursoPropio;
-import negocio.entities.ProfesorUCLM;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Centro implements IdInterface{
 	
-	private int _Id;
-	private String _nombre;
-	private String _localizacion;
-	private Object _attribute;
-	public Vector<CursoPropio> _cursoPropios = new Vector<CursoPropio>();//revisar los de vectores
-	public Vector<ProfesorUCLM> _plantilla = new Vector<ProfesorUCLM>();//revisar lo de vectores o mejor seria listas de objetos no se..
-	
+	private int Id;
+	private String nombre;
+	private String localizacion;
+	private Object attribute;
+	public List<CursoPropio> cursoPropios = new ArrayList<>();
+	public List<ProfesorUCLM> plantilla = new ArrayList<>();
+
 	
 	public int get_Id() {
-		return _Id;
+		return Id;
 	}
-	public void set_Id(int _Id) {
-		this._Id = _Id;
+	public void set_Id(int Id) {
+		this.Id = Id;
 	}	
 	public String get_nombre() {
-		return _nombre;
+		return nombre;
 	}
-	public void set_nombre(String _nombre) {
-		this._nombre = _nombre;
+	public void set_nombre(String nombre) {
+		this.nombre = nombre;
 	}
 	public String get_localizacion() {
-		return _localizacion;
+		return localizacion;
 	}
-	public void set_localizacion(String _localizacion) {
-		this._localizacion = _localizacion;
+	public void set_localizacion(String localizacion) {
+		this.localizacion = localizacion;
 	}
 	public Object get_attribute() {
-		return _attribute;
+		return attribute;
 	}
-	public void set_attribute(Object _attribute) {
-		this._attribute = _attribute;
+	public void set_attribute(Object attribute) {
+		this.attribute = attribute;
 	}
-	public Vector<CursoPropio> get_cursoPropios() {
-		return _cursoPropios;
+	public List<CursoPropio> get_cursoPropios() {
+		return cursoPropios;
 	}
-	public void set_cursoPropios(Vector<CursoPropio> _cursoPropios) {
-		this._cursoPropios = _cursoPropios;
+	public void set_cursoPropios(List<CursoPropio> cursoPropios) {
+		this.cursoPropios = cursoPropios;
 	}
-	public Vector<ProfesorUCLM> get_plantilla() {
-		return _plantilla;
+	public List<ProfesorUCLM> get_plantilla() {
+		return plantilla;
 	}
-	public void set_plantilla(Vector<ProfesorUCLM> _plantilla) {
-		this._plantilla = _plantilla;
+	public void set_plantilla(List<ProfesorUCLM> plantilla) {
+		this.plantilla = plantilla;
 	}
 	@Override
 	public String getId() {
-		return String.valueOf(_Id);
+		return String.valueOf(Id);
 	}
 	
 	

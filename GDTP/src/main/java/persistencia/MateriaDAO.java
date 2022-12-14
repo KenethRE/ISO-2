@@ -4,11 +4,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import negocio.entities.Materia;
 
 public class MateriaDAO<E> extends AbstractEntityDAO<E> {
-	public int crearNuevaMateria(Materia aMateria) throws SQLException {
+	public int crearNuevaMateria(Materia aMateria) {
 		 
 		return insert (aMateria);
 	}
@@ -28,7 +30,7 @@ public class MateriaDAO<E> extends AbstractEntityDAO<E> {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Materia no encontrada");
+			Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Materia no encontrada");
 		}
 		
 			
@@ -46,13 +48,14 @@ public class MateriaDAO<E> extends AbstractEntityDAO<E> {
 					
 				} catch (NullPointerException e) {
 					e.printStackTrace();
+					Logger.getLogger("GDTP_Logger").log(Level.SEVERE, "Materia no encontrada");
 				}
 				
 				return 0;
 	}
 
 	public List<Materia> listarMaterias() {
-		List<Materia> Materias = new ArrayList<Materia>();
+		List<Materia> Materias = new ArrayList<>();
 		ResultSet aux = get("Materia");
 		try {
 			while (aux.next()) {
@@ -67,7 +70,7 @@ public class MateriaDAO<E> extends AbstractEntityDAO<E> {
 			}
 		} catch (SQLException e) {
 				e.printStackTrace();
-				System.out.println("Error al acceder a la tabla Materia");
+				Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Error al acceder a la tabla Materia");
 			}
 
 		return Materias; 
