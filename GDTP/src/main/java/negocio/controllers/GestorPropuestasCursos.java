@@ -23,9 +23,14 @@ public class GestorPropuestasCursos {
 		return false;
 	}
 
-	public EstadoCurso evaluarPropuesta(CursoPropio aCurso) {
-		
-		throw new UnsupportedOperationException();
+	
+	public boolean rechazarPropuestaCurso(CursoPropio curso) {
+		CursoPropioDAO<CursoPropio> CursoDAO = new CursoPropioDAO<CursoPropio>();
+		curso.set_estado(EstadoCurso.PROPUESTA_RECHAZADA);
+		if(CursoDAO.editarCurso(curso)==0) {
+			return true;
+		}
+		return false;
 	}
 
 	public void altaCursoAprobado(CursoPropio aCurso) {
