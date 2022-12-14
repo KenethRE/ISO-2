@@ -59,7 +59,7 @@ public class PantallaDireccionCursos extends JFrame{
 	JFrame previousWindow;
 	Date fechaComienzo;
 	Date fechaFin;
-	int contador = 0;
+	int contador;
 	private DefaultListModel modelo;
 	DefaultListModel modelomaterias = new DefaultListModel();
 	private static final long serialVersionUID = 1L;
@@ -75,6 +75,7 @@ public class PantallaDireccionCursos extends JFrame{
 	private JTextField textField_9;
 	
 	public PantallaDireccionCursos(JFrame previousWindow) {
+		contador= (int)(Math.random()*90+1);
 		this.previousWindow = previousWindow;
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		if (previousWindow != null) {
