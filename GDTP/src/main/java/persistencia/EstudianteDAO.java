@@ -43,18 +43,19 @@ public class EstudianteDAO <E> extends AbstractEntityDAO<E> {
 
 	public int  editarEstudiantes(Estudiante aEstudiante) {
 		// El dni Estudiante es el estudiante que queremos editar, el nombre de la clase "Estudiante" es la tabla que queremos
+				int resultado = 0;
 				try{
 					seleccionarEstudiante(aEstudiante);
 					//primero busca que el estudiante exista si no salta la excepcion lo modifica
-					update (aEstudiante);
-					return 0;
+					resultado = update (aEstudiante);
+					return resultado;
 					
 				} catch (NullPointerException e) {
 					e.printStackTrace();
 					Logger.getLogger(loggerName).log(Level.SEVERE, "Estudiante no encontrado");
 				}
 				
-				return 0;
+				return resultado;
 	}
 
 	public List<Estudiante> listarEstudiantes() {

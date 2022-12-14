@@ -4,14 +4,16 @@ import java.sql.*;
 import negocio.entities.*;
 
 public class AbstractEntityDAO<E>{
-
+	private static final String profesorUCLMString = "ProfesorUCLM";
+	private static final String profesorExtString = "ProfesorExterno";
+	private static final String cursoPropioString = "CursoPropio";
 	private GestorBD agente = GestorBD.getAgente();
 	
 	//esto regresa un unico elemento
 	public ResultSet get(Object E) {
 		ResultSet result = null;
 		String castName = E.getClass().getSimpleName();
-		if (castName.equals("ProfesorExterno") || castName.equals("ProfesorUCLM")) result = agente.select("SELECT * FROM " + castName + " NATURAL JOIN PROFESOR"
+		if (castName.equals(profesorExtString) || castName.equals(profesorUCLMString)) result = agente.select("SELECT * FROM " + castName + " NATURAL JOIN PROFESOR"
 				+ " WHERE DNI = '" + ((Profesor)E).get_dni() + "'");
 		else if (castName.equals("Estudiante")) result = agente.select("SELECT * FROM ESTUDIANTE WHERE DNI = '"+((Estudiante)E).get_dni()+ "'");
 		else if (castName.equals("Materia")) result = agente.select("SELECT * FROM MATERIA WHERE NOMBRE = '"+((Materia)E).get_nombre()+ "'");
@@ -23,7 +25,7 @@ public class AbstractEntityDAO<E>{
 	public ResultSet get(String Table) {
 		ResultSet result = null;
 
-		if (Table.equals("ProfesorExterno") || Table.equals("ProfesorUCLM")) result = agente.select("SELECT * FROM " + Table + " NATURAL JOIN PROFESOR");
+		if (Table.equals(profesorExtString) || Table.equals(profesorUCLMString)) result = agente.select("SELECT * FROM " + Table + " NATURAL JOIN PROFESOR");
 		else result = agente.select("SELECT * FROM " + Table);
 
 		return result;
@@ -33,7 +35,7 @@ public class AbstractEntityDAO<E>{
 	public ResultSet get(String Table, EstadoCurso estadoCurso) {
 		ResultSet result = null;
 		
-		if (Table.equals("CursoPropio")) {
+		if (Table.equals(cursoPropioString)) {
 			result = agente.select("SELECT * FROM " + Table + " WHERE estadocurso = '"+estadoCurso+"'");
 		}
 
@@ -43,7 +45,7 @@ public class AbstractEntityDAO<E>{
 	public ResultSet get(String Table, EstadoCurso estadoCurso, Date aFechaInicio, Date aFechaFin) {
 		ResultSet result = null;
 		
-		if (Table.equals("CursoPropio")) {
+		if (Table.equals(cursoPropioString)) {
 			result = agente.select("SELECT * FROM " + Table + " WHERE estadocurso = '"+estadoCurso+"' AND fechainicio >= '"+aFechaInicio+"' AND fechafin <= '"+aFechaFin+"'");
 		}
 
@@ -67,7 +69,7 @@ public class AbstractEntityDAO<E>{
 	public ResultSet get_edicion(String Table, Date aFechaInicio, Date aFechaFin) {
 		ResultSet result = null;
 		
-		if (Table.equals("CursoPropio")) {
+		if (Table.equals(cursoPropioString)) {
 			result = agente.select("SELECT * FROM " + Table + " WHERE fechainicio >= '"+aFechaInicio+"' AND fechafin <= '"+aFechaFin+"'");
 		}
 
@@ -158,7 +160,7 @@ public class AbstractEntityDAO<E>{
 	}
 	public int delete (String iD, String Table, String keyName) {
 		int result = 0;
-		if (Table.equals("ProfesorExterno") || Table.equals("ProfesorUCLM")) result = agente.update("DELETE FROM " + Table + " NATURAL JOIN PROFESOR WHERE "+keyName+" = " +iD);
+		if (Table.equals(profesorExtString) || Table.equals(profesorUCLMString)) result = agente.update("DELETE FROM " + Table + " NATURAL JOIN PROFESOR WHERE "+keyName+" = " +iD);
 		else result = agente.update("DELETE FROM" + Table + " WHERE "+keyName+" = " +iD);
 		return result;
 	}

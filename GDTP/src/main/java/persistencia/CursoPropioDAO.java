@@ -13,7 +13,7 @@ import negocio.entities.TipoCurso;
 
 public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 
-	private static final String name = "CursoPropio";
+	private static final String nombreClase = "CursoPropio";
 	
 	public int crearNuevoCurso(CursoPropio aCurso) {
 		int aux= 0;
@@ -69,7 +69,7 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 	public List<CursoPropio> listarCursosPorEstado(EstadoCurso aEstado) {
 		List<CursoPropio> Cursos = new ArrayList<>();
 
-		ResultSet aux = get(name, aEstado);
+		ResultSet aux = get(nombreClase, aEstado);
 		try {
 			while (aux.next()) {
 				CursoPropio curso = new CursoPropio();
@@ -101,7 +101,7 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 	public List<CursoPropio> listarCursosPorEstado(EstadoCurso aEstado, Date aFechaInicio, Date aFechaFin) {
 		List<CursoPropio> Cursos = new ArrayList<>();
 		
-		ResultSet aux = get(name, aEstado, aFechaInicio, aFechaFin);
+		ResultSet aux = get(nombreClase, aEstado, aFechaInicio, aFechaFin);
 		try {
 			while (aux.next()) {
 				CursoPropio curso = new CursoPropio();
@@ -156,7 +156,7 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 	public List<CursoPropio> listarEdicionesCursos(Date aFechaInicio, Date aFechaFin) {
 		List<CursoPropio> Cursos = new ArrayList<>();
 		
-		ResultSet aux = get_edicion(name, aFechaInicio, aFechaFin);
+		ResultSet aux = get_edicion(nombreClase, aFechaInicio, aFechaFin);
 		try {
 			while (aux.next()) {
 				CursoPropio curso = new CursoPropio();
