@@ -1,6 +1,5 @@
 package negocio.entities;
 
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.Vector;
 import persistencia.CursoPropioDAO;
@@ -133,12 +132,7 @@ public class CursoPropio implements IdInterface{
 	}
 	
 	public void persist () {
-		try {
-			this._cursoPropioDao.crearNuevoCurso(this);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this._cursoPropioDao.crearNuevoCurso(this);
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package negocio.entities;
 
-import java.sql.SQLException;
 import java.util.Date;
 
 import persistencia.MateriaDAO;
@@ -61,12 +60,8 @@ public class Materia implements IdInterface{
 		
 	}
 	public void persist () {
-		try {
-			this._MateriaDAO.crearNuevaMateria(this);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this._MateriaDAO.crearNuevaMateria(this);
+
 	}
 	
 	

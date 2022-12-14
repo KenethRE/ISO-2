@@ -1,8 +1,6 @@
 package negocio.entities;
 
-import java.sql.SQLException;
 import java.util.Vector;
-import negocio.entities.Matricula;
 import persistencia.EstudianteDAO;
 
 public class Estudiante {
@@ -57,11 +55,6 @@ public class Estudiante {
 	}
 	
 	public void persist () {
-		try {
-			this.agenteEstudianteDAO.crearNuevoEstudiante(this);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.agenteEstudianteDAO.crearNuevoEstudiante(this);
 	}
 }
