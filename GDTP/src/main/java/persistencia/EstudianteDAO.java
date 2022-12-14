@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import negocio.entities.Estudiante;
 
 public class EstudianteDAO <E> extends AbstractEntityDAO<E> {
-	private final String loggerName = "GDTP_Logger";
+	private static final String loggerName = "GDTP_Logger";
 	public int crearNuevoEstudiante(Estudiante aEstudiante) {
 		 
 		return insert (aEstudiante);
