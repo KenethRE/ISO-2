@@ -41,7 +41,7 @@ public class Busquedacurso extends JFrame{
 	Date fechaFin;
 	private DefaultListModel modelo;
 	private Matriculacion ventanMatricula;
-	DefaultListModel<CursoPropio> modelocursos = new DefaultListModel<CursoPropio>();
+	DefaultListModel<CursoPropio> modelocursos = new DefaultListModel<>();
 
 	private JFrame frame;
 	private CursoPropioDAO<CursoPropio> agenteCursoPropioDAO = new CursoPropioDAO();
@@ -90,13 +90,13 @@ public class Busquedacurso extends JFrame{
 		JLabel lblNewLabel_1 = new JLabel("Fecha fin curso");
 		lblNewLabel_1.setBounds(337, 31, 88, 14);
 		contentPane.add(lblNewLabel_1);
-		JList <CursoPropio> listacursos = new JList<CursoPropio> ();
+		JList <CursoPropio> listacursos = new JList<> ();
 		
 		JButton btnNewButton_1 = new JButton("Seleccionar Curso");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CursoPropio cursoPropio;
-				cursoPropio = (CursoPropio) listacursos.getSelectedValue();
+				cursoPropio = listacursos.getSelectedValue();
 				ventanMatricula.setcursopropio(cursoPropio);
 			dispose();
 			}
