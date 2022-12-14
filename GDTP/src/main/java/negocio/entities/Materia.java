@@ -11,31 +11,31 @@ public class Materia implements IdInterface{
 	private Date fechaFin;
 	public String id_Curso;
 	public String id_prof_responsable;
-	public MateriaDAO<Materia> MateriaDAO = new MateriaDAO<Materia>();
+	public MateriaDAO<Materia> MateriaDAO = new MateriaDAO<>();
 	
 	
 	public String get_nombre() {
 		return nombre;
 	}
-	public void set_nombre(String _nombre) {
-		this.nombre = _nombre;
+	public void set_nombre(String nombre) {
+		this.nombre = nombre;
 	}
 	public double get_horas() {
 		return horas;
 	}
-	public void set_horas(double _horas) {
+	public void set_horas(double horas) {
 		this.horas = horas;
 	}
 	public Date get_fechaInicio() {
 		return fechaInicio;
 	}
-	public void set_fechaInicio(Date _fechaInicio) {
+	public void set_fechaInicio(Date fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
 	public Date get_fechaFin() {
 		return fechaFin;
 	}
-	public void set_fechaFin(Date _fechaFin) {
+	public void set_fechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
 	}
 	public String getId_Curso() {
@@ -51,7 +51,7 @@ public class Materia implements IdInterface{
 		this.id_prof_responsable = id_prof_responsable;
 	}
 	@Override
-	public String getId() {
+	public String getInternalID() {
 		return id_Curso;
 	}
 	public String toString() {

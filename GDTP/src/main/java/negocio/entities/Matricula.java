@@ -60,7 +60,7 @@ public class Matricula implements IdInterface{
 		this.tipoPago = tipoPago;
 	}
 	@Override
-	public String getId() {
+	public String getInternalID() {
 		return String.valueOf(iD);
 	}
 	public void persist () {

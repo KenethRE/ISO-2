@@ -1,7 +1,5 @@
 package negocio.controllers;
 
-import java.sql.SQLException;
-
 import negocio.entities.Matricula;
 import persistencia.MatriculaDAO;
 

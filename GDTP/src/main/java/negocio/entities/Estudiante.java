@@ -10,8 +10,8 @@ public class Estudiante {
 	private String titulacion;
 	private String cualificacion;
 	
-	//Un estudiante tiene muchas matr�culas
-	public List<Matricula> _matriculas = new ArrayList<>();//revisar los de vectores
+	//Un estudiante tiene muchas matriculas
+	private List<Matricula> matriculas = new ArrayList<>();
 	private EstudianteDAO<Estudiante> agenteEstudianteDAO = new EstudianteDAO<>();
 
 	public String get_dni() {
@@ -34,7 +34,7 @@ public class Estudiante {
 		return apellidos;
 	}
 
-	public void set_apellidos(String _apellidos) {
+	public void set_apellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
 
@@ -54,6 +54,14 @@ public class Estudiante {
 		this.cualificacion = cualificacion;
 	}
 	
+	public List<Matricula> getMatriculas() {
+		return matriculas;
+	}
+
+	public void setMatriculas(List<Matricula> matriculas) {
+		this.matriculas = matriculas;
+	}
+
 	public void persist () {
 		this.agenteEstudianteDAO.crearNuevoEstudiante(this);
 	}

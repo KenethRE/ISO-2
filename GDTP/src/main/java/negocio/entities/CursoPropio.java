@@ -13,15 +13,15 @@ public class CursoPropio implements IdInterface{
 	private int edicion;
 	
 	//Un curso propio puede tener varias matriculas
-	public List<Matricula> matriculas = new ArrayList<>();
-	public int id_centro;
-	public String id_director;
-	public String id_secretario;
+	private List<Matricula> matriculas = new ArrayList<>();
+	private int id_centro;
+	private String id_director;
+	private String id_secretario;
 	//un curso propio puede tener varias materias
-	public List<Materia> materias = new ArrayList<Materia>();
-	public EstadoCurso estado;
-	public TipoCurso tipo;
-	public CursoPropioDAO<CursoPropio> cursoPropioDao = new CursoPropioDAO<>() ;
+	private List<Materia> materias = new ArrayList<>();
+	private EstadoCurso estado;
+	private TipoCurso tipo;
+	private CursoPropioDAO<CursoPropio> cursoPropioDao = new CursoPropioDAO<>() ;
 	
 	public CursoPropio() {
 		
@@ -135,7 +135,7 @@ public class CursoPropio implements IdInterface{
 	}
 
 	@Override
-	public String getId() {
+	public String getInternalID() {
 		return id;
 	}
 	public String toString() {

@@ -50,7 +50,7 @@ public class Centro implements IdInterface{
 		this.plantilla = plantilla;
 	}
 	@Override
-	public String getId() {
+	public String getInternalID() {
 		return String.valueOf(Id);
 	}
 	

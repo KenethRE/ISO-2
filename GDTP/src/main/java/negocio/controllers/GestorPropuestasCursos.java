@@ -33,9 +33,7 @@ public class GestorPropuestasCursos {
 		return false;
 	}
 
-//	public void altaCursoAprobado(CursoPropio aCurso) {
-//		throw new UnsupportedOperationException();
-//	}
+
 	
 	public List<CursoPropio> listaCursoAprobado() {
 		EstadoCurso aEstadoCurso = EstadoCurso.PROPUESTO;
