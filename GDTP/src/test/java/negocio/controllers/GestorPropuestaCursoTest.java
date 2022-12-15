@@ -67,7 +67,7 @@ public class GestorPropuestaCursoTest {
 	public void testEditarPropuestaCurso() {
 		cursoPropio= new CursoPropio();
 		cursoPropio.set_estado(estadoCurso.VALIDADO);
-		assertFalse("el booleano devuelto es correcto",gestorPropuestaCurso.editarPropuestaCurso(cursoPropio));
+		assertTrue("el booleano devuelto es correcto",gestorPropuestaCurso.editarPropuestaCurso(cursoPropio));
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class GestorPropuestaCursoTest {
 	@Test
 	public void testListaCursoAprobado() {
 	
-		assertFalse("la lista devuelta por el metodo consultar ingreso no esta vacia",gestorPropuestaCurso.listaCursoAprobado().size()>0);
+		assertFalse("la lista devuelta por el metodo consultar ingreso no esta vacia",gestorPropuestaCurso.listaCursoAprobado().isEmpty());
 	}
 
 }

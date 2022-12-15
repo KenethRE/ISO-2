@@ -62,7 +62,7 @@ public class GestorConsultasTest {
 	 */
 	@Test
 	public void testConsultarIngresos() {
-		assertTrue("la lista devuelta por el metodo consultar ingreso esta vacia",gestorConsultas.consultarIngresos(TipoCurso.MASTER,fechacomienzoDate, fechafinDate).size()>0);
+		assertTrue("la lista devuelta por el metodo consultar ingreso esta vacia",gestorConsultas.consultarIngresos(TipoCurso.MASTER,fechacomienzoDate, fechafinDate).isEmpty());
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class GestorConsultasTest {
 	 */
 	@Test
 	public void testConsultarEstadoCursos() {
-		assertTrue("la lista devuelta por el metodo consultar ingreso esta vacia",gestorConsultas.consultarEstadoCursos(EstadoCurso.EN_MATRICULACION,fechacomienzoDate, fechafinDate).size()>0);
+		assertTrue("la lista devuelta por el metodo consultar ingreso esta vacia",gestorConsultas.consultarEstadoCursos(EstadoCurso.EN_MATRICULACION,fechacomienzoDate, fechafinDate).isEmpty());
 		//fail("Not yet implemented");
 	}
 
@@ -79,7 +79,7 @@ public class GestorConsultasTest {
 	 */
 	@Test
 	public void testListarEdicionesCursos() {
-		assertTrue("la lista devuelta por el metodo consultar ingreso esta vacia",gestorConsultas.listarEdicionesCursos(fechacomienzoDate, fechafinDate).size()>0);
+		assertTrue("la lista devuelta por el metodo consultar ingreso esta vacia",gestorConsultas.listarEdicionesCursos(fechacomienzoDate, fechafinDate).isEmpty());
 		//fail("Not yet implemented");
 	}
 
