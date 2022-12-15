@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import negocio.entities.EstadoCurso;
 import negocio.entities.TipoCurso;
 
 /**
@@ -69,6 +70,7 @@ public class GestorConsultasTest {
 	 */
 	@Test
 	public void testConsultarEstadoCursos() {
+		assertTrue("la lista devuelta por el metodo consultar ingreso esta vacia",gestorConsultas.consultarEstadoCursos(EstadoCurso.EN_MATRICULACION,fechacomienzoDate, fechafinDate).size()>0);
 		//fail("Not yet implemented");
 	}
 
@@ -77,6 +79,7 @@ public class GestorConsultasTest {
 	 */
 	@Test
 	public void testListarEdicionesCursos() {
+		assertTrue("la lista devuelta por el metodo consultar ingreso esta vacia",gestorConsultas.listarEdicionesCursos(fechacomienzoDate, fechafinDate).size()>0);
 		//fail("Not yet implemented");
 	}
 
