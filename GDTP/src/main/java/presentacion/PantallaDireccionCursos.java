@@ -210,7 +210,7 @@ public class PantallaDireccionCursos extends JFrame{
 		listamaterias.setModel(modelomaterias);
 		listamaterias.setBounds(161, 309, 156, 128);
 		panel1.add(listamaterias);
-		
+		// el boton guardar curso realiza las lamadas a los gestores de bd para guardar elk curso y las materias
 		JButton btnNewButton_1 = new JButton("Guardar Curso");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
