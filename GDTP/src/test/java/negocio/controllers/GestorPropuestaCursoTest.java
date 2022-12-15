@@ -11,12 +11,18 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import negocio.entities.CursoPropio;
+import negocio.entities.EstadoCurso;
+import negocio.entities.TipoCurso;
+
 /**
  * @author plati
  *
  */
 public class GestorPropuestaCursoTest {
-
+	GestorPropuestasCursos gestorPropuestaCurso;
+	CursoPropio cursoPropio;
+	EstadoCurso estadoCurso;
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -36,6 +42,7 @@ public class GestorPropuestaCursoTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		gestorPropuestaCurso= new GestorPropuestasCursos();
 	}
 
 	/**
@@ -50,7 +57,7 @@ public class GestorPropuestaCursoTest {
 	 */
 	@Test
 	public void testRealizarPropuestaCurso() {
-		fail("Not yet implemented");
+		//fail("Not yet implemented");
 	}
 
 	/**
@@ -58,7 +65,9 @@ public class GestorPropuestaCursoTest {
 	 */
 	@Test
 	public void testEditarPropuestaCurso() {
-		fail("Not yet implemented");
+		cursoPropio= new CursoPropio();
+		cursoPropio.set_estado(estadoCurso.VALIDADO);
+		assertFalse("el booleano devuelto es correcto",gestorPropuestaCurso.editarPropuestaCurso(cursoPropio));
 	}
 
 	/**
@@ -66,7 +75,9 @@ public class GestorPropuestaCursoTest {
 	 */
 	@Test
 	public void testRechazarPropuestaCurso() {
-		fail("Not yet implemented");
+		cursoPropio = new CursoPropio();
+		cursoPropio.set_estado(estadoCurso.PROPUESTA_RECHAZADA);
+		assertTrue("el booleano devuelto es correcto",gestorPropuestaCurso.rechazarPropuestaCurso(cursoPropio));
 	}
 
 	/**
@@ -74,7 +85,8 @@ public class GestorPropuestaCursoTest {
 	 */
 	@Test
 	public void testListaCursoAprobado() {
-		fail("Not yet implemented");
+	
+		assertFalse("la lista devuelta por el metodo consultar ingreso no esta vacia",gestorPropuestaCurso.listaCursoAprobado().size()>0);
 	}
 
 }
