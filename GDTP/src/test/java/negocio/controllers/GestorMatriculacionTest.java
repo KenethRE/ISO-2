@@ -1,38 +1,55 @@
+/**
+ * 
+ */
 package negocio.controllers;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class GestorMatriculacionTest {
+/**
+ * @author plati
+ *
+ */
+public class GestorMatriculacionTest {
 
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
 	}
 
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
 	}
 
-	@BeforeEach
-	void setUp() throws Exception {
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
 	}
 
-	@AfterEach
-	void tearDown() throws Exception {
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@After
+	public void tearDown() throws Exception {
 	}
 
+	/**
+	 * Test method for {@link negocio.controllers.GestorMatriculacion#realizarMatriculacion(negocio.entities.Matricula)}.
+	 */
 	@Test
-	void testRealizarMatriculacion() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testRealizarPagoMatricula() {
+	public void testRealizarMatriculacion() {
 		fail("Not yet implemented");
 	}
 
