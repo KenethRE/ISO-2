@@ -2,6 +2,8 @@ package negocio.entities;
 
 import java.util.Date;
 
+import negocio.controllers.GestorMatriculacion;
+
 public class Matricula implements IdInterface{
 	private int iD;
 	
@@ -11,33 +13,33 @@ public class Matricula implements IdInterface{
 	public void setiD(int iD) {
 		this.iD = iD;
 	}
-	private Date _fecha;
-	private boolean _pagado;
-	private Object _attribute;
+	private Date fecha;
+	private boolean pagado;
+	private Object attribute;
 	
 	//una matricula tiene un estudiante
 	public String id_estudiante;
 	public String id_Curso;
-	public ModoPago _tipoPago;
-	
+	public ModoPago tipoPago;
+	private GestorMatriculacion agentematricula = new GestorMatriculacion();
 	
 	public Date get_fecha() {
-		return _fecha;
+		return fecha;
 	}
-	public void set_fecha(Date _fecha) {
-		this._fecha = _fecha;
+	public void set_fecha(Date fecha) {
+		this.fecha = fecha;
 	}
 	public boolean is_pagado() {
-		return _pagado;
+		return pagado;
 	}
-	public void set_pagado(boolean _pagado) {
-		this._pagado = _pagado;
+	public void set_pagado(boolean pagado) {
+		this.pagado = pagado;
 	}
 	public Object get_attribute() {
-		return _attribute;
+		return attribute;
 	}
-	public void set_attribute(Object _attribute) {
-		this._attribute = _attribute;
+	public void set_attribute(Object attribute) {
+		this.attribute = attribute;
 	}
 	public String getId_estudiante() {
 		return id_estudiante;
@@ -52,14 +54,18 @@ public class Matricula implements IdInterface{
 		this.id_Curso = id_Curso;
 	}
 	public ModoPago get_tipoPago() {
-		return _tipoPago;
+		return tipoPago;
 	}
-	public void set_tipoPago(ModoPago _tipoPago) {
-		this._tipoPago = _tipoPago;
+	public void set_tipoPago(ModoPago tipoPago) {
+		this.tipoPago = tipoPago;
 	}
 	@Override
-	public String getId() {
+	public String getInternalID() {
 		return String.valueOf(iD);
+	}
+	public void persist () {
+		this.agentematricula.realizarMatriculacion(this);
+
 	}
 	
 	

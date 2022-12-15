@@ -18,7 +18,6 @@ public class ProfesorUCLM extends Profesor {
 
 
 	public ProfesorUCLM() {
-		// TODO Auto-generated constructor stub
 	}
 
 

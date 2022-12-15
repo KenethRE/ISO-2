@@ -86,6 +86,7 @@ public class GestorBD{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return res;
     }
 	

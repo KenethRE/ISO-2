@@ -4,11 +4,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import negocio.entities.ProfesorUCLM;
 
 public class ProfesorUCLMDAO<E> extends AbstractEntityDAO<E> {
-	public int crearNuevoProfesor(ProfesorUCLM aProfesor) throws SQLException {
+	public int crearNuevoProfesor(ProfesorUCLM aProfesor) {
 		 
 		return insert (aProfesor);
 	}
@@ -16,6 +18,7 @@ public class ProfesorUCLMDAO<E> extends AbstractEntityDAO<E> {
 	public int seleccionarProfesor(ProfesorUCLM aProfesor) {
 		// El iD curso es el curso que queremos seleccionar, el nombre de la clase "Profesor" es la tabla que queremos
 		// buscar y la cadena del final representa la clave que usamos para hacer la seleccion.
+		int resultado = 0;
 		ResultSet aux = get(aProfesor);
 		try {
 			while (aux.next()) {
@@ -27,27 +30,30 @@ public class ProfesorUCLMDAO<E> extends AbstractEntityDAO<E> {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("ProfesorUCLM no encontrado");
+			resultado = 1;
+			Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"ProfesorUCLM no encontrado");
 		}
 		
 			
-		return 0;
+		return resultado;
 		
 	}
 
 	public int editarProfesor(ProfesorUCLM aProfesor) {
 		// El dni Profesor es el profesor que queremos editar, el nombre de la clase "Profesor" es la tabla que queremos
+		int resultado = 0;
 		try{
 			seleccionarProfesor(aProfesor);
 			//primero busca que el profesor exista si no salta la excepcion lo modifica
-			update (aProfesor);
-			return 0;
+			resultado = update (aProfesor);
+			return resultado;
 			
 		} catch (NullPointerException e) {
 			e.printStackTrace();
+			Logger.getLogger("GDTP_Logger").log(Level.SEVERE, "Profesor UCLM no encontrado");
 		}
 		
-		return 0;
+		return resultado;
 	}
 
 	public List<ProfesorUCLM> listarProfesores() {
@@ -63,7 +69,7 @@ public class ProfesorUCLMDAO<E> extends AbstractEntityDAO<E> {
 			}
 		} catch (SQLException e) {
 				e.printStackTrace();
-				System.out.println("Error al acceder a la tabla ProfesoresUCLM");
+				Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Error al acceder a la tabla ProfesoresUCLM");
 			}
 
 		return Profesores; 

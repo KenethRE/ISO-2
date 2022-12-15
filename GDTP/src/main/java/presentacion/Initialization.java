@@ -1,4 +1,7 @@
 package presentacion;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import persistencia.GestorBD;
 
 public class Initialization {
@@ -6,10 +9,8 @@ public class Initialization {
 	public static void main () {
 		try {
 		agente = GestorBD.getAgente();
-		System.out.println("Inicializacion de BD correcta.");
-		
-		
-		
+		Logger.getLogger("GDTP_Logger").log(Level.INFO, "Inicializacion de BD correcta.");
+			
 		} catch (Exception e) {
 			e.printStackTrace();		
 		}

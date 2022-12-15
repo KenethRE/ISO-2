@@ -11,7 +11,6 @@ public class ProfesorExterno extends Profesor {
 	}
 
 	public ProfesorExterno() {
-		// TODO Auto-generated constructor stub
 	}
 
 	private String _titulacion;

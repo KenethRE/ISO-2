@@ -1,6 +1,7 @@
 package presentacion;
 
 import java.awt.event.ActionEvent;
+
 import persistencia.*;
 import org.apache.derby.iapi.sql.dictionary.TupleDescriptor;
 import org.apache.derby.impl.store.access.sort.MergeScanRowSource;
@@ -33,6 +34,8 @@ import javax.swing.GroupLayout.Alignment;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.ListSelectionModel;
 import javax.swing.plaf.basic.BasicTreeUI.TreeCancelEditingAction;
 import javax.swing.JLabel;
@@ -56,11 +59,23 @@ public class PantallaDireccionCursos extends JFrame{
 	JFrame previousWindow;
 	Date fechaComienzo;
 	Date fechaFin;
-	int contador = 0;
+	int contador;
 	private DefaultListModel modelo;
 	DefaultListModel modelomaterias = new DefaultListModel();
+	private static final long serialVersionUID = 1L;
+	private JTextField textField_1;
+	private JTextField txtNombreCurso;
+	private JTextField txtECTS;
+	private JTextField txtTasaMatricula;
+	private JTextField txtEdicion;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JTextField textField_7;
+	private JTextField textField_8;
+	private JTextField textField_9;
 	
 	public PantallaDireccionCursos(JFrame previousWindow) {
+		contador= (int)(Math.random()*90+1);
 		this.previousWindow = previousWindow;
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		if (previousWindow != null) {
@@ -161,28 +176,77 @@ public class PantallaDireccionCursos extends JFrame{
 				añadirMaterias.setVisible(true);
 			}
 		});
-		btnNewButton.setBounds(10, 306, 111, 23);
+		btnNewButton.setBounds(10, 306, 124, 23);
 		panel1.add(btnNewButton);
 		
 		JComboBox <TipoCurso> cbTipoCurso = new JComboBox<TipoCurso>();
 		cbTipoCurso.setModel(new DefaultComboBoxModel<TipoCurso>(TipoCurso.values()));
 		cbTipoCurso.setBounds(346, 99, 121, 22);
 		panel1.add(cbTipoCurso);
+		JList listamaterias = new JList();
+		listamaterias.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		JButton Elimnarmaterias = new JButton("Eliminar Materia");
+		Elimnarmaterias.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				modelomaterias.removeElementAt(listamaterias.getSelectedIndex());
+			}
+			
+		});
+		Elimnarmaterias.setBounds(10, 340, 124, 23);
+		panel1.add(Elimnarmaterias);
+		Elimnarmaterias.setVisible(false);
+		
+		
+		listamaterias.addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				Elimnarmaterias.setVisible(true);
+				
+			}
+		});
+		listamaterias.setModel(modelomaterias);
+		listamaterias.setBounds(161, 309, 156, 128);
+		panel1.add(listamaterias);
 		
 		JButton btnNewButton_1 = new JButton("Guardar Curso");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if (txtNombreCurso.getText().length() < 3) JOptionPane.showMessageDialog(null, "El nombre del curso es muy corto. Por favor "
-						+ "intentelo nuevamente", "ERROR",
-						JOptionPane.ERROR); else {
-				String IDCurso = txtNombreCurso.getText().substring(0, 3) + contador++;
-				fechaComienzo = new java.sql.Date(((java.util.Date) fechainicio.getModel().getValue()).getTime());
-				fechaFin = new java.sql.Date(((java.util.Date) fechafin.getModel().getValue()).getTime());
-				altaCurso(IDCurso, txtNombreCurso.getText(), Integer.valueOf(txtECTS.getText()), 
-						fechaFin, fechaFin, Double.valueOf(txtTasaMatricula.getText()), Integer.valueOf(txtEdicion.getText()), (TipoCurso) cbTipoCurso.getSelectedItem());
-				JOptionPane.showMessageDialog(null, "Se ha creado un curso con identificador: " + IDCurso, "EXITO",
-						JOptionPane.INFORMATION_MESSAGE);
+				if (txtNombreCurso.getText().length() < 3)
+					JOptionPane.showMessageDialog(null, "El nombre del curso es muy corto. Por favor "
+						+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE); 
+				else {
+					if (controldeerroresguardarcurso()== false) {
+						JOptionPane.showMessageDialog(null, "Algun campo no posee la longitud correcta o el tipo correcto de dato "
+								+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE); 
+					}
+					else {
+						String IDCurso = txtNombreCurso.getText().substring(0, 3) + contador++;
+						fechaComienzo = new java.sql.Date(((java.util.Date) fechainicio.getModel().getValue()).getTime());
+						fechaFin = new java.sql.Date(((java.util.Date) fechafin.getModel().getValue()).getTime());
+						if(fechaFin.before(fechaComienzo)) {
+							JOptionPane.showMessageDialog(null, "Rango de fechas incorrecto "
+									+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE);
+						}
+						else {
+							altaCurso(IDCurso, txtNombreCurso.getText(), Integer.valueOf(txtECTS.getText()), 
+									fechaFin, fechaFin, Double.valueOf(txtTasaMatricula.getText()), 
+									Integer.valueOf(txtEdicion.getText()), (TipoCurso) cbTipoCurso.getSelectedItem());
+							altamaterias(modelomaterias,IDCurso);
+							JOptionPane.showMessageDialog(null, "Se ha creado un curso con identificador: " + IDCurso, "EXITO",
+							JOptionPane.INFORMATION_MESSAGE);}
+							modelomaterias.removeAllElements();
+							txtNombreCurso.setText("");
+							txtECTS.setText("");
+							txtTasaMatricula.setText("");
+							txtEdicion.setText("");
+							fechafin.getModel().setValue(null);
+							fechainicio.getModel().setValue(null);
+						}
+				
 						}
 			}
 		});
@@ -195,10 +259,9 @@ public class PantallaDireccionCursos extends JFrame{
 		lblNewLabel_6.setBounds(255, 103, 80, 14);
 		panel1.add(lblNewLabel_6);
 		
-		JList list = new JList();
-		list.setModel(modelomaterias);
-		list.setBounds(161, 309, 156, 128);
-		panel1.add(list);
+		
+		
+		
 		
 		
 		JPanel panel = new JPanel();
@@ -316,19 +379,9 @@ public class PantallaDireccionCursos extends JFrame{
 	}
 
 	
-	private static final long serialVersionUID = 1L;
-	private JTextField textField_1;
-	private JTextField txtNombreCurso;
-	private JTextField txtECTS;
-	private JTextField txtTasaMatricula;
-	private JTextField txtEdicion;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
 	
-
+	
+	// metodo para dar de alta el curso en la base de datos.
 	public void altaCurso(String idCurso, String nombreCurso, int ECTS, Date fechaInicio, Date fechaFin, double TasaMatricula, int Edicion, TipoCurso tipoCurso) {
 		CursoPropio curso = new CursoPropio();
 		curso.set_id(idCurso);
@@ -345,17 +398,46 @@ public class PantallaDireccionCursos extends JFrame{
 		curso.setId_centro(1);
 		curso.persist();
 	}
+	// metodo para guardar la materia creada en la base de datos
+	public void altamaterias(DefaultListModel modelo,String idcurso) {
+		for (int i=0; i < modelo.getSize(); i++) {
+			Materia aMateria = new Materia();
+			aMateria=(Materia) modelo.getElementAt(i);
+			aMateria.setId_Curso(idcurso);
+			aMateria.persist();
+		}
+		
+	}
 
 	public void edicionCurso() {
 		throw new UnsupportedOperationException();
 	}
-	
+	// carga de materias de la tabla materias.
 	public List<Materia> cargarMaterias() {
 		
 		MateriaDAO <Materia> MateriaDAO = new MateriaDAO <Materia>();
 		List<Materia> Materias = new ArrayList<Materia>();
 		Materias=MateriaDAO.listarMaterias();
 		return Materias;
+		
+	}
+	//contro de que en cada campo este el tipo correcto.
+	public boolean controldeerroresguardarcurso() {
+		boolean control = true;
+		if (txtNombreCurso.getText().length() < 3) {
+			control = false;
+		}
+		if  (txtECTS.getText().length()<1 || txtECTS.getText().chars().allMatch(Character::isDigit)==false){
+			control = false;
+		}
+		if  (txtTasaMatricula.getText().length()<1 || txtTasaMatricula.getText().chars().allMatch(Character::isDigit)==false){
+			control = false;
+		}
+		if (txtEdicion.getText().isEmpty()|| txtEdicion.getText().length() < 1) {
+			control = false;
+		}
+		return control;
+		
 		
 	}
 	public static void main(String[] args) {
