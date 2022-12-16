@@ -1,188 +1,311 @@
+/**
+ * 
+ */
 package negocio.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class CursoPropioTest {
+/**
+ * @author plati
+ *
+ */
+public class CursoPropioTest {
 
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
 	}
 
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
 	}
 
-	@BeforeEach
-	void setUp() throws Exception {
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
 	}
 
-	@AfterEach
-	void tearDown() throws Exception {
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@After
+	public void tearDown() throws Exception {
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#CursoPropio()}.
+	 */
 	@Test
-	void testCursoPropio() {
+	public void testCursoPropio() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#CursoPropio(java.lang.String)}.
+	 */
 	@Test
-	void testCursoPropioString() {
+	public void testCursoPropioString() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#get_id()}.
+	 */
 	@Test
-	void testGet_id() {
+	public void testGet_id() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#set_id(java.lang.String)}.
+	 */
 	@Test
-	void testSet_id() {
+	public void testSet_id() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#get_nombre()}.
+	 */
 	@Test
-	void testGet_nombre() {
+	public void testGet_nombre() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#set_nombre(java.lang.String)}.
+	 */
 	@Test
-	void testSet_nombre() {
+	public void testSet_nombre() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#get_eCTS()}.
+	 */
 	@Test
-	void testGet_eCTS() {
+	public void testGet_eCTS() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#set_eCTS(int)}.
+	 */
 	@Test
-	void testSet_eCTS() {
+	public void testSet_eCTS() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#get_fechaInicio()}.
+	 */
 	@Test
-	void testGet_fechaInicio() {
+	public void testGet_fechaInicio() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#set_fechaInicio(java.util.Date)}.
+	 */
 	@Test
-	void testSet_fechaInicio() {
+	public void testSet_fechaInicio() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#get_fechaFin()}.
+	 */
 	@Test
-	void testGet_fechaFin() {
+	public void testGet_fechaFin() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#set_fechaFin(java.util.Date)}.
+	 */
 	@Test
-	void testSet_fechaFin() {
+	public void testSet_fechaFin() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#get_tasaMatricula()}.
+	 */
 	@Test
-	void testGet_tasaMatricula() {
+	public void testGet_tasaMatricula() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#set_tasaMatricula(double)}.
+	 */
 	@Test
-	void testSet_tasaMatricula() {
+	public void testSet_tasaMatricula() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#get_edicion()}.
+	 */
 	@Test
-	void testGet_edicion() {
+	public void testGet_edicion() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#set_edicion(int)}.
+	 */
 	@Test
-	void testSet_edicion() {
+	public void testSet_edicion() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#get_matriculas()}.
+	 */
 	@Test
-	void testGet_matriculas() {
+	public void testGet_matriculas() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#set_matriculas(java.util.List)}.
+	 */
 	@Test
-	void testSet_matriculas() {
+	public void testSet_matriculas() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#getId_centro()}.
+	 */
 	@Test
-	void testGetId_centro() {
+	public void testGetId_centro() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#setId_centro(int)}.
+	 */
 	@Test
-	void testSetId_centro() {
+	public void testSetId_centro() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#getId_director()}.
+	 */
 	@Test
-	void testGetId_director() {
+	public void testGetId_director() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#setId_director(java.lang.String)}.
+	 */
 	@Test
-	void testSetId_director() {
+	public void testSetId_director() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#getId_secretario()}.
+	 */
 	@Test
-	void testGetId_secretario() {
+	public void testGetId_secretario() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#setId_secretario(java.lang.String)}.
+	 */
 	@Test
-	void testSetId_secretario() {
+	public void testSetId_secretario() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#get_materias()}.
+	 */
 	@Test
-	void testGet_materias() {
+	public void testGet_materias() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#set_materias(java.util.List)}.
+	 */
 	@Test
-	void testSet_materias() {
+	public void testSet_materias() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#get_estado()}.
+	 */
 	@Test
-	void testGet_estado() {
+	public void testGet_estado() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#set_estado(negocio.entities.EstadoCurso)}.
+	 */
 	@Test
-	void testSet_estado() {
+	public void testSet_estado() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#get_tipo()}.
+	 */
 	@Test
-	void testGet_tipo() {
+	public void testGet_tipo() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#set_tipo(negocio.entities.TipoCurso)}.
+	 */
 	@Test
-	void testSet_tipo() {
+	public void testSet_tipo() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#persist()}.
+	 */
 	@Test
-	void testPersist() {
+	public void testPersist() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#getInternalID()}.
+	 */
 	@Test
-	void testGetId() {
+	public void testGetInternalID() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link negocio.entities.CursoPropio#toString()}.
+	 */
+	@Test
+	public void testToString() {
 		fail("Not yet implemented");
 	}
 
