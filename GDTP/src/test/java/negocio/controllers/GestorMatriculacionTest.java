@@ -6,8 +6,6 @@ package negocio.controllers;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.sql.SQLDataException;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -16,7 +14,6 @@ import org.junit.Test;
 
 import negocio.entities.Matricula;
 import negocio.entities.ModoPago;
-import presentacion.gestionarIngresos;
 
 /**
  * @author plati

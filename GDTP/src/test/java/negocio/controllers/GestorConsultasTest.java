@@ -4,8 +4,6 @@
 package negocio.controllers;
 
 import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import java.sql.Date;
 
 import org.junit.After;

@@ -1,103 +1,175 @@
+/**
+ * 
+ */
 package negocio.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class MatriculaTest {
+/**
+ * @author plati
+ *
+ */
+public class MatriculaTest {
 
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
 	}
 
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
 	}
 
-	@BeforeEach
-	void setUp() throws Exception {
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
 	}
 
-	@AfterEach
-	void tearDown() throws Exception {
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@After
+	public void tearDown() throws Exception {
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.Matricula#getiD()}.
+	 */
 	@Test
-	void testGetiD() {
+	public void testGetiD() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.Matricula#setiD(int)}.
+	 */
 	@Test
-	void testSetiD() {
+	public void testSetiD() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.Matricula#get_fecha()}.
+	 */
 	@Test
-	void testGet_fecha() {
+	public void testGet_fecha() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.Matricula#set_fecha(java.util.Date)}.
+	 */
 	@Test
-	void testSet_fecha() {
+	public void testSet_fecha() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.Matricula#is_pagado()}.
+	 */
 	@Test
-	void testIs_pagado() {
+	public void testIs_pagado() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.Matricula#set_pagado(boolean)}.
+	 */
 	@Test
-	void testSet_pagado() {
+	public void testSet_pagado() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.Matricula#get_attribute()}.
+	 */
 	@Test
-	void testGet_attribute() {
+	public void testGet_attribute() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.Matricula#set_attribute(java.lang.Object)}.
+	 */
 	@Test
-	void testSet_attribute() {
+	public void testSet_attribute() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.Matricula#getId_estudiante()}.
+	 */
 	@Test
-	void testGetId_estudiante() {
+	public void testGetId_estudiante() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.Matricula#setId_estudiante(java.lang.String)}.
+	 */
 	@Test
-	void testSetId_estudiante() {
+	public void testSetId_estudiante() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.Matricula#getId_Curso()}.
+	 */
 	@Test
-	void testGetId_Curso() {
+	public void testGetId_Curso() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.Matricula#setId_Curso(java.lang.String)}.
+	 */
 	@Test
-	void testSetId_Curso() {
+	public void testSetId_Curso() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.Matricula#get_tipoPago()}.
+	 */
 	@Test
-	void testGet_tipoPago() {
+	public void testGet_tipoPago() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.Matricula#set_tipoPago(negocio.entities.ModoPago)}.
+	 */
 	@Test
-	void testSet_tipoPago() {
+	public void testSet_tipoPago() {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link negocio.entities.Matricula#getInternalID()}.
+	 */
 	@Test
-	void testGetId() {
+	public void testGetInternalID() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link negocio.entities.Matricula#persist()}.
+	 */
+	@Test
+	public void testPersist() {
 		fail("Not yet implemented");
 	}
 

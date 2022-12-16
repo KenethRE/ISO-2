@@ -16,7 +16,6 @@ import org.junit.Test;
 
 import negocio.entities.CursoPropio;
 import negocio.entities.EstadoCurso;
-import negocio.entities.TipoCurso;
 
 /**
  * @author plati
