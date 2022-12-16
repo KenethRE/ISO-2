@@ -4,6 +4,9 @@
 package negocio.controllers;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.sql.SQLDataException;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -57,6 +60,9 @@ public class GestorPropuestaCursoTest {
 	 */
 	@Test
 	public void testRealizarPropuestaCurso() {
+		cursoPropio = new CursoPropio();
+	    SQLDataException exception = assertThrows(SQLDataException.class, () -> {gestorPropuestaCurso.realizarPropuestaCurso(cursoPropio);});
+	    assertEquals("no permitido", exception.getMessage());
 		//fail("Not yet implemented");
 	}
 
