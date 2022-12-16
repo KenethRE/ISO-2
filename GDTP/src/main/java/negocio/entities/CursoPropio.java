@@ -1,6 +1,8 @@
 package negocio.entities;
 
 import java.util.*;
+
+import negocio.controllers.GestorPropuestasCursos;
 import persistencia.CursoPropioDAO;
 
 public class CursoPropio implements IdInterface{
@@ -21,7 +23,7 @@ public class CursoPropio implements IdInterface{
 	private List<Materia> materias = new ArrayList<>();
 	private EstadoCurso estado;
 	private TipoCurso tipo;
-	private CursoPropioDAO<CursoPropio> cursoPropioDao = new CursoPropioDAO<>() ;
+	private GestorPropuestasCursos gestorPropuestasCursos = new GestorPropuestasCursos();
 	
 	public CursoPropio() {
 		
@@ -131,7 +133,7 @@ public class CursoPropio implements IdInterface{
 	}
 	
 	public void persist () {
-		this.cursoPropioDao.crearNuevoCurso(this);
+		this.gestorPropuestasCursos.realizarPropuestaCurso(this);
 	}
 
 	@Override
