@@ -4,6 +4,9 @@
 package negocio.controllers;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.sql.SQLDataException;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -11,11 +14,17 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import negocio.entities.Matricula;
+import negocio.entities.ModoPago;
+import presentacion.gestionarIngresos;
+
 /**
  * @author plati
  *
  */
 public class GestorMatriculacionTest {
+	GestorMatriculacion gestorMatriculacion;
+	Matricula matricula;
 
 	/**
 	 * @throws java.lang.Exception
@@ -36,6 +45,7 @@ public class GestorMatriculacionTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		gestorMatriculacion =new GestorMatriculacion();
 	}
 
 	/**
@@ -50,7 +60,11 @@ public class GestorMatriculacionTest {
 	 */
 	@Test
 	public void testRealizarMatriculacion() {
-		fail("Not yet implemented");
+		matricula = new Matricula();
+		matricula.set_tipoPago(ModoPago.TARJETA_CREDITO);
+		NullPointerException exception = assertThrows(NullPointerException.class, () -> {gestorMatriculacion.realizarMatriculacion(matricula);});
+	    assertEquals("Matricula no generada", exception.getMessage());
+		
 	}
 
 }
