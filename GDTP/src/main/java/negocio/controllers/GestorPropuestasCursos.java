@@ -10,6 +10,8 @@ import persistencia.CursoPropioDAO;
 public class GestorPropuestasCursos {
 
 	public void realizarPropuestaCurso(CursoPropio aCurso) {
+		CursoPropioDAO<CursoPropio> cursoPropioDao = new CursoPropioDAO<>() ;
+		cursoPropioDao.crearNuevoCurso(aCurso);
 		
 		throw new UnsupportedOperationException();
 	}
