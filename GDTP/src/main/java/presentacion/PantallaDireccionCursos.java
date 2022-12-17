@@ -345,7 +345,7 @@ public class PantallaDireccionCursos extends JFrame{
 		textField_9.setBounds(75, 10, 48, 20);
 		panel.add(textField_9);
 		textField_9.setColumns(10);
-		
+		// esta accion hay que realizarla todavia
 		JButton btnNewButton_3 = new JButton("Buscar curso");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
