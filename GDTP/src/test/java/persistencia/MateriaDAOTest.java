@@ -1,48 +1,80 @@
+/**
+ * 
+ */
 package persistencia;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
 
-class MateriaDAOTest {
+/**
+ * @author plati
+ *
+ */
+public class MateriaDAOTest {
 
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
 	}
 
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
 	}
 
-	@BeforeEach
-	void setUp() throws Exception {
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
 	}
 
-	@AfterEach
-	void tearDown() throws Exception {
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@After
+	public void tearDown() throws Exception {
 	}
 
-	@Test
-	void testCrearNuevaMateria() {
+	/**
+	 * Test method for {@link persistencia.MateriaDAO#crearNuevaMateria(negocio.entities.Materia)}.
+	 */
+	@Disabled
+	public void testCrearNuevaMateria() {
 		fail("Not yet implemented");
 	}
 
-	@Test
-	void testSeleccionarMateria() {
+	/**
+	 * Test method for {@link persistencia.MateriaDAO#seleccionarMateria(negocio.entities.Materia)}.
+	 */
+	@Disabled
+	public void testSeleccionarMateria() {
 		fail("Not yet implemented");
 	}
 
-	@Test
-	void testEditarMateria() {
+	/**
+	 * Test method for {@link persistencia.MateriaDAO#editarMateria(negocio.entities.Materia)}.
+	 */
+	@Disabled
+	public void testEditarMateria() {
 		fail("Not yet implemented");
 	}
 
-	@Test
-	void testListarMaterias() {
+	/**
+	 * Test method for {@link persistencia.MateriaDAO#listarMaterias()}.
+	 */
+	@Disabled
+	public void testListarMaterias() {
 		fail("Not yet implemented");
 	}
 

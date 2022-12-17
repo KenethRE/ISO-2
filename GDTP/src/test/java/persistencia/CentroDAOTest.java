@@ -1,48 +1,80 @@
+/**
+ * 
+ */
 package persistencia;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
 
-class CentroDAOTest {
+/**
+ * @author plati
+ *
+ */
+public class CentroDAOTest {
 
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
 	}
 
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
 	}
 
-	@BeforeEach
-	void setUp() throws Exception {
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
 	}
 
-	@AfterEach
-	void tearDown() throws Exception {
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@After
+	public void tearDown() throws Exception {
 	}
 
-	@Test
-	void testCrearNuevoCentro() {
+	/**
+	 * Test method for {@link persistencia.CentroDAO#crearNuevoCentro(negocio.entities.Centro)}.
+	 */
+	@Disabled
+	public void testCrearNuevoCentro() {
 		fail("Not yet implemented");
 	}
 
-	@Test
-	void testSeleccionarCentro() {
+	/**
+	 * Test method for {@link persistencia.CentroDAO#seleccionarCentro(negocio.entities.Centro)}.
+	 */
+	@Disabled
+	public void testSeleccionarCentro() {
 		fail("Not yet implemented");
 	}
 
-	@Test
-	void testEditarCentro() {
+	/**
+	 * Test method for {@link persistencia.CentroDAO#editarCentro(negocio.entities.Centro)}.
+	 */
+	@Disabled
+	public void testEditarCentro() {
 		fail("Not yet implemented");
 	}
 
-	@Test
-	void testListarCentro() {
+	/**
+	 * Test method for {@link persistencia.CentroDAO#listarCentro()}.
+	 */
+	@Disabled
+	public void testListarCentro() {
 		fail("Not yet implemented");
 	}
 
