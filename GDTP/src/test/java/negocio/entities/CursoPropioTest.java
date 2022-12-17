@@ -4,6 +4,7 @@
 package negocio.entities;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -16,7 +17,7 @@ import org.junit.Test;
  *
  */
 public class CursoPropioTest {
-
+	CursoPropio cursoPropio;
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -36,6 +37,8 @@ public class CursoPropioTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		cursoPropio= new CursoPropio();
+		cursoPropio.set_id("popi");
 	}
 
 	/**
@@ -66,7 +69,7 @@ public class CursoPropioTest {
 	 */
 	@Test
 	public void testGet_id() {
-		fail("Not yet implemented");
+		assertEquals("pepi", cursoPropio.get_id(), "FALLO");
 	}
 
 	/**
