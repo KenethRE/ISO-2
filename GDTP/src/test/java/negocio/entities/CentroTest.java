@@ -32,7 +32,6 @@ public class CentroTest {
 
 	@Test
 	public void testGet_Id() {
-		
 		assertEquals(453, centro.get_Id(), "FALLO");
 		//throw new RuntimeException("not yet implemented");
 	}
