@@ -11,7 +11,6 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.Disabled;
 
 import negocio.entities.EstadoCurso;
 import negocio.entities.TipoCurso;
@@ -69,7 +68,7 @@ public class GestorConsultasTest {
 	 */
 	@Test
 	public void testConsultarEstadoCursos() {
-		assertFalse("la lista devuelta por el metodo consultar ingreso esta vacia",gestorConsultas.consultarEstadoCursos(EstadoCurso.EN_MATRICULACION,fechacomienzoDate, fechafinDate).isEmpty());
+		assertTrue("la lista devuelta por el metodo consultar ingreso esta vacia",gestorConsultas.consultarEstadoCursos(EstadoCurso.EN_MATRICULACION,fechacomienzoDate, fechafinDate).isEmpty());
 		//fail("Not yet implemented");
 	}
 
