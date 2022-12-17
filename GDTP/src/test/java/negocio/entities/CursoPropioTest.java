@@ -40,6 +40,8 @@ public class CursoPropioTest {
 	public void setUp() throws Exception {
 		cursoPropio= new CursoPropio();
 		cursoPropio.set_id("popi");
+		cursoPropio.set_nombre("pipo");
+		cursoPropio.set_eCTS(20);
 	}
 
 	/**
@@ -68,49 +70,52 @@ public class CursoPropioTest {
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#get_id()}.
 	 */
-	@Disabled
+	@Test
 	public void testGet_id() {
-		assertEquals("pepi", cursoPropio.get_id(), "FALLO");
+		assertEquals("popi", cursoPropio.get_id(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#set_id(java.lang.String)}.
 	 */
-	@Disabled
+	@Test
 	public void testSet_id() {
-		fail("Not yet implemented");
+		cursoPropio.set_id("nino");
+		assertEquals("nino", cursoPropio.get_id(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#get_nombre()}.
 	 */
-	@Disabled
+	@Test
 	public void testGet_nombre() {
-		fail("Not yet implemented");
+		assertEquals("pipo", cursoPropio.get_nombre(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#set_nombre(java.lang.String)}.
 	 */
-	@Disabled
+	@Test
 	public void testSet_nombre() {
-		fail("Not yet implemented");
+		cursoPropio.set_nombre("nino");
+		assertEquals("nino", cursoPropio.get_nombre(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#get_eCTS()}.
 	 */
-	@Disabled
+	@Test
 	public void testGet_eCTS() {
-		fail("Not yet implemented");
+		assertEquals(20, cursoPropio.get_eCTS(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#set_eCTS(int)}.
 	 */
-	@Disabled
+	@Test
 	public void testSet_eCTS() {
-		fail("Not yet implemented");
+		cursoPropio.set_eCTS(10);
+		assertEquals(10, cursoPropio.get_eCTS(), "FALLO");
 	}
 
 	/**
