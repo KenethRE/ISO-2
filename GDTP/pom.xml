@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ISO-2</groupId>
   <artifactId>GDTP</artifactId>
-  <version>1.1.12</version>
+  <version>1.1.13</version>
   <description>Sistema informático para la gestión de enseñanzas propias de la Universidad
 de Castilla-La Mancha.</description>
   <properties>
