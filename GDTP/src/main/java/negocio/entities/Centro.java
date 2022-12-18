@@ -53,6 +53,11 @@ public class Centro implements IdInterface{
 	public String getInternalID() {
 		return String.valueOf(Id);
 	}
+	@Override
+	public String getId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

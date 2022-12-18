@@ -1,6 +1,7 @@
 package negocio.entities;
 
 import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.util.*;
 
 import negocio.controllers.GestorPropuestasCursos;
@@ -134,7 +135,12 @@ public class CursoPropio implements IdInterface{
 	}
 	
 	public void persist () throws SQLDataException {
-		this.gestorPropuestasCursos.realizarPropuestaCurso(this);
+		try {
+			this.gestorPropuestasCursos.realizarPropuestaCurso(this);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -145,6 +151,12 @@ public class CursoPropio implements IdInterface{
 		return nombre;
 		
 		
+	}
+
+	@Override
+	public String getId() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

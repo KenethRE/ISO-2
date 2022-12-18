@@ -3,8 +3,6 @@ package persistencia;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import negocio.entities.CursoPropio;
 import negocio.entities.EstadoCurso;
@@ -13,9 +11,7 @@ import negocio.entities.TipoCurso;
 
 public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 
-	private static final String nombreClase = "CursoPropio";
-	
-	public int crearNuevoCurso(CursoPropio aCurso) {
+	public int crearNuevoCurso(CursoPropio aCurso) throws SQLException {
 		int aux= 0;
 		aux = insert (aCurso);
 		
@@ -43,7 +39,7 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Curso no encontrado");
+			System.out.println("Curso no encontrado");
 		}
 		
 		return 0;
@@ -52,24 +48,22 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 
 	public int editarCurso(CursoPropio aCurso) {
 		// El iD curso es el curso que queremos editar, el nombre de la clase "CursoPropio" es la tabla que queremos
-		int resultado = 0;
 		try{
-			resultado = update (aCurso);
-			return resultado;
+			update (aCurso);
+			return 0;
 			
 		} catch (NullPointerException e) {
 			e.printStackTrace();
-			Logger.getLogger("GDTP_Logger").log(Level.SEVERE, "Curso no encontrado");
 		}
 		
-		return resultado;
+		return 0;
 		
 	}
 	
 	public List<CursoPropio> listarCursosPorEstado(EstadoCurso aEstado) {
-		List<CursoPropio> Cursos = new ArrayList<>();
+		List<CursoPropio> Cursos = new ArrayList<CursoPropio>();
 
-		ResultSet aux = get(nombreClase, aEstado);
+		ResultSet aux = get("CursoPropio", aEstado);
 		try {
 			while (aux.next()) {
 				CursoPropio curso = new CursoPropio();
@@ -92,16 +86,16 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
-			Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Curso no encontrado");
+			System.out.println("Curso no encontrado");
 		}
 		
 		return Cursos;
 	}
 
 	public List<CursoPropio> listarCursosPorEstado(EstadoCurso aEstado, Date aFechaInicio, Date aFechaFin) {
-		List<CursoPropio> Cursos = new ArrayList<>();
+		List<CursoPropio> Cursos = new ArrayList<CursoPropio>();
 		
-		ResultSet aux = get(nombreClase, aEstado, aFechaInicio, aFechaFin);
+		ResultSet aux = get("CursoPropio", aEstado, aFechaInicio, aFechaFin);
 		try {
 			while (aux.next()) {
 				CursoPropio curso = new CursoPropio();
@@ -124,11 +118,52 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
-			Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Curso no encontrado");
+			System.out.println("Curso no encontrado");
 		}
 		
 		return Cursos;
 	}
+	
+	/*========= prueba de codigo ====*/
+	//public List<CursoPropio> listardatosdecursos(String idcurso) {
+	public CursoPropio datosdecurso(String idcurso) {
+		/*List<CursoPropio> Cursos = new ArrayList<CursoPropio>();*/
+		CursoPropio Curso = null;
+		
+		ResultSet aux = getCursos("CursoPropio", idcurso);
+		
+		try {
+			while (aux.next()) {
+				CursoPropio curso = new CursoPropio();
+				curso.set_id(aux.getString("ID"));
+				curso.set_nombre(aux.getString("NOMBRE"));
+				curso.set_eCTS(aux.getInt("ECTS"));
+				curso.set_fechaInicio(aux.getDate("FECHAINICIO"));
+				curso.set_fechaFin(aux.getDate("FECHAFIN"));
+				curso.set_tasaMatricula(aux.getInt("TASAMATRICULA"));
+				curso.set_edicion(aux.getInt("EDICION"));
+				curso.setId_centro(aux.getInt("IDCENTRO"));
+				curso.setId_director(aux.getString("DIRECTOR"));
+				curso.setId_secretario(aux.getString("SECRETARIO"));
+				curso.set_tipo(TipoCurso.valueOf(aux.getString("TIPOCURSO")));
+				curso.set_estado(EstadoCurso.valueOf(aux.getString("ESTADOCURSO")));
+				//Curso.add(curso);
+			}
+			
+			return Curso;
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Curso no encontrado");
+		}
+		
+		return Curso;
+	}
+	/*==========*/
+	
+	
+	
+	
 	
 	public List<List<String>> listarIngresos(TipoCurso aTipo, Date aFechaInicio, Date aFechaFin) {
 		List<List<String>> Datos = new ArrayList<>();
@@ -144,7 +179,6 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
-			Logger.getLogger("GDTP_Logger").log(Level.SEVERE, "Informacion de ingresos no encontrada.");
 		}
 		
 		
@@ -154,9 +188,9 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 	
 
 	public List<CursoPropio> listarEdicionesCursos(Date aFechaInicio, Date aFechaFin) {
-		List<CursoPropio> Cursos = new ArrayList<>();
+		List<CursoPropio> Cursos = new ArrayList<CursoPropio>();
 		
-		ResultSet aux = get_edicion(nombreClase, aFechaInicio, aFechaFin);
+		ResultSet aux = get_edicion("CursoPropio", aFechaInicio, aFechaFin);
 		try {
 			while (aux.next()) {
 				CursoPropio curso = new CursoPropio();
@@ -179,7 +213,7 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 					
 		} catch (SQLException e) {
 			e.printStackTrace();
-			Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Curso no encontrado");
+			System.out.println("Curso no encontrado");
 		}
 		
 		return Cursos;

@@ -1,42 +1,45 @@
 package negocio.entities;
 
+import java.sql.SQLException;
 import java.util.Date;
 
 import persistencia.MateriaDAO;
 
 public class Materia implements IdInterface{
-	private String nombre;
-	private double horas;
-	private Date fechaInicio;
-	private Date fechaFin;
+	private String id_Materia;
+	
+	private String _nombre;
+	private double _horas;
+	private Date _fechaInicio;
+	private Date _fechaFin;
 	public String id_Curso;
 	public String id_prof_responsable;
-	public MateriaDAO<Materia> MateriaDAO = new MateriaDAO<>();
+	public MateriaDAO<Materia> _MateriaDAO = new MateriaDAO<Materia>();
 	
 	
 	public String get_nombre() {
-		return nombre;
+		return _nombre;
 	}
-	public void set_nombre(String nombre) {
-		this.nombre = nombre;
+	public void set_nombre(String _nombre) {
+		this._nombre = _nombre;
 	}
 	public double get_horas() {
-		return horas;
+		return _horas;
 	}
-	public void set_horas(double horas) {
-		this.horas = horas;
+	public void set_horas(double _horas) {
+		this._horas = _horas;
 	}
 	public Date get_fechaInicio() {
-		return fechaInicio;
+		return _fechaInicio;
 	}
-	public void set_fechaInicio(Date fechaInicio) {
-		this.fechaInicio = fechaInicio;
+	public void set_fechaInicio(Date _fechaInicio) {
+		this._fechaInicio = _fechaInicio;
 	}
 	public Date get_fechaFin() {
-		return fechaFin;
+		return _fechaFin;
 	}
-	public void set_fechaFin(Date fechaFin) {
-		this.fechaFin = fechaFin;
+	public void set_fechaFin(Date _fechaFin) {
+		this._fechaFin = _fechaFin;
 	}
 	public String getId_Curso() {
 		return id_Curso;
@@ -51,17 +54,37 @@ public class Materia implements IdInterface{
 		this.id_prof_responsable = id_prof_responsable;
 	}
 	@Override
-	public String getInternalID() {
+	public String getId() {
 		return id_Curso;
 	}
+	
+	
+	
+	
+	
+	public String getId_Materia() {
+		return id_Materia;
+	}
+	public void setId_Materia(String id_Materia) {
+		this.id_Materia = id_Materia;
+	}
 	public String toString() {
-		return nombre;
+		return _nombre;
 		
 		
 	}
 	public void persist () {
-		this.MateriaDAO.crearNuevaMateria(this);
-
+		try {
+			this._MateriaDAO.crearNuevaMateria(this);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	@Override
+	public String getInternalID() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

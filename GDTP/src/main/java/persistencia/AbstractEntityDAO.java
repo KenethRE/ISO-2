@@ -4,20 +4,18 @@ import java.sql.*;
 import negocio.entities.*;
 
 public class AbstractEntityDAO<E>{
-	private static final String profesorUCLMString = "ProfesorUCLM";
-	private static final String profesorExtString = "ProfesorExterno";
-	private static final String cursoPropioString = "CursoPropio";
+
 	private GestorBD agente = GestorBD.getAgente();
 	
 	//esto regresa un unico elemento
 	public ResultSet get(Object E) {
 		ResultSet result = null;
 		String castName = E.getClass().getSimpleName();
-		if (castName.equals(profesorExtString) || castName.equals(profesorUCLMString)) result = agente.select("SELECT * FROM " + castName + " NATURAL JOIN PROFESOR"
+		if (castName.equals("ProfesorExterno") || castName.equals("ProfesorUCLM")) result = agente.select("SELECT * FROM " + castName + " NATURAL JOIN PROFESOR"
 				+ " WHERE DNI = '" + ((Profesor)E).get_dni() + "'");
 		else if (castName.equals("Estudiante")) result = agente.select("SELECT * FROM ESTUDIANTE WHERE DNI = '"+((Estudiante)E).get_dni()+ "'");
 		else if (castName.equals("Materia")) result = agente.select("SELECT * FROM MATERIA WHERE NOMBRE = '"+((Materia)E).get_nombre()+ "'");
-		else result = agente.select("SELECT * FROM " + castName + " WHERE ID = '"+((IdInterface) E).getInternalID()+ "'");
+		else result = agente.select("SELECT * FROM " + castName + " WHERE ID = '"+((IdInterface) E).getId()+ "'");
 		return result;
 	}
 	
@@ -25,32 +23,71 @@ public class AbstractEntityDAO<E>{
 	public ResultSet get(String Table) {
 		ResultSet result = null;
 
-		if (Table.equals(profesorExtString) || Table.equals(profesorUCLMString)) result = agente.select("SELECT * FROM " + Table + " NATURAL JOIN PROFESOR");
+		if (Table.equals("ProfesorExterno") || Table.equals("ProfesorUCLM")) result = agente.select("SELECT * FROM " + Table + " NATURAL JOIN PROFESOR");
 		else result = agente.select("SELECT * FROM " + Table);
 
 		return result;
 	}
 	
-	//get para estadoCurso
-	public ResultSet get(String Table, EstadoCurso estadoCurso) {
+	//get MATERIAS DE UN CURSO
+	public ResultSet getMateriaCurso(String Table, String idcurso) {
 		ResultSet result = null;
 		
-		if (Table.equals(cursoPropioString)) {
-			result = agente.select("SELECT * FROM " + Table + " WHERE estadocurso = '"+estadoCurso+"'");
+		if (Table.equals("CursoPropio")) {
+			result = agente.select("SELECT * FROM " + Table + " WHERE IDCURSO = '"+idcurso+"'");
 		}
 
 		return result;
 	}
 	
+	//get para estadoCurso
+		public ResultSet get(String Table, EstadoCurso estadoCurso) {
+			ResultSet result = null;
+			
+			if (Table.equals("CursoPropio")) {
+				result = agente.select("SELECT * FROM " + Table + " WHERE estadocurso = '"+estadoCurso+"'");
+			}
+
+			return result;
+		}
+	
 	public ResultSet get(String Table, EstadoCurso estadoCurso, Date aFechaInicio, Date aFechaFin) {
 		ResultSet result = null;
 		
-		if (Table.equals(cursoPropioString)) {
+		if (Table.equals("CursoPropio")) {
 			result = agente.select("SELECT * FROM " + Table + " WHERE estadocurso = '"+estadoCurso+"' AND fechainicio >= '"+aFechaInicio+"' AND fechafin <= '"+aFechaFin+"'");
 		}
 
 		return result;
 	}
+	
+	/*========= LISTA DE DATOS ===== */
+	public ResultSet getCursos(String Table, String idcurso) {
+		ResultSet result = null;
+		
+		if (Table.equals("CursoPropio")) {
+			result = agente.select("SELECT * FROM " + Table+" WHERE IDCURSO='"+idcurso+"'");
+		}
+
+		return result;
+	}
+	/*==========*/
+	
+	
+	/*========= LISTA DE DATOS ===== */
+	public ResultSet getMateria(String Table, String idmateria) {
+		ResultSet result = null;
+		
+		if (Table.equals("Materia")) {
+			result = agente.select("SELECT * FROM " + Table+" WHERE IDMATERIA='"+idmateria+"'");
+		}
+
+		return result;
+	}
+	/*==========*/
+	
+	
+	
 	
 	//get para coste total por tipos de curso
 	public ResultSet get(TipoCurso tipoCurso,  Date aFechaInicio, Date aFechaFin) {
@@ -69,7 +106,7 @@ public class AbstractEntityDAO<E>{
 	public ResultSet get_edicion(String Table, Date aFechaInicio, Date aFechaFin) {
 		ResultSet result = null;
 		
-		if (Table.equals(cursoPropioString)) {
+		if (Table.equals("CursoPropio")) {
 			result = agente.select("SELECT * FROM " + Table + " WHERE fechainicio >= '"+aFechaInicio+"' AND fechafin <= '"+aFechaFin+"'");
 		}
 
@@ -81,7 +118,7 @@ public class AbstractEntityDAO<E>{
 		String className = E.getClass().getSimpleName();
 		int result = 0;
 		switch (className) {
-		
+		//.getId_secretario() .getId_director() getId_centro() 
 		case "CursoPropio":
 			result = agente.insert("INSERT INTO " + className + " VALUES('" + ((CursoPropio) E).get_id() + "','"  + ((CursoPropio) E).get_nombre() + "'," 
 					+ ((CursoPropio) E).get_eCTS() + ",'"  + ((CursoPropio) E).get_fechaInicio() + "','"  + ((CursoPropio) E).get_fechaFin() + "'," 
@@ -92,17 +129,17 @@ public class AbstractEntityDAO<E>{
 		case "Profesor":
 			result = agente.insert("INSERT INTO " + className + " VALUES('" + ((Profesor) E).get_dni() + "','" + ((Profesor) E).get_nombre() + "','"
 					 + ((Profesor) E).get_apellidos() + "'," + ((Profesor) E).is_doctor()+ "," + ((Profesor) E).get_centro() + ")");
-			break;
 		case "ProfesorExterno":
 			result = agente.insert("INSERT INTO " + className + " VALUES('" + ((ProfesorExterno) E).get_dni() + "','" + ((ProfesorExterno) E).get_titulacion() + "')");
 			break;
+			//INSERT INTO Matricula VALUES('2022-12-13',true,'jdsljhflkj','mic0','TRANSFERENCIA')
 		case "Matricula":
 			String senteciamatricula= "INSERT INTO " + className + " VALUES('" + ((Matricula) E).get_fecha() +  "'," + ((Matricula) E).is_pagado() + ",'"
 					+ ((Matricula) E).getId_estudiante() + "','"  + ((Matricula) E).getId_Curso() + "','"+((Matricula) E).get_tipoPago().toString()+"')";
 			result = agente.insert(senteciamatricula);
 			break;
 		case "Materia":
-			String sentencia= "INSERT INTO " + className + " VALUES('" + ((Materia) E).get_nombre()+ "',"+((Materia) E).get_horas() + ",'"+ ((Materia) E).get_fechaInicio() + "','" + ((Materia) E).get_fechaFin() +
+			String sentencia= "INSERT INTO " + className + " VALUES('" + ((Materia) E).getId_Materia()+ "',"+((Materia) E).get_nombre() + "',"+((Materia) E).get_horas() + ",'"+ ((Materia) E).get_fechaInicio() + "','" + ((Materia) E).get_fechaFin() +
 			"','"+ ((Materia) E).getId_Curso()+ "','" +((Materia) E).getId_prof_responsable() + "')";
 			result = agente.insert(sentencia);
 			break;
@@ -133,7 +170,6 @@ public class AbstractEntityDAO<E>{
 		case "Profesor":
 			result = agente.update("UPDATE " + className + " SET DNI='" + ((Profesor) E).get_dni() + "', NOMBRE='" + ((Profesor) E).get_nombre() + "', APELLIDOS='"
 					 + ((Profesor) E).get_apellidos() + "', DOCTOR=" + ((Profesor) E).is_doctor()+ ", CENTRO=" + ((Profesor) E).get_centro() + ")" + " WHERE DNI = '" + ((Profesor) E).get_dni() +"'");
-			break;
 		case "ProfesorExterno":
 			result = agente.update("UPDATE " + className + "SET DNI='" + ((ProfesorExterno) E).get_dni() + "', TITULACION='" + ((ProfesorExterno) E).get_titulacion() + "'"+ " WHERE DNI = '" + ((ProfesorExterno) E).get_dni() +"'");
 			break;
@@ -141,11 +177,10 @@ public class AbstractEntityDAO<E>{
 		case "Matricula":
 			result = agente.update("UPDATE " + className + "SET FECHA='" + ((Matricula) E).get_fecha() + "', PAGADO=" + ((Matricula) E).is_pagado() + ", DNIESTUDIANTE='"
 					+ ((Matricula) E).getId_estudiante() + "', IDCURSO='" + ((Matricula) E).getId_Curso() + "', MODOPAGO='" + ((Matricula) E).get_tipoPago()+ "' WHERE ID = '" + ((Matricula) E).getiD() + "'");
-			break;
 		case "Materia":
 			result = agente.update("UPDATE " + className + "SET NOMBRE='" + ((Materia) E).get_nombre()+ "', HORAS=" + ((Materia) E).get_horas() + ", FECHAINICIO='"
-					+ ((Materia) E).get_fechaInicio() + "', FECHAFIN='" + ((Materia) E).get_fechaFin() + "', IDCURSO='" + ((Materia) E).getId_Curso() + "', DNIPROFESOR='" + ((Materia) E).getId_prof_responsable()+ "' WHERE NOMBRE = '" 
-					+ ((Materia) E).get_nombre() +"'"); 
+					+ ((Materia) E).get_fechaInicio() + "', FECHAFIN='" + ((Materia) E).get_fechaFin() + "', IDCURSO='" + ((Materia) E).getId_Curso() + "', DNIPROFESOR='" + ((Materia) E).getId_prof_responsable()+ "' WHERE IDMATERIA = '" 
+					+ ((Materia) E).getId_Materia() +"'"); 
 			break;
 		case "Centro":
 			result = agente.update("UPDATE " + className + "SET ID=" + ((Centro) E).get_Id() + ", NOMBRE='" + ((Centro) E).get_nombre() + "', LOCALIZACION='" + ((Centro) E).get_localizacion() 
@@ -158,11 +193,15 @@ public class AbstractEntityDAO<E>{
 		}	
 		return result;
 	}
+	
 	public int delete (String iD, String Table, String keyName) {
 		int result = 0;
-		if (Table.equals(profesorExtString) || Table.equals(profesorUCLMString)) result = agente.update("DELETE FROM " + Table + " NATURAL JOIN PROFESOR WHERE "+keyName+" = " +iD);
+		if (Table.equals("ProfesorExterno") || Table.equals("ProfesorUCLM")) result = agente.update("DELETE FROM " + Table + " NATURAL JOIN PROFESOR WHERE "+keyName+" = " +iD);
 		else result = agente.update("DELETE FROM" + Table + " WHERE "+keyName+" = " +iD);
 		return result;
 	}
+	
+	
+	
 
 }

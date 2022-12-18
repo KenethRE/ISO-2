@@ -67,6 +67,11 @@ public class Matricula implements IdInterface{
 		this.agentematricula.realizarMatriculacion(this);
 
 	}
+	@Override
+	public String getId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }
