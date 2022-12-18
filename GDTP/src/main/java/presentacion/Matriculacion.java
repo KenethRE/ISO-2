@@ -29,6 +29,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.SQLDataException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -334,7 +335,11 @@ public class Matriculacion extends JFrame {
 					matricula.set_tipoPago(tipoPago.TARJETA_CREDITO);
 				}
 				estudiante.persist();
-				matricula.persist();
+				try {
+					matricula.persist();
+				} catch (NullPointerException e1) {
+					e1.printStackTrace();
+				}
 				JOptionPane.showMessageDialog(null, "Se ha creado la matricula con identificador: " + matricula.getiD(), "EXITO",
 				JOptionPane.INFORMATION_MESSAGE);
 				dispose();
