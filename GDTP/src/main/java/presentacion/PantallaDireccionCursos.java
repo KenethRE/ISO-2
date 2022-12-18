@@ -61,7 +61,6 @@ public class PantallaDireccionCursos extends JFrame{
 	Date fechaComienzo;
 	Date fechaFin;
 	int contador;
-	
 	private DefaultListModel modelo;
 	DefaultListModel modelomaterias = new DefaultListModel();
 	private static final long serialVersionUID = 1L;
