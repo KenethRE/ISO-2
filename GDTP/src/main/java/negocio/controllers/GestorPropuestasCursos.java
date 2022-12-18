@@ -1,7 +1,6 @@
 package negocio.controllers;
 
 import java.sql.SQLDataException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +10,7 @@ import persistencia.CursoPropioDAO;
 
 public class GestorPropuestasCursos {
 
-	public void realizarPropuestaCurso(CursoPropio aCurso) throws SQLException{
+	public void realizarPropuestaCurso(CursoPropio aCurso) throws SQLDataException{
 		CursoPropioDAO<CursoPropio> cursoPropioDao = new CursoPropioDAO<>() ;
 		cursoPropioDao.crearNuevoCurso(aCurso);
 		

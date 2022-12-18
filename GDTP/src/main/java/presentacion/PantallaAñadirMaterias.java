@@ -29,14 +29,14 @@ import java.sql.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 
-public class PantallaAnadirMaterias extends JFrame{
+public class PantallaAñadirMaterias extends JFrame{
 	JFrame previousWindow;
 	private JTextField textField;
 	private JTextField textField_1;
 	Date fechaComienzo2;
 	Date fechaFin2;
 	private ProfesorDAO<Profesor> agenteProfesorDAO = new ProfesorDAO<>();
-	public PantallaAnadirMaterias(DefaultListModel modelomaterias, JFrame previousWindow) {
+	public PantallaAñadirMaterias(DefaultListModel modelomaterias, JFrame previousWindow) {
 		this.previousWindow = previousWindow;
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		if (previousWindow != null) {

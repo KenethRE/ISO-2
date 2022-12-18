@@ -20,8 +20,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Date;
 import java.sql.SQLDataException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -55,7 +53,6 @@ import javax.swing.JTable;
 import javax.swing.JComboBox;
 import javax.management.modelmbean.ModelMBeanOperationInfo;
 import javax.management.openmbean.OpenMBeanAttributeInfoSupport;
-import javax.sound.midi.SysexMessage;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
@@ -63,45 +60,24 @@ public class PantallaDireccionCursos extends JFrame{
 	JFrame previousWindow;
 	Date fechaComienzo;
 	Date fechaFin;
-	int contador = 0;
+	int contador;
+	
 	private DefaultListModel modelo;
 	DefaultListModel modelomaterias = new DefaultListModel();
-	
-	
-	
-	private DefaultListModel modelo2;
-	//DefaultListModel modelomaterias = new DefaultListModel();
-	
-	
 	private static final long serialVersionUID = 1L;
 	private JTextField textField_1;
 	private JTextField txtNombreCurso;
 	private JTextField txtECTS;
 	private JTextField txtTasaMatricula;
 	private JTextField txtEdicion;
-	
-	private JTextField txtnombre5;
-	private JTextField txtects5;
-	private JTextField txttasa5;
-	private JTextField txtedicion5;
-	private JTextField txtfechainicio5;
-	private JTextField txtfechafin5;
-	private JTextField txtidcurso5;
-	
-	
-	private JTextField txtnom5;
-	private JTextField txthoras5;
-	private JTextField txtfecini5;
-	private JTextField txtfecfin5;
-	private JTextField txtidprofesor5;
-
-	
-	
-	private CursoPropioDAO<CursoPropio> agenteCursoPropioDAO = new CursoPropioDAO();
-	private MateriaDAO<Materia> agenteMateriaDAO=new MateriaDAO();
-	private JTextField txtidmateria5;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JTextField textField_7;
+	private JTextField textField_8;
+	private JTextField textField_9;
 	
 	public PantallaDireccionCursos(JFrame previousWindow) {
+		contador= (int)(Math.random()*90+1);
 		this.previousWindow = previousWindow;
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		if (previousWindow != null) {
@@ -113,30 +89,30 @@ public class PantallaDireccionCursos extends JFrame{
 			});
 		}
 		setTitle("Pantalla Director Cursos");
-		setBounds(100, 100, 857, 626);
+		setBounds(100, 100, 544, 547);
 		setResizable(false);
 		getContentPane().setLayout(new CardLayout(0, 0));
-		JTabbedPane pestanas=new JTabbedPane();
-		getContentPane().add(pestanas, "name_000");
+		JTabbedPane pestañas=new JTabbedPane();
+		getContentPane().add(pestañas, "name_000");
 		JLabel lblFechaInicio = new JLabel("Fecha Inicio");
 		lblFechaInicio.setBounds(25, 320, 59, 14);
 		Properties propiedadesfecha = new Properties();
 		propiedadesfecha.put("text.today","Hoy");
 		propiedadesfecha.put("text.month","Mes");
-		propiedadesfecha.put("text.year","AÃ±o");
+		propiedadesfecha.put("text.year","Año");
 		
 		
 		this.addWindowListener(new WindowAdapter() {
 			public void windowOpened(WindowEvent e) {
 			}
 		});
-	
+		
 	
 		JDatePanelImpl panelfechainicio = new JDatePanelImpl(new UtilDateModel(),propiedadesfecha);
 		JDatePanelImpl panelfechafin = new JDatePanelImpl(new UtilDateModel(),propiedadesfecha);
 		JPanel panel1 = new JPanel();
 		panel1.setLayout(null);
-		pestanas.addTab("Alta Curso",panel1);
+		pestañas.addTab("Alta Curso",panel1);
 		
 		JLabel lblNewLabel = new JLabel("Nombre");
 		lblNewLabel.setBounds(31, 44, 49, 14);
@@ -195,17 +171,11 @@ public class PantallaDireccionCursos extends JFrame{
 		panel1.add(txtEdicion);
 		modelo=new DefaultListModel<>();
 		
-		
-		
-		modelo2=new DefaultListModel<>();
-		
-		
-		
-		JButton btnNewButton = new JButton("AÃ±adir Materias");
+		JButton btnNewButton = new JButton("Añadir Materias");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PantallaAnadirMaterias anadirMaterias = new PantallaAnadirMaterias(modelomaterias, previousWindow);
-				anadirMaterias.setVisible(true);
+				PantallaAñadirMaterias añadirMaterias = new PantallaAñadirMaterias(modelomaterias, previousWindow);
+				añadirMaterias.setVisible(true);
 			}
 		});
 		btnNewButton.setBounds(10, 306, 124, 23);
@@ -242,7 +212,7 @@ public class PantallaDireccionCursos extends JFrame{
 		listamaterias.setModel(modelomaterias);
 		listamaterias.setBounds(161, 309, 156, 128);
 		panel1.add(listamaterias);
-		
+		// el boton guardar curso realiza las lamadas a los gestores de bd para guardar elk curso y las materias
 		JButton btnNewButton_1 = new JButton("Guardar Curso");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -297,7 +267,7 @@ public class PantallaDireccionCursos extends JFrame{
 		
 		
 		JPanel panel = new JPanel();
-		pestanas.addTab("Editar Curso", null, panel, null);
+		pestañas.addTab("Editar Curso", null, panel, null);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel_8 = new JLabel("Nombre");
@@ -305,11 +275,21 @@ public class PantallaDireccionCursos extends JFrame{
 		panel.add(lblNewLabel_8);
 		lblNewLabel_8.setVisible(false);
 		
-		txtnombre5 = new JTextField();
-		txtnombre5.setColumns(10);
-		txtnombre5.setBounds(80, 41, 185, 20);
-		panel.add(txtnombre5);
-		txtnombre5.setVisible(false);
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(75, 41, 185, 20);
+		panel.add(textField_5);
+		textField_5.setVisible(false);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("Fecha Inicio");
+		lblNewLabel_1_1.setBounds(30, 148, 93, 14);
+		panel.add(lblNewLabel_1_1);
+		lblNewLabel_1_1.setVisible(false);
+		
+		JLabel lblNewLabel_2_1 = new JLabel("Fecha Fin");
+		lblNewLabel_2_1.setBounds(231, 148, 49, 14);
+		panel.add(lblNewLabel_2_1);
+		lblNewLabel_2_1.setVisible(false);
 		
 		JLabel lblNewLabel_3_1 = new JLabel("ECTS");
 		lblNewLabel_3_1.setBounds(21, 76, 34, 14);
@@ -317,812 +297,84 @@ public class PantallaDireccionCursos extends JFrame{
 		lblNewLabel_3_1.setVisible(false);
 		
 		JLabel lblNewLabel_4_1 = new JLabel("Tasa");
-		lblNewLabel_4_1.setBounds(156, 79, 34, 14);
+		lblNewLabel_4_1.setBounds(161, 76, 34, 14);
 		panel.add(lblNewLabel_4_1);
 		lblNewLabel_4_1.setVisible(false);
 		
 		JLabel lblNewLabel_5_1 = new JLabel("Edicion");
-		lblNewLabel_5_1.setBounds(21, 111, 49, 14);
+		lblNewLabel_5_1.setBounds(21, 103, 49, 14);
 		panel.add(lblNewLabel_5_1);
 		lblNewLabel_5_1.setVisible(false);
 		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(85, 72, 49, 20);
+		panel.add(textField_6);
+		textField_6.setVisible(false);
 		
-		JLabel lblfechainicio5 = new JLabel("FEcha de inicio");
-		lblfechainicio5.setBounds(21, 139, 93, 14);
-		panel.add(lblfechainicio5);
-		lblfechainicio5.setVisible(false);
+		textField_7 = new JTextField();
+		textField_7.setColumns(10);
+		textField_7.setBounds(211, 72, 49, 20);
+		panel.add(textField_7);
+		textField_7.setVisible(false);
 		
-		JLabel lblfechafin5 = new JLabel("FEcha de fin");
-		lblfechafin5.setBounds(184, 142, 78, 14);
-		panel.add(lblfechafin5);
-		lblfechafin5.setVisible(false);
+		textField_8 = new JTextField();
+		textField_8.setColumns(10);
+		textField_8.setBounds(80, 100, 49, 20);
+		panel.add(textField_8);
+		textField_8.setVisible(false);
 		
-		
-
-		JLabel lblmateria = new JLabel("MATERIA");
-		lblmateria.setBounds(11, 372, 73, 23);
-		panel.add(lblmateria);
-		lblmateria.setVisible(false);
-		
-		
-		JLabel lblhoras = new JLabel("Horas");
-		lblhoras.setBounds(11, 431, 59, 14);
-		panel.add(lblhoras);
-		lblhoras.setVisible(false);
-		
-		JLabel lblidprofesor = new JLabel("ID PROFESOR");
-		lblidprofesor.setBounds(11, 406, 103, 14);
-		panel.add(lblidprofesor);
-		lblidprofesor.setVisible(false);
-		
-		
-		JLabel lblfecini5 = new JLabel("FEcha de inicio");
-		lblfecini5.setBounds(11, 456, 93, 14);
-		panel.add(lblfecini5);
-		lblfecini5.setVisible(false);
-		
-		JLabel lblfecfin5 = new JLabel("FEcha de fin");
-		lblfecfin5.setBounds(11, 484, 113, 14);
-		panel.add(lblfecfin5);
-		lblfecfin5.setVisible(false);
-		
-		
-		
-
-		
-		txtects5 = new JTextField();
-		txtects5.setColumns(10);
-		txtects5.setBounds(65, 73, 49, 20);
-		panel.add(txtects5);
-		txtects5.setVisible(false);
-		
-		txttasa5 = new JTextField();
-		txttasa5.setColumns(10);
-		txttasa5.setBounds(189, 73, 59, 20);
-		panel.add(txttasa5);
-		txttasa5.setVisible(false);
-		
-		txtedicion5 = new JTextField();
-		txtedicion5.setColumns(10);
-		txtedicion5.setBounds(65, 108, 59, 20);
-		panel.add(txtedicion5);
-		txtedicion5.setVisible(false);
-		
-		
-		
-		txtfechainicio5 = new JTextField();
-		txtfechainicio5.setColumns(10);
-		txtfechainicio5.setBounds(111, 136, 62, 20);
-		panel.add(txtfechainicio5);
-		txtfechainicio5.setVisible(false);
-		
-		txtfechafin5 = new JTextField();
-		txtfechafin5.setColumns(10);
-		txtfechafin5.setBounds(267, 139, 68, 20);
-		panel.add(txtfechafin5);
-		txtfechafin5.setVisible(false);
-		
-		
-		
-/*===*/
-		txtnom5 = new JTextField();
-		txtnom5.setColumns(10);
-		txtnom5.setBounds(85, 373, 163, 20);
-		panel.add(txtnom5);
-		txtnom5.setVisible(false);
-		
-		txthoras5 = new JTextField();
-		txthoras5.setColumns(10);
-		txthoras5.setBounds(65, 428, 183, 20);
-		panel.add(txthoras5);
-		txthoras5.setVisible(false);
-		
-		txtidprofesor5 = new JTextField();
-		txtidprofesor5.setColumns(10);
-		txtidprofesor5.setBounds(111, 403, 137, 20);
-		panel.add(txtidprofesor5);
-		txtidprofesor5.setVisible(false);
-		
-		
-		
-		txtfecini5 = new JTextField();
-		txtfecini5.setColumns(10);
-		txtfecini5.setBounds(114, 453, 134, 20);
-		panel.add(txtfecini5);
-		txtfecini5.setVisible(false);
-		
-		txtfecfin5 = new JTextField();
-		txtfecfin5.setColumns(10);
-		txtfecfin5.setBounds(111, 481, 137, 20);
-		panel.add(txtfecfin5);
-		txtfecfin5.setVisible(false);
-		
-		JLabel lblidmateria = new JLabel("Id materia");
-		lblidmateria.setBounds(11, 536, 59, 14);
-		panel.add(lblidmateria);
-		lblidmateria.setVisible(false);
-		
-		txtidmateria5 = new JTextField();
-		txtidmateria5.setBounds(78, 533, 125, 20);
-		panel.add(txtidmateria5);
-		txtidmateria5.setColumns(10);
-		txtidmateria5.setVisible(false);
+		JButton btnNewButton_2 = new JButton("Añadir Materias");
+		btnNewButton_2.setBounds(30, 314, 111, 23);
+		panel.add(btnNewButton_2);
+		btnNewButton_2.setVisible(false);
 		
 		JLabel lblNewLabel_6_1 = new JLabel("Id Curso");
 		lblNewLabel_6_1.setBounds(21, 11, 49, 14);
 		panel.add(lblNewLabel_6_1);
 		
-		JList jlista1 = new JList();
-		jlista1.setBounds(10, 175, 306, 140);
-		panel.add(jlista1);
-		jlista1.setVisible(false);
-
-		DefaultListModel<String> modelo2=new DefaultListModel<>();
-		jlista1.setModel(modelo2);
+		JList list_1 = new JList();
+		list_1.setBounds(178, 317, 188, 140);
+		panel.add(list_1);
+		list_1.setVisible(false);
 		
-		txtidcurso5 = new JTextField();
-		txtidcurso5.setBounds(76, 8, 48, 20);
-		panel.add(txtidcurso5);
-		txtidcurso5.setColumns(10);
-		JButton btnNewButton_3_2 = new JButton("Registrar Materia");
-		btnNewButton_3_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				
-				
-				if (txtidcurso5.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "EL ID ESTA VACIO");
-					txtidcurso5.requestFocus();
-					
-					}
-					else {
-						
-						
-					
-						
-						//modelo2.addElement("ID:"+" - Materia: ");
-						
-						String materia=txtnom5.getText().toString();
-						String idprofesor=txtidprofesor5.getText().toString();
-						String horas=txthoras5.getText().toString();
-						
-						
-						SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
-						
-						String fechainis=txtfecini5.getText().toString();
-						Date fechaini = null;
-						
-						try {
-							fechaini = (Date) formato.parse(fechainis);
-						} catch (ParseException e3) {
-							// TODO Auto-generated catch block
-							e3.printStackTrace();
-						}
-						
-						String fechafins=txtfecfin5.getText().toString();
-						Date fechafin = null;
-						
-						try {
-							fechafin = (Date) formato.parse(fechafins);
-						} catch (ParseException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-						
-						String idcurso=txtidcurso5.getText().toString();
-						String idmateria=txtidmateria5.getText().toString();
-						
-						
-						
-						/*===== PROCESO DE INSERCION =======*/
-						
-						try {
-							Materia m=new Materia();
-							m.setId_Materia(idmateria);
-							m.set_nombre(materia);
-							m.setId_prof_responsable(idprofesor);
-							m.set_horas(Double.parseDouble(horas));
-							m.set_fechaInicio(fechaini);
-							m.set_fechaFin(fechafin);
-							m.setId_Curso(idcurso);
-							
-							int verificar = agenteMateriaDAO.crearNuevaMateria(m);
-							
-							if(verificar!=0)
-							{
-								JOptionPane.showMessageDialog(null, "SE REGISTRO LA MATERIA EN EL CURSO CON EL ID DE CURSO: "+idcurso);
-							}
-							else
-							{
-								JOptionPane.showMessageDialog(null, "NO SE PUDO REGISTRAR LA MATERIA EN EL CURSO CON ID: "+idcurso);
-							}
-							
-							
-							
-							
-							
-						} catch (Exception e2) {
-							JOptionPane.showMessageDialog(null, "Curso no encontrados "
-									+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE);
-						}
-						
-						
-						
-						/*===================================*/
-						/*List<CursoPropio> Cursos = new ArrayList<CursoPropio>();*/
-					 
-						
-						CursoPropio Curso = new CursoPropio();
-						
-						List<Materia> materias = new ArrayList<Materia>();
-						
-						modelo.removeAllElements();
-						
-						
-						
-						try {
-							Curso = agenteCursoPropioDAO.datosdecurso(idcurso);
-							txtnombre5.setText(Curso.get_nombre());
-							txtects5.setText(""+Curso.get_eCTS());
-							txttasa5.setText(String.valueOf(Curso.get_tasaMatricula()));
-							txtedicion5.setText(""+Curso.get_edicion());
-							txtfechainicio5.setText(""+Curso.get_fechaInicio());
-							txtfechafin5.setText(""+Curso.get_fechaFin());
-							
-							materias = agenteMateriaDAO.listarMateriasCurso(idcurso);
-							
-							
-							
-							for (int i=0; i<materias.size();i++) {
-								//modelocursos.addElement(Cursos.get(i));
-								
-								//System.out.println(Cursos.get(i));
-								modelo.addElement("ID:"+materias.get(i).getId_Materia()+" - Materia: "+materias.get(i).get_nombre());
-							}
-						} catch (Exception e2) {
-							JOptionPane.showMessageDialog(null, "Curso no encontrados "
-									+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE);
-						}
-						
-						
-						
-					 txtnom5.setText("");
-						
-					}
-				
-				
-				
-				
-				
-				
-				
-				
-				
-			}
-		});
-		btnNewButton_3_2.setBounds(31, 337, 142, 23);
-		panel.add(btnNewButton_3_2);
+		JButton btnNewButton_1_1 = new JButton("Guardar Curso");
+		btnNewButton_1_1.setBounds(417, 382, 121, 23);
+		panel.add(btnNewButton_1_1);
+		btnNewButton_1_1.setVisible(false);
 		
-		JButton btnNewButton_3_3 = new JButton("Modificar Materia");
-		btnNewButton_3_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				
-				
-				
-				if (txtidcurso5.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "EL ID ESTA VACIO");
-					txtidcurso5.requestFocus();
-					
-					}else
-					if (txtidmateria5.getText().isEmpty()) {
-							JOptionPane.showMessageDialog(null, "EL ID ESTA VACIO");
-							txtidmateria5.requestFocus();
-							
-							}
-					else {
-						
-						
-					
-						
-						//modelo2.addElement("ID:"+" - Materia: ");
-						
-						String materia=txtnom5.getText().toString();
-						String idprofesor=txtidprofesor5.getText().toString();
-						String horas=txthoras5.getText().toString();
-						
-						
-						SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
-						
-						String fechainis=txtfecini5.getText().toString();
-						Date fechaini = null;
-						
-						try {
-							fechaini = (Date) formato.parse(fechainis);
-						} catch (ParseException e3) {
-							// TODO Auto-generated catch block
-							e3.printStackTrace();
-						}
-						
-						String fechafins=txtfecfin5.getText().toString();
-						Date fechafin = null;
-						
-						try {
-							fechafin = (Date) formato.parse(fechafins);
-						} catch (ParseException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-						
-						String idcurso=txtidcurso5.getText().toString();
-						String idmateria=txtidmateria5.getText().toString();
-						
-						
-						
-						/*===== PROCESO DE MODIFICAR =======*/
-						
-						try {
-							Materia m=new Materia();
-							m.setId_Materia(idmateria);
-							m.set_nombre(materia);
-							m.setId_prof_responsable(idprofesor);
-							m.set_horas(Double.parseDouble(horas));
-							m.set_fechaInicio(fechaini);
-							m.set_fechaFin(fechafin);
-							m.setId_Curso(idcurso);
-							
-							int verificar = agenteMateriaDAO.editarMateria(m);
-							
-							if(verificar!=0)
-							{
-								JOptionPane.showMessageDialog(null, "SE MODIFICO LA MATERIA EN EL CURSO CON EL ID DE CURSO: "+idcurso);
-							}
-							else
-							{
-								JOptionPane.showMessageDialog(null, "NO SE PUDO MODIFICO LA MATERIA EN EL CURSO CON ID: "+idcurso);
-							}
-							
-							
-							
-							
-							
-						} catch (Exception e2) {
-							JOptionPane.showMessageDialog(null, "Curso no encontrados "
-									+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE);
-						}
-						
-						
-						
-						/*===================================*/
-						/*List<CursoPropio> Cursos = new ArrayList<CursoPropio>();*/
-					 
-						
-						CursoPropio Curso = new CursoPropio();
-						
-						List<Materia> materias = new ArrayList<Materia>();
-						
-						modelo.removeAllElements();
-						
-						
-						
-						try {
-							Curso = agenteCursoPropioDAO.datosdecurso(idcurso);
-							txtnombre5.setText(Curso.get_nombre());
-							txtects5.setText(""+Curso.get_eCTS());
-							txttasa5.setText(String.valueOf(Curso.get_tasaMatricula()));
-							txtedicion5.setText(""+Curso.get_edicion());
-							txtfechainicio5.setText(""+Curso.get_fechaInicio());
-							txtfechafin5.setText(""+Curso.get_fechaFin());
-							
-							materias = agenteMateriaDAO.listarMateriasCurso(idcurso);
-							
-							
-							
-							for (int i=0; i<materias.size();i++) {
-								//modelocursos.addElement(Cursos.get(i));
-								
-								//System.out.println(Cursos.get(i));
-								modelo.addElement("ID:"+materias.get(i).getId_Materia()+" - Materia: "+materias.get(i).get_nombre());
-							}
-						} catch (Exception e2) {
-							JOptionPane.showMessageDialog(null, "Curso no encontrados "
-									+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE);
-						}
-						
-						
-						
-					 txtnom5.setText("");
-						
-					}
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-			}
-		});
-		btnNewButton_3_3.setBounds(285, 527, 150, 23);
-		panel.add(btnNewButton_3_3);
-		
-		JButton btnNewButton_3_4 = new JButton("Eliminar Materia");
-		btnNewButton_3_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				
-			
-					if (txtidmateria5.getText().isEmpty()) {
-							JOptionPane.showMessageDialog(null, "EL ID ESTA VACIO");
-							txtidmateria5.requestFocus();
-							
-							}
-					else {
-						
-						
-					
-						
-						//modelo2.addElement("ID:"+" - Materia: ");
-						
-						String materia=txtnom5.getText().toString();
-						String idprofesor=txtidprofesor5.getText().toString();
-						String horas=txthoras5.getText().toString();
-						
-						
-						SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
-						
-						String fechainis=txtfecini5.getText().toString();
-						Date fechaini = null;
-						
-						try {
-							fechaini = (Date) formato.parse(fechainis);
-						} catch (ParseException e3) {
-							// TODO Auto-generated catch block
-							e3.printStackTrace();
-						}
-						
-						String fechafins=txtfecfin5.getText().toString();
-						Date fechafin = null;
-						
-						try {
-							fechafin = (Date) formato.parse(fechafins);
-						} catch (ParseException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-						
-						String idcurso=txtidcurso5.getText().toString();
-						String idmateria=txtidmateria5.getText().toString();
-						
-						
-						
-						/*===== PROCESO DE MODIFICAR =======*/
-						
-						try {
-							Materia m=new Materia();
-							m.setId_Materia(idmateria);
-							
-							/*m.set_nombre(materia);
-							m.setId_prof_responsable(idprofesor);
-							m.set_horas(Double.parseDouble(horas));
-							m.set_fechaInicio(fechaini);
-							m.set_fechaFin(fechafin);
-							m.setId_Curso(idcurso);*/
-							
-							int verificar = agenteMateriaDAO.EliminarMateria(m);
-							
-							if(verificar!=0)
-							{
-								JOptionPane.showMessageDialog(null, "SE ELIMINO LA MATERIA EN EL CURSO CON EL ID DE CURSO: "+idcurso);
-							}
-							else
-							{
-								JOptionPane.showMessageDialog(null, "NO SE PUDO ELIMINAR LA MATERIA EN EL CURSO CON ID: "+idcurso);
-							}
-							
-							
-							
-							
-							
-						} catch (Exception e2) {
-							JOptionPane.showMessageDialog(null, "MATERIA no encontrados "
-									+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE);
-						}
-						
-						
-						
-						/*===================================*/
-						/*List<CursoPropio> Cursos = new ArrayList<CursoPropio>();*/
-					 
-						
-						CursoPropio Curso = new CursoPropio();
-						
-						List<Materia> materias = new ArrayList<Materia>();
-						
-						modelo.removeAllElements();
-						
-						
-						
-						try {
-							/*Curso = agenteCursoPropioDAO.datosdecurso(idcurso);
-							txtnombre5.setText(Curso.get_nombre());
-							txtects5.setText(""+Curso.get_eCTS());
-							txttasa5.setText(String.valueOf(Curso.get_tasaMatricula()));
-							txtedicion5.setText(""+Curso.get_edicion());
-							txtfechainicio5.setText(""+Curso.get_fechaInicio());
-							txtfechafin5.setText(""+Curso.get_fechaFin());*/
-							
-							materias = agenteMateriaDAO.listarMateriasCurso(idcurso);
-							
-							
-							
-							for (int i=0; i<materias.size();i++) {
-								//modelocursos.addElement(Cursos.get(i));
-								
-								//System.out.println(Cursos.get(i));
-								modelo.addElement("ID:"+materias.get(i).getId_Materia()+" - Materia: "+materias.get(i).get_nombre());
-							}
-						} catch (Exception e2) {
-							JOptionPane.showMessageDialog(null, "Curso no encontrados "
-									+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE);
-						}
-						
-						
-						
-					 txtnom5.setText("");
-						
-					}
-				
-				
-				
-				
-			}
-		});
-		btnNewButton_3_4.setBounds(473, 527, 163, 23);
-		panel.add(btnNewButton_3_4);
-		
-		JButton btnNewButton_3_1 = new JButton("Buscar materia");
-		
-		btnNewButton_3_1.setBounds(3, 502, 111, 23);
-		panel.add(btnNewButton_3_1);
-	
-		btnNewButton_3_2.setVisible(false);
-		btnNewButton_3_3.setVisible(false);
-		btnNewButton_3_4.setVisible(false);
-		btnNewButton_3_1.setVisible(false);
-		
+		textField_9 = new JTextField();
+		textField_9.setBounds(75, 10, 48, 20);
+		panel.add(textField_9);
+		textField_9.setColumns(10);
+		// esta accion hay que realizarla todavia
 		JButton btnNewButton_3 = new JButton("Buscar curso");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (txtidcurso5.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(null, "EL ID ESTA VACIO");
-				txtidcurso5.requestFocus();
+				if (textField_9.getText().isEmpty()) {
 				
+					
 				}
 				else {
-					//String id = textField_9.getText();
-					//CursoPropio cp = new CursoPropio(id);
-					//agenteCursoPropioDAO.seleccionarCurso(cp);
-					//System.out.println("curso:"+cp);
-					//List<CursoPropio> cp = agenteCursoPropioDAO.get(new CursoPropio(id));
 					lblNewLabel_8.setVisible(true);
-					txtnombre5.setVisible(true);
-					lblfechainicio5.setVisible(true);
-					lblfechafin5	.setVisible(true);
+					textField_5.setVisible(true);
+					lblNewLabel_1_1.setVisible(true);
+					lblNewLabel_2_1	.setVisible(true);
 					lblNewLabel_3_1.setVisible(true);
 					lblNewLabel_4_1.setVisible(true);
 					lblNewLabel_5_1.setVisible(true);
-					
-				
-					
-					
-					txtects5.setVisible(true);
-					txttasa5.setVisible(true);
-					txtedicion5.setVisible(true);
-					
-					txtfechainicio5.setVisible(true);
-					txtfechafin5.setVisible(true);
-					
-					
-					jlista1.setVisible(true);
-					
-					btnNewButton_3_1.setVisible(true);
-					btnNewButton_3_2.setVisible(true);
-					btnNewButton_3_3.setVisible(true);
-					btnNewButton_3_4.setVisible(true);
-					
-					
-					txtnom5.setVisible(true);
-					txtidprofesor5.setVisible(true);
-					txthoras5.setVisible(true);
-					txtfecini5.setVisible(true);
-					txtfecfin5.setVisible(true);
-					txtidmateria5.setVisible(true);
-					
-					lblmateria.setVisible(true);
-					lblidprofesor.setVisible(true);
-					lblhoras.setVisible(true);
-					lblfecini5.setVisible(true);
-					lblfecfin5.setVisible(true);
-					lblidmateria.setVisible(true);
-					
-					
-					
-					
-					
-					
-					//modelo2.addElement("ID:"+" - Materia: ");
-					
-					
-					
-					
-					String idcurso=txtidcurso5.getText().toString();
-					
-					/*List<CursoPropio> Cursos = new ArrayList<CursoPropio>();*/
-				 
-					CursoPropio Curso = new CursoPropio();
-					
-					
-					List<Materia> materias = new ArrayList<Materia>();
-					
-					modelo.removeAllElements();
-					
-					
-					
-					try {
-						Curso = agenteCursoPropioDAO.datosdecurso(idcurso);
-						txtnombre5.setText(Curso.get_nombre());
-						txtects5.setText(""+Curso.get_eCTS());
-						txttasa5.setText(String.valueOf(Curso.get_tasaMatricula()));
-						txtedicion5.setText(""+Curso.get_edicion());
-						txtfechainicio5.setText(""+Curso.get_fechaInicio());
-						txtfechafin5.setText(""+Curso.get_fechaFin());
-						
-						materias = agenteMateriaDAO.listarMateriasCurso(idcurso);
-						
-						
-						
-						for (int i=0; i<materias.size();i++) {
-							//modelocursos.addElement(Cursos.get(i));
-							
-							//System.out.println(Cursos.get(i));
-							modelo.addElement("ID:"+materias.get(i).getId_Materia()+" - Materia: "+materias.get(i).get_nombre());
-						}
-					} catch (Exception e2) {
-						JOptionPane.showMessageDialog(null, "Curso no encontrados "
-								+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE);
-					}
-					
-					
-					
-					//textField_5.setText(cp.get_nombre());
-					//textField_6.setText(cp.get_eCTS().toString());
+					textField_6.setVisible(true);
+					textField_7.setVisible(true);
+					textField_8.setVisible(true);
+					btnNewButton_2.setVisible(true);
+					list_1.setVisible(true);
+					btnNewButton_1_1.setVisible(true);
 					
 				}
-				
-				
-			
-				
-				
 			}
-			
-			
-			
-		
-			
-			
 		});
-		
-		
-	
-		
-		
 		btnNewButton_3.setBounds(205, 7, 111, 23);
 		panel.add(btnNewButton_3);
-		
-		
-		
-	
-		btnNewButton_3_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				if (txtidmateria5.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "EL ID ESTA VACIO");
-					txtidmateria5.requestFocus();
-					
-					}
-					else {
-						//String id = textField_9.getText();
-						//CursoPropio cp = new CursoPropio(id);
-						//agenteCursoPropioDAO.seleccionarCurso(cp);
-						//System.out.println("curso:"+cp);
-						//List<CursoPropio> cp = agenteCursoPropioDAO.get(new CursoPropio(id));
-						
-					
-					
-						
-						
-						//modelo2.addElement("ID:"+" - Materia: ");
-						
-						
-						
-						
-						String idmateria=txtidmateria5.getText().toString();
-						
-						String idcurso=txtidcurso5.getText().toString();
-						
-						
-						/*List<CursoPropio> Cursos = new ArrayList<CursoPropio>();*/
-					 
-						Materia materia = new Materia();
-						
-						
-						List<Materia> materias = new ArrayList<Materia>();
-						
-						modelo.removeAllElements();
-						
-						
-						
-						try {
-							materia = agenteMateriaDAO.datosdemateria(idmateria);
-							txtnom5.setText(materia.get_nombre());
-							txtidprofesor5.setText(""+materia.getId_prof_responsable());
-							txthoras5.setText(String.valueOf(materia.get_horas()));
-							txtfecini5.setText(""+materia.get_fechaInicio());
-							txtfechafin5.setText(""+materia.get_fechaFin());
-							txtidmateria5.setText(""+materia.getId_Materia());
-							
-							materias = agenteMateriaDAO.listarMateriasCurso(idcurso);
-							
-							
-							
-							for (int i=0; i<materias.size();i++) {
-								//modelocursos.addElement(Cursos.get(i));
-								
-								//System.out.println(Cursos.get(i));
-								modelo.addElement("ID:"+materias.get(i).getId_Materia()+" - Materia: "+materias.get(i).get_nombre());
-							}
-						} catch (Exception e2) {
-							JOptionPane.showMessageDialog(null, "Curso no encontrados "
-									+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE);
-						}
-						
-						
-						
-						//textField_5.setText(cp.get_nombre());
-						//textField_6.setText(cp.get_eCTS().toString());
-						
-					}
-				
-				
-			}
-		});
-		
-		
-		
-		
-		
-		
-	
 		
 		
 		
