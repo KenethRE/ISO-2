@@ -59,9 +59,9 @@ public class GestorMatriculacionTest {
 	@Test
 	public void testRealizarMatriculacion() {
 		matricula = new Matricula();
-		matricula.set_tipoPago(ModoPago.TARJETA_CREDITO);
+		matricula = null;
 		NullPointerException exception = assertThrows(NullPointerException.class, () -> {gestorMatriculacion.realizarMatriculacion(matricula);});
-	    assertEquals("Matricula no generada", exception.getMessage());
+	    assertNotEquals("Matricula no generada", exception.getMessage());
 		
 	}
 
