@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Disabled;
 
 import negocio.entities.EstadoCurso;
 import negocio.entities.TipoCurso;
+import presentacion.Initialization;
 
 /**
  * @author plati
@@ -30,6 +31,7 @@ public class GestorConsultasTest {
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		Initialization.main();
 	}
 
 	/**
@@ -47,6 +49,7 @@ public class GestorConsultasTest {
 		fechacomienzoDate= new java.sql.Date(System.currentTimeMillis());
 		fechafinDate= new java.sql.Date(System.currentTimeMillis()+254845121);
 		gestorConsultas= new GestorConsultas();
+		
 	}
 
 	/**
