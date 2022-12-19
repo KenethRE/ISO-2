@@ -65,6 +65,8 @@ public class PantallaDireccionCursos extends JFrame{
 	int contador;
 	private DefaultListModel modelo;
 	DefaultListModel modelomaterias = new DefaultListModel();
+	DefaultListModel modelomaterias2 = new DefaultListModel();
+	DefaultListModel modelomateriasnuevas = new DefaultListModel();
 	private static final long serialVersionUID = 1L;
 	private JTextField textField_1;
 	private JTextField txtNombreCurso;
@@ -76,6 +78,8 @@ public class PantallaDireccionCursos extends JFrame{
 	private JTextField textField_7;
 	private JTextField textField_8;
 	private GestorConsultas gestorConsultas = new GestorConsultas();
+	private MateriaDAO<Materia> materiasDao = new MateriaDAO<Materia>();
+	private CursoPropio Cursoencontrado = new CursoPropio();
 	
 	public PantallaDireccionCursos(JFrame previousWindow) {
 		contador= (int)(Math.random()*90+1);
@@ -179,7 +183,7 @@ public class PantallaDireccionCursos extends JFrame{
 				añadirMaterias.setVisible(true);
 			}
 		});
-		btnNewButton.setBounds(10, 306, 124, 23);
+		btnNewButton.setBounds(10, 326, 124, 23);
 		panel1.add(btnNewButton);
 		
 		JComboBox <TipoCurso> cbTipoCurso = new JComboBox<TipoCurso>();
@@ -197,7 +201,7 @@ public class PantallaDireccionCursos extends JFrame{
 			}
 			
 		});
-		Elimnarmaterias.setBounds(10, 340, 124, 23);
+		Elimnarmaterias.setBounds(10, 360, 124, 23);
 		panel1.add(Elimnarmaterias);
 		Elimnarmaterias.setVisible(false);
 		
@@ -213,6 +217,7 @@ public class PantallaDireccionCursos extends JFrame{
 		listamaterias.setModel(modelomaterias);
 		listamaterias.setBounds(161, 309, 156, 128);
 		panel1.add(listamaterias);
+		
 		// el boton guardar curso realiza las lamadas a los gestores de bd para guardar elk curso y las materias
 		JButton btnNewButton_1 = new JButton("Guardar Curso");
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -326,7 +331,13 @@ public class PantallaDireccionCursos extends JFrame{
 		textField_8.setVisible(false);
 		
 		JButton btnNewButton_2 = new JButton("Añadir Materias");
-		btnNewButton_2.setBounds(30, 314, 111, 23);
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PantallaAñadirMaterias añadirMaterias = new PantallaAñadirMaterias(modelomateriasnuevas, previousWindow);
+				añadirMaterias.setVisible(true);
+			}
+		});
+		btnNewButton_2.setBounds(27, 301, 121, 23);
 		panel.add(btnNewButton_2);
 		btnNewButton_2.setVisible(false);
 		
@@ -335,12 +346,13 @@ public class PantallaDireccionCursos extends JFrame{
 		panel.add(lblNewLabel_6_1);
 		
 		JList list_1 = new JList();
-		list_1.setBounds(178, 317, 188, 140);
+		list_1.setBounds(203, 317, 126, 140);
 		panel.add(list_1);
 		list_1.setVisible(false);
 		
 		JButton btnNewButton_1_1 = new JButton("Guardar Curso");
-		btnNewButton_1_1.setBounds(27, 361, 121, 23);
+		
+		btnNewButton_1_1.setBounds(27, 419, 121, 23);
 		panel.add(btnNewButton_1_1);
 		btnNewButton_1_1.setVisible(false);
 		
@@ -368,11 +380,42 @@ public class PantallaDireccionCursos extends JFrame{
 		panel.add(PanelFechaFin2);
 		PanelFechaComienzo2.add(fechainicio2);
 		PanelFechaFin2.add(fechafin2);
+		PanelFechaComienzo2.setVisible(false);
+		PanelFechaFin2.setVisible(false);
+
+		JButton btnEliminarMateria = new JButton("Eliminar Materia guardada");
+		btnEliminarMateria.setVerticalAlignment(SwingConstants.TOP);
 		
-		// esta accion hay que realizarla todavia
+		btnEliminarMateria.setBounds(10, 335, 185, 23);
+		panel.add(btnEliminarMateria);
+		btnEliminarMateria.setEnabled(false);
+		
+		JLabel lblMateriasGuardadas = new JLabel("Materias guardadas");
+		lblMateriasGuardadas.setBounds(203, 286, 126, 20);
+		panel.add(lblMateriasGuardadas);
+		lblMateriasGuardadas.setVisible(false);
+		
+		JList listamateriasnuevas = new JList();
+		listamateriasnuevas.setBounds(371, 317, 121, 140);
+		panel.add(listamateriasnuevas);
+		listamateriasnuevas.setModel(modelomateriasnuevas);
+		listamateriasnuevas.setVisible(false);
+		
+		JLabel lblMateriasNuevas = new JLabel("Materias nuevas");
+		lblMateriasNuevas.setBounds(386, 286, 106, 20);
+		panel.add(lblMateriasNuevas);
+		lblMateriasNuevas.setVisible(false);
+		btnEliminarMateria.setVisible(false);
+		
+		JButton btnNewButton_4 = new JButton("Eliminar materia nueva");
+		btnNewButton_4.setVisible(false);
+		btnNewButton_4.setEnabled(false);
+		
+		// esta accion busca cursos
 		JButton btnNewButton_3 = new JButton("Buscar curso");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+					modelomaterias2.removeAllElements();
 				
 					lblNewLabel_8.setVisible(true);
 					textField_5.setVisible(true);
@@ -387,28 +430,198 @@ public class PantallaDireccionCursos extends JFrame{
 					btnNewButton_2.setVisible(true);
 					list_1.setVisible(true);
 					btnNewButton_1_1.setVisible(true);
+					lblMateriasGuardadas.setVisible(true);
+					PanelFechaComienzo2.setVisible(true);
+					PanelFechaFin2.setVisible(true);
+					listamateriasnuevas.setVisible(true);
+					lblMateriasNuevas.setVisible(true);
+					btnEliminarMateria.setVisible(true);
+					btnNewButton_4.setVisible(true);
 					CursoPropio cursoPropio = new CursoPropio();
 					cursoPropio.set_id(comboBox.getSelectedItem().toString());
 					List<CursoPropio> listaCursos = new ArrayList<>();
-					cursoPropio= gestorConsultas.seleccionarCursoPropio(cursoPropio);
-					textField_5.setText(cursoPropio.get_nombre());
-					textField_6.setText(Integer.toString(cursoPropio.get_eCTS()));
-					textField_7.setText(Double.toString(cursoPropio.get_tasaMatricula()));
-					textField_8.setText(Integer.toString(cursoPropio.get_edicion()));
+					Cursoencontrado= gestorConsultas.seleccionarCursoPropio(cursoPropio);
+					textField_5.setText(Cursoencontrado.get_nombre());
+					textField_6.setText(Integer.toString(Cursoencontrado.get_eCTS()));
+					textField_7.setText(Double.toString(Cursoencontrado.get_tasaMatricula()));
+					textField_8.setText(Integer.toString(Cursoencontrado.get_edicion()));
 					Calendar calendar = Calendar.getInstance();
-					Date fechaDateinicioDate = (Date) cursoPropio.get_fechaInicio();
+					Date fechaDateinicioDate = (Date) Cursoencontrado.get_fechaInicio();
+					Date fechaDatefinaDate = (Date) Cursoencontrado.get_fechaFin();
 					calendar.setTime(fechaDateinicioDate);
 					Integer yearInteger = calendar.get(Calendar.YEAR);
 					Integer mes= calendar.get(Calendar.MONTH+1);
 					Integer day = calendar.get(Calendar.DAY_OF_MONTH);
 					fechainicio2.getModel().setDate(yearInteger, mes, day);
+					fechainicio2.getModel().setSelected(true);
+					calendar.setTime(fechaDatefinaDate);
+					yearInteger = calendar.get(Calendar.YEAR);
+					mes= calendar.get(Calendar.MONTH+1);
+					day = calendar.get(Calendar.DAY_OF_MONTH);
+					fechafin2.getModel().setDate(yearInteger, mes, day);
+					fechafin2.getModel().setSelected(true);
+					List<Materia> Materias = new ArrayList<>();
+					Materias = materiasDao.listarMateriasporcurso(Cursoencontrado.get_id());
+					for (int i=0; i<Materias.size(); i++) {
+						Materia materia = new Materia();
+						materia = Materias.get(i);
+						modelomaterias2.addElement(materia);
+					}
+					list_1.setModel(modelomaterias2);
+					list_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+					
+					
+					
 					
 						
 				
 			}
 		});
+			list_1.addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				btnEliminarMateria.setEnabled(true);
+				
+			}
+			
+		});
+			listamateriasnuevas.addListSelectionListener(new ListSelectionListener() {
+				
+				@Override
+				public void valueChanged(ListSelectionEvent e) {
+					btnNewButton_4.setEnabled(true);
+					
+				}
+				
+			});
+			btnEliminarMateria.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					int index = list_1.getSelectedIndex();
+					Materia materia = new Materia();
+					materia = (Materia) list_1.getModel().getElementAt(index);
+					try {
+						int resultado = materiasDao.delete("Nombre='"+materia.get_nombre()+"'","Materia", "idCurso='"+materia.getId_Curso()+"'" );
+					} catch (Exception e2) {
+						JOptionPane.showMessageDialog(null, "error eliminar materia"
+								+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE);
+					}
+					
+				}
+			});
+			btnNewButton_1_1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					fechaComienzo = new java.sql.Date(((java.util.Date) fechainicio2.getModel().getValue()).getTime());
+					fechaFin = new java.sql.Date(((java.util.Date) fechafin2.getModel().getValue()).getTime());
+					if(fechaFin.before(fechaComienzo)) {
+						JOptionPane.showMessageDialog(null, "Rango de fechas incorrecto "
+								+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE);
+					}
+					else {
+						CursoPropio cursoeditadoCursoPropio = new CursoPropio();
+						cursoeditadoCursoPropio.set_id(Cursoencontrado.get_id());
+						cursoeditadoCursoPropio.set_nombre(textField_5.getText());
+						cursoeditadoCursoPropio.set_eCTS(Integer.parseInt(textField_6.getText()));
+						cursoeditadoCursoPropio.set_fechaInicio(fechaComienzo);
+						cursoeditadoCursoPropio.set_fechaFin(fechaFin);
+						cursoeditadoCursoPropio.setId_secretario("01");
+						cursoeditadoCursoPropio.setId_director("02");
+						cursoeditadoCursoPropio.set_estado(EstadoCurso.PROPUESTO);
+						cursoeditadoCursoPropio.setId_centro(1);
+						cursoeditadoCursoPropio.set_tasaMatricula(Double.parseDouble(textField_7.getText()));
+						cursoeditadoCursoPropio.set_edicion(Integer.parseInt(textField_8.getText()));
+						cursoeditadoCursoPropio.set_tipo(Cursoencontrado.get_tipo());
+						edicionCurso(cursoeditadoCursoPropio);
+						altamaterias(modelomateriasnuevas,Cursoencontrado.get_id());
+						JOptionPane.showMessageDialog(null, "Se ha modificado el curso con identificador: " + cursoeditadoCursoPropio.get_id(), "EXITO",
+						JOptionPane.INFORMATION_MESSAGE);}
+						modelomateriasnuevas.removeAllElements();
+						
+						
+						textField_5.setText("");
+						textField_6.setText("");
+						textField_7.setText("");
+						textField_8.setText("");
+						textField_5.setVisible(false);
+						textField_6.setVisible(false);
+						textField_7.setVisible(false);
+						textField_8.setVisible(false);
+						modelomaterias2.removeAllElements();
+						lblNewLabel_8.setVisible(false);
+						lblNewLabel_1_1.setVisible(false);
+						lblNewLabel_2_1	.setVisible(false);
+						lblNewLabel_3_1.setVisible(false);
+						lblNewLabel_4_1.setVisible(false);
+						lblNewLabel_5_1.setVisible(false);
+						btnNewButton_2.setVisible(false);
+						list_1.setVisible(false);
+						btnNewButton_1_1.setVisible(false);
+						fechafin.getModel().setValue(null);
+						fechainicio.getModel().setValue(null);
+						lblMateriasNuevas.setVisible(false);
+						btnEliminarMateria.setVisible(false);
+						listamateriasnuevas.setVisible(false);
+						lblMateriasGuardadas.setVisible(false);
+						btnEliminarMateria.setEnabled(false);
+						PanelFechaComienzo2.setVisible(false);
+						PanelFechaFin2.setVisible(false);
+						
+					
+				}
+			});
 		btnNewButton_3.setBounds(205, 7, 111, 23);
 		panel.add(btnNewButton_3);
+		
+		JButton btnborrar = new JButton("Borrar");
+		btnborrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				textField_5.setText("");
+				textField_6.setText("");
+				textField_7.setText("");
+				textField_8.setText("");
+				textField_5.setVisible(false);
+				textField_6.setVisible(false);
+				textField_7.setVisible(false);
+				textField_8.setVisible(false);
+				modelomaterias2.removeAllElements();
+				lblNewLabel_8.setVisible(false);
+				lblNewLabel_1_1.setVisible(false);
+				lblNewLabel_2_1	.setVisible(false);
+				lblNewLabel_3_1.setVisible(false);
+				lblNewLabel_4_1.setVisible(false);
+				lblNewLabel_5_1.setVisible(false);
+				btnNewButton_2.setVisible(false);
+				list_1.setVisible(false);
+				btnNewButton_1_1.setVisible(false);
+				fechafin.getModel().setValue(null);
+				fechainicio.getModel().setValue(null);
+				lblMateriasNuevas.setVisible(false);
+				btnEliminarMateria.setVisible(false);
+				listamateriasnuevas.setVisible(false);
+				lblMateriasGuardadas.setVisible(false);
+				btnEliminarMateria.setEnabled(false);
+				PanelFechaComienzo2.setVisible(false);
+				PanelFechaFin2.setVisible(false);
+				btnNewButton_4.setVisible (false);
+			}
+		});
+		btnborrar.setBounds(354, 7, 89, 23);
+		panel.add(btnborrar);
+		
+		
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				modelomateriasnuevas.removeElementAt(listamateriasnuevas.getSelectedIndex());
+			}
+		});
+		btnNewButton_4.setBounds(10, 369, 185, 23);
+		panel.add(btnNewButton_4);
+		
+		
+		
+		
+		
 		
 		
 		
@@ -452,8 +665,9 @@ public class PantallaDireccionCursos extends JFrame{
 		
 	}
 
-	public void edicionCurso() {
-		throw new UnsupportedOperationException();
+	public void edicionCurso(CursoPropio cursoPropio) {
+		CursoPropioDAO<CursoPropio> cursoPropioDAO = new CursoPropioDAO<CursoPropio>();
+		cursoPropioDAO.editarCurso(cursoPropio);
 	}
 	// carga de materias de la tabla materias.
 	public List<Materia> cargarMaterias() {
