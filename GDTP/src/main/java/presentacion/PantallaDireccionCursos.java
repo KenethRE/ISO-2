@@ -22,6 +22,7 @@ import java.awt.event.WindowEvent;
 import java.sql.Date;
 import java.sql.SQLDataException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -282,12 +283,12 @@ public class PantallaDireccionCursos extends JFrame{
 		textField_5.setVisible(false);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Fecha Inicio");
-		lblNewLabel_1_1.setBounds(30, 148, 93, 14);
+		lblNewLabel_1_1.setBounds(10, 128, 93, 14);
 		panel.add(lblNewLabel_1_1);
 		lblNewLabel_1_1.setVisible(false);
 		
 		JLabel lblNewLabel_2_1 = new JLabel("Fecha Fin");
-		lblNewLabel_2_1.setBounds(231, 148, 49, 14);
+		lblNewLabel_2_1.setBounds(255, 128, 49, 14);
 		panel.add(lblNewLabel_2_1);
 		lblNewLabel_2_1.setVisible(false);
 		
@@ -339,7 +340,7 @@ public class PantallaDireccionCursos extends JFrame{
 		list_1.setVisible(false);
 		
 		JButton btnNewButton_1_1 = new JButton("Guardar Curso");
-		btnNewButton_1_1.setBounds(417, 382, 121, 23);
+		btnNewButton_1_1.setBounds(27, 361, 121, 23);
 		panel.add(btnNewButton_1_1);
 		btnNewButton_1_1.setVisible(false);
 		
@@ -355,6 +356,18 @@ public class PantallaDireccionCursos extends JFrame{
 		comboBox.setModel(modelo);
 		comboBox.setBounds(75, 8, 73, 22);
 		panel.add(comboBox);
+		JDatePickerImpl fechainicio2 = new JDatePickerImpl(panelfechainicio,new DateLabelFormatter());
+		fechainicio2.setBounds(21, 173, 134, 101);
+		JDatePickerImpl fechafin2 = new JDatePickerImpl(panelfechafin,new DateLabelFormatter());
+		fechafin2.setBounds(232, 173, 134, 101);
+		JPanel PanelFechaComienzo2 = new JPanel();
+		PanelFechaComienzo2.setBounds(10, 145, 212, 130);
+		JPanel PanelFechaFin2 = new JPanel();
+		PanelFechaFin2.setBounds(255, 145, 212, 130);
+		panel.add(PanelFechaComienzo2);
+		panel.add(PanelFechaFin2);
+		PanelFechaComienzo2.add(fechainicio2);
+		PanelFechaFin2.add(fechafin2);
 		
 		// esta accion hay que realizarla todavia
 		JButton btnNewButton_3 = new JButton("Buscar curso");
@@ -382,6 +395,13 @@ public class PantallaDireccionCursos extends JFrame{
 					textField_6.setText(Integer.toString(cursoPropio.get_eCTS()));
 					textField_7.setText(Double.toString(cursoPropio.get_tasaMatricula()));
 					textField_8.setText(Integer.toString(cursoPropio.get_edicion()));
+					Calendar calendar = Calendar.getInstance();
+					Date fechaDateinicioDate = (Date) cursoPropio.get_fechaInicio();
+					calendar.setTime(fechaDateinicioDate);
+					Integer yearInteger = calendar.get(Calendar.YEAR);
+					Integer mes= calendar.get(calendar.MONTH);
+					Integer day = calendar.get(calendar.DAY_OF_MONTH);
+					fechainicio2.getModel().setDate(yearInteger, mes, day);
 					
 						
 				
