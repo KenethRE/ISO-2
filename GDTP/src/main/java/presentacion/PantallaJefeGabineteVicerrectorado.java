@@ -154,6 +154,21 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		model.addColumn("Nº Matriculados");
 		model.addColumn("IngresosTotales");
 		model.addColumn("idCurso");
+		
+		//Button Logout Panel 1
+		
+		JButton btnLogout1 = new JButton("Logout");
+		btnLogout1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				PantallaLogin frame = new PantallaLogin();
+				frame.setResizable(false);
+				frame.setVisible(true);
+				
+			}
+		});
+		btnLogout1.setBounds(494, 11, 89, 23);
+		panel1.add(btnLogout1);
 
 		// Button ConsultarIngresos Panel1
 
@@ -314,6 +329,21 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		model2.addColumn("FechaFin");
 		model2.addColumn("TasaMatriculacion");
 		model2.addColumn("Edicion");
+		
+		//Button Logout Panel 2
+		
+				JButton btnLogout2 = new JButton("Logout");
+				btnLogout2.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+						PantallaLogin frame = new PantallaLogin();
+						frame.setResizable(false);
+						frame.setVisible(true);
+						
+					}
+				});
+				btnLogout2.setBounds(494, 11, 89, 23);
+				panel2.add(btnLogout2);
 
 		// Boton Reset panel2
 
@@ -469,6 +499,21 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		model3.addColumn("TasaMatriculacion");
 		model3.addColumn("Edicion");
 
+		//Button Logout Panel 3
+		
+				JButton btnLogout3 = new JButton("Logout");
+				btnLogout3.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+						PantallaLogin frame = new PantallaLogin();
+						frame.setResizable(false);
+						frame.setVisible(true);
+						
+					}
+				});
+				btnLogout3.setBounds(494, 11, 89, 23);
+				panel3.add(btnLogout3);
+		
 		// Botón ListarEdiciones Panel3
 
 		JButton btnListarEdiciones = new JButton("Listar Ediciones");

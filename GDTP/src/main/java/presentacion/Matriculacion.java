@@ -300,6 +300,10 @@ public class Matriculacion extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
+				PantallaLogin frame = new PantallaLogin();
+				frame.setResizable(false);
+				frame.setVisible(true);
+				
 			}
 		});
 		btnNewButton_1.setBounds(546, 21, 89, 23);
