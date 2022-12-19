@@ -79,25 +79,25 @@ public class MateriaDAO<E> extends AbstractEntityDAO<E> {
 		return Materias; 
 	}
 	public List<Materia> listarMateriasporcurso(String idcurso) {
-		List<Materia> Materias = new ArrayList<>();
+		List<Materia> Materias2 = new ArrayList<>();
 		ResultSet aux = get("Materia",idcurso);
 		try {
 			while (aux.next()) {
-				Materia aMateria = new Materia();
-				aMateria.set_nombre(aux.getString("Nombre"));
-				aMateria.set_horas(aux.getDouble("horas"));
-				aMateria.set_fechaInicio(aux.getDate("FechaInicio"));
-				aMateria.set_fechaFin(aux.getDate("FechaFin"));
-				aMateria.setId_Curso(aux.getString("idCurso"));
-				aMateria.setId_prof_responsable(aux.getString("dniProfesor"));
-				Materias.add(aMateria);
+				Materia aMateria2 = new Materia();
+				aMateria2.set_nombre(aux.getString("Nombre"));
+				aMateria2.set_horas(aux.getDouble("horas"));
+				aMateria2.set_fechaInicio(aux.getDate("FechaInicio"));
+				aMateria2.set_fechaFin(aux.getDate("FechaFin"));
+				aMateria2.setId_Curso(aux.getString("idCurso"));
+				aMateria2.setId_prof_responsable(aux.getString("dniProfesor"));
+				Materias2.add(aMateria2);
 			}
 		} catch (SQLException e) {
 				e.printStackTrace();
 				Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Error al acceder a la tabla Materia");
 			}
 
-		return Materias; 
+		return Materias2; 
 	}
 	
 }
