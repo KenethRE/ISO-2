@@ -10,7 +10,6 @@ public class GestorMatriculacion {
 	public void realizarMatriculacion(Matricula matricula) throws NullPointerException{
 		MatriculaDAO<Matricula> agenteMatriculaDAO = new MatriculaDAO<>();
 		agenteMatriculaDAO.crearNuevaMatricula(matricula);
-		throw new NullPointerException("Matricula no generada");
 	}
 
 //	public void realizarPagoMatricula(CursoPropio aCurso, Estudiante aEstudiante) {
