@@ -4,6 +4,9 @@
 package persistencia;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.sql.SQLDataException;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -12,11 +15,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.jupiter.api.Disabled;
 
+import negocio.entities.Centro;
+
 /**
  * @author plati
  *
  */
 public class CentroDAOTest {
+	CentroDAO centroDAO;
+	Centro aCentro;
 
 	/**
 	 * @throws java.lang.Exception
@@ -37,6 +44,7 @@ public class CentroDAOTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		centroDAO= new CentroDAO<Centro>();
 	}
 
 	/**
@@ -57,25 +65,31 @@ public class CentroDAOTest {
 	/**
 	 * Test method for {@link persistencia.CentroDAO#seleccionarCentro(negocio.entities.Centro)}.
 	 */
-	@Disabled
+	@Test
 	public void testSeleccionarCentro() {
-		fail("Not yet implemented");
+		aCentro = new Centro();
+		aCentro=null;
+		NullPointerException exception = assertThrows(NullPointerException.class, () -> {centroDAO.seleccionarCentro(aCentro);});
+		assertEquals("Centro no encontrado", exception.getMessage());
 	}
 
 	/**
 	 * Test method for {@link persistencia.CentroDAO#editarCentro(negocio.entities.Centro)}.
 	 */
-	@Disabled
+	@Test
 	public void testEditarCentro() {
-		fail("Not yet implemented");
+		aCentro = new Centro();
+		aCentro=null;
+		NullPointerException exception = assertThrows(NullPointerException.class, () -> {centroDAO.editarCentro(aCentro);});
+		assertEquals("Centro no editado", exception.getMessage());
 	}
 
 	/**
 	 * Test method for {@link persistencia.CentroDAO#listarCentro()}.
 	 */
-	@Disabled
+	@Test
 	public void testListarCentro() {
-		fail("Not yet implemented");
+		assertTrue("la lista devuelta por el metodo listarCentro no esta vacia",centroDAO.listarCentro().isEmpty());
 	}
 
 }
