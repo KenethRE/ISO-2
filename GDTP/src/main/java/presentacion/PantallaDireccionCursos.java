@@ -21,6 +21,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Date;
 import java.sql.SQLDataException;
+import java.sql.SQLException;
+import java.sql.SQLSyntaxErrorException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -240,10 +242,20 @@ public class PantallaDireccionCursos extends JFrame{
 									+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE);
 						}
 						else {
-							altaCurso(IDCurso, txtNombreCurso.getText(), Integer.valueOf(txtECTS.getText()), 
-									fechaFin, fechaFin, Double.valueOf(txtTasaMatricula.getText()), 
-									Integer.valueOf(txtEdicion.getText()), (TipoCurso) cbTipoCurso.getSelectedItem());
-							altamaterias(modelomaterias,IDCurso);
+							try {
+								altaCurso(IDCurso, txtNombreCurso.getText(), Integer.valueOf(txtECTS.getText()), 
+										fechaFin, fechaFin, Double.valueOf(txtTasaMatricula.getText()), 
+										Integer.valueOf(txtEdicion.getText()), (TipoCurso) cbTipoCurso.getSelectedItem());
+							} catch (SQLSyntaxErrorException e1) {
+								e1.printStackTrace();
+							} catch (NumberFormatException e1) {
+								e1.printStackTrace();
+							}
+							try {
+								altamaterias(modelomaterias,IDCurso);
+							} catch (SQLException e1) {
+								e1.printStackTrace();
+							}
 							JOptionPane.showMessageDialog(null, "Se ha creado un curso con identificador: " + IDCurso, "EXITO",
 							JOptionPane.INFORMATION_MESSAGE);}
 							modelomaterias.removeAllElements();
@@ -532,7 +544,12 @@ public class PantallaDireccionCursos extends JFrame{
 						cursoeditadoCursoPropio.set_edicion(Integer.parseInt(textField_8.getText()));
 						cursoeditadoCursoPropio.set_tipo(Cursoencontrado.get_tipo());
 						edicionCurso(cursoeditadoCursoPropio);
-						altamaterias(modelomateriasnuevas,Cursoencontrado.get_id());
+						try {
+							altamaterias(modelomateriasnuevas,Cursoencontrado.get_id());
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						JOptionPane.showMessageDialog(null, "Se ha modificado el curso con identificador: " + cursoeditadoCursoPropio.get_id(), "EXITO",
 						JOptionPane.INFORMATION_MESSAGE);}
 						modelomateriasnuevas.removeAllElements();
@@ -633,7 +650,7 @@ public class PantallaDireccionCursos extends JFrame{
 	
 	
 	// metodo para dar de alta el curso en la base de datos.
-	public void altaCurso(String idCurso, String nombreCurso, int ECTS, Date fechaInicio, Date fechaFin, double TasaMatricula, int Edicion, TipoCurso tipoCurso) {
+	public void altaCurso(String idCurso, String nombreCurso, int ECTS, Date fechaInicio, Date fechaFin, double TasaMatricula, int Edicion, TipoCurso tipoCurso) throws SQLSyntaxErrorException {
 		CursoPropio curso = new CursoPropio();
 		curso.set_id(idCurso);
 		curso.set_nombre(nombreCurso);
@@ -649,13 +666,13 @@ public class PantallaDireccionCursos extends JFrame{
 		curso.setId_centro(1);
 		try {
 			curso.persist();
-		} catch (SQLDataException e) {
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	// metodo para guardar la materia creada en la base de datos
-	public void altamaterias(DefaultListModel modelo,String idcurso) {
+	public void altamaterias(DefaultListModel modelo,String idcurso) throws SQLException {
 		for (int i=0; i < modelo.getSize(); i++) {
 			Materia aMateria = new Materia();
 			aMateria=(Materia) modelo.getElementAt(i);

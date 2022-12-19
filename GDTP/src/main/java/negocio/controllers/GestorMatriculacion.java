@@ -1,15 +1,22 @@
 package negocio.controllers;
 
 import java.sql.SQLDataException;
+import java.sql.SQLException;
+import java.sql.SQLSyntaxErrorException;
 
 import negocio.entities.Matricula;
 import persistencia.MatriculaDAO;
 
 public class GestorMatriculacion {
 
-	public void realizarMatriculacion(Matricula matricula) throws NullPointerException{
+	public void realizarMatriculacion(Matricula matricula) throws SQLException {
 		MatriculaDAO<Matricula> agenteMatriculaDAO = new MatriculaDAO<>();
-		agenteMatriculaDAO.crearNuevaMatricula(matricula);
+		try {
+			agenteMatriculaDAO.crearNuevaMatricula(matricula);
+		} catch (SQLSyntaxErrorException e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 //	public void realizarPagoMatricula(CursoPropio aCurso, Estudiante aEstudiante) {

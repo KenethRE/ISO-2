@@ -9,7 +9,10 @@ public class Initialization {
 	static GestorBD agente;
 	public static void main () {
 		try {
+
 		agente = GestorBD.getAgente();
+		if (!agente.select("SELECT * FROM CENTRO").next()) {
+		
 		agente.insert("INSERT INTO CENTRO VALUES (1,'UCLMTALA','TALAVERA')");
 		agente.insert("INSERT INTO CENTRO VALUES (2,'UCLMTOL','TOLEDO')");
 		agente.insert("INSERT INTO CENTRO VALUES (3,'UCLMCR','CIUDAD REAL')");
@@ -25,6 +28,8 @@ public class Initialization {
 		agente.insert("INSERT INTO PROFESOREXTERNO  VALUES ('01','INGENIERO')");
 		agente.insert("INSERT INTO PROFESORUCLM  VALUES ('02','PIPI','MORO','CATEDRATICO')");
 		agente.insert("INSERT INTO PROFESOREXTERNO  VALUES ('03','ARQUITECTO')");
+		
+		}
 		
 		Logger.getLogger("GDTP_Logger").log(Level.INFO, "Inicializacion de BD correcta.");
 		

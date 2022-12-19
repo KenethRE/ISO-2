@@ -1,5 +1,7 @@
 package negocio.entities;
 
+import java.sql.SQLException;
+import java.sql.SQLSyntaxErrorException;
 import java.util.*;
 import persistencia.EstudianteDAO;
 
@@ -62,7 +64,7 @@ public class Estudiante {
 		this.matriculas = matriculas;
 	}
 
-	public void persist () {
+	public void persist () throws SQLException {
 		this.agenteEstudianteDAO.crearNuevoEstudiante(this);
 	}
 }

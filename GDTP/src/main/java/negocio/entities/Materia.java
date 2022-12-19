@@ -1,5 +1,7 @@
 package negocio.entities;
 
+import java.sql.SQLException;
+import java.sql.SQLSyntaxErrorException;
 import java.util.Date;
 
 import persistencia.MateriaDAO;
@@ -59,7 +61,7 @@ public class Materia implements IdInterface{
 		
 		
 	}
-	public void persist () {
+	public void persist () throws SQLException {
 		this.MateriaDAO.crearNuevaMateria(this);
 
 	}

@@ -2,6 +2,7 @@ package persistencia;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLSyntaxErrorException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -11,7 +12,7 @@ import negocio.entities.Estudiante;
 
 public class EstudianteDAO <E> extends AbstractEntityDAO<E> {
 	private static final String loggerName = "GDTP_Logger";
-	public int crearNuevoEstudiante(Estudiante aEstudiante) {
+	public int crearNuevoEstudiante(Estudiante aEstudiante) throws SQLException {
 		 
 		return insert (aEstudiante);
 	}

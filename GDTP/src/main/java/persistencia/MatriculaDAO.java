@@ -2,6 +2,7 @@ package persistencia;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLSyntaxErrorException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -11,8 +12,13 @@ import negocio.entities.Matricula;
 import negocio.entities.ModoPago;
 
 public class MatriculaDAO <E> extends AbstractEntityDAO<E> {
-	public int crearNuevaMatricula(Matricula aMatricula) {
-		return insert (aMatricula);
+	public int crearNuevaMatricula(Matricula aMatricula) throws SQLException {
+		try {
+			return insert (aMatricula);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	public int seleccionarMatricula(Matricula aMatricula) {

@@ -15,7 +15,7 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 
 	private static final String nombreClase = "CursoPropio";
 	
-	public int crearNuevoCurso(CursoPropio aCurso) {
+	public int crearNuevoCurso(CursoPropio aCurso) throws SQLException {
 		int aux= 0;
 		aux = insert (aCurso);
 		

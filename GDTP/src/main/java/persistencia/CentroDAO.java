@@ -2,6 +2,7 @@ package persistencia;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLSyntaxErrorException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -10,7 +11,7 @@ import java.util.logging.Logger;
 import negocio.entities.Centro;
 
 public class CentroDAO<E> extends AbstractEntityDAO<E> {
-	public int crearNuevoCentro(Centro aCentro) {
+	public int crearNuevoCentro(Centro aCentro) throws SQLException {
 		 
 		return insert (aCentro);
 	}

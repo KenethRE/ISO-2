@@ -10,7 +10,7 @@ import negocio.entities.Profesor;
 
 public class ProfesorDAO<E> extends AbstractEntityDAO<E> {
 
-	public int crearNuevoProfesor(Profesor aProfesor) {
+	public int crearNuevoProfesor(Profesor aProfesor) throws SQLException {
 		 
 		return insert (aProfesor);
 	}

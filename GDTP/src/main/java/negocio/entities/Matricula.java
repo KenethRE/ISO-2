@@ -1,5 +1,9 @@
 package negocio.entities;
 
+import java.sql.SQLDataException;
+import java.sql.SQLException;
+import java.sql.SQLNonTransientException;
+import java.sql.SQLSyntaxErrorException;
 import java.util.Date;
 
 import negocio.controllers.GestorMatriculacion;
@@ -63,8 +67,13 @@ public class Matricula implements IdInterface{
 	public String getInternalID() {
 		return String.valueOf(iD);
 	}
-	public void persist () {
-		this.agentematricula.realizarMatriculacion(this);
+	public void persist () throws SQLException {
+		try {
+			this.agentematricula.realizarMatriculacion(this);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
 
 	}
 	

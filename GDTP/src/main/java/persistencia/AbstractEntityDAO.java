@@ -89,7 +89,7 @@ public class AbstractEntityDAO<E>{
 	}
 	
 	
-	public int insert (Object E) {
+	public int insert (Object E) throws SQLException {
 		String className = E.getClass().getSimpleName();
 		int result = 0;
 		switch (className) {

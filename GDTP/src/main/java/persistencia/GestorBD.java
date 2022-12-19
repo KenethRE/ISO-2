@@ -59,7 +59,7 @@ public class GestorBD{
 		return res;
 	}
 	
-	public int insert(String sentencia) {
+	public int insert(String sentencia) throws SQLException {
 		int res = 0;
 		try {
             conectarBD();
@@ -70,6 +70,7 @@ public class GestorBD{
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw e;
 		}
 		return res;
     	

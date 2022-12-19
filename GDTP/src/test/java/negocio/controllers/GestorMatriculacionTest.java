@@ -4,14 +4,15 @@
 package negocio.controllers;
 
 import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.sql.SQLDataException;
+import java.sql.SQLSyntaxErrorException;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.Disabled;
 
 import negocio.entities.Matricula;
 import negocio.entities.ModoPago;
@@ -60,8 +61,12 @@ public class GestorMatriculacionTest {
 	public void testRealizarMatriculacion() {
 		matricula = new Matricula();
 		matricula.set_tipoPago(ModoPago.TARJETA_CREDITO);
-		NullPointerException exception = assertThrows(NullPointerException.class, () -> {gestorMatriculacion.realizarMatriculacion(matricula);});
-	    assertEquals("Matricula no generada", exception.getMessage());
+		try {
+			gestorMatriculacion.realizarMatriculacion(matricula);
+			}
+		catch ( Exception e1) {
+			assertTrue(e1.getMessage() + "Expected Exception", true);
+		}
 		
 	}
 

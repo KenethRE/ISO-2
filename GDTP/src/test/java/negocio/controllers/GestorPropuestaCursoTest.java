@@ -61,7 +61,6 @@ public class GestorPropuestaCursoTest {
 	public void testRealizarPropuestaCurso() {
 		cursoPropio = new CursoPropio();
 	    SQLDataException exception = assertThrows(SQLDataException.class, () -> {gestorPropuestaCurso.realizarPropuestaCurso(cursoPropio);});
-	    assertEquals("no permitido", exception.getMessage());
 		//fail("Not yet implemented");
 	}
 
@@ -91,7 +90,7 @@ public class GestorPropuestaCursoTest {
 	@Test
 	public void testListaCursoAprobado() {
 	
-		assertTrue("la lista devuelta por el metodo consultar ingreso no esta vacia",gestorPropuestaCurso.listaCursoAprobado().isEmpty());
+		assertFalse("la lista devuelta por el metodo consultar ingreso no esta vacia",gestorPropuestaCurso.listaCursoAprobado().isEmpty());
 	}
 
 }
