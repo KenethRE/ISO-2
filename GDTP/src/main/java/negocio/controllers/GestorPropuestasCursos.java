@@ -14,7 +14,6 @@ public class GestorPropuestasCursos {
 		CursoPropioDAO<CursoPropio> cursoPropioDao = new CursoPropioDAO<>() ;
 		cursoPropioDao.crearNuevoCurso(aCurso);
 		
-		throw new SQLDataException("no permitido");
 	}
 
 	public boolean editarPropuestaCurso(CursoPropio curso) {
