@@ -1146,7 +1146,7 @@ public class PantallaDireccionCursos2 extends JFrame{
 		curso.set_estado(EstadoCurso.PROPUESTO);
 		curso.set_tipo(tipoCurso);
 		curso.setId_centro(1);
-		curso.persist();
+		//curso.persist();
 	}
 	// metodo para guardar la materia creada en la base de datos
 	public void altamaterias(DefaultListModel modelo,String idcurso) {

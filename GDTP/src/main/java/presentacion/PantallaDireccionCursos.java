@@ -308,7 +308,7 @@ public class PantallaDireccionCursos extends JFrame{
 		
 		textField_6 = new JTextField();
 		textField_6.setColumns(10);
-		textField_6.setBounds(85, 72, 49, 20);
+		textField_6.setBounds(74, 73, 49, 20);
 		panel.add(textField_6);
 		textField_6.setVisible(false);
 		
@@ -320,7 +320,7 @@ public class PantallaDireccionCursos extends JFrame{
 		
 		textField_8 = new JTextField();
 		textField_8.setColumns(10);
-		textField_8.setBounds(80, 100, 49, 20);
+		textField_8.setBounds(74, 100, 49, 20);
 		panel.add(textField_8);
 		textField_8.setVisible(false);
 		
@@ -353,7 +353,7 @@ public class PantallaDireccionCursos extends JFrame{
 			modelo.addElement(cursoPropio.get_id());;
 		}
 		comboBox.setModel(modelo);
-		comboBox.setBounds(65, 11, 73, 22);
+		comboBox.setBounds(75, 8, 73, 22);
 		panel.add(comboBox);
 		
 		// esta accion hay que realizarla todavia
@@ -378,6 +378,11 @@ public class PantallaDireccionCursos extends JFrame{
 					cursoPropio.set_id(comboBox.getSelectedItem().toString());
 					List<CursoPropio> listaCursos = new ArrayList<>();
 					cursoPropio= gestorConsultas.seleccionarCursoPropio(cursoPropio);
+					textField_5.setText(cursoPropio.get_nombre());
+					textField_6.setText(Integer.toString(cursoPropio.get_eCTS()));
+					textField_7.setText(Double.toString(cursoPropio.get_tasaMatricula()));
+					textField_8.setText(Integer.toString(cursoPropio.get_edicion()));
+					
 						
 				
 			}
