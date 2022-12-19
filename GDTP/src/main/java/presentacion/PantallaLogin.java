@@ -71,7 +71,7 @@ public class PantallaLogin extends JFrame {
 		textUsuario.setColumns(10);
 		
 		JComboBox<String> loginSwitch = new JComboBox<String>();
-		loginSwitch.setModel(new DefaultComboBoxModel<String>(new String[] {"Vicerrector", "Gabinete", "Director", "Estudiante"}));
+		loginSwitch.setModel(new DefaultComboBoxModel<String>(new String[] {"Empleado", "Jefe Gabinete", "Director", "Estudiante"}));
 		loginSwitch.setToolTipText("");
 		loginSwitch.setBounds(209, 66, 94, 22);
 		panel.add(loginSwitch);
@@ -100,12 +100,12 @@ public class PantallaLogin extends JFrame {
 							JOptionPane.INFORMATION_MESSAGE);
 					
 					switch(loginSwitch.getSelectedItem().toString()) {
-						case "Vicerrector":
+						case "Empleado":
 							dispose();
-							PantallaJefeGabineteVicerrectorado screen1 = new PantallaJefeGabineteVicerrectorado(PantallaLogin.this);
+							PantallaEmpleadosVicerrectorado screen1 = new PantallaEmpleadosVicerrectorado(PantallaLogin.this);
 							screen1.setVisible(true);
 						break;
-						case "Gabinete":
+						case "Jefe Gabinete":
 							dispose();
 							PantallaJefeGabineteVicerrectorado screen2 = new PantallaJefeGabineteVicerrectorado (PantallaLogin.this);
 							screen2.setVisible(true);
