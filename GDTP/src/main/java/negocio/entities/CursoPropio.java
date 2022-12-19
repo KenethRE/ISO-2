@@ -1,5 +1,6 @@
 package negocio.entities;
 
+import java.sql.SQLDataException;
 import java.util.*;
 
 import negocio.controllers.GestorPropuestasCursos;
@@ -132,7 +133,7 @@ public class CursoPropio implements IdInterface{
 		this.tipo = tipo;
 	}
 	
-	public void persist () {
+	public void persist () throws SQLDataException {
 		this.gestorPropuestasCursos.realizarPropuestaCurso(this);
 	}
 

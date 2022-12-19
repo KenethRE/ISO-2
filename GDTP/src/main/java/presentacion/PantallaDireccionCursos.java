@@ -20,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Date;
+import java.sql.SQLDataException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -408,7 +409,12 @@ public class PantallaDireccionCursos extends JFrame{
 		curso.set_estado(EstadoCurso.PROPUESTO);
 		curso.set_tipo(tipoCurso);
 		curso.setId_centro(1);
-		curso.persist();
+		try {
+			curso.persist();
+		} catch (SQLDataException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	// metodo para guardar la materia creada en la base de datos
 	public void altamaterias(DefaultListModel modelo,String idcurso) {
