@@ -7,6 +7,7 @@ public class AbstractEntityDAO<E>{
 	private static final String profesorUCLMString = "ProfesorUCLM";
 	private static final String profesorExtString = "ProfesorExterno";
 	private static final String cursoPropioString = "CursoPropio";
+	private static final String materiaString = "Materia";
 	private GestorBD agente = GestorBD.getAgente();
 	
 	//esto regresa un unico elemento
@@ -17,6 +18,7 @@ public class AbstractEntityDAO<E>{
 				+ " WHERE DNI = '" + ((Profesor)E).get_dni() + "'");
 		else if (castName.equals("Estudiante")) result = agente.select("SELECT * FROM ESTUDIANTE WHERE DNI = '"+((Estudiante)E).get_dni()+ "'");
 		else if (castName.equals("Materia")) result = agente.select("SELECT * FROM MATERIA WHERE NOMBRE = '"+((Materia)E).get_nombre()+ "'");
+		else if (castName.equals("CursoPropio")) result = agente.select("SELECT * FROM CURSOPROPIO WHERE ID = '"+((CursoPropio)E).get_id()+ "'");
 		else result = agente.select("SELECT * FROM " + castName + " WHERE ID = '"+((IdInterface) E).getInternalID()+ "'");
 		return result;
 	}
@@ -30,7 +32,17 @@ public class AbstractEntityDAO<E>{
 
 		return result;
 	}
+	// get lista materias por id curso
 	
+	public ResultSet get(String Table, String idcurso) {
+		ResultSet result = null;
+		
+		if (Table.equals("Materia")) {
+			result = agente.select("SELECT * FROM " + Table + " WHERE idCurso = '"+idcurso+"'");
+		}
+
+		return result;
+}
 	//get para estadoCurso
 	public ResultSet get(String Table, EstadoCurso estadoCurso) {
 		ResultSet result = null;
@@ -161,7 +173,13 @@ public class AbstractEntityDAO<E>{
 	public int delete (String iD, String Table, String keyName) {
 		int result = 0;
 		if (Table.equals(profesorExtString) || Table.equals(profesorUCLMString)) result = agente.update("DELETE FROM " + Table + " NATURAL JOIN PROFESOR WHERE "+keyName+" = " +iD);
-		else result = agente.update("DELETE FROM" + Table + " WHERE "+keyName+" = " +iD);
+		else 
+			if(Table.equals(materiaString)) {
+				String consultaString = "DELETE FROM " + Table + " WHERE "+keyName+" AND " +iD;
+				result = agente.update(consultaString);
+			}
+			else
+			result = agente.update("DELETE FROM " + Table + " WHERE "+keyName+" = " +iD);
 		return result;
 	}
 

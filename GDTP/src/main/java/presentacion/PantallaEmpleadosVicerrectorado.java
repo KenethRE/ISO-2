@@ -68,10 +68,25 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 		getContentPane().setLayout(new CardLayout(0, 0));
 		JTabbedPane pestañas = new JTabbedPane();
 		getContentPane().add(pestañas, "name_001");
-
+		
 		JPanel panel1 = new JPanel();
 		pestañas.addTab("Evaluar propuesta", panel1);
 		panel1.setLayout(null);
+		
+		//Button Logout
+		
+		JButton btnLogout1 = new JButton("Logout");
+		btnLogout1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				PantallaLogin frame = new PantallaLogin();
+				frame.setResizable(false);
+				frame.setVisible(true);
+				
+			}
+		});
+		btnLogout1.setBounds(494, 11, 89, 23);
+		panel1.add(btnLogout1);
 
 		// Jlist
 

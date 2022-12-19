@@ -185,4 +185,69 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 		return Cursos;
 		
 	}
+	public CursoPropio SeleccionarCursoPropio(CursoPropio cursoPropio) {
+		CursoPropio curso = null;
+		ResultSet aux = get(cursoPropio);
+		try {
+			while (aux.next()) {
+				curso = new CursoPropio();
+				curso.set_id(aux.getString("ID"));
+				curso.set_nombre(aux.getString("NOMBRE"));
+				curso.set_eCTS(aux.getInt("ECTS"));
+				curso.set_fechaInicio(aux.getDate("FECHAINICIO"));
+				curso.set_fechaFin(aux.getDate("FECHAFIN"));
+				curso.set_tasaMatricula(aux.getInt("TASAMATRICULA"));
+				curso.set_edicion(aux.getInt("EDICION"));
+				curso.setId_centro(aux.getInt("IDCENTRO"));
+				curso.setId_director(aux.getString("DIRECTOR"));
+				curso.setId_secretario(aux.getString("SECRETARIO"));
+				TipoCurso Tcurso =  TipoCurso.valueOf(aux.getString("TIPOCURSO"));
+				curso.set_tipo(Tcurso);
+				EstadoCurso Ecurso = EstadoCurso.valueOf(aux.getString("ESTADOCURSO"));
+				curso.set_estado(Ecurso);
+				}
+					
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Curso no encontrado");
+		}
+		
+		return curso;
+		
+		
+		
+	}
+	public List<CursoPropio> listartodosloscursos () {
+		String tablacurso ="CursoPropio";
+		List<CursoPropio> Cursos = new ArrayList<>();
+
+		ResultSet aux = get(tablacurso);
+		try {
+			while (aux.next()) {
+				CursoPropio curso = new CursoPropio();
+				curso.set_id(aux.getString("ID"));
+				curso.set_nombre(aux.getString("NOMBRE"));
+				curso.set_eCTS(aux.getInt("ECTS"));
+				curso.set_fechaInicio(aux.getDate("FECHAINICIO"));
+				curso.set_fechaFin(aux.getDate("FECHAFIN"));
+				curso.set_tasaMatricula(aux.getInt("TASAMATRICULA"));
+				curso.set_edicion(aux.getInt("EDICION"));
+				curso.setId_centro(aux.getInt("IDCENTRO"));
+				curso.setId_director(aux.getString("DIRECTOR"));
+				curso.setId_secretario(aux.getString("SECRETARIO"));
+				curso.set_tipo(TipoCurso.valueOf(aux.getString("TIPOCURSO")));
+				curso.set_estado(EstadoCurso.valueOf(aux.getString("ESTADOCURSO")));
+				Cursos.add(curso);
+			}
+			
+			return Cursos;
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Curso no encontrado");
+		}
+		
+		return Cursos;
+		
+	}
 }
