@@ -13,7 +13,6 @@ public class GestorPropuestasCursos {
 	public void realizarPropuestaCurso(CursoPropio aCurso) throws SQLDataException{
 		CursoPropioDAO<CursoPropio> cursoPropioDao = new CursoPropioDAO<>() ;
 		cursoPropioDao.crearNuevoCurso(aCurso);
-		
 	}
 
 	public boolean editarPropuestaCurso(CursoPropio curso) {
