@@ -56,7 +56,7 @@ public class GestorMatriculacionTest {
 	/**
 	 * Test method for {@link negocio.controllers.GestorMatriculacion#realizarMatriculacion(negocio.entities.Matricula)}.
 	 */
-	@Disabled
+	@Test
 	public void testRealizarMatriculacion() {
 		matricula = new Matricula();
 		matricula.set_tipoPago(ModoPago.TARJETA_CREDITO);

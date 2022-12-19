@@ -91,7 +91,7 @@ public class GestorPropuestaCursoTest {
 	@Test
 	public void testListaCursoAprobado() {
 	
-		assertTrue("la lista devuelta por el metodo consultar ingreso no esta vacia",gestorPropuestaCurso.listaCursoAprobado().isEmpty());
+		assertFalse("la lista devuelta por el metodo consultar ingreso no esta vacia",gestorPropuestaCurso.listaCursoAprobado().isEmpty());
 	}
 
 }

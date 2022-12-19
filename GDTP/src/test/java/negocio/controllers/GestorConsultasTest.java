@@ -44,7 +44,7 @@ public class GestorConsultasTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		fechacomienzoDate= new java.sql.Date(System.currentTimeMillis());
+		fechacomienzoDate= new java.sql.Date(System.currentTimeMillis()+154845121);
 		fechafinDate= new java.sql.Date(System.currentTimeMillis()+254845121);
 		gestorConsultas= new GestorConsultas();
 	}
@@ -69,7 +69,7 @@ public class GestorConsultasTest {
 	 */
 	@Disabled
 	public void testConsultarEstadoCursos() {
-		assertFalse("la lista devuelta por el metodo consultar ingreso esta vacia",gestorConsultas.consultarEstadoCursos(EstadoCurso.EN_MATRICULACION,fechacomienzoDate, fechafinDate).isEmpty());
+		assertTrue("la lista devuelta por el metodo consultar ingreso esta vacia",gestorConsultas.consultarEstadoCursos(EstadoCurso.EN_MATRICULACION,fechacomienzoDate, fechafinDate).isEmpty());
 		//fail("Not yet implemented");
 	}
 
@@ -78,7 +78,7 @@ public class GestorConsultasTest {
 	 */
 	@Test
 	public void testListarEdicionesCursos() {
-		assertTrue("la lista devuelta por el metodo consultar ingreso esta vacia",gestorConsultas.listarEdicionesCursos(fechacomienzoDate, fechafinDate).isEmpty());
+		assertFalse("la lista devuelta por el metodo consultar ingreso esta vacia",gestorConsultas.listarEdicionesCursos(fechacomienzoDate, fechafinDate).isEmpty());
 		//fail("Not yet implemented");
 	}
 
