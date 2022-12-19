@@ -31,4 +31,19 @@ public class GestorConsultas {
 		listaEdiciones=cursoDao.listarEdicionesCursos(aFechaInicio,aFechaFin);
 		return listaEdiciones;
 	}
+	public CursoPropio seleccionarCursoPropio(CursoPropio cursoPropio) {
+		CursoPropioDAO<CursoPropio> cursoDao = new CursoPropioDAO<>();
+		cursoPropio = cursoDao.SeleccionarCursoPropio(cursoPropio);
+		return cursoPropio;
+		
+		
+	}
+	public  List<CursoPropio> listartodolosCursoPropios() {
+		CursoPropioDAO<CursoPropio> cursoDao = new CursoPropioDAO<>();
+		List<CursoPropio> listaCursos = new ArrayList<>();	
+		listaCursos=cursoDao.listartodosloscursos();
+		return listaCursos;
+		
+		
+	}
 }

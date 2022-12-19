@@ -17,6 +17,7 @@ public class AbstractEntityDAO<E>{
 				+ " WHERE DNI = '" + ((Profesor)E).get_dni() + "'");
 		else if (castName.equals("Estudiante")) result = agente.select("SELECT * FROM ESTUDIANTE WHERE DNI = '"+((Estudiante)E).get_dni()+ "'");
 		else if (castName.equals("Materia")) result = agente.select("SELECT * FROM MATERIA WHERE NOMBRE = '"+((Materia)E).get_nombre()+ "'");
+		else if (castName.equals("CursoPropio")) result = agente.select("SELECT * FROM CURSOPROPIO WHERE ID = '"+((CursoPropio)E).get_id()+ "'");
 		else result = agente.select("SELECT * FROM " + castName + " WHERE ID = '"+((IdInterface) E).getInternalID()+ "'");
 		return result;
 	}

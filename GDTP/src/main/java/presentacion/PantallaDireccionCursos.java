@@ -10,6 +10,7 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
+import negocio.controllers.GestorConsultas;
 import negocio.entities.CursoPropio;
 import negocio.entities.EstadoCurso;
 import negocio.entities.Materia;
@@ -72,7 +73,7 @@ public class PantallaDireccionCursos extends JFrame{
 	private JTextField textField_6;
 	private JTextField textField_7;
 	private JTextField textField_8;
-	private JTextField textField_9;
+	private GestorConsultas gestorConsultas = new GestorConsultas();
 	
 	public PantallaDireccionCursos(JFrame previousWindow) {
 		contador= (int)(Math.random()*90+1);
@@ -341,19 +342,24 @@ public class PantallaDireccionCursos extends JFrame{
 		panel.add(btnNewButton_1_1);
 		btnNewButton_1_1.setVisible(false);
 		
-		textField_9 = new JTextField();
-		textField_9.setBounds(75, 10, 48, 20);
-		panel.add(textField_9);
-		textField_9.setColumns(10);
+		JComboBox comboBox = new JComboBox();
+		List<CursoPropio> listaCursos = new ArrayList<>();
+		listaCursos = gestorConsultas.listartodolosCursoPropios();
+		DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>();
+		for (int i=0; i<listaCursos.size();i++) {
+			CursoPropio cursoPropio = new CursoPropio();
+			cursoPropio= listaCursos.get(i);
+			modelo.addElement(cursoPropio.get_id());;
+		}
+		comboBox.setModel(modelo);
+		comboBox.setBounds(65, 11, 73, 22);
+		panel.add(comboBox);
+		
 		// esta accion hay que realizarla todavia
 		JButton btnNewButton_3 = new JButton("Buscar curso");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (textField_9.getText().isEmpty()) {
 				
-					
-				}
-				else {
 					lblNewLabel_8.setVisible(true);
 					textField_5.setVisible(true);
 					lblNewLabel_1_1.setVisible(true);
@@ -367,12 +373,18 @@ public class PantallaDireccionCursos extends JFrame{
 					btnNewButton_2.setVisible(true);
 					list_1.setVisible(true);
 					btnNewButton_1_1.setVisible(true);
-					
-				}
+					CursoPropio cursoPropio = new CursoPropio();
+					cursoPropio.set_id(comboBox.getSelectedItem().toString());
+					List<CursoPropio> listaCursos = new ArrayList<>();
+					cursoPropio= gestorConsultas.seleccionarCursoPropio(cursoPropio);
+						
+				
 			}
 		});
 		btnNewButton_3.setBounds(205, 7, 111, 23);
 		panel.add(btnNewButton_3);
+		
+		
 		
 		
 		
