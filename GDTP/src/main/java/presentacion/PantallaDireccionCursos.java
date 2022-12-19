@@ -399,8 +399,8 @@ public class PantallaDireccionCursos extends JFrame{
 					Date fechaDateinicioDate = (Date) cursoPropio.get_fechaInicio();
 					calendar.setTime(fechaDateinicioDate);
 					Integer yearInteger = calendar.get(Calendar.YEAR);
-					Integer mes= calendar.get(calendar.MONTH);
-					Integer day = calendar.get(calendar.DAY_OF_MONTH);
+					Integer mes= calendar.get(Calendar.MONTH+1);
+					Integer day = calendar.get(Calendar.DAY_OF_MONTH);
 					fechainicio2.getModel().setDate(yearInteger, mes, day);
 					
 						
