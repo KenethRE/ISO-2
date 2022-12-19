@@ -12,12 +12,19 @@ import persistencia.CursoPropioDAO;
 
 public class GestorPropuestasCursos {
 
+
 	public void realizarPropuestaCurso(CursoPropio aCurso) throws SQLException {
+		if (aCurso==null) {
+			throw new SQLDataException("no permitido");
+		}
+		else {
 		CursoPropioDAO<CursoPropio> cursoPropioDao = new CursoPropioDAO<>() ;
 		cursoPropioDao.crearNuevoCurso(aCurso);
+		}
 	}
 
-	public boolean editarPropuestaCurso(CursoPropio curso) {
+	public boolean editarPropuestaCurso(CursoPropio curso)
+	{
 		CursoPropioDAO<CursoPropio> cursoDao = new CursoPropioDAO<>();
 		curso.set_estado(EstadoCurso.VALIDADO);
 		if(cursoDao.editarCurso(curso)==0) {

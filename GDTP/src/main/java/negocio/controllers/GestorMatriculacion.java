@@ -1,6 +1,5 @@
 package negocio.controllers;
 
-import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.sql.SQLSyntaxErrorException;
 
