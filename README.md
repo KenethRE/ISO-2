@@ -22,7 +22,17 @@
 ### 4.2.	Pruebas
 
 ## 5.	Conclusión 
+____________________________________________________________________________________________________________________________________________________________________
 
+### 1. Introducción
+En este documento se recoge la memoria del proyecto de la asignatura de ingeniería del software II. “Gestión de títulos propios” ha sido realizado por:
+-	Adrián Riza Pérez
+-	Allipson Nicol Herrera Álvarez
+-	David Arriero Ollero
+-	Keneth Launies Rodríguez Escorcia.
+
+El proyecto consiste en la gestión de enseñanzas propias de la Universidad de Castilla-La Mancha la cual se estructura en tres categorías: formación permanente con titulación universitaria, formación permanente que no requiere titulación universitaria y enseñanzas propias (independientemente de si requieren o no titulación universitaria).
+Cada una de estas categorías dispone de una serie de cursos y actividades cada uno de ellos con una duración y créditos determinados. En el desarrollo de esta memoria aparecerán plasmados los requisitos requeridos y el desarrollo del proyecto.
 
 
 
