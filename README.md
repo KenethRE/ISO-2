@@ -71,4 +71,5 @@ Una aplicacion o un sistema informático no es perfecto. Sabemos que con el uso 
 
 ### 2.	Especificaciones técnicas
 #### 2.1.	 Base de Datos y Servidor de Base de datos 
+El sistema de gestión de bases de datos, permitirá crear y manejar bases de datos relacionales.
 
