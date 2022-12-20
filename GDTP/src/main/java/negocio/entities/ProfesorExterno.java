@@ -6,6 +6,13 @@ public class ProfesorExterno extends Profesor {
 		super(dni, nombre, apellidos, doctor);
 	}
 
+	public ProfesorExterno(String dni) {
+		super(dni);
+	}
+
+	public ProfesorExterno() {
+	}
+
 	private String _titulacion;
 
 	public String get_titulacion() {

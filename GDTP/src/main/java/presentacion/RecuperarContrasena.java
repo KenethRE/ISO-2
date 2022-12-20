@@ -1,4 +1,4 @@
-package presentacion.LoginPrueba;
+package presentacion;
 
 import java.awt.EventQueue;
 
@@ -17,6 +17,10 @@ import java.awt.event.ActionEvent;
 
 public class RecuperarContrasena extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3638398564729238573L;
 	private JPanel contentPane;
 	private JTextField textEmail;
 
@@ -28,6 +32,7 @@ public class RecuperarContrasena extends JFrame {
 			public void run() {
 				try {
 					RecuperarContrasena frame = new RecuperarContrasena();
+					frame.setResizable(false);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +47,7 @@ public class RecuperarContrasena extends JFrame {
 	public RecuperarContrasena() {
 		
 	
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 934, 566);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

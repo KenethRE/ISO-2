@@ -1,59 +1,70 @@
 package negocio.entities;
 
-import java.util.Vector;
-import negocio.entities.Matricula;
+import java.sql.SQLException;
+import java.sql.SQLSyntaxErrorException;
+import java.util.*;
+import persistencia.EstudianteDAO;
 
 public class Estudiante {
-	private String _dni;
-	private String _nombre;
-	private String _apellidos;
-	private String _titulacion;
-	private String _cualificacion;
+	private String dni;
+	private String nombre;
+	private String apellidos;
+	private String titulacion;
+	private String cualificacion;
 	
-	//Un estudiante tiene muchas matr�culas
-	public Vector<Matricula> _matriculas = new Vector<Matricula>();//revisar los de vectores
-	
+	//Un estudiante tiene muchas matriculas
+	private List<Matricula> matriculas = new ArrayList<>();
+	private EstudianteDAO<Estudiante> agenteEstudianteDAO = new EstudianteDAO<>();
 
 	public String get_dni() {
-		return _dni;
+		return dni;
 	}
 
-	public void set_dni(String _dni) {
-		this._dni = _dni;
+	public void set_dni(String dni) {
+		this.dni = dni;
 	}
 
 	public String get_nombre() {
-		return _nombre;
+		return nombre;
 	}
 
-	public void set_nombre(String _nombre) {
-		this._nombre = _nombre;
+	public void set_nombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public String get_apellidos() {
-		return _apellidos;
+		return apellidos;
 	}
 
-	public void set_apellidos(String _apellidos) {
-		this._apellidos = _apellidos;
+	public void set_apellidos(String apellidos) {
+		this.apellidos = apellidos;
 	}
 
 	public String get_titulacion() {
-		return _titulacion;
+		return titulacion;
 	}
 
-	public void set_titulacion(String _titulacion) {
-		this._titulacion = _titulacion;
+	public void set_titulacion(String titulacion) {
+		this.titulacion = titulacion;
 	}
 
 	public String get_cualificacion() {
-		return _cualificacion;
+		return cualificacion;
 	}
 
-	public void set_cualificacion(String _cualificacion) {
-		this._cualificacion = _cualificacion;
+	public void set_cualificacion(String cualificacion) {
+		this.cualificacion = cualificacion;
 	}
 	
-	
-	
+	public List<Matricula> getMatriculas() {
+		return matriculas;
+	}
+
+	public void setMatriculas(List<Matricula> matriculas) {
+		this.matriculas = matriculas;
+	}
+
+	public void persist () throws SQLException {
+		this.agenteEstudianteDAO.crearNuevoEstudiante(this);
+	}
 }

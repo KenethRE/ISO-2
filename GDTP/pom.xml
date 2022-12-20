@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ISO-2</groupId>
   <artifactId>GDTP</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.2.0</version>
   <description>Sistema informático para la gestión de enseñanzas propias de la Universidad
 de Castilla-La Mancha.</description>
   <properties>
@@ -10,6 +10,7 @@ de Castilla-La Mancha.</description>
   	<maven.compiler.target>15</maven.compiler.target>
   	<sonar.organization>vaporware</sonar.organization>
   	<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <build>
   	<plugins>
@@ -18,7 +19,7 @@ de Castilla-La Mancha.</description>
   <configuration>
     <archive>
       <manifest>
-        <mainClass>presentacion.Principal</mainClass> <!--  recordar cambiar el nombre de esta clase a la nueva clase principal cuando la tengamos -->
+        <mainClass>presentacion.PantallaLogin</mainClass> <!--  recordar cambiar el nombre de esta clase a la nueva clase principal cuando la tengamos -->
       </manifest>
     </archive>
     <descriptorRefs>
@@ -38,7 +39,7 @@ de Castilla-La Mancha.</description>
 <plugin>
 		<groupId>org.jacoco</groupId>
 		<artifactId>jacoco-maven-plugin</artifactId>
-		<version>0.7.9</version>
+		<version>0.8.8</version>
 		<executions>
 			<execution>
 				<id>default-prepare-agent</id>
@@ -79,7 +80,7 @@ de Castilla-La Mancha.</description>
 								<limit implementation="org.jacoco.report.check.Limit">
 									<counter>COMPLEXITY</counter>
 									<value>COVEREDRATIO</value>
-									<minimum>0.60</minimum>
+									<minimum>0.01</minimum>
 								</limit>
 							</limits>
 						</rule>
@@ -97,7 +98,7 @@ de Castilla-La Mancha.</description>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.7.1</version>
+                <version>3.9.1</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -107,7 +108,7 @@ de Castilla-La Mancha.</description>
             <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
     			<artifactId>maven-surefire-report-plugin</artifactId>
-    			<version>3.0.0-M7</version>
+    			<version>3.0.0-M5</version>
 				<configuration>
 					<skipEmptyReport>false</skipEmptyReport>
 				</configuration>
@@ -115,13 +116,14 @@ de Castilla-La Mancha.</description>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jxr-plugin</artifactId>
-				<version>2.1</version>
+				<version>3.0.0</version>
 			</plugin>
 			
 			<plugin>
 			<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<reportSets>
+			<artifactId>jacoco-maven-plugin</artifactId>
+			<version>0.8.6</version>
+			<reportSets>
 					<reportSet>
 						<reports>
 							<report>report</report>
@@ -146,13 +148,25 @@ de Castilla-La Mancha.</description>
     	<version>5.8.1</version>
     	<scope>test</scope>
 	</dependency>
+	<dependency>
+	  <groupId>junit</groupId>
+	  <artifactId>junit</artifactId>
+	  <version>4.11</version>
+	  <scope>test</scope>
+	</dependency>
 	<!-- https://mvnrepository.com/artifact/com.toedter/jcalendar -->
 	<dependency>
 	    <groupId>com.toedter</groupId>
 	    <artifactId>jcalendar</artifactId>
 	    <version>1.4</version>
 	</dependency>
-	
+
+
+	<dependency>
+		<groupId>org.jdatepicker</groupId>
+		<artifactId>jdatepicker</artifactId>
+		<version>1.3.4</version>
+	</dependency>
   </dependencies>
   <name>Gestion de Titulos Propios</name>
   <organization>

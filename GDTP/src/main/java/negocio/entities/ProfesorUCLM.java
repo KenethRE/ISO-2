@@ -17,6 +17,10 @@ public class ProfesorUCLM extends Profesor {
 	}
 
 
+	public ProfesorUCLM() {
+	}
+
+
 	public String get_nombre() {
 		return _nombre;
 	}

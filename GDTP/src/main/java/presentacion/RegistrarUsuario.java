@@ -1,4 +1,4 @@
-package presentacion.LoginPrueba;
+package presentacion;
 
 import java.awt.EventQueue;
 
@@ -17,6 +17,10 @@ import java.awt.event.ActionEvent;
 
 public class RegistrarUsuario extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7839219422490002600L;
 	private JPanel contentPane;
 	private JTextField textNombre;
 	private JTextField textApellidos;
@@ -44,7 +48,7 @@ public class RegistrarUsuario extends JFrame {
 	 * Create the frame.
 	 */
 	public RegistrarUsuario() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 929, 592);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(189, 189, 189));
@@ -124,6 +128,7 @@ public class RegistrarUsuario extends JFrame {
 					dispose();
 					JOptionPane.showMessageDialog(null, "Usuario registrado correctamente", "INGRESO CORRECTO", 
 							JOptionPane.INFORMATION_MESSAGE);
+					//AÑADIR USUARIO A LA BBDD -> Nuestro programa no soporta la creacion de usuarios ya que no existe persistencia para ello.
 					
 				}else {
 					JOptionPane.showMessageDialog(null, "Usuario no registrado, datos incorrectos", "ERROR",
