@@ -4,6 +4,9 @@
 package negocio.entities;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.sql.Date;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -12,36 +15,29 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.jupiter.api.Disabled;
 
-/**
- * @author plati
- *
- */
 public class MatriculaTest {
-
-	/**
-	 * @throws java.lang.Exception
-	 */
+	Matricula matricula;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
 	@Before
 	public void setUp() throws Exception {
+		matricula = new Matricula();
+		matricula.setiD(1);
+		Date date = new Date(2010,10,10);
+		matricula.set_fecha(date);
+		matricula.set_pagado(false);
+		matricula.set_attribute("atributo");
+		matricula.setId_estudiante("01");
+		matricula.setId_Curso("01");
+		matricula.set_tipoPago(ModoPago.TARJETA_CREDITO);
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
 	@After
 	public void tearDown() throws Exception {
 	}
@@ -49,113 +45,122 @@ public class MatriculaTest {
 	/**
 	 * Test method for {@link negocio.entities.Matricula#getiD()}.
 	 */
-	@Disabled
+	@Test
 	public void testGetiD() {
-		fail("Not yet implemented");
+		assertEquals(1, matricula.getiD(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.Matricula#setiD(int)}.
 	 */
-	@Disabled
+	@Test
 	public void testSetiD() {
-		fail("Not yet implemented");
+		matricula.setiD(2);
+		assertEquals(2, matricula.getiD(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.Matricula#get_fecha()}.
 	 */
-	@Disabled
+	@Test
 	public void testGet_fecha() {
-		fail("Not yet implemented");
+		Date date = new Date(2010,10,10);
+		assertEquals(date, matricula.get_fecha(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.Matricula#set_fecha(java.util.Date)}.
 	 */
-	@Disabled
+	@Test
 	public void testSet_fecha() {
-		fail("Not yet implemented");
+		Date date = new Date(2005,5,5);
+		matricula.set_fecha(date);
+		assertEquals(date, matricula.get_fecha(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.Matricula#is_pagado()}.
 	 */
-	@Disabled
+	@Test
 	public void testIs_pagado() {
-		fail("Not yet implemented");
+		assertEquals(false, matricula.is_pagado(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.Matricula#set_pagado(boolean)}.
 	 */
-	@Disabled
+	@Test
 	public void testSet_pagado() {
-		fail("Not yet implemented");
+		matricula.set_pagado(true);
+		assertEquals(true, matricula.is_pagado(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.Matricula#get_attribute()}.
 	 */
-	@Disabled
+	@Test
 	public void testGet_attribute() {
-		fail("Not yet implemented");
+		assertEquals("atributo", matricula.get_attribute(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.Matricula#set_attribute(java.lang.Object)}.
 	 */
-	@Disabled
+	@Test
 	public void testSet_attribute() {
-		fail("Not yet implemented");
+		matricula.set_attribute("atr");
+		assertEquals("atr", matricula.get_attribute(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.Matricula#getId_estudiante()}.
 	 */
-	@Disabled
+	@Test
 	public void testGetId_estudiante() {
-		fail("Not yet implemented");
+		assertEquals("01", matricula.getId_estudiante(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.Matricula#setId_estudiante(java.lang.String)}.
 	 */
-	@Disabled
+	@Test
 	public void testSetId_estudiante() {
-		fail("Not yet implemented");
+		matricula.setId_estudiante("02");
+		assertEquals("02", matricula.getId_estudiante(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.Matricula#getId_Curso()}.
 	 */
-	@Disabled
+	@Test
 	public void testGetId_Curso() {
-		fail("Not yet implemented");
+		assertEquals("01", matricula.getId_Curso(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.Matricula#setId_Curso(java.lang.String)}.
 	 */
-	@Disabled
+	@Test
 	public void testSetId_Curso() {
-		fail("Not yet implemented");
+		matricula.setId_Curso("02");
+		assertEquals("02", matricula.getId_Curso(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.Matricula#get_tipoPago()}.
 	 */
-	@Disabled
+	@Test
 	public void testGet_tipoPago() {
-		fail("Not yet implemented");
+		assertEquals(ModoPago.TARJETA_CREDITO, matricula.get_tipoPago(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.Matricula#set_tipoPago(negocio.entities.ModoPago)}.
 	 */
-	@Disabled
+	@Test
 	public void testSet_tipoPago() {
-		fail("Not yet implemented");
+		matricula.set_tipoPago(ModoPago.TRANSFERENCIA);
+		assertEquals(ModoPago.TRANSFERENCIA, matricula.get_tipoPago(), "FALLO");
 	}
 
 	/**
