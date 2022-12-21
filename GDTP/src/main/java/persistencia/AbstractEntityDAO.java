@@ -13,86 +13,115 @@ public class AbstractEntityDAO<E>{
 	//esto regresa un unico elemento
 	public ResultSet get(Object E) {
 		ResultSet result = null;
+		if (E!=null) {
+		
 		String castName = E.getClass().getSimpleName();
 		if (castName.equals(profesorExtString) || castName.equals(profesorUCLMString)) result = agente.select("SELECT * FROM " + castName + " NATURAL JOIN PROFESOR"
 				+ " WHERE DNI = '" + ((Profesor)E).get_dni() + "'");
-		else if (castName.equals("Estudiante")) result = agente.select("SELECT * FROM ESTUDIANTE WHERE DNI = '"+((Estudiante)E).get_dni()+ "'");
+		else if (castName.equals("Estudiante")) {
+			String sentencia= "SELECT * FROM ESTUDIANTE WHERE DNI = '"+((Estudiante)E).get_dni()+ "'";
+			result = agente.select(sentencia);
+			
+		} 
 		else if (castName.equals("Materia")) result = agente.select("SELECT * FROM MATERIA WHERE NOMBRE = '"+((Materia)E).get_nombre()+ "'");
 		else if (castName.equals("CursoPropio")) result = agente.select("SELECT * FROM CURSOPROPIO WHERE ID = '"+((CursoPropio)E).get_id()+ "'");
 		else if (castName.equals("Centro")) result = agente.select("SELECT * FROM CENTRO WHERE ID = "+((Centro)E).get_Id());
 		else result = agente.select("SELECT * FROM " + castName + " WHERE ID = '"+((IdInterface) E).getInternalID()+ "'");
+		}
+		else {
+			throw new NullPointerException();
+			}
+		
 		return result;
+		
 	}
 	
 	//esto regresa todos los elementos de alguna tabla en particular
 	public ResultSet get(String Table) {
 		ResultSet result = null;
+		if (Table.isEmpty())
+			throw new NullPointerException();
+		else {
 
 		if (Table.equals(profesorExtString) || Table.equals(profesorUCLMString)) result = agente.select("SELECT * FROM " + Table + " NATURAL JOIN PROFESOR");
 		else result = agente.select("SELECT * FROM " + Table);
-
+		}
 		return result;
 	}
 	// get lista materias por id curso
 	
 	public ResultSet get(String Table, String idcurso) {
 		ResultSet result = null;
-		
+		if (Table.isEmpty() || idcurso.isEmpty())
+			throw new NullPointerException();
+		else {
 		if (Table.equals("Materia")) {
 			result = agente.select("SELECT * FROM " + Table + " WHERE idCurso = '"+idcurso+"'");
 		}
-
+		}
 		return result;
 }
 	//get para estadoCurso
 	public ResultSet get(String Table, EstadoCurso estadoCurso) {
 		ResultSet result = null;
-		
+		if (Table.isEmpty())
+			throw new NullPointerException();
+		else {
 		if (Table.equals(cursoPropioString)) {
 			result = agente.select("SELECT * FROM " + Table + " WHERE estadocurso = '"+estadoCurso+"'");
 		}
-
+		}
 		return result;
 	}
 	
 	public ResultSet get(String Table, EstadoCurso estadoCurso, Date aFechaInicio, Date aFechaFin) {
 		ResultSet result = null;
-		
+		if (Table.isEmpty())
+			throw new NullPointerException();
+		else {
 		if (Table.equals(cursoPropioString)) {
 			result = agente.select("SELECT * FROM " + Table + " WHERE estadocurso = '"+estadoCurso+"' AND fechainicio >= '"+aFechaInicio+"' AND fechafin <= '"+aFechaFin+"'");
 		}
-
+		}
 		return result;
 	}
 	
 	//get para coste total por tipos de curso
 	public ResultSet get(TipoCurso tipoCurso,  Date aFechaInicio, Date aFechaFin) {
 		ResultSet result = null;
-		
+		if (aFechaInicio==null && aFechaFin==null) {
+			throw new NullPointerException();
+		}
+		else {
 		result = agente.select("SELECT COUNT(IDCURSO) AS n,COUNT(IDCURSO)*C.TASAMATRICULA AS total,IDCURSO FROM Matricula m "
 				+ "INNER JOIN CursoPropio c ON m.idcurso = c.id WHERE m.pagado='TRUE' "
 				+ "AND c.tipocurso='"+tipoCurso+"' "
 				+ "AND c.fechainicio >= '"+aFechaInicio+"' "
 				+ "AND c.fechafin <= '"+aFechaFin+"' "
 				+ "GROUP BY IDCURSO, TASAMATRICULA");
+		}
 
 		return result;
 	}
 	
 	public ResultSet get_edicion(String Table, Date aFechaInicio, Date aFechaFin) {
 		ResultSet result = null;
-		
+		if (Table.isEmpty())
+			throw new NullPointerException();
+		else { 
 		if (Table.equals(cursoPropioString)) {
 			result = agente.select("SELECT * FROM " + Table + " WHERE fechainicio >= '"+aFechaInicio+"' AND fechafin <= '"+aFechaFin+"'");
 		}
-
+		}
 		return result;
 	}
 	
 	
 	public int insert (Object E) throws SQLException {
-		String className = E.getClass().getSimpleName();
 		int result = 0;
+		if (E!=null){
+		String className = E.getClass().getSimpleName();
+		
 		switch (className) {
 		
 		case "CursoPropio":
@@ -128,11 +157,17 @@ public class AbstractEntityDAO<E>{
 					+ "','" + ((Estudiante) E).get_titulacion() + "','" + ((Estudiante) E).get_cualificacion() + "')" );
 			break;
 		}
+		}
+		else {
+			throw new NullPointerException();
+		}
 		return result;
 	}
 	public int update (Object E) {
-		String className = E.getClass().getSimpleName();
+		
 		int result = 0;
+		if (E!=null){
+		String className = E.getClass().getSimpleName();
 		switch (className) {
 		
 		case "CursoPropio":
@@ -168,11 +203,17 @@ public class AbstractEntityDAO<E>{
 			result = agente.update("UPDATE " + className + "SET DNI='" + ((Estudiante) E).get_dni() + "', NOMBRE='" + ((Estudiante) E).get_nombre() + "', APELLIDOS='" + ((Estudiante) E).get_apellidos() 
 					+ "', TITULACION='" + ((Estudiante) E).get_titulacion() + "', CUALIFICACION='" + ((Estudiante) E).get_cualificacion() + "' WHERE DNI = '" + ((Estudiante) E).get_dni() +"'" );
 			break;
-		}	
+		}
+		}else {
+			throw new NullPointerException();
+		} 
 		return result;
 	}
 	public int delete (String iD, String Table, String keyName) {
 		int result = 0;
+		if (Table.isEmpty()) {
+			throw new NullPointerException();
+		}else {
 		if (Table.equals(profesorExtString) || Table.equals(profesorUCLMString)) result = agente.update("DELETE FROM " + Table + " NATURAL JOIN PROFESOR WHERE "+keyName+" = " +iD);
 		else 
 			if(Table.equals(materiaString)) {
@@ -181,6 +222,7 @@ public class AbstractEntityDAO<E>{
 			}
 			else
 			result = agente.update("DELETE FROM " + Table + " WHERE "+keyName+" = " +iD);
+		}
 		return result;
 	}
 

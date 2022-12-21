@@ -15,6 +15,10 @@ public class Estudiante {
 	//Un estudiante tiene muchas matriculas
 	private List<Matricula> matriculas = new ArrayList<>();
 	private EstudianteDAO<Estudiante> agenteEstudianteDAO = new EstudianteDAO<>();
+	
+	public Estudiante () {
+		
+	}
 
 	public String get_dni() {
 		return dni;

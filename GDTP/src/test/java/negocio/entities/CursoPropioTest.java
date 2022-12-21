@@ -6,6 +6,10 @@ package negocio.entities;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -13,35 +17,48 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.jupiter.api.Disabled;
 
-/**
- * @author plati
- *
- */
 public class CursoPropioTest {
 	CursoPropio cursoPropio;
-	/**
-	 * @throws java.lang.Exception
-	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
 	@Before
 	public void setUp() throws Exception {
-		cursoPropio= new CursoPropio();
+		cursoPropio = new CursoPropio();
 		cursoPropio.set_id("popi");
 		cursoPropio.set_nombre("pipo");
 		cursoPropio.set_eCTS(20);
+		
+		Date date = new Date(2010,10,10);
+		cursoPropio.set_fechaInicio(date);
+		cursoPropio.set_fechaFin(date);
+		
+		cursoPropio.set_tasaMatricula(200.5);
+		cursoPropio.set_edicion(1);
+		
+		Matricula m = new Matricula();
+		List<Matricula> matriculas = new ArrayList<Matricula>();
+		matriculas.add(m);
+		
+		cursoPropio.set_matriculas(matriculas);
+		cursoPropio.setId_centro(1);
+		cursoPropio.setId_director("01");
+		cursoPropio.setId_secretario("01");
+		cursoPropio.set_estado(EstadoCurso.VALIDADO);
+		
+		/*
+		Materia mat = new Materia();
+		List<Materia> materias = new ArrayList<Materia>();
+		materias.add(mat);
+		cursoPropio.set_materias(materias);
+		*/
+		
+		cursoPropio.set_tipo(TipoCurso.MASTER);
 	}
 
 	/**
@@ -121,161 +138,190 @@ public class CursoPropioTest {
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#get_fechaInicio()}.
 	 */
-	@Disabled
+	@Test
 	public void testGet_fechaInicio() {
-		fail("Not yet implemented");
+		Date date = new Date(2010,10,10);
+		assertEquals(date, cursoPropio.get_fechaInicio(), "FALLO");
+
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#set_fechaInicio(java.util.Date)}.
 	 */
-	@Disabled
+	@Test
 	public void testSet_fechaInicio() {
-		fail("Not yet implemented");
+		Date date = new Date(2005,5,5);
+		cursoPropio.set_fechaInicio(date);
+		assertEquals(date, cursoPropio.get_fechaInicio(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#get_fechaFin()}.
 	 */
-	@Disabled
+	@Test
 	public void testGet_fechaFin() {
-		fail("Not yet implemented");
+		Date date = new Date(2010,10,10);
+		assertEquals(date, cursoPropio.get_fechaFin(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#set_fechaFin(java.util.Date)}.
 	 */
-	@Disabled
+	@Test
 	public void testSet_fechaFin() {
-		fail("Not yet implemented");
+		Date date = new Date(2005,5,5);
+		cursoPropio.set_fechaFin(date);
+		assertEquals(date, cursoPropio.get_fechaFin(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#get_tasaMatricula()}.
 	 */
-	@Disabled
+	@Test
 	public void testGet_tasaMatricula() {
-		fail("Not yet implemented");
+		assertEquals(200.5, cursoPropio.get_tasaMatricula(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#set_tasaMatricula(double)}.
 	 */
-	@Disabled
+	@Test
 	public void testSet_tasaMatricula() {
-		fail("Not yet implemented");
+		cursoPropio.set_tasaMatricula(100.5);
+		assertEquals(100.5, cursoPropio.get_tasaMatricula(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#get_edicion()}.
 	 */
-	@Disabled
+	@Test
 	public void testGet_edicion() {
-		fail("Not yet implemented");
+		assertEquals(1, cursoPropio.get_edicion(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#set_edicion(int)}.
 	 */
-	@Disabled
+	@Test
 	public void testSet_edicion() {
-		fail("Not yet implemented");
+		cursoPropio.set_edicion(2);
+		assertEquals(2, cursoPropio.get_edicion(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#get_matriculas()}.
 	 */
-	@Disabled
+	@Test
 	public void testGet_matriculas() {
-		fail("Not yet implemented");
+		assertEquals(false, cursoPropio.get_matriculas().isEmpty(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#set_matriculas(java.util.List)}.
 	 */
-	@Disabled
+	@Test
 	public void testSet_matriculas() {
-		fail("Not yet implemented");
+		Matricula m = new Matricula();
+		m.setId_Curso("Mates");
+		List<Matricula> matriculas = new ArrayList<Matricula>();
+		matriculas.add(m);
+		cursoPropio.set_matriculas(matriculas);
+		assertEquals(matriculas, cursoPropio.get_matriculas(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#getId_centro()}.
 	 */
-	@Disabled
+	@Test
 	public void testGetId_centro() {
-		fail("Not yet implemented");
+		assertEquals(1, cursoPropio.getId_centro(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#setId_centro(int)}.
 	 */
-	@Disabled
+	@Test
 	public void testSetId_centro() {
-		fail("Not yet implemented");
+		cursoPropio.setId_centro(2);
+		assertEquals(2, cursoPropio.getId_centro(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#getId_director()}.
 	 */
-	@Disabled
+	@Test
 	public void testGetId_director() {
-		fail("Not yet implemented");
+		assertEquals("01", cursoPropio.getId_director(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#setId_director(java.lang.String)}.
 	 */
-	@Disabled
+	@Test
 	public void testSetId_director() {
-		fail("Not yet implemented");
+		cursoPropio.setId_director("02");
+		assertEquals("02", cursoPropio.getId_director(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#getId_secretario()}.
 	 */
-	@Disabled
+	@Test
 	public void testGetId_secretario() {
-		fail("Not yet implemented");
+		assertEquals("01", cursoPropio.getId_secretario(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#setId_secretario(java.lang.String)}.
 	 */
-	@Disabled
+	@Test
 	public void testSetId_secretario() {
-		fail("Not yet implemented");
+		cursoPropio.setId_secretario("02");
+		assertEquals("02", cursoPropio.getId_secretario(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#get_materias()}.
 	 */
+	
+	//FALLO DAO
+	/*
 	@Disabled
 	public void testGet_materias() {
-		fail("Not yet implemented");
+		assertEquals(false, cursoPropio.get_materias().isEmpty(), "FALLO");
 	}
+	*/
 
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#set_materias(java.util.List)}.
 	 */
 	@Disabled
+	/*
 	public void testSet_materias() {
-		fail("Not yet implemented");
+		Materia mat = new Materia();
+		mat.setId_Curso("Mates");
+		List<Materia> materias = new ArrayList<Materia>();
+		materias.add(mat);
+		cursoPropio.set_materias(materias);
+		assertEquals(mat, cursoPropio.get_matriculas(), "FALLO");
 	}
+	*/
 
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#get_estado()}.
 	 */
-	@Disabled
+	@Test
 	public void testGet_estado() {
-		fail("Not yet implemented");
+		assertEquals(EstadoCurso.VALIDADO, cursoPropio.get_estado(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.CursoPropio#set_estado(negocio.entities.EstadoCurso)}.
 	 */
-	@Disabled
+	@Test
 	public void testSet_estado() {
-		fail("Not yet implemented");
+		cursoPropio.set_estado(EstadoCurso.TERMINADO);
+		assertEquals(EstadoCurso.TERMINADO, cursoPropio.get_estado(), "FALLO");
 	}
 
 	/**
@@ -283,7 +329,7 @@ public class CursoPropioTest {
 	 */
 	@Disabled
 	public void testGet_tipo() {
-		fail("Not yet implemented");
+		assertEquals(TipoCurso.MASTER, cursoPropio.get_tipo(), "FALLO");
 	}
 
 	/**
@@ -291,7 +337,8 @@ public class CursoPropioTest {
 	 */
 	@Disabled
 	public void testSet_tipo() {
-		fail("Not yet implemented");
+		cursoPropio.set_tipo(TipoCurso.ESPECIALISTA);
+		assertEquals(TipoCurso.ESPECIALISTA, cursoPropio.get_tipo(), "FALLO");
 	}
 
 	/**

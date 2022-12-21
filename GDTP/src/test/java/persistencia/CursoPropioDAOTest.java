@@ -4,6 +4,10 @@
 package persistencia;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -12,11 +16,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.jupiter.api.Disabled;
 
+import negocio.entities.CursoPropio;
+import negocio.entities.EstadoCurso;
+
 /**
  * @author plati
  *
  */
 public class CursoPropioDAOTest {
+	CursoPropioDAO<CursoPropio> cursoPropioDAO;
+	CursoPropio cursoPropio;
 
 	/**
 	 * @throws java.lang.Exception
@@ -37,6 +46,7 @@ public class CursoPropioDAOTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		cursoPropio = new CursoPropio();
 	}
 
 	/**
@@ -49,25 +59,28 @@ public class CursoPropioDAOTest {
 	/**
 	 * Test method for {@link persistencia.CursoPropioDAO#crearNuevoCurso(negocio.entities.CursoPropio)}.
 	 */
-	@Disabled
+	@Test
 	public void testCrearNuevoCurso() {
-		fail("Not yet implemented");
+		cursoPropio=null;
+		NullPointerException exception = assertThrows(NullPointerException.class, () -> {cursoPropioDAO.crearNuevoCurso(cursoPropio);});
 	}
 
 	/**
 	 * Test method for {@link persistencia.CursoPropioDAO#seleccionarCurso(negocio.entities.CursoPropio)}.
 	 */
-	@Disabled
+	@Test
 	public void testSeleccionarCurso() {
-		fail("Not yet implemented");
+		cursoPropio=null;
+		NullPointerException exception = assertThrows(NullPointerException.class, () -> {cursoPropioDAO.seleccionarCurso(cursoPropio);});
 	}
 
 	/**
 	 * Test method for {@link persistencia.CursoPropioDAO#editarCurso(negocio.entities.CursoPropio)}.
 	 */
-	@Disabled
+	@Test
 	public void testEditarCurso() {
-		fail("Not yet implemented");
+		cursoPropio=null;
+		NullPointerException exception = assertThrows(NullPointerException.class, () -> {cursoPropioDAO.editarCurso(cursoPropio);});
 	}
 
 	/**
@@ -75,7 +88,8 @@ public class CursoPropioDAOTest {
 	 */
 	@Disabled
 	public void testListarCursosPorEstadoEstadoCurso() {
-		fail("Not yet implemented");
+		assertFalse("la lista devuelta por el metodo consultar ingreso no esta vacia",cursoPropioDAO.listarCursosPorEstado(EstadoCurso.PROPUESTO).isEmpty());
+
 	}
 
 	/**

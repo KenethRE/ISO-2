@@ -65,24 +65,15 @@ public class GestorPropuestaCursoTest {
 	}
 
 	/**
-	 * Test method for {@link negocio.controllers.GestorPropuestasCursos#editarPropuestaCurso(negocio.entities.CursoPropio)}.
+	 * Test method for {@link negocio.controllers.GestorPropuestasCursos#evaluarPropuestaCurso(negocio.entities.CursoPropio)}.
 	 */
 	@Test
-	public void testEditarPropuestaCurso() {
+	public void testEvaluarPropuestaCurso() {
 		cursoPropio= new CursoPropio();
-		cursoPropio.set_estado(estadoCurso.VALIDADO);
-		assertTrue("el booleano devuelto es correcto",gestorPropuestaCurso.editarPropuestaCurso(cursoPropio));
+		assertFalse("el booleano devuelto es correcto",gestorPropuestaCurso.evaluarPropuestaCurso(cursoPropio,estadoCurso.VALIDADO));
 	}
 
-	/**
-	 * Test method for {@link negocio.controllers.GestorPropuestasCursos#rechazarPropuestaCurso(negocio.entities.CursoPropio)}.
-	 */
-	@Test
-	public void testRechazarPropuestaCurso() {
-		cursoPropio = new CursoPropio();
-		cursoPropio.set_estado(estadoCurso.PROPUESTA_RECHAZADA);
-		assertTrue("el booleano devuelto es correcto",gestorPropuestaCurso.rechazarPropuestaCurso(cursoPropio));
-	}
+
 
 	/**
 	 * Test method for {@link negocio.controllers.GestorPropuestasCursos#listaCursoAprobado()}.

@@ -12,9 +12,11 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
+import negocio.controllers.GestorConsultas;
 import negocio.entities.CursoPropio;
 import negocio.entities.Estudiante;
 import negocio.entities.ModoPago;
+import persistencia.AbstractEntityDAO;
 import persistencia.EstudianteDAO;
 import persistencia.MatriculaDAO;
 import negocio.entities.Matricula;
@@ -29,6 +31,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.ResultSet;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.sql.SQLSyntaxErrorException;
@@ -60,6 +63,7 @@ public class Matriculacion extends JFrame {
 	private ModoPago tipoPago;
 	private boolean tarjeta=false;
 	Date fechamatriculacionDate;
+	private GestorConsultas  gestorconsultas = new GestorConsultas();
 	
 	public Matriculacion(JFrame previousWindow){
 		estaventana= this;
@@ -340,22 +344,36 @@ public class Matriculacion extends JFrame {
 				else {
 					matricula.set_tipoPago(tipoPago.TARJETA_CREDITO);
 				}
+				
 				try {
-					estudiante.persist();
+					Estudiante estudiante2 = new Estudiante(); 
+					estudiante2 =  gestorconsultas.buscarEstudiante(estudiante);
+					if (estudiante2!=null) {
+						matricula.setId_estudiante(estudiante2.get_dni());
+					}
+					else {
+						estudiante.persist();
+					}
 				} catch (SQLException e2) {
 					e2.printStackTrace();
 				}
+				
 				try {
 					matricula.persist();
+					JOptionPane.showMessageDialog(null, "Se ha creado la matricula con identificador: " + matricula.getiD(), "EXITO",
+							JOptionPane.INFORMATION_MESSAGE);
+					dispose();
+					previousWindow.setVisible(true);
+					
 				} catch (NullPointerException e1) {
 					e1.printStackTrace();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
-				JOptionPane.showMessageDialog(null, "Se ha creado la matricula con identificador: " + matricula.getiD(), "EXITO",
-				JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Error al crear matrícula: " + matricula.getiD(), "ERROR",
+						JOptionPane.INFORMATION_MESSAGE);
 				dispose();
-				
+				previousWindow.setVisible(true);
 			}
 		});
 		
@@ -390,6 +408,7 @@ public class Matriculacion extends JFrame {
 	public void setcursopropio(CursoPropio curso) {
 		cursoPropio=curso;
 		textField.setText(cursoPropio.get_nombre());
+
 	}
 	//chequea los campos para saber si estan completados
 	public boolean chequearcampos() {
@@ -404,6 +423,7 @@ public class Matriculacion extends JFrame {
 	public void activarcasillapago() {
 		chckbxNewCheckBox.setSelected(true);
 		btnNewButton_2.setEnabled(true);
+		
 		
 	}
 	// si el pago ha sido con tarjeta en la venta pago se cambia aqui.

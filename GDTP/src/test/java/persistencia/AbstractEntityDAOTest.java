@@ -4,6 +4,10 @@
 package persistencia;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.sql.Date;
+import java.sql.SQLDataException;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -11,13 +15,21 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.jupiter.api.Disabled;
+import org.junit.runners.model.FrameworkField;
+
+import negocio.entities.EstadoCurso;
+import negocio.entities.TipoCurso;
 
 /**
  * @author plati
  *
  */
 public class AbstractEntityDAOTest {
-
+	Object eObject;
+	AbstractEntityDAO abstracDAO = new AbstractEntityDAO<>();
+	String string ="";
+	String idcurso="";
+	Date date = new Date(2010,10,10);
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -37,6 +49,7 @@ public class AbstractEntityDAOTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		
 	}
 
 	/**
@@ -49,73 +62,81 @@ public class AbstractEntityDAOTest {
 	/**
 	 * Test method for {@link persistencia.AbstractEntityDAO#get(java.lang.Object)}.
 	 */
-	@Disabled
+	@Test
 	public void testGetObject() {
-		fail("Not yet implemented");
+
+		eObject = null;
+	
+		NullPointerException exception = assertThrows(NullPointerException.class, () -> {abstracDAO.get(eObject);});
 	}
 
 	/**
 	 * Test method for {@link persistencia.AbstractEntityDAO#get(java.lang.String)}.
 	 */
-	@Disabled
+	@Test
 	public void testGetString() {
-		fail("Not yet implemented");
+		NullPointerException exception = assertThrows(NullPointerException.class, () -> {abstracDAO.get(string);});
+		
 	}
 
 	/**
 	 * Test method for {@link persistencia.AbstractEntityDAO#get(java.lang.String, negocio.entities.EstadoCurso)}.
 	 */
-	@Disabled
+	@Test
 	public void testGetStringEstadoCurso() {
-		fail("Not yet implemented");
+		NullPointerException exception = assertThrows(NullPointerException.class, () -> {abstracDAO.get(string,EstadoCurso.EN_IMPARTIZICION);});
+		
 	}
 
 	/**
 	 * Test method for {@link persistencia.AbstractEntityDAO#get(java.lang.String, negocio.entities.EstadoCurso, java.sql.Date, java.sql.Date)}.
 	 */
-	@Disabled
+	@Test
 	public void testGetStringEstadoCursoDateDate() {
-		fail("Not yet implemented");
+		NullPointerException exception = assertThrows(NullPointerException.class, () -> {abstracDAO.get(string,EstadoCurso.EN_IMPARTIZICION,date,date);});
 	}
 
 	/**
 	 * Test method for {@link persistencia.AbstractEntityDAO#get(negocio.entities.TipoCurso, java.sql.Date, java.sql.Date)}.
 	 */
-	@Disabled
+	@Test
 	public void testGetTipoCursoDateDate() {
-		fail("Not yet implemented");
+		date=null;
+		NullPointerException exception = assertThrows(NullPointerException.class, () -> {abstracDAO.get(TipoCurso.CORTA_DURACION,date,date);});
 	}
 
 	/**
 	 * Test method for {@link persistencia.AbstractEntityDAO#get_edicion(java.lang.String, java.sql.Date, java.sql.Date)}.
 	 */
-	@Disabled
+	@Test
 	public void testGet_edicion() {
-		fail("Not yet implemented");
+		NullPointerException exception = assertThrows(NullPointerException.class, () -> {abstracDAO.get_edicion(string, date, date);});
 	}
 
 	/**
 	 * Test method for {@link persistencia.AbstractEntityDAO#insert(java.lang.Object)}.
 	 */
-	@Disabled
+	@Test
 	public void testInsert() {
-		fail("Not yet implemented");
+		NullPointerException exception = assertThrows(NullPointerException.class, () -> {abstracDAO.insert(eObject);});
+		
 	}
 
 	/**
 	 * Test method for {@link persistencia.AbstractEntityDAO#update(java.lang.Object)}.
 	 */
-	@Disabled
+	@Test
 	public void testUpdate() {
-		fail("Not yet implemented");
+		NullPointerException exception = assertThrows(NullPointerException.class, () -> {abstracDAO.update(eObject);});
 	}
 
 	/**
 	 * Test method for {@link persistencia.AbstractEntityDAO#delete(java.lang.String, java.lang.String, java.lang.String)}.
 	 */
-	@Disabled
+	@Test
 	public void testDelete() {
-		fail("Not yet implemented");
+		NullPointerException exception = assertThrows(NullPointerException.class, () -> {abstracDAO.delete(string, idcurso, string);});
+		
 	}
 
 }

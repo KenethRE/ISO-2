@@ -144,7 +144,7 @@ public class PantallaAñadirMaterias extends JFrame{
 				
 			}
 		});
-		btnNewButton.setBounds(181, 264, 105, 23);
+		btnNewButton.setBounds(155, 265, 138, 23);
 		panel.add(btnNewButton);
 		
 		JLabel lblDniProfesor = new JLabel("Dni Profesor");

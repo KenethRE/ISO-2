@@ -4,6 +4,9 @@
 package negocio.entities;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.sql.Date;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -12,36 +15,28 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.jupiter.api.Disabled;
 
-/**
- * @author plati
- *
- */
 public class MateriaTest {
-
-	/**
-	 * @throws java.lang.Exception
-	 */
+	Materia materia;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
 	@Before
 	public void setUp() throws Exception {
+		materia = new Materia();
+		materia.set_nombre("Mates");
+		materia.set_horas(2);
+		Date date = new Date(2010,10,10);
+		materia.set_fechaInicio(date);
+		materia.set_fechaFin(date);
+		materia.setId_Curso("ROBOT");
+		materia.setId_prof_responsable("01");
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
 	@After
 	public void tearDown() throws Exception {
 	}
@@ -49,98 +44,107 @@ public class MateriaTest {
 	/**
 	 * Test method for {@link negocio.entities.Materia#get_nombre()}.
 	 */
-	@Disabled
+	@Test
 	public void testGet_nombre() {
-		Materia materia = new Materia();
-		assertEquals("materia", materia.get_nombre());
+		assertEquals("Mates", materia.get_nombre(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.Materia#set_nombre(java.lang.String)}.
 	 */
-	@Disabled
+	@Test
 	public void testSet_nombre() {
-		fail("Not yet implemented");
+		materia.set_nombre("Lengua");
+		assertEquals("Lengua", materia.get_nombre(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.Materia#get_horas()}.
 	 */
-	@Disabled
+	@Test
 	public void testGet_horas() {
-		fail("Not yet implemented");
+		assertEquals(2, materia.get_horas(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.Materia#set_horas(double)}.
 	 */
-	@Disabled
+	@Test
 	public void testSet_horas() {
-		fail("Not yet implemented");
+		materia.set_horas(3);
+		assertEquals(3, materia.get_horas(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.Materia#get_fechaInicio()}.
 	 */
-	@Disabled
+	@Test
 	public void testGet_fechaInicio() {
-		fail("Not yet implemented");
+		Date date = new Date(2010,10,10);
+		assertEquals(date, materia.get_fechaInicio(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.Materia#set_fechaInicio(java.util.Date)}.
 	 */
-	@Disabled
+	@Test
 	public void testSet_fechaInicio() {
-		fail("Not yet implemented");
+		Date date = new Date(2005,5,5);
+		materia.set_fechaInicio(date);
+		assertEquals(date, materia.get_fechaInicio(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.Materia#get_fechaFin()}.
 	 */
-	@Disabled
+	@Test
 	public void testGet_fechaFin() {
-		fail("Not yet implemented");
+		Date date = new Date(2010,10,10);
+		assertEquals(date, materia.get_fechaFin(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.Materia#set_fechaFin(java.util.Date)}.
 	 */
-	@Disabled
+	@Test
 	public void testSet_fechaFin() {
-		fail("Not yet implemented");
+		Date date = new Date(2010,10,10);
+		materia.set_fechaFin(date);
+		assertEquals(date, materia.get_fechaFin(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.Materia#getId_Curso()}.
 	 */
-	@Disabled
+	@Test
 	public void testGetId_Curso() {
-		fail("Not yet implemented");
+		assertEquals("ROBOT", materia.getId_Curso(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.Materia#setId_Curso(java.lang.String)}.
 	 */
-	@Disabled
+	@Test
 	public void testSetId_Curso() {
-		fail("Not yet implemented");
+		materia.setId_Curso("INFOR");
+		assertEquals("INFOR", materia.getId_Curso(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.Materia#getId_prof_responsable()}.
 	 */
-	@Disabled
+	@Test
 	public void testGetId_prof_responsable() {
-		fail("Not yet implemented");
+		assertEquals("01", materia.getId_prof_responsable(), "FALLO");
 	}
 
 	/**
 	 * Test method for {@link negocio.entities.Materia#setId_prof_responsable(java.lang.String)}.
 	 */
-	@Disabled
+	@Test
 	public void testSetId_prof_responsable() {
-		fail("Not yet implemented");
+		materia.setId_prof_responsable("02");
+		assertEquals("02", materia.getId_prof_responsable(), "FALLO");;
 	}
 
 	/**

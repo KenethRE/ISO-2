@@ -5,9 +5,6 @@ package negocio.controllers;
 
 import static org.junit.Assert.*;
 
-import java.sql.SQLDataException;
-import java.sql.SQLSyntaxErrorException;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

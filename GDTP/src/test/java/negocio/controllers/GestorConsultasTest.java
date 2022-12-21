@@ -46,7 +46,7 @@ public class GestorConsultasTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		fechacomienzoDate= new java.sql.Date(System.currentTimeMillis());
+		fechacomienzoDate= new java.sql.Date(System.currentTimeMillis()+54845121);
 		fechafinDate= new java.sql.Date(System.currentTimeMillis()+254845121);
 		gestorConsultas= new GestorConsultas();
 		

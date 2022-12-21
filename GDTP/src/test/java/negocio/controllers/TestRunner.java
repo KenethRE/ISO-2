@@ -5,16 +5,17 @@ import org.junit.runner.notification.Failure;
 
 public class TestRunner {
    public static void main(String[] args) {
+	   
       Result result = JUnitCore.runClasses(GestorConsultasTest.class); //cambias aqui el nombre de la clase para saber el resultado
       
-      System.out.println("test gestor consultas:");
+      System.out.println("Test gestor consultas:");
       for (Failure failure : result.getFailures()) {
          System.out.println(failure.toString());
       }
 		
       System.out.println(result.wasSuccessful());
       
-      System.out.println("test gestor pruebas cursos:");
+      System.out.println("Test gestor pruebas cursos:");
       
       result = JUnitCore.runClasses(GestorPropuestaCursoTest.class); 
 		
@@ -24,7 +25,7 @@ public class TestRunner {
 		
       System.out.println(result.wasSuccessful());
       
-      System.out.println("test gestor matriculacion:");
+      System.out.println("Test gestor matriculacion:");
       
       result = JUnitCore.runClasses(GestorMatriculacionTest.class);
 		
