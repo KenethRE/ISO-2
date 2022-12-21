@@ -243,33 +243,49 @@ public class PantallaDireccionCursos extends JFrame{
 						}
 						else {
 							try {
-								altaCurso(IDCurso, txtNombreCurso.getText(), Integer.valueOf(txtECTS.getText()), 
-										fechaFin, fechaFin, Double.valueOf(txtTasaMatricula.getText()), 
-										Integer.valueOf(txtEdicion.getText()), (TipoCurso) cbTipoCurso.getSelectedItem());
-							} catch (SQLSyntaxErrorException e1) {
-								e1.printStackTrace();
-							} catch (NumberFormatException e1) {
-								e1.printStackTrace();
+								TipoCurso tipo = (TipoCurso) cbTipoCurso.getSelectedItem();
+								int ects = Integer.valueOf(txtECTS.getText());
+								
+								if(evaluarETCS(tipo,ects,fechaComienzo,fechaFin)) {
+									altaCurso(IDCurso, txtNombreCurso.getText(), Integer.valueOf(txtECTS.getText()), 
+									fechaComienzo, fechaFin, Double.valueOf(txtTasaMatricula.getText()), 
+									Integer.valueOf(txtEdicion.getText()), (TipoCurso) cbTipoCurso.getSelectedItem());
+									try {
+										altamaterias(modelomaterias,IDCurso);
+										JOptionPane.showMessageDialog(null, "Se ha creado un curso con identificador: " + IDCurso, "EXITO",
+												JOptionPane.INFORMATION_MESSAGE);
+										modelomaterias.removeAllElements();
+										txtNombreCurso.setText("");
+										txtECTS.setText("");
+										txtTasaMatricula.setText("");
+										txtEdicion.setText("");
+										fechafin.getModel().setValue(null);
+										fechainicio.getModel().setValue(null);
+									} catch (SQLException e1) {
+										e1.printStackTrace();
+									}
+									
+								}
+								else {
+										JOptionPane.showMessageDialog(null, "ETCS incorrectos para TipoCurso: MASTER\n"
+												+ "Intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE);
+								}
+								
+								} catch (SQLSyntaxErrorException e1) {
+									e1.printStackTrace();
+								} catch (NumberFormatException e1) {
+									e1.printStackTrace();
+								}
+								
+							
 							}
-							try {
-								altamaterias(modelomaterias,IDCurso);
-							} catch (SQLException e1) {
-								e1.printStackTrace();
-							}
-							JOptionPane.showMessageDialog(null, "Se ha creado un curso con identificador: " + IDCurso, "EXITO",
-							JOptionPane.INFORMATION_MESSAGE);}
-							modelomaterias.removeAllElements();
-							txtNombreCurso.setText("");
-							txtECTS.setText("");
-							txtTasaMatricula.setText("");
-							txtEdicion.setText("");
-							fechafin.getModel().setValue(null);
-							fechainicio.getModel().setValue(null);
+							
 						}
 				
-						}
+					}
 			}
 		});
+		
 		btnNewButton_1.setBounds(196, 448, 121, 23);
 		panel1.add(btnNewButton_1);
 		
@@ -481,12 +497,7 @@ public class PantallaDireccionCursos extends JFrame{
 					}
 					list_1.setModel(modelomaterias2);
 					list_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-					
-					
-					
-					
-						
-				
+	
 			}
 		});
 			list_1.addListSelectionListener(new ListSelectionListener() {
@@ -633,20 +644,79 @@ public class PantallaDireccionCursos extends JFrame{
 			}
 		});
 		btnNewButton_4.setBounds(10, 369, 185, 23);
-		panel.add(btnNewButton_4);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		panel.add(btnNewButton_4);	
 	}
 
 	
+	//metodo para evaluar ETCS segun el TipoCurso y fecha
+	public boolean evaluarETCS(TipoCurso tipo, int ects, Date fechaComiezo, Date fechaFin) {
+		long mesInicio = fechaComienzo.getTime();
+		long mesFinal = fechaFin.getTime();
+		long tiempoDias = (mesFinal -mesInicio)/86400000;
+		
+		switch(tipo) {
+		
+		case MASTER:
+			if(ects==60) {
+				if(tiempoDias>240 && tiempoDias<480) {
+					return true;
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Rango de fechas incorrecto "
+							+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE);
+				}
+			}
+			else if(ects==90 || ects==120 ) {
+				if(tiempoDias>480) {
+					return true;
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Rango de fechas incorrecto "
+							+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE);
+				}
+			}
+			break;
+			
+		case ESPECIALISTA:
+			if(ects>29 && ects <60) {
+				if(tiempoDias>180 && tiempoDias<365) {
+					return true;
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Rango de fechas incorrecto "
+							+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE);
+				}
+			}
+			break;
+		case EXPERTO:
+			if(ects>14 && ects <30) {
+				return true;
+			}
+			break;
+		case FORMACION_AVANZADA:
+			if(ects>14 && ects <31) {
+				return true;
+			}
+			break;
+		case FORMACION_CONTINUA:
+			if(ects>2 && ects <15) {
+				return true;
+			}
+			break;
+		case MICROCREDENCIALES:
+			if(ects>1 && ects <15) {
+				return true;
+			}
+			break;
+		case CORTA_DURACION:
+			if(ects==1) {
+				return true;
+			}
+			break;
+		}
+
+		return false;
+	}
 	
 	
 	// metodo para dar de alta el curso en la base de datos.
