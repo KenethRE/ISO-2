@@ -162,10 +162,22 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 		panel1.add(btnVaciar);
 		btnVaciar.setVisible(false);
 		
-		JButton btnRechazarPropuesta = new JButton("Rechazar propuesta");
-		btnRechazarPropuesta.setBounds(248, 60, 170, 23);
-		panel1.add(btnRechazarPropuesta);
-		btnRechazarPropuesta.setVisible(false);
+		JButton btnEvaluarPropuesta = new JButton("Evaluar propuesta");
+		btnEvaluarPropuesta.setBounds(248, 60, 170, 23);
+		panel1.add(btnEvaluarPropuesta);
+		btnEvaluarPropuesta.setVisible(false);
+		
+		JComboBox cbEstadoCurso = new JComboBox();
+		cbEstadoCurso.setBounds(248, 26, 170, 22);
+		panel1.add(cbEstadoCurso);
+		cbEstadoCurso.setVisible(false);
+		
+		cbEstadoCurso.addItem(EstadoCurso.EN_MATRICULACION);
+		cbEstadoCurso.addItem(EstadoCurso.EN_IMPARTIZICION);
+		cbEstadoCurso.addItem(EstadoCurso.TERMINADO);
+		cbEstadoCurso.addItem(EstadoCurso.PROPUESTA_RECHAZADA);
+		cbEstadoCurso.addItem(EstadoCurso.TERMINADO);
+		cbEstadoCurso.addItem(EstadoCurso.VALIDADO);
 
 		JButton btnListarPropuestas = new JButton("Listar propuestas");
 		btnListarPropuestas.addActionListener(new ActionListener() {
@@ -200,7 +212,7 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 					model.addRow(col);
 					btnAprobarSel.setVisible(false);
 					btnVaciar.setVisible(false);
-					btnRechazarPropuesta.setVisible(false);
+					btnEvaluarPropuesta.setVisible(false);
 				}
 
 				if (contador == 0) {
@@ -210,14 +222,16 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 					// Activar boton aprobar sel
 					btnAprobarSel.setVisible(true);
 					btnVaciar.setVisible(true);
-					btnRechazarPropuesta.setVisible(true);
+					btnEvaluarPropuesta.setVisible(true);
+					cbEstadoCurso.setVisible(true);
 				}
 			}
 		});
 		btnListarPropuestas.setBounds(29, 26, 149, 23);
 		panel1.add(btnListarPropuestas);
+		
 
-		btnRechazarPropuesta.addActionListener(new ActionListener() {
+		btnEvaluarPropuesta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				// Aqui cambiar a curso aprobado
@@ -232,11 +246,12 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 					data = gestor.listaCursoAprobado();
 					for (CursoPropio curso : data) {
 						if (id.equals(curso.get_id())) {
-							if (gestor.rechazarPropuestaCurso(curso)) {
-								JOptionPane.showMessageDialog(null, curso.get_nombre() + " : Propuesta rechazada",
-										"Rechazar Propuesta", JOptionPane.INFORMATION_MESSAGE);
+							EstadoCurso estado = (EstadoCurso) cbEstadoCurso.getSelectedItem();
+							if (gestor.evaluarPropuestaCurso(curso,estado)) {
+								JOptionPane.showMessageDialog(null, curso.get_nombre() + " : Propuesta evuluada",
+										"Evaluar Propuesta", JOptionPane.INFORMATION_MESSAGE);
 							} else {
-								JOptionPane.showMessageDialog(null, "Ninguna propuesta rechazada", "Rechazar propuesta",
+								JOptionPane.showMessageDialog(null, "Ninguna propuesta evaluada", "Evaluar propuesta",
 										JOptionPane.INFORMATION_MESSAGE);
 							}
 
@@ -246,7 +261,7 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 				}
 
 				catch (Exception ex) {
-					JOptionPane.showMessageDialog(null, "Ninguna propuesta rechazada", "Rechazar propuesta",
+					JOptionPane.showMessageDialog(null, "Ninguna propuesta evaluada", "Evaluar propuesta",
 							JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
