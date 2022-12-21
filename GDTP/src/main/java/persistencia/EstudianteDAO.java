@@ -71,7 +71,7 @@ public class EstudianteDAO <E> extends AbstractEntityDAO<E> {
 				aEstudiante.set_nombre(aux.getString("Nombre"));
 				aEstudiante.set_apellidos(aux.getString("Apellidos"));
 				aEstudiante.set_titulacion(aux.getString("Titulacion"));
-				aEstudiante.set_cualificacion(aux.getNString("Cualificacion"));
+				aEstudiante.set_cualificacion(aux.getString("Cualificacion"));
 			}
 		} catch (SQLException e) {
 				e.printStackTrace();
