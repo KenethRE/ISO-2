@@ -86,7 +86,7 @@ Para este sistema he mos decidido utilizar Apache derby.
 - Pantallas que usarán Empleados
 - Pantallas que usará el Jefe de gabinete 
 - Pantallas que usará el Director
-******************************EXPLICAR PANTALLAS***********************************************************************************************
+
 ##### Mantenimiento
 Para el mantenimiento necesario del software habrá que tener en cuenta que todo este actualizado y que funcione correctamente. Lo que respecta al mantenimiento de la base de datos, únicamente tendríamos que comprobar esporádicamente la correcta introducción de datos al sistema. 
 
@@ -103,3 +103,77 @@ Para el mantenimiento necesario del software habrá que tener en cuenta que todo
 ##### 3.1.1.1.	Diseño de datos
 En este apartado vamos a describir la estructura interna de cada una de las tuplas de nuestra base de datos relacional.
 
+**Tabla Centro: **En esta tabla se almacenarán los centros en donde se cursarán los diversos cursos.
+Siendo: 
+ - ID: identificador unico, es la clave primaria de esta tabla
+ - Nombre: contendrá el nombre del centro
+ - Localizacion: contendrá la ubicacion del centro
+
+**Tabla Profesor: **En esta tabla guardaremos los datos del profesor asignado para impartir el curso.
+Siendo:
+ - DNI: identificador del profesor. Clave primaria
+ - Nombre: contendrá el nombre del profesor
+ - Apellidos: contendrá el apellido del profesor
+ - Doctor: se conocerá si es o no doctor
+Como clave foranea tenemos Centro cuya referencia será el id (del centro).
+De acuerdo al id del centro cada uno tendrá sus repectivos profesores.
+
+**Tabla Profesor Externo: **En esta tabla al igual que la tabla Profesor guardaremos los datos de los profesores externos.
+Siendo:
+ - DNI: identificador del profesor. Clave foranea
+ - Titulacion: contendrá la titulacion que tenga el profesor.
+ 
+ **Tabla ProfesorUCLM: **Se guardarán los datos del profesor perteneciente a la UCLM.
+Siendo:
+ -  DNI: identificador del profesor. Clave foranea
+ - Nombre: contendrá el nombre del profesor
+ - Apellidos: contendrá el apellido del profesor
+ - Categoria profesor
+ 
+**Tabla Curso Propio: ** Esta tabla almacenará los datos del curso.
+Siendo:
+ - ID: Clave primaria
+ - Nombre: contendrá el nombre del curso
+ - ECTS: contendrá los créditos asignados a ese curso
+ - FechaInicio: contendrá la fecha de inicio del curso
+ - FechaFin: contendrá la fecha fin del curso
+ - TasaMatricula: se guardará el precio/tasa de la matricula del curso
+ - Edicion: contendrá las edicion del curso
+ - IdCentro: contendrá el id del centro al que pertenece ese curso. Clave foranea 
+ - Secretario: contendrá el dni del secretario(es un profesor) de ese curso. Clave foranea
+ - Director:contendrá el dni del director del curso. Clave foranea
+ - TipoCurso: se almacenará el tipo del que sea el curos (Master, experto, ...)
+ - EstadoCurso: se guardará el estado en el que se encuentre el curso (propuesto, validado, ...)
+ 
+ **Tabla Estudiante: **Aquí serán guardados los datos que posee el estudiante de un curso.
+ Siendo:
+  - DNI: identificador del estudiante. Clave primaria.
+  - Nombre: nombre del estudiante
+  - Apellidos: apellidos del estudiante
+  - Titulacion: se almacenará la titulacion del estudiante
+  - Cualificacion.
+ 
+ **Tabla Materia: **En esta tabla se guardarán los datos de las materias de un curso.
+ - Nombre: se almacenará el nombre de la materia del curso
+ - Horas: se almacenarán las horas que durará la materia
+ - Fecha inicio: se almacenará la fecha en la que se comience la imparticion de la materia
+ - Fecha fin: se almacenará la fecha en la que termine la imparticion de la materia
+ - Id curso: Será necesario saber a que curso pertenece la materia. Clave foranea.
+ - DNI Profesor: Será necesario conocer el profesor responsable de la materia. Clave foranea.
+ 
+ **Tabla Matricula: **En esta tabla serán guardados los datos pertenecientes a la matricula de un estudiante a un determinado curso.
+Siendo:
+ - Fecha: Se almacenará la fecha en la que se realice la matricula
+ - Pagado: Se guardará el dato de si está o no pagado
+ - DNI Estudiante: Será necesario conocer el dni del estudiante matriculado en un curso. Clave foranea.
+ - ID Curso: Será necesario conocer el id del curso en que se ha matriculado. Clave foranea.
+ - Modo Pago: Se almacenará el modo de pago de la matricula (Transferencia bancaria o Targeta de crédito).
+ 
+**Diagrama entidad-relacion**
+Encontraremos el diagrama entidad-relacion en Confluence (JIRA).
+
+
+#### 3.2.	 Diseño procedimental o diseño detallado
+**LOGUEARSE**
+La primera pantalla cuando arrancamos el sistema será "la PantallaLogin". En ella tendremos que introducir el nombre de usuario (admin) y la contraseña (1234) además de rellenar esos datos tambien debemos elegir el tipo de usuario que entrará al sistema (comboBox), ya que no todos tendrán el mismo acceso. 
+Para poder acceder al sistema, el usuario tendrá que hacer clic sobre el botón de acceso al sistema que es el botón ingresar. El sistema comprobará que los datos introducidos sean los correctos de no ser así devolverá el mensaje de: "Usuario o contraseña incorrectos".
