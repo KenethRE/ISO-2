@@ -85,7 +85,7 @@ public class AbstractEntityDAO<E>{
 	//get para coste total por tipos de curso
 	public ResultSet get(TipoCurso tipoCurso,  Date aFechaInicio, Date aFechaFin) {
 		ResultSet result = null;
-		if (aFechaFin==null && aFechaFin==null) {
+		if (aFechaInicio==null && aFechaFin==null) {
 			throw new NullPointerException();
 		}
 		else {
