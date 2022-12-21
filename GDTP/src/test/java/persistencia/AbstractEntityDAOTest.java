@@ -107,33 +107,35 @@ public class AbstractEntityDAOTest {
 	/**
 	 * Test method for {@link persistencia.AbstractEntityDAO#get_edicion(java.lang.String, java.sql.Date, java.sql.Date)}.
 	 */
-	@Disabled
+	@Test
 	public void testGet_edicion() {
-		fail("Not yet implemented");
+		NullPointerException exception = assertThrows(NullPointerException.class, () -> {abstracDAO.get_edicion(string, date, date);});
 	}
 
 	/**
 	 * Test method for {@link persistencia.AbstractEntityDAO#insert(java.lang.Object)}.
 	 */
-	@Disabled
+	@Test
 	public void testInsert() {
-		fail("Not yet implemented");
+		NullPointerException exception = assertThrows(NullPointerException.class, () -> {abstracDAO.insert(eObject);});
+		
 	}
 
 	/**
 	 * Test method for {@link persistencia.AbstractEntityDAO#update(java.lang.Object)}.
 	 */
-	@Disabled
+	@Test
 	public void testUpdate() {
-		fail("Not yet implemented");
+		NullPointerException exception = assertThrows(NullPointerException.class, () -> {abstracDAO.update(eObject);});
 	}
 
 	/**
 	 * Test method for {@link persistencia.AbstractEntityDAO#delete(java.lang.String, java.lang.String, java.lang.String)}.
 	 */
-	@Disabled
+	@Test
 	public void testDelete() {
-		fail("Not yet implemented");
+		NullPointerException exception = assertThrows(NullPointerException.class, () -> {abstracDAO.delete(string, idcurso, string);});
+		
 	}
 
 }

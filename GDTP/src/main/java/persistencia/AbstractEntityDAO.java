@@ -100,18 +100,22 @@ public class AbstractEntityDAO<E>{
 	
 	public ResultSet get_edicion(String Table, Date aFechaInicio, Date aFechaFin) {
 		ResultSet result = null;
-		
+		if (Table.isEmpty())
+			throw new NullPointerException();
+		else { 
 		if (Table.equals(cursoPropioString)) {
 			result = agente.select("SELECT * FROM " + Table + " WHERE fechainicio >= '"+aFechaInicio+"' AND fechafin <= '"+aFechaFin+"'");
 		}
-
+		}
 		return result;
 	}
 	
 	
 	public int insert (Object E) throws SQLException {
-		String className = E.getClass().getSimpleName();
 		int result = 0;
+		if (E!=null){
+		String className = E.getClass().getSimpleName();
+		
 		switch (className) {
 		
 		case "CursoPropio":
@@ -147,11 +151,17 @@ public class AbstractEntityDAO<E>{
 					+ "','" + ((Estudiante) E).get_titulacion() + "','" + ((Estudiante) E).get_cualificacion() + "')" );
 			break;
 		}
+		}
+		else {
+			throw new NullPointerException();
+		}
 		return result;
 	}
 	public int update (Object E) {
-		String className = E.getClass().getSimpleName();
+		
 		int result = 0;
+		if (E!=null){
+		String className = E.getClass().getSimpleName();
 		switch (className) {
 		
 		case "CursoPropio":
@@ -187,11 +197,17 @@ public class AbstractEntityDAO<E>{
 			result = agente.update("UPDATE " + className + "SET DNI='" + ((Estudiante) E).get_dni() + "', NOMBRE='" + ((Estudiante) E).get_nombre() + "', APELLIDOS='" + ((Estudiante) E).get_apellidos() 
 					+ "', TITULACION='" + ((Estudiante) E).get_titulacion() + "', CUALIFICACION='" + ((Estudiante) E).get_cualificacion() + "' WHERE DNI = '" + ((Estudiante) E).get_dni() +"'" );
 			break;
-		}	
+		}
+		}else {
+			throw new NullPointerException();
+		} 
 		return result;
 	}
 	public int delete (String iD, String Table, String keyName) {
 		int result = 0;
+		if (Table.isEmpty()) {
+			throw new NullPointerException();
+		}else {
 		if (Table.equals(profesorExtString) || Table.equals(profesorUCLMString)) result = agente.update("DELETE FROM " + Table + " NATURAL JOIN PROFESOR WHERE "+keyName+" = " +iD);
 		else 
 			if(Table.equals(materiaString)) {
@@ -200,6 +216,7 @@ public class AbstractEntityDAO<E>{
 			}
 			else
 			result = agente.update("DELETE FROM " + Table + " WHERE "+keyName+" = " +iD);
+		}
 		return result;
 	}
 
