@@ -81,7 +81,7 @@ public class GestorConsultasTest {
 	 */
 	@Test
 	public void testListarEdicionesCursos() {
-		assertTrue("la lista devuelta por el metodo Listar Ediciones Cursos no esta vacia",gestorConsultas.listarEdicionesCursos(fechacomienzoDate, fechafinDate).size()>0);
+		assertTrue("la lista devuelta por el metodo Listar Ediciones Cursos no esta vacia",gestorConsultas.listarEdicionesCursos(fechacomienzoDate, fechafinDate).isEmpty());
 		//fail("Not yet implemented");
 	}
 
