@@ -13,7 +13,7 @@ public class AbstractEntityDAO<E>{
 	//esto regresa un unico elemento
 	public ResultSet get(Object E) {
 		ResultSet result = null;
-		if (E==null) {
+		if (E!=null) {
 		
 		String castName = E.getClass().getSimpleName();
 		if (castName.equals(profesorExtString) || castName.equals(profesorUCLMString)) result = agente.select("SELECT * FROM " + castName + " NATURAL JOIN PROFESOR"
@@ -24,7 +24,9 @@ public class AbstractEntityDAO<E>{
 		else if (castName.equals("Centro")) result = agente.select("SELECT * FROM CENTRO WHERE ID = "+((Centro)E).get_Id());
 		else result = agente.select("SELECT * FROM " + castName + " WHERE ID = '"+((IdInterface) E).getInternalID()+ "'");
 		}
-		else throw new NullPointerException();
+		else {
+			throw new NullPointerException();
+			}
 		
 		return result;
 		
