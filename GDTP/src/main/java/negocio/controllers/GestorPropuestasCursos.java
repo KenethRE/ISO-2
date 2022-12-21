@@ -21,26 +21,6 @@ public class GestorPropuestasCursos {
 		cursoPropioDao.crearNuevoCurso(aCurso);
 		}
 	}
-
-	public boolean editarPropuestaCurso(CursoPropio curso)
-	{
-		CursoPropioDAO<CursoPropio> cursoDao = new CursoPropioDAO<>();
-		curso.set_estado(EstadoCurso.VALIDADO);
-		if(cursoDao.editarCurso(curso)==1) {
-			return true;
-		}
-		return false;
-	}
-
-	
-	public boolean rechazarPropuestaCurso(CursoPropio curso) {
-		CursoPropioDAO<CursoPropio> cursoDao = new CursoPropioDAO<>();
-		curso.set_estado(EstadoCurso.PROPUESTA_RECHAZADA);
-		if(cursoDao.editarCurso(curso)==1) {
-			return true;
-		}
-		return false;
-	}
 	
 	public boolean evaluarPropuestaCurso(CursoPropio curso, EstadoCurso estado) {
 		CursoPropioDAO<CursoPropio> cursoDao = new CursoPropioDAO<>();
@@ -50,8 +30,6 @@ public class GestorPropuestasCursos {
 		}
 		return false;
 	}
-
-
 	
 	public List<CursoPropio> listaCursoAprobado() {
 		EstadoCurso aEstadoCurso = EstadoCurso.PROPUESTO;
