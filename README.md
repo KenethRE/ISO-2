@@ -175,5 +175,32 @@ Encontraremos el diagrama entidad-relacion en Confluence (JIRA).
 
 #### 3.2.	 Diseño procedimental o diseño detallado
 **LOGUEARSE**
-La primera pantalla cuando arrancamos el sistema será "la PantallaLogin". En ella tendremos que introducir el nombre de usuario (admin) y la contraseña (1234) además de rellenar esos datos tambien debemos elegir el tipo de usuario que entrará al sistema (comboBox), ya que no todos tendrán el mismo acceso. 
+La primera pantalla cuando arrancamos el sistema será la "PantallaLogin". En ella tendremos que introducir el nombre de usuario (admin) y la contraseña (1234) además de rellenar esos datos tambien debemos elegir el tipo de usuario que entrará al sistema (comboBox), ya que no todos tendrán el mismo acceso. 
 Para poder acceder al sistema, el usuario tendrá que hacer clic sobre el botón de acceso al sistema que es el botón ingresar. El sistema comprobará que los datos introducidos sean los correctos de no ser así devolverá el mensaje de: "Usuario o contraseña incorrectos".
+Los tipos de usuario que podrán loguearse serán: 
+- Empleado -> PantallaEmpleadosVicerrectorado
+- Jefe Gabinete -> PantallaJefeGabineteVicerrectorado (consultar ingresos, consultar estado cursos, listar ediciones)
+- Director -> PantallaDirectorCursos (Alta cursos, editar cursos)
+- Estudiante -> Matricula
+Estos usuarios al realizar un inicio de sesion correcto cada uno de ellos sera dirigido a determinadas ventanas. De acuerdo al tipo de usuario que se loguee.
+
+**Empleado logueado**
+Una vez logueado el usuario empleado este será dirigido a la "PantallaEmpleadosVicerrectorado" en donde se listarán los cursos que hayan sido aprobados, de los cuales aparecerá su id, nombre, ECTS, Fecha inicio, fecha fin, tasa matriculacion y edicion.
+En esta misma ventana veremos que tambien aparece el botón logout, si el usuario empleado clickea este botón, se cerrará en inicio de sesión como empleado y será redirigido a la ventana de inicio de sesion "PantallaLogin".
+
+**Jefe Gabinete logueado**
+Una vez logueado el usuario Jefe Gabinete este será dirigido a la ventana "PantallaJefeGabineteVicerrectorado" en donde aparecen tres pestañas las cuales son:
+- Consultar Ingresos: como bien dice el nombre de la pestaña aquí se listarán los ingresos de los estudiantes. Pero primeramente se debe introducir el tipo de curso del cual se listarán los ingresos, la fecha inicio y fecha fin. Cuando hagamos clic en el botón "Consultar Ingresos" aparecerán listados en la tabla dichos ingresos. Como datos de la tabla tenemos el número de matriculados; en donde aparecerá la cantidad de alumnos matriculados en ese curso, tambien tenemos en la tabla el campo ingresos totales y el campo id curso; donde aparecerá el id del curso seleccionado.
+En esta ventana tambien tenemos el botón "Reset", este se encargará de resetear los campos, de esta forma se permite que puedan ser nuevamente rellenados.
+Cabe destacar que a la hora de hace clic en "Consultar Ingresos" en el caso de que no se rellenen los campos de fecha inicio y fecha fin, el sistema dará una señal de fallo por medio de una ventana de mensaje en donde se le avisará al usuario: "Campo fecha inicio vacio" o "Campo fecha fin vacio". Es muy útil avisar al usuario de todas las alertas y posibles fallos, ya que de no ser avisadas, es dificil que puedan ser resueltas.
+- Consultar estado curso: En esta ventana se consultará el estado en el que se encuentren los cursos. Pero primeramente se debe introducir el estado de curso, la fecha inicio y fecha fin. Cuando hagamos clic en el botón "Consultar Estados" aparecerán listados en la tabla los cursos que tengan ese estado. Como datos de la tabla tenemos id del curso, nombre del curso, ECTS, Fecha inicio, fecha fin, Tasa Matriculacion, Edicion.
+En esta ventana tambien tenemos el botón "Reset", este se encargará de resetear los campos, de esta forma se permite que puedan ser nuevamente rellenados.
+Cabe destacar que a la hora de hace clic en "Consultar Estados" en el caso de que no se rellenen los campos de fecha inicio y fecha fin, el sistema dará una señal de fallo por medio de una ventana de mensaje en donde se le avisará al usuario: "Campo fecha inicio vacio" o "Campo fecha fin vacio".
+- Listar ediciones: En esta ventana se listarán las ediciones de un curso, debemos rellenar los campos de fecha inicio y fecha fin para evitar que nos de fallo. Una vez rellenados los campos podrémos listar las ediciones haciendo clic en el botón "Listar Ediciones", de los cuales se listará el ID, nombre, ECTS, fecha inicio, fecha fin, tasa matriculacion, edicion.
+En esta ventana tambien tenemos el botón "Reset", este se encargará de resetear los campos, de esta forma se permite que puedan ser nuevamente rellenados.
+
+En todas las ventanas tenemos la opcion de cerrar sesion basta con que el usuario haga clic en el botón "Logout".
+
+**Director logueado**
+Una vez logueado el usuario Director este será dirigido a la ventana "PantallaDirectorCursos" en donde aparecen dos pestañas las cuales son:
+-
