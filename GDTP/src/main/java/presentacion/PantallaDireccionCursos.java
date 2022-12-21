@@ -246,7 +246,7 @@ public class PantallaDireccionCursos extends JFrame{
 								TipoCurso tipo = (TipoCurso) cbTipoCurso.getSelectedItem();
 								int ects = Integer.valueOf(txtECTS.getText());
 								
-								if(evaluarETCS(tipo,ects,fechaComienzo,fechaFin)) {
+								if(evaluarECTS(tipo,ects,fechaComienzo,fechaFin)) {
 									altaCurso(IDCurso, txtNombreCurso.getText(), Integer.valueOf(txtECTS.getText()), 
 									fechaComienzo, fechaFin, Double.valueOf(txtTasaMatricula.getText()), 
 									Integer.valueOf(txtEdicion.getText()), (TipoCurso) cbTipoCurso.getSelectedItem());
@@ -265,10 +265,6 @@ public class PantallaDireccionCursos extends JFrame{
 										e1.printStackTrace();
 									}
 									
-								}
-								else {
-										JOptionPane.showMessageDialog(null, "ETCS incorrectos para TipoCurso: MASTER\n"
-												+ "Intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE);
 								}
 								
 								} catch (SQLSyntaxErrorException e1) {
@@ -649,7 +645,7 @@ public class PantallaDireccionCursos extends JFrame{
 
 	
 	//metodo para evaluar ETCS segun el TipoCurso y fecha
-	public boolean evaluarETCS(TipoCurso tipo, int ects, Date fechaComiezo, Date fechaFin) {
+	public boolean evaluarECTS(TipoCurso tipo, int ects, Date fechaComiezo, Date fechaFin) {
 		long mesInicio = fechaComienzo.getTime();
 		long mesFinal = fechaFin.getTime();
 		long tiempoDias = (mesFinal -mesInicio)/86400000;
@@ -662,8 +658,8 @@ public class PantallaDireccionCursos extends JFrame{
 					return true;
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "Rango de fechas incorrecto "
-							+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Rango de fechas incorrecto\n"
+							+ "Necesitas un rango de fechas entre 8 y 16 meses\npara un master de 60 ects", "ERROR",JOptionPane.ERROR_MESSAGE);
 				}
 			}
 			else if(ects==90 || ects==120 ) {
@@ -672,8 +668,12 @@ public class PantallaDireccionCursos extends JFrame{
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Rango de fechas incorrecto "
-							+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE);
+							+ "Necesitas al menos 16 meses para un master de 90/120 ects", "ERROR",JOptionPane.ERROR_MESSAGE);
 				}
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "ECTS incorrecto"
+						+ "60, 90 o 120 ects para un MASTER", "ERROR",JOptionPane.ERROR_MESSAGE);
 			}
 			break;
 			
@@ -683,34 +683,58 @@ public class PantallaDireccionCursos extends JFrame{
 					return true;
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "Rango de fechas incorrecto "
-							+ "intentelo nuevamente", "ERROR",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Rango de fechas incorrecto"
+							+ "Necesitas entre 6 meses y un año  para un master de 90/120 ects", "ERROR",JOptionPane.ERROR_MESSAGE);
 				}
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "ECTS incorrecto"
+						+ "Necesitas entre 29 ECTS y 60 ECTS para la ESPECIALISTA", "ERROR",JOptionPane.ERROR_MESSAGE);
 			}
 			break;
 		case EXPERTO:
 			if(ects>14 && ects <30) {
 				return true;
 			}
+			else {
+				JOptionPane.showMessageDialog(null, "ECTS incorrecto"
+						+ "Necesitas más de 14 ETCS y menos de 30 ECTS para EXPERTO", "ERROR",JOptionPane.ERROR_MESSAGE);
+			}
 			break;
 		case FORMACION_AVANZADA:
 			if(ects>14 && ects <31) {
 				return true;
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "ECTS incorrecto"
+						+ "Necesitas más de 14 ETCS y menos de 31 ECTS para FORMACION_AVANZADA", "ERROR",JOptionPane.ERROR_MESSAGE);
 			}
 			break;
 		case FORMACION_CONTINUA:
 			if(ects>2 && ects <15) {
 				return true;
 			}
+			else {
+				JOptionPane.showMessageDialog(null, "ECTS incorrecto"
+						+ "Necesitas más de 2 ETCS y menos de 15 ECTS para FORMACION_CONTINUA", "ERROR",JOptionPane.ERROR_MESSAGE);
+			}
 			break;
 		case MICROCREDENCIALES:
 			if(ects>1 && ects <15) {
 				return true;
 			}
+			else {
+				JOptionPane.showMessageDialog(null, "ECTS incorrecto"
+						+ "Necesitas más de 1 ETCS y menos de 15 ECTS  para MICROCREDENCIALES", "ERROR",JOptionPane.ERROR_MESSAGE);
+			}
 			break;
 		case CORTA_DURACION:
 			if(ects==1) {
 				return true;
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "ECTS incorrecto"
+						+ "Necesitas 1 ETCS para curso de CORTA_DURACION", "ERROR",JOptionPane.ERROR_MESSAGE);
 			}
 			break;
 		}
