@@ -227,9 +227,9 @@ public class RealizarPago extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				
+				fechacaducidad = new java.sql.Date(((java.util.Date) fecha.getModel().getValue()).getTime());
 				if((txtIban.getText().length() != 0) || ((txtNombre.getText().length() != 0) && (txtNumTargeta.getText().length() != 0)
-						 && (fechacaducidad.toString().length() !=0) && (txtCvv.getText().length() != 0))) {
+						 && (fechacaducidad !=null) && (txtCvv.getText().length() != 0))) {
 					dispose(); 
 					if(tarjeta==false) {
 						JOptionPane.showMessageDialog(null, "Pago realizado con exito", 

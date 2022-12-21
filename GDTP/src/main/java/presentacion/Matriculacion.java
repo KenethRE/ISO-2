@@ -355,6 +355,7 @@ public class Matriculacion extends JFrame {
 				JOptionPane.showMessageDialog(null, "Se ha creado la matricula con identificador: " + matricula.getiD(), "EXITO",
 				JOptionPane.INFORMATION_MESSAGE);
 				dispose();
+				previousWindow.setVisible(true);
 				
 			}
 		});
@@ -404,6 +405,7 @@ public class Matriculacion extends JFrame {
 	public void activarcasillapago() {
 		chckbxNewCheckBox.setSelected(true);
 		btnNewButton_2.setEnabled(true);
+		
 		
 	}
 	// si el pago ha sido con tarjeta en la venta pago se cambia aqui.
