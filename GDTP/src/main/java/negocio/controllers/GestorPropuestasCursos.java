@@ -26,7 +26,7 @@ public class GestorPropuestasCursos {
 	{
 		CursoPropioDAO<CursoPropio> cursoDao = new CursoPropioDAO<>();
 		curso.set_estado(EstadoCurso.VALIDADO);
-		if(cursoDao.editarCurso(curso)==0) {
+		if(cursoDao.editarCurso(curso)==1) {
 			return true;
 		}
 		return false;
@@ -36,7 +36,7 @@ public class GestorPropuestasCursos {
 	public boolean rechazarPropuestaCurso(CursoPropio curso) {
 		CursoPropioDAO<CursoPropio> cursoDao = new CursoPropioDAO<>();
 		curso.set_estado(EstadoCurso.PROPUESTA_RECHAZADA);
-		if(cursoDao.editarCurso(curso)==0) {
+		if(cursoDao.editarCurso(curso)==1) {
 			return true;
 		}
 		return false;
