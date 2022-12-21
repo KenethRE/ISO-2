@@ -20,7 +20,7 @@
 ##### 4.1.	 Implementación
 ##### 4.2.	Pruebas
 
-#### 5.	Conclusión 
+
 ____________________________________________________________________________________________________________________________________________________________________
 
 ### 1. Introducción
@@ -153,7 +153,8 @@ Siendo:
   - Titulacion: se almacenará la titulacion del estudiante
   - Cualificacion.
  
- **Tabla Materia: **En esta tabla se guardarán los datos de las materias de un curso.
+ **Tabla Materia: **En esta tabla se guardarán los datos de las materias de un curso. 
+ Siendo:
  - Nombre: se almacenará el nombre de la materia del curso
  - Horas: se almacenarán las horas que durará la materia
  - Fecha inicio: se almacenará la fecha en la que se comience la imparticion de la materia
@@ -201,6 +202,3 @@ En esta ventana tambien tenemos el botón "Reset", este se encargará de resetea
 
 En todas las ventanas tenemos la opcion de cerrar sesion basta con que el usuario haga clic en el botón "Logout".
 
-**Director logueado**
-Una vez logueado el usuario Director este será dirigido a la ventana "PantallaDirectorCursos" en donde aparecen dos pestañas las cuales son:
--
