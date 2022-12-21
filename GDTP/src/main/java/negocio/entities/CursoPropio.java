@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.*;
 
 import negocio.controllers.GestorPropuestasCursos;
-import persistencia.CursoPropioDAO;
 
 public class CursoPropio implements IdInterface{
 	private String id;

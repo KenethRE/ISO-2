@@ -6,8 +6,6 @@ package persistencia;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.sql.SQLDataException;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -22,7 +20,7 @@ import negocio.entities.Centro;
  *
  */
 public class CentroDAOTest {
-	CentroDAO centroDAO;
+	CentroDAO<Centro> centroDAO;
 	Centro aCentro;
 
 	/**
