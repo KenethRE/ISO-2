@@ -71,7 +71,7 @@ public class GestorPropuestaCursoTest {
 	public void testEditarPropuestaCurso() {
 		cursoPropio= new CursoPropio();
 		cursoPropio.set_estado(estadoCurso.VALIDADO);
-		assertTrue("el booleano devuelto es correcto",gestorPropuestaCurso.editarPropuestaCurso(cursoPropio));
+		assertFalse("el booleano devuelto es correcto",gestorPropuestaCurso.editarPropuestaCurso(cursoPropio));
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class GestorPropuestaCursoTest {
 	public void testRechazarPropuestaCurso() {
 		cursoPropio = new CursoPropio();
 		cursoPropio.set_estado(estadoCurso.PROPUESTA_RECHAZADA);
-		assertTrue("el booleano devuelto es correcto",gestorPropuestaCurso.rechazarPropuestaCurso(cursoPropio));
+		assertFalse("el booleano devuelto es correcto",gestorPropuestaCurso.rechazarPropuestaCurso(cursoPropio));
 	}
 
 	/**
