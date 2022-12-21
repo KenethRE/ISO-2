@@ -117,46 +117,6 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 		model.addColumn("TasaMatriculacion");
 		model.addColumn("Edicion");
 
-		JButton btnAprobarSel = new JButton("Aprobar propuesta");
-		btnAprobarSel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				// Aqui cambiar a curso aprobado
-
-				GestorPropuestasCursos gestor = new GestorPropuestasCursos();
-				try {
-
-					String id = ((String) model.getValueAt(table.getSelectedRow(), 0));
-
-					// Consulta a BBDD
-					List<CursoPropio> data = new ArrayList<CursoPropio>();
-					data = gestor.listaCursoAprobado();
-					for (CursoPropio curso : data) {
-						if (id.equals(curso.get_id())) {
-							if (gestor.editarPropuestaCurso(curso)) {
-								JOptionPane.showMessageDialog(null, curso.get_nombre() + " : Curso aprobado",
-										"Aprobar Cursos", JOptionPane.INFORMATION_MESSAGE);
-							} else {
-								JOptionPane.showMessageDialog(null, "Ningun curso aprobado", "Aprobar Cursos",
-										JOptionPane.INFORMATION_MESSAGE);
-							}
-
-						}
-					}
-					model.removeRow(table.getSelectedRow());
-				}
-
-				catch (Exception ex) {
-					JOptionPane.showMessageDialog(null, "Ningun curso seleccionado", "Aprobar curso",
-							JOptionPane.INFORMATION_MESSAGE);
-				}
-			}
-
-		});
-		btnAprobarSel.setBounds(29, 60, 170, 23);
-		panel1.add(btnAprobarSel);
-		btnAprobarSel.setVisible(false);
-
 		JButton btnVaciar = new JButton("Reset");
 		btnVaciar.setBounds(464, 60, 99, 23);
 		panel1.add(btnVaciar);
@@ -171,7 +131,7 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 		cbEstadoCurso.setBounds(248, 26, 170, 22);
 		panel1.add(cbEstadoCurso);
 		cbEstadoCurso.setVisible(false);
-		
+	
 		cbEstadoCurso.addItem(EstadoCurso.EN_MATRICULACION);
 		cbEstadoCurso.addItem(EstadoCurso.EN_IMPARTIZICION);
 		cbEstadoCurso.addItem(EstadoCurso.TERMINADO);
@@ -210,7 +170,6 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 					col[1] = "hay";
 					col[2] = "datos";
 					model.addRow(col);
-					btnAprobarSel.setVisible(false);
 					btnVaciar.setVisible(false);
 					btnEvaluarPropuesta.setVisible(false);
 				}
@@ -219,8 +178,7 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 					JOptionPane.showMessageDialog(null, "No hay cursos propuestos", "Listar cursos propuestos",
 							JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					// Activar boton aprobar sel
-					btnAprobarSel.setVisible(true);
+					// Activar botones
 					btnVaciar.setVisible(true);
 					btnEvaluarPropuesta.setVisible(true);
 					cbEstadoCurso.setVisible(true);
@@ -248,7 +206,7 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 						if (id.equals(curso.get_id())) {
 							EstadoCurso estado = (EstadoCurso) cbEstadoCurso.getSelectedItem();
 							if (gestor.evaluarPropuestaCurso(curso,estado)) {
-								JOptionPane.showMessageDialog(null, curso.get_nombre() + " : Propuesta evuluada",
+								JOptionPane.showMessageDialog(null, curso.get_nombre() + " : Propuesta evaluada",
 										"Evaluar Propuesta", JOptionPane.INFORMATION_MESSAGE);
 							} else {
 								JOptionPane.showMessageDialog(null, "Ninguna propuesta evaluada", "Evaluar propuesta",
