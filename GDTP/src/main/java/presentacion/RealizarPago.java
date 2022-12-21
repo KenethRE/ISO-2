@@ -212,22 +212,26 @@ public class RealizarPago extends JFrame {
 		rdbtnTargetaDeCredito.setBounds(42, 252, 232, 23);
 		contentPane.add(rdbtnTargetaDeCredito);
 		
-		
 		JButton btnNewButton = new JButton("Pagar ahora ");
-		if ( rdbtnTargetaDeCredito.isSelected()) {
-			if (fecha.getModel().getValue()!=null) {
-				fechacaducidad = new java.sql.Date(((java.util.Date) fecha.getModel().getValue()).getTime());
-			}
-			else {
-				JOptionPane.showMessageDialog(null, "debe elegir una fecha",
-						"ERROR", JOptionPane.ERROR_MESSAGE);
-			}
 		
-		}
 		btnNewButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				fechacaducidad = new java.sql.Date(((java.util.Date) fecha.getModel().getValue()).getTime());
+				if ( rdbtnTargetaDeCredito.isSelected()) {
+					if (fecha.getModel().getValue()!=null) {
+						fechacaducidad = new java.sql.Date(((java.util.Date) fecha.getModel().getValue()).getTime());
+						JOptionPane.showMessageDialog(null, "Pago realizado con exito", 
+								"PAGO CORRECTO", JOptionPane.INFORMATION_MESSAGE);
+							ventanMatricula.activarcasillapago();
+							ventanMatricula.setpagotarjeta();
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "debe elegir una fecha",
+								"ERROR", JOptionPane.ERROR_MESSAGE);
+					}
+				
+				}
+				else {
 				if((txtIban.getText().length() != 0) || ((txtNombre.getText().length() != 0) && (txtNumTargeta.getText().length() != 0)
 						 && (fechacaducidad !=null) && (txtCvv.getText().length() != 0))) {
 					dispose(); 
@@ -251,6 +255,7 @@ public class RealizarPago extends JFrame {
 					fecha.getModel().setValue(null);
 					txtCvv.setText("");
 					txtIban.requestFocus();
+				}
 				}		
 			}
 		});
