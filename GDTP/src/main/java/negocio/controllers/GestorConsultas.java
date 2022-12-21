@@ -7,7 +7,9 @@ import java.util.List;
 import negocio.entities.CursoPropio;
 import negocio.entities.TipoCurso;
 import persistencia.CursoPropioDAO;
+import persistencia.EstudianteDAO;
 import negocio.entities.EstadoCurso;
+import negocio.entities.Estudiante;
 
 public class GestorConsultas {
 
@@ -44,6 +46,12 @@ public class GestorConsultas {
 		listaCursos=cursoDao.listartodosloscursos();
 		return listaCursos;
 		
+		
+	}
+	public Estudiante buscarEstudiante(Estudiante estudiante) {
+		EstudianteDAO<Estudiante> estudianteDAO = new EstudianteDAO<>();
+		estudiante = estudianteDAO.buscarestudiante(estudiante);
+		return estudiante;
 		
 	}
 }

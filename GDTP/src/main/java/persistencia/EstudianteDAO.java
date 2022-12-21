@@ -1,5 +1,6 @@
 package persistencia;
 
+import java.awt.event.FocusEvent.Cause;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLSyntaxErrorException;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import negocio.entities.CursoPropio;
 import negocio.entities.Estudiante;
 
 public class EstudianteDAO <E> extends AbstractEntityDAO<E> {
@@ -77,6 +79,31 @@ public class EstudianteDAO <E> extends AbstractEntityDAO<E> {
 			}
 
 		return Estudiantes; 
+	}
+	public Estudiante buscarestudiante (Estudiante aEstudiante) {
+		// El dni es el Estudiante que queremos seleccionar, el nombre de la clase "Estudiante" es la tabla que queremos
+		// buscar y la cadena del final representa la clave que usamos para hacer la seleccion.
+		ResultSet aux = get(aEstudiante);
+		Estudiante estudiante1 =null;
+			
+					try {
+						while (aux.next()) {
+						estudiante1 = new Estudiante();
+						estudiante1.set_dni(aux.getString("dni"));
+						estudiante1.set_nombre(aux.getString("Nombre"));
+						estudiante1.set_apellidos(aux.getString("Apellidos"));
+						estudiante1.set_titulacion(aux.getString("Titulacion"));
+						estudiante1.set_cualificacion(aux.getString("Cualificacion"));
+						}
+				
+					} catch (SQLException e) {
+						Logger.getLogger(loggerName).log(Level.SEVERE,"Estudiante no encontrado");
+		
+					}		
+				
+			
+		return estudiante1;
+		
 	}
 
 }

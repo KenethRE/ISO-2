@@ -18,7 +18,11 @@ public class AbstractEntityDAO<E>{
 		String castName = E.getClass().getSimpleName();
 		if (castName.equals(profesorExtString) || castName.equals(profesorUCLMString)) result = agente.select("SELECT * FROM " + castName + " NATURAL JOIN PROFESOR"
 				+ " WHERE DNI = '" + ((Profesor)E).get_dni() + "'");
-		else if (castName.equals("Estudiante")) result = agente.select("SELECT * FROM ESTUDIANTE WHERE DNI = '"+((Estudiante)E).get_dni()+ "'");
+		else if (castName.equals("Estudiante")) {
+			String sentencia= "SELECT * FROM ESTUDIANTE WHERE DNI = '"+((Estudiante)E).get_dni()+ "'";
+			result = agente.select(sentencia);
+			
+		} 
 		else if (castName.equals("Materia")) result = agente.select("SELECT * FROM MATERIA WHERE NOMBRE = '"+((Materia)E).get_nombre()+ "'");
 		else if (castName.equals("CursoPropio")) result = agente.select("SELECT * FROM CURSOPROPIO WHERE ID = '"+((CursoPropio)E).get_id()+ "'");
 		else if (castName.equals("Centro")) result = agente.select("SELECT * FROM CENTRO WHERE ID = "+((Centro)E).get_Id());

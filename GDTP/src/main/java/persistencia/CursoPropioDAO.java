@@ -30,6 +30,9 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 		// El iD curso es el curso que queremos seleccionar, el nombre de la clase "CursoPropio" es la tabla que queremos
 		// buscar y la cadena del final representa la clave que usamos para hacer la seleccion.
 		ResultSet aux = get(aCurso);
+		if (aCurso==null)
+			throw new NullPointerException();
+			else {
 		try {
 			while (aux.next()) {
 				aCurso.set_nombre(aux.getString("NOMBRE"));
@@ -49,7 +52,7 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 			e.printStackTrace();
 			Logger.getLogger("GDTP_Logger").log(Level.SEVERE,"Curso no encontrado");
 		}
-		
+			}
 		return 0;
 		
 	}
@@ -57,6 +60,9 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 	public int editarCurso(CursoPropio aCurso) {
 		// El iD curso es el curso que queremos editar, el nombre de la clase "CursoPropio" es la tabla que queremos
 		int resultado = 0;
+		if (aCurso==null)
+			throw new NullPointerException();
+			else {
 		try{
 			resultado = update (aCurso);
 			return resultado;
@@ -65,7 +71,7 @@ public class CursoPropioDAO<E> extends AbstractEntityDAO<E> {
 			e.printStackTrace();
 			Logger.getLogger("GDTP_Logger").log(Level.SEVERE, "Curso no encontrado");
 		}
-		
+			}
 		return resultado;
 		
 	}

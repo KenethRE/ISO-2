@@ -6,6 +6,9 @@ package persistencia;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -14,6 +17,7 @@ import org.junit.Test;
 import org.junit.jupiter.api.Disabled;
 
 import negocio.entities.CursoPropio;
+import negocio.entities.EstadoCurso;
 
 /**
  * @author plati
@@ -64,25 +68,28 @@ public class CursoPropioDAOTest {
 	/**
 	 * Test method for {@link persistencia.CursoPropioDAO#seleccionarCurso(negocio.entities.CursoPropio)}.
 	 */
-	@Disabled
+	@Test
 	public void testSeleccionarCurso() {
-		fail("Not yet implemented");
+		cursoPropio=null;
+		NullPointerException exception = assertThrows(NullPointerException.class, () -> {cursoPropioDAO.seleccionarCurso(cursoPropio);});
 	}
 
 	/**
 	 * Test method for {@link persistencia.CursoPropioDAO#editarCurso(negocio.entities.CursoPropio)}.
 	 */
-	@Disabled
+	@Test
 	public void testEditarCurso() {
-		fail("Not yet implemented");
+		cursoPropio=null;
+		NullPointerException exception = assertThrows(NullPointerException.class, () -> {cursoPropioDAO.editarCurso(cursoPropio);});
 	}
 
 	/**
 	 * Test method for {@link persistencia.CursoPropioDAO#listarCursosPorEstado(negocio.entities.EstadoCurso)}.
 	 */
-	@Disabled
+	@Test
 	public void testListarCursosPorEstadoEstadoCurso() {
-		fail("Not yet implemented");
+		assertFalse("la lista devuelta por el metodo consultar ingreso no esta vacia",cursoPropioDAO.listarCursosPorEstado(EstadoCurso.PROPUESTO).isEmpty());
+
 	}
 
 	/**
