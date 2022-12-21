@@ -64,8 +64,9 @@ public class AbstractEntityDAOTest {
 	 */
 	@Test
 	public void testGetObject() {
-		
+
 		eObject = null;
+	
 		NullPointerException exception = assertThrows(NullPointerException.class, () -> {abstracDAO.get(eObject);});
 	}
 

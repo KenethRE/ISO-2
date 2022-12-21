@@ -4,6 +4,7 @@
 package persistencia;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -12,11 +13,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.jupiter.api.Disabled;
 
+import negocio.entities.CursoPropio;
+
 /**
  * @author plati
  *
  */
 public class CursoPropioDAOTest {
+	CursoPropioDAO<CursoPropio> cursoPropioDAO;
+	CursoPropio cursoPropio;
 
 	/**
 	 * @throws java.lang.Exception
@@ -37,6 +42,7 @@ public class CursoPropioDAOTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		cursoPropio = new CursoPropio();
 	}
 
 	/**
@@ -49,9 +55,10 @@ public class CursoPropioDAOTest {
 	/**
 	 * Test method for {@link persistencia.CursoPropioDAO#crearNuevoCurso(negocio.entities.CursoPropio)}.
 	 */
-	@Disabled
+	@Test
 	public void testCrearNuevoCurso() {
-		fail("Not yet implemented");
+		cursoPropio=null;
+		NullPointerException exception = assertThrows(NullPointerException.class, () -> {cursoPropioDAO.crearNuevoCurso(cursoPropio);});
 	}
 
 	/**

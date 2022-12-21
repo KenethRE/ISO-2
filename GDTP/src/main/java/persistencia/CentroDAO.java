@@ -11,6 +11,8 @@ import negocio.entities.Centro;
 
 public class CentroDAO<E> extends AbstractEntityDAO<E> {
 	public int crearNuevoCentro(Centro aCentro) throws SQLException {
+		if (aCentro==null)
+			throw new NullPointerException();
 		 
 		return insert (aCentro);
 	}

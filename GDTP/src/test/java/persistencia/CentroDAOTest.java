@@ -57,10 +57,12 @@ public class CentroDAOTest {
 	 */
 	@Disabled
 	public void testCrearNuevoCentro() {
-		fail("Not yet implemented");
+		aCentro = new Centro();
+		aCentro=null;
+		NullPointerException exception = assertThrows(NullPointerException.class, () -> {centroDAO.crearNuevoCentro(aCentro);});
 	}
 
-	/**
+	/**;
 	 * Test method for {@link persistencia.CentroDAO#seleccionarCentro(negocio.entities.Centro)}.
 	 */
 	@Test

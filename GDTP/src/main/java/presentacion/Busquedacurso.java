@@ -137,7 +137,7 @@ public class Busquedacurso extends JFrame{
 					else {
 						List<CursoPropio> Cursos = new ArrayList<CursoPropio>();
 						try {
-							Cursos = agenteCursoPropioDAO.listarCursosPorEstado(EstadoCurso.PROPUESTO, fechaComienzo,fechaFin);
+							Cursos = agenteCursoPropioDAO.listarCursosPorEstado(EstadoCurso.EN_MATRICULACION, fechaComienzo,fechaFin);
 							for (int i=0; i<Cursos.size();i++) {
 								modelocursos.addElement(Cursos.get(i));
 							}
