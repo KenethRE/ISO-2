@@ -41,6 +41,15 @@ public class GestorPropuestasCursos {
 		}
 		return false;
 	}
+	
+	public boolean evaluarPropuestaCurso(CursoPropio curso, EstadoCurso estado) {
+		CursoPropioDAO<CursoPropio> cursoDao = new CursoPropioDAO<>();
+		curso.set_estado(estado);
+		if(cursoDao.editarCurso(curso)==1) {
+			return true;
+		}
+		return false;
+	}
 
 
 	
