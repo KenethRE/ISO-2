@@ -20,7 +20,7 @@
 ##### 4.1.	 Implementación
 ##### 4.2.	Pruebas
 
-#### 5.	Conclusión 
+
 ____________________________________________________________________________________________________________________________________________________________________
 
 ### 1. Introducción
@@ -153,7 +153,8 @@ Siendo:
   - Titulacion: se almacenará la titulacion del estudiante
   - Cualificacion.
  
- **Tabla Materia: **En esta tabla se guardarán los datos de las materias de un curso.
+ **Tabla Materia: **En esta tabla se guardarán los datos de las materias de un curso. 
+ Siendo:
  - Nombre: se almacenará el nombre de la materia del curso
  - Horas: se almacenarán las horas que durará la materia
  - Fecha inicio: se almacenará la fecha en la que se comience la imparticion de la materia
@@ -203,4 +204,27 @@ En todas las ventanas tenemos la opcion de cerrar sesion basta con que el usuari
 
 **Director logueado**
 Una vez logueado el usuario Director este será dirigido a la ventana "PantallaDirectorCursos" en donde aparecen dos pestañas las cuales son:
--
+- Alta curso: esta ventana permite dar de alta un curso para ello se deben rellenar los campos que aparecen en la ventana, asignar el nombre del curos el el textBox Nombre, asignar ECTS del curso en el campo ECTS, establecer la edidion del curso en el campo de edicion, establecer la tasa del curso en el campo Tasa tambien hay que seleccionar el tipo de curso en el comboBox y establecer una fecha de inicio y una fecha de fin. Al pulsar el boton "Añadir materia" se podrá registrar una nueva materia para ese curso. Esto nos llevará a una nueva ventana en donde se deben rellenar los campos, una vez rellenos hacemos clic en añadir materia para que sea añadida. Finalmente pulsamos "Guardar curso" en donde se guardará el curso dado de alta.
+- Editar curso: En esta ventana se buscará un curso para editarlo, para ello es necesario primeramente introducir un id de un curso existente, despues hacemos clic en el botón "Buscar curso", veremos como se activan el resto de campos. Proseguimos a rellenar estos campos activados. En los JList aparecerá listados tanto las materias guardadas como las nuevas materias. Estas materias nuevas, las puede añadir el usuario haciendo clic en el botón "Añadir materia".
+Esto nos llevará a una nueva ventana en donde se deben rellenar los campos, una vez rellenos hacemos clic en añadir materia para que sea añadida.
+En la ventana de editar curso también está disponible el botón "Borrar", este botón borrará todos los campos y una vez borrados los desactivará y ya no aparecerán salvo el campo id curso, dando la posibilidad de editar un nuevo curso volviendo a introducir el id de un curso.
+
+**Estudiante logueado**
+Una vez logueado el usuario Estudiante este será dirigido a la ventana "Matriculacion" en donde el estudiante deberá rellenar los campos que aparecen en la ventana, en el caso de que no rellene los campos no se habilitará el botón "Realizar pago". Al hacer clic en el botón "Buscar Cursos" el estudiante podrá buscar el curso en el que desea ser matriculado, para ello debe introducir las fechas inicio y fin y al hacer clic en "Buscar curso" aparecerán en la lista los cursos disponibles. dandole la opcion de seleccionar el curso deseado. Una vez seleccionado el curso el usuario Estudiante podrá realizar el pago de la matricula bien sea pago con targeta o por transferencia bancaria al hacer clic en el botón "Realizar pago" se crea la matricula y su id tambien al hacer clic en ese botón se dirigirá al usuario a la ventana "RealizarPago" allí es donde escogerá el metodo de pago. En el caso de que seleccione pago por transferencia bancaria veremos como los campos pertenecientes al pago por targeta se deshabilitan y viceversa.
+Los campos númericos tienen sus respectivas restricciones, por ejemplo, el campo Cvv solo admite tres digitos. Una vez que el estudiante realiza el pago el sistema le informa si se ha hecho o si no se ha podido hacer. 
+
+Algo que tenemos en cuenta es que a la hora de establecer las fechas, el usuario debe establecer fechas correctas, es decir la fecha fin debe ser posterior a la fecha de inicio. De lo contrario el sistema devolverá un mensaje de error: "Rango de fechas incorrecto intentelo nuevamente".
+
+### 4.	Implementación y pruebas
+#### 4.1.	 Implementación
+Este proceso es el más largo y el más complejo de todos. En este proceso es donde vamos a crear la aplicación.
+Lo primero de todo fue crear la configuracion del maven, Exportar el codigo de VPP y hacer el primer commit a Git y añadir el repositorio Git a Eclipse. Todo esto lo hemos hecho en el primer Sprint.
+Más tarde nos centramos en encontrar el driver de BBDD y configurarlo para hacerlo funcionar en el proyecto, creacion del Gestor de persistencia en BBDD, definir las consultas SQL para el proyecto, creacion del agente DB y las conexiones con el gestor de BBDD y gestionar las entidades de base de datos (Objetos DAO). Todo esto lo hemos plasmado en el segundo Sprint.
+Despues hemos procedido a la creación de interfaces y a las funcionalidades, creacion de datos de prueba y funcion de inicializacion de BBDD, añadir asserts a test case, revisar control de fallos, realizar pruebas, etc. Todo esto y más queda definido en el tercer y cuarto Sprint. 
+
+
+#### 4.2.	Pruebas
+En el proyecto se ha creado una nueva carpeta (src/test/java) en esa carpeta se encuentran todos los testing que se han hecho del proyecto, dentro de la cual encontramos los controllers, entidades y el paquete persistencia que es en donde se encuentran las clases DAO de testing. Dentro de los controllers se encuentra el test de las clases GestorConsultaTest, GestorMatriculacionTest y GestorPropuestaCursoTest. Dentro de las entidades se encuentran los test de las entidades las cuales son: CentroTest, CursoPropioTest, MateriaTest, ProfesorExternoTest, ProfesorTest y ProfesorUCLMTest. Dentro del paquete de presentacion encontramos los test de todas las clases DAO.
+Cada una de los paquetes mencionados tiene su respectiva clase TestRunner la cual se encargará de obtener los resultados de las clases test ya mencionadas.
+Testing nos ayuda a reducir el número de errores y de esta forma es más sencillo realizar correcciones y mantenimiento.
+____________________________________________________________________________________________________________________________________________________________________
