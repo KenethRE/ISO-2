@@ -214,3 +214,17 @@ Una vez logueado el usuario Estudiante este será dirigido a la ventana "Matricu
 Los campos númericos tienen sus respectivas restricciones, por ejemplo, el campo Cvv solo admite tres digitos. Una vez que el estudiante realiza el pago el sistema le informa si se ha hecho o si no se ha podido hacer. 
 
 Algo que tenemos en cuenta es que a la hora de establecer las fechas, el usuario debe establecer fechas correctas, es decir la fecha fin debe ser posterior a la fecha de inicio. De lo contrario el sistema devolverá un mensaje de error: "Rango de fechas incorrecto intentelo nuevamente".
+
+### 4.	Implementación y pruebas
+#### 4.1.	 Implementación
+Este proceso es el más largo y el más complejo de todos. En este proceso es donde vamos a crear la aplicación.
+Lo primero de todo fue crear la configuracion del maven, Exportar el codigo de VPP y hacer el primer commit a Git y añadir el repositorio Git a Eclipse. Todo esto lo hemos hecho en el primer Sprint.
+Más tarde nos centramos en encontrar el driver de BBDD y configurarlo para hacerlo funcionar en el proyecto, creacion del Gestor de persistencia en BBDD, definir las consultas SQL para el proyecto, creacion del agente DB y las conexiones con el gestor de BBDD y gestionar las entidades de base de datos (Objetos DAO). Todo esto lo hemos plasmado en el segundo Sprint.
+Despues hemos procedido a la creación de interfaces y a las funcionalidades, creacion de datos de prueba y funcion de inicializacion de BBDD, añadir asserts a test case, revisar control de fallos, realizar pruebas, etc. Todo esto y más queda definido en el tercer y cuarto Sprint. 
+
+
+#### 4.2.	Pruebas
+En el proyecto se ha creado una nueva carpeta (src/test/java) en esa carpeta se encuentran todos los testing que se han hecho del proyecto, dentro de la cual encontramos los controllers, entidades y el paquete persistencia que es en donde se encuentran las clases DAO de testing. Dentro de los controllers se encuentra el test de las clases GestorConsultaTest, GestorMatriculacionTest y GestorPropuestaCursoTest. Dentro de las entidades se encuentran los test de las entidades las cuales son: CentroTest, CursoPropioTest, MateriaTest, ProfesorExternoTest, ProfesorTest y ProfesorUCLMTest. Dentro del paquete de presentacion encontramos los test de todas las clases DAO.
+Cada una de los paquetes mencionados tiene su respectiva clase TestRunner la cual se encargará de obtener los resultados de las clases test ya mencionadas.
+Testing nos ayuda a reducir el número de errores y de esta forma es más sencillo realizar correcciones y mantenimiento.
+____________________________________________________________________________________________________________________________________________________________________
