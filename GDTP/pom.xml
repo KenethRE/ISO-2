@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ISO-2</groupId>
   <artifactId>GDTP</artifactId>
-  <version>1.2.0</version>
+  <version>2.0.0</version>
   <description>Sistema informático para la gestión de enseñanzas propias de la Universidad
 de Castilla-La Mancha.</description>
   <properties>
@@ -71,6 +71,9 @@ de Castilla-La Mancha.</description>
 					<goal>check</goal>
 				</goals>
 				<configuration>
+					<excludes>
+        				<exclude>**/presentacion/**/*</exclude>
+    				</excludes>
 					<rules>
 						<!-- implementation is needed only for Maven 2 -->
 						<rule implementation="org.jacoco.maven.RuleConfiguration">
