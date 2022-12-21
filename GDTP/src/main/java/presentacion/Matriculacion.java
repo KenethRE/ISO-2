@@ -347,16 +347,20 @@ public class Matriculacion extends JFrame {
 				}
 				try {
 					matricula.persist();
+					JOptionPane.showMessageDialog(null, "Se ha creado la matricula con identificador: " + matricula.getiD(), "EXITO",
+							JOptionPane.INFORMATION_MESSAGE);
+					dispose();
+					previousWindow.setVisible(true);
+					
 				} catch (NullPointerException e1) {
 					e1.printStackTrace();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
-				JOptionPane.showMessageDialog(null, "Se ha creado la matricula con identificador: " + matricula.getiD(), "EXITO",
-				JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Error al crear matrícula: " + matricula.getiD(), "ERROR",
+						JOptionPane.INFORMATION_MESSAGE);
 				dispose();
 				previousWindow.setVisible(true);
-				
 			}
 		});
 		
