@@ -14,6 +14,15 @@ public class TestRunner {
 		
       System.out.println(result.wasSuccessful());
       
+      result = JUnitCore.runClasses(AbstractEntityDAOTest.class); //cambias aqui el nombre de la clase para saber el resultado
+      
+      System.out.println("test AbstractEntityDAO:");
+      for (Failure failure : result.getFailures()) {
+         System.out.println(failure.toString());
+      }
+		
+      System.out.println(result.wasSuccessful());
+      
       
    }
 }

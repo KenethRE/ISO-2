@@ -33,54 +33,67 @@ public class AbstractEntityDAO<E>{
 	//esto regresa todos los elementos de alguna tabla en particular
 	public ResultSet get(String Table) {
 		ResultSet result = null;
+		if (Table.isEmpty())
+			throw new NullPointerException();
+		else {
 
 		if (Table.equals(profesorExtString) || Table.equals(profesorUCLMString)) result = agente.select("SELECT * FROM " + Table + " NATURAL JOIN PROFESOR");
 		else result = agente.select("SELECT * FROM " + Table);
-
+		}
 		return result;
 	}
 	// get lista materias por id curso
 	
 	public ResultSet get(String Table, String idcurso) {
 		ResultSet result = null;
-		
+		if (Table.isEmpty() || idcurso.isEmpty())
+			throw new NullPointerException();
+		else {
 		if (Table.equals("Materia")) {
 			result = agente.select("SELECT * FROM " + Table + " WHERE idCurso = '"+idcurso+"'");
 		}
-
+		}
 		return result;
 }
 	//get para estadoCurso
 	public ResultSet get(String Table, EstadoCurso estadoCurso) {
 		ResultSet result = null;
-		
+		if (Table.isEmpty())
+			throw new NullPointerException();
+		else {
 		if (Table.equals(cursoPropioString)) {
 			result = agente.select("SELECT * FROM " + Table + " WHERE estadocurso = '"+estadoCurso+"'");
 		}
-
+		}
 		return result;
 	}
 	
 	public ResultSet get(String Table, EstadoCurso estadoCurso, Date aFechaInicio, Date aFechaFin) {
 		ResultSet result = null;
-		
+		if (Table.isEmpty())
+			throw new NullPointerException();
+		else {
 		if (Table.equals(cursoPropioString)) {
 			result = agente.select("SELECT * FROM " + Table + " WHERE estadocurso = '"+estadoCurso+"' AND fechainicio >= '"+aFechaInicio+"' AND fechafin <= '"+aFechaFin+"'");
 		}
-
+		}
 		return result;
 	}
 	
 	//get para coste total por tipos de curso
 	public ResultSet get(TipoCurso tipoCurso,  Date aFechaInicio, Date aFechaFin) {
 		ResultSet result = null;
-		
+		if (aFechaFin==null && aFechaFin==null) {
+			throw new NullPointerException();
+		}
+		else {
 		result = agente.select("SELECT COUNT(IDCURSO) AS n,COUNT(IDCURSO)*C.TASAMATRICULA AS total,IDCURSO FROM Matricula m "
 				+ "INNER JOIN CursoPropio c ON m.idcurso = c.id WHERE m.pagado='TRUE' "
 				+ "AND c.tipocurso='"+tipoCurso+"' "
 				+ "AND c.fechainicio >= '"+aFechaInicio+"' "
 				+ "AND c.fechafin <= '"+aFechaFin+"' "
 				+ "GROUP BY IDCURSO, TASAMATRICULA");
+		}
 
 		return result;
 	}
