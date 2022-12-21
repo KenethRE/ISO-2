@@ -86,4 +86,14 @@ Para este sistema he mos decidido utilizar Apache derby.
 - Pantallas que usarán Empleados
 - Pantallas que usará el Jefe de gabinete 
 - Pantallas que usará el Director
+******************************EXPLICAR PANTALLAS*************************
+##### Mantenimiento
+Para el mantenimiento necesario del software habrá que tener en cuenta que todo este actualizado y que funcione correctamente. Lo que respecta al mantenimiento de la base de datos, únicamente tendríamos que comprobar esporádicamente la correcta introducción de datos al sistema. 
 
+#### 2.3.	 Especificaciones de la arquitectura del sistema
+
+Image:
+![](img width="374" alt="image" src="https://user-images.githubusercontent.com/114161839/208890070-ec7efd59-5cdb-4b36-88ba-d59124d46265.png")
+
+
+> Follow your heart.
